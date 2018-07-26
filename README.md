@@ -2,6 +2,8 @@
 
 A flutter settings control panel with a bunch of canned field options.
 
+![Screenshot](https://github.com/codegrue/card_settings/tree/master/images/example.mov)
+
 This package consists of a CardSettings layout wrapper and a series of form field options including:
 
 - CardSettingsText - Basic text field
@@ -22,10 +24,6 @@ The package also includes these additonal items:
 - CardSettingsField - The base layout widget. You can use this to build custom fields.
 - CardSettingsHeader - A control to put a header between form sections.
 - Converters - a set of utility functions to assist in converting data into and out of the fields.
-
-## Example
-
-[screen shot]
 
 ## Usage
 To use this package, add `card_settings` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
