@@ -4,7 +4,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'card_settings_field.dart';
-import 'package:card_settings/helpers/converters.dart';
+import '../helpers/converter_functions.dart';
 
 /// This is a field for entering numeric doubles
 class CardSettingsDouble extends StatelessWidget {
