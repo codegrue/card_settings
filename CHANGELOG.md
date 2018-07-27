@@ -1,3 +1,3 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - 7/26/2018
 
-* TODO: Describe initial release.
+* First release implementing card view and core set of field widgets.

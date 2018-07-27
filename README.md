@@ -1,6 +1,6 @@
 # Card Settings control
 
-A flutter settings control panel with a bunch of canned field options.
+A flutter package for building card based settings forms.
 
 ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/example.gif)
 
