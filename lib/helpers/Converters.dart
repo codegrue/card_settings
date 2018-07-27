@@ -1,3 +1,6 @@
+// Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
+// is governed by the MIT license that can be found in the LICENSE file.
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
@@ -23,6 +26,7 @@ T intelligentCast<T>(dynamic value) {
   throw new Exception('Failed to convert $value to $T');
 }
 
+/// This will parse various conceptual representaitons of yes/no into a boolean
 bool boolParse(String value) {
   if (value == null) return false;
 
@@ -38,6 +42,7 @@ bool boolParse(String value) {
   return false;
 }
 
+/// This will parse either a string or integer representation of a color into an actual Color
 Color colorParse(dynamic value) {
   // input is string (e.g. 'FF112233') convert to integer
   if (value is String) {
@@ -53,10 +58,12 @@ Color colorParse(dynamic value) {
   throw new Exception('Failed to convert $value to Color');
 }
 
+/// This will convert a Color to a hex string (more abreviated than the .toString() method.
 String colorToString(Color color) {
   return color.toString().split('(0x')[1].split(')')[0];
 }
 
+/// Given a DateTime this will replace just the date portion leaving the time unchanged
 DateTime updateJustDate(DateTime newDate, DateTime originalDateTime) {
   return new DateTime(
     newDate.year, // year
@@ -70,6 +77,7 @@ DateTime updateJustDate(DateTime newDate, DateTime originalDateTime) {
   );
 }
 
+/// Given a DateTime this will replace just the time portion leaving the date unchanged
 DateTime updateJustTime(TimeOfDay newTime, DateTime originalDateTime) {
   return new DateTime(
     originalDateTime.year, // year

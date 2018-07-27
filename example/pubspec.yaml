@@ -1,5 +1,5 @@
 name: card_settings_example
-description: A new Flutter project.
+description: A Flutter project that demonstrated the use of the card_settings package.
 
 dependencies:
   flutter:

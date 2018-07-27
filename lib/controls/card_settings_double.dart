@@ -1,8 +1,10 @@
-import 'package:flutter/services.dart';
+// Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
+// is governed by the MIT license that can be found in the LICENSE file.
 
-import '../helpers/converters.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'card_settings_field.dart';
+import 'package:card_settings/helpers/converters.dart';
 
 /// This is a field for entering numeric doubles
 class CardSettingsDouble extends StatelessWidget {

@@ -1,3 +1,7 @@
+// Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
+// is governed by the MIT license that can be found in the LICENSE file.
+
+/// Package for building card based settings forms
 library card_settings;
 
 export 'controls/card_settings_panel.dart';

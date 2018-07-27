@@ -1,3 +1,6 @@
+// Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
+// is governed by the MIT license that can be found in the LICENSE file.
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -122,15 +125,14 @@ class ScrollPicker extends StatelessWidget {
   ///To prevent this we are calculating cacheExtent by our own so it gets smaller if number of items is smaller
   double _calculateCacheExtent(int itemCount) {
     double cacheExtent = 350.0; //default cache extent
-    // if ((itemCount - 2) * DEFAULT_ITEM_HEIGHT <= cacheExtent) {
-    //   cacheExtent = ((itemCount - 3) * DEFAULT_ITEM_HEIGHT);
-    // }
     return cacheExtent;
   }
 
   // indicates if user has stopped scrolling so we can center value in the middle
   bool _userStoppedScrolling(
-      Notification notification, ScrollController scrollController) {
+    Notification notification,
+    ScrollController scrollController,
+  ) {
     return notification is UserScrollNotification &&
         notification.direction == ScrollDirection.idle &&
         scrollController.position.activity is! HoldScrollActivity;

@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
+// Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
+// is governed by the MIT license that can be found in the LICENSE file.
 
+import 'package:flutter/material.dart';
 import 'card_settings_list_picker.dart';
-import '../helpers/converters.dart';
+import 'package:card_settings/helpers/converters.dart';
 
 /// This is a list picker that allows for a range of numbers to be speficied as pptions.
 class CardSettingsNumberPicker extends StatelessWidget {

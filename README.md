@@ -1,6 +1,7 @@
 # Card Settings control
 
-A flutter package for building card based settings forms. This implements a card based settings panel and a suite of form field widgets to use inside it. It's a bit of a cross between the cupertino settings screen and material design; The idea it should be intutive on both iOS and Android.
+A flutter package for building card based settings forms. This includes a library of pre-built form field widgets. The style is a bit like a cross between 
+the cupertino settings screen and material design; The idea is it should be usable and intutive on both iOS and Android.
 
 ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/example.gif)
 
@@ -17,7 +18,7 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
 - CardSettingsDatePicker - Material Design Date Picker
 - CardSettingsTimePicker - Material Design Time Picker
 
-All fields support `validate`, `onSaved`, and `autoValidate`.
+All fields support `validate`, `onSaved`, and `autovalidate`.
 
 The package also includes these additonal items:
 
@@ -32,12 +33,13 @@ To use this package, add `card_settings` as a [dependency in your pubspec.yaml f
     card_settings: ^0.1.1
 ```
 
+### Simple Example
+
 All fields in this package are compatible with the standard Flutter Form widget. Simply wrap the CardSettings control in a form and use it as you normally would with the form functionality.
 
-### Example
-
 ``` dart
-  String name = "Jean Luc";
+  String title = "Spheria";
+  String author = "Cody Leet";
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +47,24 @@ All fields in this package are compatible with the standard Flutter Form widget.
         key: _formKey,
         child: CardSettings(
           children: <Widget>[
-            CardSettingsHeader(label: 'New Section'),
+            CardSettingsHeader(label: 'Favorite Book'),
             CardSettingsText(
-              label: 'Name',
-              initialValue: name,
+              label: 'Title',
+              initialValue: title,
               validator: (value) {
                 if (value == null || value.isEmpty)
-                  return 'Name type is required.';
+                  return 'Title is required.';
               },
-              onSaved: (value) => name = value,
+              onSaved: (value) => title = value,
             ),
+            CardSettingsText(
+              label: 'Author',
+              initialValue: author,
+              validator: (value) {
+                if (value == null || value.isEmpty)
+                  return 'Author is required.';
+              },
+              onSaved: (value) => author = value,
             ),
           ],
         ),
@@ -63,7 +73,9 @@ All fields in this package are compatible with the standard Flutter Form widget.
   }            
 ```
 
-### Themeing
+See the full demo example [here](https://pub.dartlang.org/packages/card_settings#-example-tab-).
+
+### Theming
 
 The controls support the material design theme. If you want to customize the colors you do something like this:
 
@@ -85,13 +97,32 @@ class MyApp extends StatelessWidget {
 
 ```
 
+### Dynamic Visibility
+
+Each field implements a `visible` property that you can use to control the visibility based on the value of other fields. In this example, the switch field controls the visibility of the color picker control:
+
+``` dart
+  bool _ateOut = false;
+
+  CardSettingsSwitch(
+    label: 'Ate out?',
+    initialValue: _ateOut,
+    onChanged: (value) => setState(() => _ateOut = value),
+  ),
+
+  CardSettingsText(
+    label: 'Restaurant',
+    visible: _ateOut,
+  ),
+```
+
 ## Changelog
 
-Please see the [Changelog](https://github.com/letsar/flutter_staggered_grid_view/blob/master/CHANGELOG.md) page to know what's recently changed.
+Please see the [Changelog](https://github.com/codegrue/card_settings/blob/master/CHANGELOG.md) page to know what's recently changed.
 
 ## Contributions
 
 Feel free to contribute to this project.
 
-If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/letsar/flutter_staggered_grid_view/issues).  
-If you fixed a bug or implemented a new feature, please send a [pull request](https://github.com/letsar/flutter_staggered_grid_view/pulls).
+If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/codegrue/card_settings/issues).  
+If you fixed a bug or implemented a new feature, please send a [pull request](https://github.com/codegrue/card_settings/pulls).
