@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'CardSettingsField.dart';
+import 'card_settings_field.dart';
 
 class CardSettingsText extends StatefulWidget {
   CardSettingsText({

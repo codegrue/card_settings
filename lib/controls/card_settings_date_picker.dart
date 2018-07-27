@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'CardSettingsField.dart';
+import 'card_settings_field.dart';
 
-class CardSettingsTimePicker extends FormField<TimeOfDay> {
+class CardSettingsDatePicker extends FormField<DateTime> {
 
-  CardSettingsTimePicker({
+  CardSettingsDatePicker({
     Key key,
     label: 'Label',
     initialValue,
     bool autovalidate: false,
     bool visible: true,
-    FormFieldSetter<TimeOfDay> onSaved,
-    FormFieldValidator<TimeOfDay> validator,
+    FormFieldSetter<DateTime> onSaved,
+    FormFieldValidator<DateTime> validator,
   }) : super(
             key: key,
             initialValue: initialValue ?? DateTime.now(),
             onSaved: onSaved,
             validator: validator,
             autovalidate: autovalidate,
-            builder: (FormFieldState<TimeOfDay> field) {
-              final _CardSettingsTimePickerState state = field;
+            builder: (FormFieldState<DateTime> field) {
+              final _CardSettingsDatePickerState state = field;
               return GestureDetector(
                 onTap: () {
                   state._showDialog();
@@ -29,7 +29,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
                   visible: visible,
                   errorText: field.errorText,
                   content: Text(
-                    state.value == null ? '' : state.value.format(field.context),
+                    state.value == null ? '' : DateFormat.yMd().format(state.value),
                     style: TextStyle(fontSize: 16.0),
                   ),
                   pickerIcon: Icons.arrow_drop_down,
@@ -38,18 +38,20 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
             });
 
   @override
-  _CardSettingsTimePickerState createState() =>
-      new _CardSettingsTimePickerState();
+  _CardSettingsDatePickerState createState() =>
+      new _CardSettingsDatePickerState();
 }
 
-class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
+class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   @override
-  CardSettingsTimePicker get widget => super.widget;
+  CardSettingsDatePicker get widget => super.widget;
 
   void _showDialog() {
-    showTimePicker(
+    showDatePicker(
       context: context,
-      initialTime: value,
+      initialDate: value,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
     ).then((value) {
       if (value != null) {
         didChange(value);

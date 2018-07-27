@@ -1,4 +1,4 @@
-import 'ScrollPicker.dart';
+import 'scroll_picker.dart';
 import 'package:flutter/material.dart';
 
 ///Returns AlertDialog as a Widget so it is designed to be used in showDialog method

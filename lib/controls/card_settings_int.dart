@@ -2,10 +2,10 @@ import 'package:flutter/services.dart';
 
 import '../helpers/Converters.dart';
 import 'package:flutter/material.dart';
-import 'CardSettingsField.dart';
+import 'card_settings_field.dart';
 
-class CardSettingsDouble extends StatelessWidget {
-  CardSettingsDouble({
+class CardSettingsInt extends StatelessWidget {
+  CardSettingsInt({
     this.label: 'Label',
     this.initialValue: 0.0,
     this.maxLength: 10,
@@ -24,11 +24,11 @@ class CardSettingsDouble extends StatelessWidget {
   final bool visible;
 
   // Events
-  final FormFieldValidator<double> validator;
-  final FormFieldSetter<double> onSaved;
+  final FormFieldValidator<int> validator;
+  final FormFieldSetter<int> onSaved;
 
   Widget build(BuildContext context) {
-    return CardSettingsField(
+    return new CardSettingsField(
       label: label,
       visible: visible,
       unitLabel: unitLabel,
@@ -44,7 +44,7 @@ class CardSettingsDouble extends StatelessWidget {
         keyboardType: TextInputType.number,
         inputFormatters: [
           LengthLimitingTextInputFormatter(maxLength),
-          WhitelistingTextInputFormatter(RegExp("[0-9]+.?[0-9]*")),
+          WhitelistingTextInputFormatter(RegExp("[0-9]+")),
         ],
       ),
     );
@@ -52,11 +52,11 @@ class CardSettingsDouble extends StatelessWidget {
 
   String _safeValidator(value) {
     if (validator == null) return null;
-    return validator(intelligentCast<double>(value));
+    return validator(intelligentCast<int>(value));
   }
 
   void _safeOnSaved(value) {
     if (onSaved == null) return;
-    onSaved(intelligentCast<double>(value));
-  }
+    onSaved(intelligentCast<int>(value));
+  }  
 }

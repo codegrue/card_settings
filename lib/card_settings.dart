@@ -1,19 +1,19 @@
 library card_settings;
 
-export 'controls/CardSettings.dart';
-export 'controls/CardSettingsField.dart';
-export 'controls/CardSettingsHeader.dart';
-export 'controls/CardSettingsText.dart';
-export 'controls/CardSettingsDouble.dart';
-export 'controls/CardSettingsInt.dart';
-export 'controls/CardSettingsParagraph.dart';
-export 'controls/CardSettingsSwitch.dart';
-export 'controls/CardSettingsListPicker.dart';
-export 'controls/CardSettingsNumberPicker.dart';
-export 'controls/CardSettingsColorPicker.dart';
-export 'controls/CardSettingsDatePicker.dart';
-export 'controls/CardSettingsTimePicker.dart';
+export 'controls/card_settings.dart';
+export 'controls/card_settings_field.dart';
+export 'controls/card_settings_header.dart';
+export 'controls/card_settings_text.dart';
+export 'controls/card_settings_double.dart';
+export 'controls/card_settings_int.dart';
+export 'controls/card_settings_paragraph.dart';
+export 'controls/card_settings_switch.dart';
+export 'controls/card_settings_list_picker.dart';
+export 'controls/card_settings_number_picker.dart';
+export 'controls/card_settings_color_picker.dart';
+export 'controls/card_settings_date_picker.dart';
+export 'controls/card_settings_time_picker.dart';
 
-export 'helpers/PickerDialog.dart';
-export 'helpers/ScrollPicker.dart';
-export 'helpers/Converters.dart';
+export 'helpers/picker_dialog.dart';
+export 'helpers/scroll_picker.dart';
+export 'helpers/converters.dart';

@@ -1,6 +1,6 @@
-import '../helpers/PickerDialog.dart';
+import '../helpers/picker_dialog.dart';
 import 'package:flutter/material.dart';
-import 'CardSettingsField.dart';
+import 'card_settings_field.dart';
 
 class CardSettingsListPicker extends FormField<String> {
   final String label;

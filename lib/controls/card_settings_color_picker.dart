@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'CardSettingsField.dart';
+import 'card_settings_field.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class CardSettingsColorPicker extends FormField<Color> {

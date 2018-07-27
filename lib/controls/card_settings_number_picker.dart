@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
-import 'CardSettingsListPicker.dart';
+import 'card_settings_list_picker.dart';
 import '../helpers/Converters.dart';
 
 class CardSettingsNumberPicker extends StatelessWidget {
