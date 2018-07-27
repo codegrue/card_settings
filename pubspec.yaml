@@ -1,6 +1,6 @@
 name: card_settings
 description: A flutter package for building card based settings forms. This implements a card based settings panel and a suite of form field widgets to use inside it. It's a bit of a cross between the cupertino settings screen and material design; The idea it should be intutive on both iOS and Android.
-version: 0.1.0
+version: 0.1.1
 author: Jeff Jorczak <jeff@jorczak.com>
 homepage: https://github.com/codegrue/card_settings
 
@@ -15,6 +15,11 @@ dev_dependencies:
     sdk: flutter
 
 environment:
-  sdk: ">=1.9.9 <3.0.0"
+  sdk: ">=1.19.0 <3.0.0"
 
 flutter:
+
+
+# Command Reference
+# - To publish to pub.dartlang.org: flutter packages pub publish
+# - To generate documentation: dartdoc
