@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'card_settings_field.dart';
 
+/// This is the date picker field
 class CardSettingsDatePicker extends FormField<DateTime> {
-
   CardSettingsDatePicker({
     Key key,
     label: 'Label',
@@ -29,7 +29,9 @@ class CardSettingsDatePicker extends FormField<DateTime> {
                   visible: visible,
                   errorText: field.errorText,
                   content: Text(
-                    state.value == null ? '' : DateFormat.yMd().format(state.value),
+                    state.value == null
+                        ? ''
+                        : DateFormat.yMd().format(state.value),
                     style: TextStyle(fontSize: 16.0),
                   ),
                   pickerIcon: Icons.arrow_drop_down,

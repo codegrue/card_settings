@@ -1,7 +1,7 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
+/// This attempts to intelligently cast any value to the desired type.
 T intelligentCast<T>(dynamic value) {
   // already expected type, return it
   if (value is T) return value;
@@ -57,29 +57,28 @@ String colorToString(Color color) {
   return color.toString().split('(0x')[1].split(')')[0];
 }
 
-
 DateTime updateJustDate(DateTime newDate, DateTime originalDateTime) {
-    return new DateTime(
-      newDate.year, // year 
-      newDate.month, // month
-      newDate.day, // day
-      originalDateTime.hour, // hour
-      originalDateTime.minute, // minute
-      originalDateTime.second, // second
-      originalDateTime.millisecond, // millisecond
-      originalDateTime.microsecond, // microsecond
-    );
+  return new DateTime(
+    newDate.year, // year
+    newDate.month, // month
+    newDate.day, // day
+    originalDateTime.hour, // hour
+    originalDateTime.minute, // minute
+    originalDateTime.second, // second
+    originalDateTime.millisecond, // millisecond
+    originalDateTime.microsecond, // microsecond
+  );
 }
 
 DateTime updateJustTime(TimeOfDay newTime, DateTime originalDateTime) {
-    return new DateTime(
-      originalDateTime.year, // year 
-      originalDateTime.month, // month
-      originalDateTime.day, // day
-      newTime.hour, // hour
-      newTime.minute, // minute
-      0, // second
-      0, // millisecond
-      0, // microsecond
-    );
+  return new DateTime(
+    originalDateTime.year, // year
+    originalDateTime.month, // month
+    originalDateTime.day, // day
+    newTime.hour, // hour
+    newTime.minute, // minute
+    0, // second
+    0, // millisecond
+    0, // microsecond
+  );
 }

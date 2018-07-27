@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'card_settings_field.dart';
 
+/// This field allows a time to be selected.
 class CardSettingsTimePicker extends FormField<TimeOfDay> {
-
   CardSettingsTimePicker({
     Key key,
     label: 'Label',
@@ -28,7 +28,9 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
                   visible: visible,
                   errorText: field.errorText,
                   content: Text(
-                    state.value == null ? '' : state.value.format(field.context),
+                    state.value == null
+                        ? ''
+                        : state.value.format(field.context),
                     style: TextStyle(fontSize: 16.0),
                   ),
                   pickerIcon: Icons.arrow_drop_down,

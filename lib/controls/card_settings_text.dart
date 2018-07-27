@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'card_settings_field.dart';
 
+/// This is a standard one line text entry field. It encapselates the [TextFormField] widget.
 class CardSettingsText extends StatefulWidget {
   CardSettingsText({
     this.label: 'Label',
@@ -43,7 +44,7 @@ class _CardSettingsTextState extends State<CardSettingsText> {
         autovalidate: widget.autovalidate,
         validator: widget.validator,
         keyboardType: widget.keyboardType,
-        onSaved: widget.onSaved,       
+        onSaved: widget.onSaved,
         inputFormatters: [
           LengthLimitingTextInputFormatter(widget.maxLength),
         ],

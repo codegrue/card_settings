@@ -2,6 +2,7 @@ import '../helpers/picker_dialog.dart';
 import 'package:flutter/material.dart';
 import 'card_settings_field.dart';
 
+/// This is a list picker that allows an arbitrary list of options to be provided.
 class CardSettingsListPicker extends FormField<String> {
   final String label;
   final List<String> options;

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'card_settings_list_picker.dart';
-import '../helpers/Converters.dart';
+import '../helpers/converters.dart';
 
+/// This is a list picker that allows for a range of numbers to be speficied as pptions.
 class CardSettingsNumberPicker extends StatelessWidget {
   CardSettingsNumberPicker({
     this.label: 'Label',

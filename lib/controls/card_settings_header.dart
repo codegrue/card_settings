@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// This is a header to distinguish sections of the form.
 class CardSettingsHeader extends StatelessWidget {
   CardSettingsHeader({
     this.label: 'Label',

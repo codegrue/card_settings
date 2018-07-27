@@ -1,6 +1,6 @@
 library card_settings;
 
-export 'controls/card_settings.dart';
+export 'controls/card_settings_panel.dart';
 export 'controls/card_settings_field.dart';
 export 'controls/card_settings_header.dart';
 export 'controls/card_settings_text.dart';

@@ -1,6 +1,6 @@
 # Card Settings control
 
-A flutter package for building card based settings forms.
+A flutter package for building card based settings forms. This implements a card based settings panel and a suite of form field widgets to use inside it. It's a bit of a cross between the cupertino settings screen and material design; The idea it should be intutive on both iOS and Android.
 
 ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/example.gif)
 

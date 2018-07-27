@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'card_settings_field.dart';
 
+/// This is a field that allows a boolean to be set via a switch widget.
 class CardSettingsSwitch extends FormField<bool> {
   CardSettingsSwitch({
     Key key,
@@ -25,7 +26,7 @@ class CardSettingsSwitch extends FormField<bool> {
                 label: label,
                 visible: visible,
                 errorText: field.errorText,
-                content: Row(children: <Widget>[                  
+                content: Row(children: <Widget>[
                   Expanded(
                     child: Text(
                       state.value ? trueLabel : falseLabel,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'card_settings_field.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
+/// This is the color picker field
 class CardSettingsColorPicker extends FormField<Color> {
   CardSettingsColorPicker({
     Key key,

@@ -1,24 +1,22 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-///NumberPicker is a widget designed to pick a number between #minValue and #maxValue
+/// This helper widget managed the scrollable content inside a picker widget.
 class ScrollPicker extends StatelessWidget {
-
   static const double DEFAULT_ITEM_HEIGHT = 50.0;
   static const double DEFAULT_LISTVIEW_WIDTH = 100.0;
   static const int DEFAULT_NUMBER_OF_VISIBLE_ITEMS = 5;
 
   ///constructor for integer number picker
-  ScrollPicker({
-    Key key,
-    @required this.items,
-    @required String initialValue,
-    @required this.onChanged,
-    this.itemHeight = DEFAULT_ITEM_HEIGHT,
-    this.listViewWidth = DEFAULT_LISTVIEW_WIDTH,
-    this.numberOfVisibleItems = DEFAULT_NUMBER_OF_VISIBLE_ITEMS
-  })  : assert(items != null),
+  ScrollPicker(
+      {Key key,
+      @required this.items,
+      @required String initialValue,
+      @required this.onChanged,
+      this.itemHeight = DEFAULT_ITEM_HEIGHT,
+      this.listViewWidth = DEFAULT_LISTVIEW_WIDTH,
+      this.numberOfVisibleItems = DEFAULT_NUMBER_OF_VISIBLE_ITEMS})
+      : assert(items != null),
         assert(numberOfVisibleItems % 2 != 0), // must be odd number
         selectedValue = initialValue,
         numberOfPaddingRows = ((numberOfVisibleItems - 1) ~/ 2),
@@ -31,15 +29,22 @@ class ScrollPicker extends StatelessWidget {
   // Events
   final ValueChanged<String> onChanged;
 
-  // Variables 
+  // Variables
   final List<String> items;
   final double itemHeight; // height of every list element in pixels
-  final double _listViewHeight; //view will always contain only 3 elements of list in pixels
+  final double
+      _listViewHeight; //view will always contain only 3 elements of list in pixels
   final int numberOfVisibleItems;
   final int numberOfPaddingRows;
-  final double listViewWidth; ///width of list view in pixels
-  final ScrollController scrollController; ///ScrollController used for integer list
-  final String selectedValue; ///Currently selected integer value
+  final double listViewWidth;
+
+  ///width of list view in pixels
+  final ScrollController scrollController;
+
+  ///ScrollController used for integer list
+  final String selectedValue;
+
+  ///Currently selected integer value
 
   ///main widget
   @override
@@ -51,7 +56,8 @@ class ScrollPicker extends StatelessWidget {
 
   Widget _listView(ThemeData themeData) {
     TextStyle defaultStyle = themeData.textTheme.body1;
-    TextStyle selectedStyle = themeData.textTheme.headline.copyWith(color: themeData.accentColor);
+    TextStyle selectedStyle =
+        themeData.textTheme.headline.copyWith(color: themeData.accentColor);
 
     int itemCount = items.length + numberOfPaddingRows * 2;
 
@@ -65,13 +71,15 @@ class ScrollPicker extends StatelessWidget {
           itemCount: itemCount,
           cacheExtent: _calculateCacheExtent(itemCount),
           itemBuilder: (BuildContext context, int index) {
+            bool isPaddingRow = index < numberOfPaddingRows ||
+                index >= itemCount - numberOfPaddingRows;
 
-            bool isPaddingRow = index < numberOfPaddingRows || index >= itemCount - numberOfPaddingRows;
-
-            String value = (isPaddingRow) ? null : items[index - numberOfPaddingRows];
+            String value =
+                (isPaddingRow) ? null : items[index - numberOfPaddingRows];
 
             //define special style for selected (middle) element
-            final TextStyle itemStyle = (value == selectedValue) ? selectedStyle : defaultStyle;
+            final TextStyle itemStyle =
+                (value == selectedValue) ? selectedStyle : defaultStyle;
 
             return isPaddingRow
                 ? new Container() //empty first and last element
@@ -87,8 +95,9 @@ class ScrollPicker extends StatelessWidget {
 
   bool _onNotification(Notification notification) {
     if (notification is ScrollNotification) {
-
-      int indexOfMiddleElement = (notification.metrics.pixels + _listViewHeight / 2) ~/ itemHeight - numberOfPaddingRows;
+      int indexOfMiddleElement =
+          (notification.metrics.pixels + _listViewHeight / 2) ~/ itemHeight -
+              numberOfPaddingRows;
 
       if (_userStoppedScrolling(notification, scrollController)) {
         centerSelectedItemAnimation(indexOfMiddleElement);
@@ -103,12 +112,9 @@ class ScrollPicker extends StatelessWidget {
     return true;
   }
 
-
   centerSelectedItemAnimation(int indexToSelect) {
-    scrollController.animateTo(
-      indexToSelect * itemHeight,
-      duration: new Duration(seconds: 1), curve: new ElasticOutCurve()
-    );
+    scrollController.animateTo(indexToSelect * itemHeight,
+        duration: new Duration(seconds: 1), curve: new ElasticOutCurve());
   }
 
   ///There was a bug, when if there was small integer range, e.g. from 1 to 5,
@@ -129,6 +135,4 @@ class ScrollPicker extends StatelessWidget {
         notification.direction == ScrollDirection.idle &&
         scrollController.position.activity is! HoldScrollActivity;
   }
-
-
 }

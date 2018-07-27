@@ -1,9 +1,10 @@
 import 'package:flutter/services.dart';
 
-import '../helpers/Converters.dart';
+import '../helpers/converters.dart';
 import 'package:flutter/material.dart';
 import 'card_settings_field.dart';
 
+/// This is a field for entering numeric integers
 class CardSettingsInt extends StatelessWidget {
   CardSettingsInt({
     this.label: 'Label',
@@ -58,5 +59,5 @@ class CardSettingsInt extends StatelessWidget {
   void _safeOnSaved(value) {
     if (onSaved == null) return;
     onSaved(intelligentCast<int>(value));
-  }  
+  }
 }

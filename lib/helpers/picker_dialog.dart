@@ -1,7 +1,8 @@
 import 'scroll_picker.dart';
 import 'package:flutter/material.dart';
 
-///Returns AlertDialog as a Widget so it is designed to be used in showDialog method
+/// This is a support widget that returns an AlertDialog as a Widget.
+/// It is designed to be used in the showDialog method of other fields.
 class PickerDialog extends StatefulWidget {
   PickerDialog({
     this.title,
@@ -27,11 +28,11 @@ class PickerDialog extends StatefulWidget {
 
 class _PickerDialogState extends State<PickerDialog> {
   _PickerDialogState(this.selectedValue);
-  
+
   String selectedValue;
 
   _handleValueChanged(String value) {
-      setState(() => selectedValue = value);
+    setState(() => selectedValue = value);
   }
 
   @override
