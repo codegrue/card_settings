@@ -30,7 +30,7 @@ The package also includes these additonal items:
 To use this package, add `card_settings` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
 ``` dart
-    card_settings: ^0.1.1
+    card_settings: ^0.1.2
 ```
 
 ### Simple Example
