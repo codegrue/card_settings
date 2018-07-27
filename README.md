@@ -83,4 +83,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-```# card_settings
+```
+
+## Changelog
+
+Please see the [Changelog](https://github.com/letsar/flutter_staggered_grid_view/blob/master/CHANGELOG.md) page to know what's recently changed.
+
+## Contributions
+
+Feel free to contribute to this project.
+
+If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/letsar/flutter_staggered_grid_view/issues).  
+If you fixed a bug or implemented a new feature, please send a [pull request](https://github.com/letsar/flutter_staggered_grid_view/pulls).
