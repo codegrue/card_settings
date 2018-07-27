@@ -2,7 +2,7 @@
 
 A flutter settings control panel with a bunch of canned field options.
 
-![Screenshot](https://github.com/codegrue/card_settings/tree/master/images/example.mov)
+![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/example.gif)
 
 This package consists of a CardSettings layout wrapper and a series of form field options including:
 
