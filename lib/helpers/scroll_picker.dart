@@ -26,7 +26,7 @@ class ScrollPicker extends StatelessWidget {
         scrollController = new ScrollController(
           initialScrollOffset: items.indexOf(initialValue) * itemHeight,
         ),
-        _listViewHeight = numberOfVisibleItems * itemHeight,
+        listViewHeight = numberOfVisibleItems * itemHeight,
         super(key: key);
 
   // Events
@@ -35,8 +35,7 @@ class ScrollPicker extends StatelessWidget {
   // Variables
   final List<String> items;
   final double itemHeight; // height of every list element in pixels
-  final double
-      _listViewHeight; //view will always contain only 3 elements of list in pixels
+  final double listViewHeight;
   final int numberOfVisibleItems;
   final int numberOfPaddingRows;
   final double listViewWidth;
@@ -46,8 +45,6 @@ class ScrollPicker extends StatelessWidget {
 
   ///ScrollController used for integer list
   final String selectedValue;
-
-  ///Currently selected integer value
 
   ///main widget
   @override
@@ -66,66 +63,87 @@ class ScrollPicker extends StatelessWidget {
 
     return new NotificationListener(
       child: new Container(
-        height: _listViewHeight,
+        height: listViewHeight,
         width: listViewWidth,
-        child: new ListView.builder(
-          controller: scrollController,
-          itemExtent: itemHeight,
-          itemCount: itemCount,
-          cacheExtent: _calculateCacheExtent(itemCount),
-          itemBuilder: (BuildContext context, int index) {
-            bool isPaddingRow = index < numberOfPaddingRows ||
-                index >= itemCount - numberOfPaddingRows;
+        child: Stack(
+          children: <Widget>[
+            ListView.builder(
+              controller: scrollController,
+              itemExtent: itemHeight,
+              itemCount: itemCount,
+              itemBuilder: (BuildContext context, int index) {
+                bool isPaddingRow = index < numberOfPaddingRows ||
+                    index >= itemCount - numberOfPaddingRows;
 
-            String value =
-                (isPaddingRow) ? null : items[index - numberOfPaddingRows];
+                String value =
+                    (isPaddingRow) ? null : items[index - numberOfPaddingRows];
 
-            //define special style for selected (middle) element
-            final TextStyle itemStyle =
-                (value == selectedValue) ? selectedStyle : defaultStyle;
+                //define special style for selected (middle) element
+                final TextStyle itemStyle =
+                    (value == selectedValue) ? selectedStyle : defaultStyle;
 
-            return isPaddingRow
-                ? new Container() //empty first and last element
-                : new Center(
-                    child: new Text(value, style: itemStyle),
-                  );
-          },
+                return isPaddingRow
+                    ? new Container() //empty items for padding rows
+                    : new GestureDetector(
+                        onTap: () {
+                          _itemTapped(index);
+                        },
+                        child: Container(
+                          color: Colors
+                              .white, // seems to be necessary to allow touches outside the item text
+                          child: Center(
+                            child: Text(value, style: itemStyle),
+                          ),
+                        ),
+                      );
+              },
+            ),
+            Center(
+              
+              child: Container(
+                height: DEFAULT_ITEM_HEIGHT,
+                decoration: new BoxDecoration(
+                  border: new Border(
+                    top: BorderSide(color: themeData.accentColor, width: 1.0),
+                    bottom: BorderSide(color: themeData.accentColor, width: 1.0),                  
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
       ),
       onNotification: _onNotification,
     );
   }
 
+  void _itemTapped(int itemIndex) {
+    int selectedIndex = itemIndex - numberOfPaddingRows;
+    _changeSelectedItem(selectedIndex);
+  }
+
   bool _onNotification(Notification notification) {
     if (notification is ScrollNotification) {
-      int indexOfMiddleElement =
-          (notification.metrics.pixels + _listViewHeight / 2) ~/ itemHeight -
-              numberOfPaddingRows;
-
       if (_userStoppedScrolling(notification, scrollController)) {
-        centerSelectedItemAnimation(indexOfMiddleElement);
-      }
-
-      //update selection
-      String newValue = items[indexOfMiddleElement];
-      if (newValue != selectedValue) {
-        onChanged(newValue);
+        int indexOfMiddleElement =
+            (notification.metrics.pixels + listViewHeight / 2) ~/ itemHeight -
+                numberOfPaddingRows;
+        _changeSelectedItem(indexOfMiddleElement);
       }
     }
     return true;
   }
 
-  centerSelectedItemAnimation(int indexToSelect) {
-    scrollController.animateTo(indexToSelect * itemHeight,
-        duration: new Duration(seconds: 1), curve: new ElasticOutCurve());
-  }
+  void _changeSelectedItem(int itemIndex) {
+    // update value with selected item
+    String newValue = items[itemIndex];
+    if (newValue != selectedValue) {
+      onChanged(newValue);
+    }
 
-  ///There was a bug, when if there was small integer range, e.g. from 1 to 5,
-  ///When user scrolled to the top, whole listview got displayed.
-  ///To prevent this we are calculating cacheExtent by our own so it gets smaller if number of items is smaller
-  double _calculateCacheExtent(int itemCount) {
-    double cacheExtent = 350.0; //default cache extent
-    return cacheExtent;
+    // animate to and center on the selected item
+    scrollController.animateTo(itemIndex * itemHeight,
+        duration: new Duration(seconds: 1), curve: new ElasticOutCurve());
   }
 
   // indicates if user has stopped scrolling so we can center value in the middle
