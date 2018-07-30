@@ -17,6 +17,8 @@ export 'controls/card_settings_number_picker.dart';
 export 'controls/card_settings_color_picker.dart';
 export 'controls/card_settings_date_picker.dart';
 export 'controls/card_settings_time_picker.dart';
+export 'controls/card_settings_button.dart';
+export 'controls/card_settings_instructions.dart';
 
 export 'helpers/picker_dialog.dart';
 export 'helpers/scroll_picker.dart';

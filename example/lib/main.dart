@@ -154,6 +154,9 @@ class _PonyExampleState extends State<PonyExample> {
               onSaved: (value) => _ponyModel.weight = value,
             ),
             CardSettingsHeader(label: 'Career'),
+            CardSettingsInstructions(
+              text: 'This is when this little horse got her big break',          
+            ),
             CardSettingsDatePicker(
               label: 'Show Date',
               initialValue: _ponyModel.showDateTime,
@@ -172,6 +175,19 @@ class _PonyExampleState extends State<PonyExample> {
               label: 'Description',
               initialValue: _ponyModel.description,
               onSaved: (value) => _ponyModel.description = value,
+            ),
+            CardSettingsHeader(label: 'Actions'),
+            CardSettingsButton(
+              label: 'SAVE',
+              onPressed: _savePressed,
+              backgroundColor: Colors.lightBlueAccent[100]
+            ),         
+            CardSettingsButton(
+              label: 'RESET',
+              onPressed: _resetPressed,
+              bottomSpacing: 4.0,
+              backgroundColor: Colors.redAccent,
+              textColor: Colors.white,
             ),
           ],
         ),
@@ -212,8 +228,10 @@ class _PonyExampleState extends State<PonyExample> {
               _buildRow('SpotColor', _ponyModel.spotColor),
               _buildRow('Height', _ponyModel.height),
               _buildRow('Weight', _ponyModel.weight),
-              _buildRow('ShowDate', DateFormat.yMd().format(_ponyModel.showDateTime)),
-              _buildRow('ShowTime', DateFormat.jm().format(_ponyModel.showDateTime)),    
+              _buildRow(
+                  'ShowDate', DateFormat.yMd().format(_ponyModel.showDateTime)),
+              _buildRow(
+                  'ShowTime', DateFormat.jm().format(_ponyModel.showDateTime)),
               Text(_ponyModel.description),
             ],
           ),
@@ -249,6 +267,3 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 }
-
-
-

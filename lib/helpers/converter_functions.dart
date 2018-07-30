@@ -13,7 +13,7 @@ T intelligentCast<T>(dynamic value) {
   if (T.toString() == 'bool') return boolParse(value) as T;
 
   // if null, dont change it.
-  if (value == null) return null; 
+  if (value == null) return null;
 
   // instead of empty string we want to return null
   if (value.toString().isEmpty) return null;

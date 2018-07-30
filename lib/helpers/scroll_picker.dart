@@ -99,13 +99,13 @@ class ScrollPicker extends StatelessWidget {
               },
             ),
             Center(
-              
               child: Container(
                 height: DEFAULT_ITEM_HEIGHT,
                 decoration: new BoxDecoration(
                   border: new Border(
                     top: BorderSide(color: themeData.accentColor, width: 1.0),
-                    bottom: BorderSide(color: themeData.accentColor, width: 1.0),                  
+                    bottom:
+                        BorderSide(color: themeData.accentColor, width: 1.0),
                   ),
                 ),
               ),

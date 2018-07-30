@@ -36,7 +36,6 @@ class CardSettingsField extends StatelessWidget {
                   bottom: BorderSide(
                       width: 1.0, color: Theme.of(context).dividerColor)),
             ),
-            //height: 50.0,
             padding: EdgeInsets.all(14.0),
             child: Column(
               children: <Widget>[

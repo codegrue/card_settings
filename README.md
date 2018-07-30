@@ -17,13 +17,15 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
 - CardSettingsColorPicker - RBG Color Picker
 - CardSettingsDatePicker - Material Design Date Picker
 - CardSettingsTimePicker - Material Design Time Picker
+- CardSettingsButton - Actions buttons for the form
 
-All fields support `validate`, `onSaved`, and `autovalidate`.
+All fields support `validate`, `onSaved`, `autovalidate`, and `visible`.
 
 The package also includes these additonal items:
 
 - CardSettingsField - The base layout widget. You can use this to build custom fields.
 - CardSettingsHeader - A control to put a header between form sections.
+- CardSettingsInstructions - Informational read-only text.
 - Converters - a set of utility functions to assist in converting data into and out of the fields.
 
 ## Usage
@@ -90,6 +92,7 @@ class MyApp extends StatelessWidget {
       theme: Theme.of(context).copyWith(
         accentColor: Colors.teal[400], // used for headers
         cardColor: Colors.teal[100], // used for field backgrounds
+        backgroundColor: Colors.teal[200], // color outside the card
       ),
     );
   }
@@ -115,6 +118,12 @@ Each field implements a `visible` property that you can use to control the visib
     visible: _ateOut,
   ),
 ```
+
+## Dependencies
+
+This widget set relies on these external third-party components:
+
+- [flutter_colorpicker](https://pub.dartlang.org/packages/flutter_colorpicker)
 
 ## Changelog
 
