@@ -1,3 +1,7 @@
+[![Pub Package](https://img.shields.io/pub/v/card_settings.svg)](https://pub.dartlang.org/packages/card_settings)
+[![Github Issues](http://githubbadges.herokuapp.com/codegrue/card_settings/issues.svg)](https://github.com/codegrue/card_settings/issues)
+
+
 # Card Settings control
 
 A flutter package for building card based settings forms. This includes a library of pre-built form field widgets. The style is a bit like a cross between 
