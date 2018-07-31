@@ -96,7 +96,7 @@ class MyApp extends StatelessWidget {
 
 ### Dynamic Visibility
 
-Each field implements a `visible` property that you can use to control the visibility based on the value of other fields. In this example, the switch field controls the visibility of the color picker control:
+Each field implements a `visible` property that you can use to control the visibility based on the value of other fields. In this example, the switch field controls the visibility of the text field:
 
 ``` dart
   bool _ateOut = false;
