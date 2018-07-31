@@ -19,6 +19,7 @@ export 'widgets/card_settings_date_picker.dart';
 export 'widgets/card_settings_time_picker.dart';
 export 'widgets/card_settings_button.dart';
 export 'widgets/card_settings_instructions.dart';
+export 'widgets/card_settings_currency.dart';
 
 export 'helpers/picker_dialog.dart';
 export 'helpers/scroll_picker.dart';

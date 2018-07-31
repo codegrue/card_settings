@@ -25,7 +25,6 @@ class PonyModel {
   String name = 'Twilight Sparkle';
   String type = 'Unicorn';
   int age = 7;
-  String gender = 'Female';
   String coatColor = 'D19FE4';
   String maneColor = '273873';
   bool hasSpots = false;
@@ -34,7 +33,8 @@ class PonyModel {
       'An intelligent and dutiful scholar with an avid love of learning and skill in unicorn magic such as levitation, teleportation, and the creation of force fields.';
   double height = 3.5;
   double weight = 45.25;
-  DateTime showDateTime = DateTime(2006, 07, 25, 20, 30);
+  DateTime showDateTime = DateTime(2010, 10, 10, 20, 30);
+  double ticketPrice = 65.99;
 }
 
 class PonyExample extends StatefulWidget {
@@ -103,6 +103,12 @@ class _PonyExampleState extends State<PonyExample> {
               },
               onSaved: (value) => _ponyModel.age = value,
             ),
+            CardSettingsParagraph(
+              label: 'Description',
+              initialValue: _ponyModel.description,
+              numberOfLines: 5,
+              onSaved: (value) => _ponyModel.description = value,
+            ),
             CardSettingsHeader(label: 'Colors'),
             CardSettingsColorPicker(
               label: 'Coat',
@@ -153,9 +159,9 @@ class _PonyExampleState extends State<PonyExample> {
               },
               onSaved: (value) => _ponyModel.weight = value,
             ),
-            CardSettingsHeader(label: 'Career'),
+            CardSettingsHeader(label: 'First Show'),
             CardSettingsInstructions(
-              text: 'This is when this little horse got her big break',          
+              text: 'This is when this little horse got her big break',
             ),
             CardSettingsDatePicker(
               label: 'Show Date',
@@ -171,17 +177,19 @@ class _PonyExampleState extends State<PonyExample> {
               onSaved: (value) => _ponyModel.showDateTime =
                   updateJustTime(value, _ponyModel.showDateTime),
             ),
-            CardSettingsParagraph(
-              label: 'Description',
-              initialValue: _ponyModel.description,
-              onSaved: (value) => _ponyModel.description = value,
+            CardSettingsCurrency(
+              label: 'Ticket Price',
+              initialValue: _ponyModel.ticketPrice,
+              validator: (value) {
+                if (value != null && value > 100) return 'No scalpers allowed!';
+              },
+              onSaved: (value) => _ponyModel.ticketPrice = value,
             ),
             CardSettingsHeader(label: 'Actions'),
             CardSettingsButton(
-              label: 'SAVE',
-              onPressed: _savePressed,
-              backgroundColor: Colors.lightBlueAccent[100]
-            ),         
+                label: 'SAVE',
+                onPressed: _savePressed,
+                backgroundColor: Colors.lightBlueAccent[100]),
             CardSettingsButton(
               label: 'RESET',
               onPressed: _resetPressed,
@@ -216,24 +224,27 @@ class _PonyExampleState extends State<PonyExample> {
       builder: (BuildContext context) {
         return new AlertDialog(
           title: Text('Updated Results'),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _buildRow('Name', _ponyModel.name),
-              _buildRow('Type', _ponyModel.type),
-              _buildRow('Age', _ponyModel.age),
-              _buildRow('CoatColor', _ponyModel.coatColor),
-              _buildRow('ManeColor', _ponyModel.maneColor),
-              _buildRow('HasSpots', _ponyModel.hasSpots),
-              _buildRow('SpotColor', _ponyModel.spotColor),
-              _buildRow('Height', _ponyModel.height),
-              _buildRow('Weight', _ponyModel.weight),
-              _buildRow(
-                  'ShowDate', DateFormat.yMd().format(_ponyModel.showDateTime)),
-              _buildRow(
-                  'ShowTime', DateFormat.jm().format(_ponyModel.showDateTime)),
-              Text(_ponyModel.description),
-            ],
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _buildRow('Name', _ponyModel.name),
+                _buildRow('Type', _ponyModel.type),
+                _buildRow('Age', _ponyModel.age),
+                Text(_ponyModel.description),                
+                _buildRow('CoatColor', _ponyModel.coatColor),
+                _buildRow('ManeColor', _ponyModel.maneColor),
+                _buildRow('HasSpots', _ponyModel.hasSpots),
+                _buildRow('SpotColor', _ponyModel.spotColor),
+                _buildRow('Height', _ponyModel.height),
+                _buildRow('Weight', _ponyModel.weight),
+                _buildRow('ShowDate',
+                    DateFormat.yMd().format(_ponyModel.showDateTime)),
+                _buildRow('ShowTime',
+                    DateFormat.jm().format(_ponyModel.showDateTime)),
+                _buildRow('Price', _ponyModel.ticketPrice),
+              ],
+            ),
           ),
           actions: <Widget>[
             new FlatButton(

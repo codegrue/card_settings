@@ -9,3 +9,11 @@
 ## [0.1.2] - 7/27/2018
 
 * Attempt to improve documentation and remove warnings
+
+## [0.1.3] - 7/30/2018
+
+* Added CardSettingsCurrency field
+* Added CardSettingsInstructions field
+* Added CardSettingsButton field
+* Added ability to tap to select in pickers
+

@@ -18,6 +18,7 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
 - CardSettingsDatePicker - Material Design Date Picker
 - CardSettingsTimePicker - Material Design Time Picker
 - CardSettingsButton - Actions buttons for the form
+- CardSettingsCurrency - Field for currency entry
 
 All fields support `validate`, `onSaved`, `autovalidate`, and `visible`.
 
@@ -124,6 +125,7 @@ Each field implements a `visible` property that you can use to control the visib
 This widget set relies on these external third-party components:
 
 - [flutter_colorpicker](https://pub.dartlang.org/packages/flutter_colorpicker)
+- [flutter_masked_text](https://pub.dartlang.org/packages/flutter_masked_text)
 
 ## Changelog
 
