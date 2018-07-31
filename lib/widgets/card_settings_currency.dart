@@ -38,8 +38,9 @@ class CardSettingsCurrency extends StatelessWidget {
   final FormFieldSetter<double> onSaved;
 
   Widget build(BuildContext context) {
-
-    var controller = new MoneyMaskedTextController(decimalSeparator: decimalSeparator, thousandSeparator: thousandSeparator);
+    var controller = new MoneyMaskedTextController(
+        decimalSeparator: decimalSeparator,
+        thousandSeparator: thousandSeparator);
     controller.value = TextEditingValue(text: initialValue?.toString());
 
     return CardSettingsField(
