@@ -29,13 +29,6 @@ The package also includes these additonal items:
 - CardSettingsInstructions - Informational read-only text.
 - Converters - a set of utility functions to assist in converting data into and out of the fields.
 
-## Usage
-To use this package, add `card_settings` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
-
-``` dart
-    card_settings: ^0.1.2
-```
-
 ### Simple Example
 
 All fields in this package are compatible with the standard Flutter Form widget. Simply wrap the CardSettings control in a form and use it as you normally would with the form functionality.
