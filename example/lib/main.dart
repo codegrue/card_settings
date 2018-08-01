@@ -11,10 +11,18 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Card Settings Example',
       home: new PonyExample(),
-      theme: Theme.of(context).copyWith(
-        accentColor: Colors.indigo[400],
-        backgroundColor: Colors.indigo[100],
-        primaryColor: Colors.teal,
+      theme: ThemeData(
+        //.of(context).copyWith(
+        accentColor: Colors.indigo[400], // used for card headers
+        cardColor: Colors.white, // used for field backgrounds
+        backgroundColor: Colors.indigo[100], // color outside the card
+        primaryColor: Colors.teal, // color of page header
+        buttonColor: Colors.lightBlueAccent[100], // background color of buttons
+        textTheme: TextTheme(
+          button: TextStyle(
+            color: Colors.deepPurple, // text color of buttons
+          ),
+        ),
       ),
     );
   }
@@ -207,9 +215,9 @@ class _PonyExampleState extends State<PonyExample> {
             ),
             CardSettingsHeader(label: 'Actions'),
             CardSettingsButton(
-                label: 'SAVE',
-                onPressed: _savePressed,
-                backgroundColor: Colors.lightBlueAccent[100]),
+              label: 'SAVE',
+              onPressed: _savePressed,
+            ),
             CardSettingsButton(
               label: 'RESET',
               onPressed: _resetPressed,
