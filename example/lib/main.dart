@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:card_settings/card_settings.dart';
 import 'package:intl/intl.dart';
-import 'package:asynchronous_validator/asynchronous_validator.dart';
 
 void main() => runApp(new MyApp());
 
@@ -193,7 +192,8 @@ class _PonyExampleState extends State<PonyExample> {
               initialValue: _ponyModel.email,
               validator: (value) {
                 if (value == null || value.isEmpty) return 'Email is required.';
-                if (!isEmail(value)) return "Email not formatted correctly.";
+                if (!value.contains('@'))
+                  return "Email not formatted correctly.";
               },
               onSaved: (value) => _ponyModel.email = value,
             ),
