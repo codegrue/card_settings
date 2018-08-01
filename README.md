@@ -22,9 +22,9 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
   - *CardSettingsCurrency* - Field for currency entry
   - *CardSettingsSwitch* - Field for boolean state   
 - **Pickers**
-  - *CardSettingsListPicker* - Picker list of user provided options
+  - *CardSettingsListPicker* - Picker list of arbitrary options
   - *CardSettingsNumberPicker* - Picker list of numbers in a given range
-  - *CardSettingsColorPicker* - RBG Color Picker
+  - *CardSettingsColorPicker* - RGB Color Picker
   - *CardSettingsDatePicker* - Material Design Date Picker
   - *CardSettingsTimePicker* - Material Design Time Picker
 - **Informational Sections**

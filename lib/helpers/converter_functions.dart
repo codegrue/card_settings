@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 
 /// This attempts to intelligently cast any value to the desired type.
 T intelligentCast<T>(dynamic value) {
+  // instead of empty string we want to return null
+  if (T.toString() == 'String' && value.toString().isEmpty) return null;
+
   // already expected type, return it
   if (value is T) return value;
 
@@ -14,9 +17,6 @@ T intelligentCast<T>(dynamic value) {
 
   // if null, dont change it.
   if (value == null) return null;
-
-  // instead of empty string we want to return null
-  if (value.toString().isEmpty) return null;
 
   // perform explicit parsing on the value as a string
   if (T.toString() == 'double') return double.parse(value) as T;
@@ -34,10 +34,10 @@ bool boolParse(String value) {
   if (value.toLowerCase() == 'false') return false;
 
   if (value.toLowerCase() == '1') return true;
-  if (value.toLowerCase() == '0') return true;
+  if (value.toLowerCase() == '0') return false;
 
   if (value.toLowerCase() == 'yes') return true;
-  if (value.toLowerCase() == 'no') return true;
+  if (value.toLowerCase() == 'no') return false;
 
   return false;
 }
