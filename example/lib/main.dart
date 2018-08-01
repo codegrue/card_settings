@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
       title: 'Card Settings Example',
       home: new PonyExample(),
       theme: ThemeData(
-        //.of(context).copyWith(
         accentColor: Colors.indigo[400], // used for card headers
         cardColor: Colors.white, // used for field backgrounds
         backgroundColor: Colors.indigo[100], // color outside the card
