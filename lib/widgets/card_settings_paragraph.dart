@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'card_settings_field.dart';
 
 /// This is a field that allows multiple lines of text to be entered.
-class CardSettingsParagraph extends StatefulWidget {
+class CardSettingsParagraph extends StatelessWidget {
   CardSettingsParagraph({
     this.label: 'Label',
     this.initialValue,
@@ -27,29 +27,23 @@ class CardSettingsParagraph extends StatefulWidget {
   final FormFieldValidator<String> validator;
   final FormFieldSetter<String> onSaved;
 
-  @override
-  _CardSettingsParagraphState createState() =>
-      new _CardSettingsParagraphState();
-}
-
-class _CardSettingsParagraphState extends State<CardSettingsParagraph> {
   Widget build(BuildContext context) {
     return new CardSettingsField(
       contentOnNewLine: true,
-      label: widget.label,
-      visible: widget.visible,
+      label: label,
+      visible: visible,
       content: Container(
         child: TextFormField(
-          maxLines: widget.numberOfLines,
+          maxLines: numberOfLines,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.all(0.0),
             border: InputBorder.none,
           ),
-          initialValue: widget.initialValue,
-          autovalidate: widget.autovalidate,
-          validator: widget.validator,
-          onSaved: widget.onSaved,
-          maxLength: widget.maxLength, // note, this will show the counter
+          initialValue: initialValue,
+          autovalidate: autovalidate,
+          validator: validator,
+          onSaved: onSaved,
+          maxLength: maxLength, // note, this will show the counter
         ),
       ),
     );

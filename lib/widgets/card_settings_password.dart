@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'card_settings_field.dart';
 
-/// This is a standard one line text entry field. It encapselates the [TextFormField] widget.
-class CardSettingsText extends StatelessWidget {
-  CardSettingsText({
-    this.label: 'Label',
+/// This is a password field. It obscures the entered text.
+class CardSettingsPassword extends StatelessWidget {
+  CardSettingsPassword({
+    this.label: 'Password',
     this.initialValue,
     this.maxLength: 20,
     this.autovalidate: false,
@@ -46,6 +46,7 @@ class CardSettingsText extends StatelessWidget {
         inputFormatters: [
           LengthLimitingTextInputFormatter(maxLength),
         ],
+        obscureText: true,
       ),
     );
   }

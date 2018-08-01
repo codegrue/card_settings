@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'card_settings_field.dart';
 
-/// This is a standard one line text entry field. It encapselates the [TextFormField] widget.
-class CardSettingsText extends StatelessWidget {
-  CardSettingsText({
-    this.label: 'Label',
+/// This is a sepcial field used to collect email addresses
+class CardSettingsEmail extends StatelessWidget {
+  CardSettingsEmail({
+    this.label: 'Email',
     this.initialValue,
     this.maxLength: 20,
     this.autovalidate: false,
     this.validator,
     this.onSaved,
-    this.keyboardType: TextInputType.text,
+    this.keyboardType: TextInputType.emailAddress,
     this.unitLabel,
     this.visible: true,
   });

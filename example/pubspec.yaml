@@ -6,6 +6,7 @@ dependencies:
     sdk: flutter
   card_settings:
     path: ../
+  asynchronous_validator: ^1.0.2  
 
 
 # For information on the generic Dart part of this file, see the

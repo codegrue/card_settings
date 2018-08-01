@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 
-/// This is a header to distinguish sections of the form.
+/// This is a read only section of text
 class CardSettingsInstructions extends StatelessWidget {
   CardSettingsInstructions({
     this.text: 'Instructions here...',

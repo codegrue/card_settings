@@ -7,7 +7,7 @@ import 'card_settings_field.dart';
 import 'package:card_settings/helpers/converter_functions.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
-/// This is a field for entering numeric doubles
+/// This is a field for entering currency amounts
 class CardSettingsCurrency extends StatelessWidget {
   CardSettingsCurrency({
     this.label: 'Label',

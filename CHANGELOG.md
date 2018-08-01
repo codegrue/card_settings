@@ -17,3 +17,8 @@
 * Added CardSettingsButton field
 * Added ability to tap to select in pickers
 
+## [0.1.4] - 7/31/2018
+
+* Added CardSettingsEmail field
+* Added CardSettingsPassword field
+* Changed all TextFormFields to be stateless widget wrappers

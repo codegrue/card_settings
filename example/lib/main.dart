@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:card_settings/card_settings.dart';
 import 'package:intl/intl.dart';
+import 'package:asynchronous_validator/asynchronous_validator.dart';
 
 void main() => runApp(new MyApp());
 
@@ -35,6 +36,8 @@ class PonyModel {
   double weight = 45.25;
   DateTime showDateTime = DateTime(2010, 10, 10, 20, 30);
   double ticketPrice = 65.99;
+  String email = 'me@nowhere.org';
+  String password = 'secret';
 }
 
 class PonyExample extends StatefulWidget {
@@ -153,7 +156,7 @@ class _PonyExampleState extends State<PonyExample> {
               initialValue: _ponyModel.weight,
               validator: (value) {
                 if (value != null) {
-                  if (value > 70) return 'You won' 't fly at the weight.';
+                  if (value > 70) return 'You won\'t fly at the weight.';
                   if (value < 10) return 'Cmon, you are not a feather.';
                 }
               },
@@ -184,6 +187,23 @@ class _PonyExampleState extends State<PonyExample> {
                 if (value != null && value > 100) return 'No scalpers allowed!';
               },
               onSaved: (value) => _ponyModel.ticketPrice = value,
+            ),
+            CardSettingsHeader(label: 'Security'),
+            CardSettingsEmail(
+              initialValue: _ponyModel.email,
+              validator: (value) {
+                if (value == null || value.isEmpty) return 'Email is required.';
+                if (!isEmail(value)) return "Email not formatted correctly.";
+              },
+              onSaved: (value) => _ponyModel.email = value,
+            ),
+            CardSettingsPassword(
+              initialValue: _ponyModel.password,
+              validator: (value) {
+                if (value == null) return 'Password is required.';
+                if (value.length <= 6) return 'Must be more than 6 characters.';
+              },
+              onSaved: (value) => _ponyModel.password = value,
             ),
             CardSettingsHeader(label: 'Actions'),
             CardSettingsButton(
@@ -231,7 +251,7 @@ class _PonyExampleState extends State<PonyExample> {
                 _buildRow('Name', _ponyModel.name),
                 _buildRow('Type', _ponyModel.type),
                 _buildRow('Age', _ponyModel.age),
-                Text(_ponyModel.description),                
+                Text(_ponyModel.description),
                 _buildRow('CoatColor', _ponyModel.coatColor),
                 _buildRow('ManeColor', _ponyModel.maneColor),
                 _buildRow('HasSpots', _ponyModel.hasSpots),

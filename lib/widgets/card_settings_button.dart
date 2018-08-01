@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 
-/// This is a field for entering numeric doubles
+/// This is a button widget for inclusion in the form.
 class CardSettingsButton extends StatelessWidget {
   CardSettingsButton({
     this.label: 'Label',
