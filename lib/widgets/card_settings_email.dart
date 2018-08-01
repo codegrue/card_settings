@@ -17,6 +17,7 @@ class CardSettingsEmail extends StatelessWidget {
     this.keyboardType: TextInputType.emailAddress,
     this.unitLabel,
     this.visible: true,
+    this.controller,
   });
 
   final String label;
@@ -26,6 +27,7 @@ class CardSettingsEmail extends StatelessWidget {
   final String unitLabel;
   final int maxLength;
   final bool visible;
+  final TextEditingController controller;
 
   final FormFieldValidator<String> validator;
   final FormFieldSetter<String> onSaved;
@@ -43,6 +45,7 @@ class CardSettingsEmail extends StatelessWidget {
         validator: validator,
         keyboardType: keyboardType,
         onSaved: onSaved,
+        controller: controller,
         inputFormatters: [
           LengthLimitingTextInputFormatter(maxLength),
         ],

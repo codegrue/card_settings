@@ -15,6 +15,7 @@ class CardSettingsParagraph extends StatelessWidget {
     this.validator,
     this.onSaved,
     this.visible: true,
+    this.controller,
   });
 
   final String label;
@@ -23,6 +24,7 @@ class CardSettingsParagraph extends StatelessWidget {
   final int numberOfLines;
   final int maxLength;
   final bool visible;
+  final TextEditingController controller;
 
   final FormFieldValidator<String> validator;
   final FormFieldSetter<String> onSaved;
@@ -43,6 +45,7 @@ class CardSettingsParagraph extends StatelessWidget {
           autovalidate: autovalidate,
           validator: validator,
           onSaved: onSaved,
+          controller: controller,
           maxLength: maxLength, // note, this will show the counter
         ),
       ),

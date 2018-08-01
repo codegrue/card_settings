@@ -17,6 +17,7 @@ class CardSettingsDouble extends StatelessWidget {
     this.onSaved,
     this.unitLabel,
     this.visible: true,
+    this.controller,
   });
 
   final String label;
@@ -25,6 +26,7 @@ class CardSettingsDouble extends StatelessWidget {
   final String unitLabel;
   final int maxLength;
   final bool visible;
+  final TextEditingController controller;
 
   // Events
   final FormFieldValidator<double> validator;
@@ -44,6 +46,7 @@ class CardSettingsDouble extends StatelessWidget {
         autovalidate: autovalidate,
         validator: _safeValidator,
         onSaved: _safeOnSaved,
+        controller: controller,
         keyboardType: TextInputType.number,
         inputFormatters: [
           LengthLimitingTextInputFormatter(maxLength),
