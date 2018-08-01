@@ -11,34 +11,34 @@ the cupertino settings screen and material design; The idea is it should be usab
 
 This package consists of a CardSettings layout wrapper and a series of form field options including:
 
-- Text Fields
-  - CardSettingsText - Basic text field
-  - CardSettingsParagraph - Multiline text field with counter
-  - CardSettingsEmail - A text field pre-configured for email input.
-  - CardSettingsPassword - A text field pre-configured for passwords.
-- Numeric Fields
-  - CardSettingsDouble - Field for double precision numbers
-  - CardSettingsInt - Field for integer numbers
-  - CardSettingsCurrency - Field for currency entry
-  - CardSettingsSwitch - Field for boolean state   
-- Pickers
-  - CardSettingsListPicker - Picker list of user provided options
-  - CardSettingsNumberPicker - Picker list of numbers in a given range
-  - CardSettingsColorPicker - RBG Color Picker
-  - CardSettingsDatePicker - Material Design Date Picker
-  - CardSettingsTimePicker - Material Design Time Picker
-- Informational Sections
-  - CardSettingsHeader - A control to put a header between form sections.
-  - CardSettingsInstructions - Informational read-only text.
-- Actions
-  - CardSettingsButton - Actions buttons for the form
+- **Text Fields**
+  - *CardSettingsText* - Basic text field
+  - *CardSettingsParagraph* - Multiline text field with counter
+  - *CardSettingsEmail* - A text field pre-configured for email input.
+  - *CardSettingsPassword* - A text field pre-configured for passwords.
+- **Numeric Fields**
+  - *CardSettingsDouble* - Field for double precision numbers
+  - *CardSettingsInt* - Field for integer numbers
+  - *CardSettingsCurrency* - Field for currency entry
+  - *CardSettingsSwitch* - Field for boolean state   
+- **Pickers**
+  - *CardSettingsListPicker* - Picker list of user provided options
+  - *CardSettingsNumberPicker* - Picker list of numbers in a given range
+  - *CardSettingsColorPicker* - RBG Color Picker
+  - *CardSettingsDatePicker* - Material Design Date Picker
+  - *CardSettingsTimePicker* - Material Design Time Picker
+- **Informational Sections**
+  - *CardSettingsHeader* - A control to put a header between form sections.
+  - *CardSettingsInstructions* - Informational read-only text.
+- **Actions**
+  - *CardSettingsButton* - Actions buttons for the form
 
 All fields support `validate`, `onSaved`, `autovalidate`, and `visible`.
 
 The package also includes these additonal items:
 
-- CardSettingsField - The base layout widget. You can use this to build custom fields.
-- Converters - a set of utility functions to assist in converting data into and out of the fields.
+- *CardSettingsField* - The base layout widget. You can use this to build custom fields.
+- *Converters* - a set of utility functions to assist in converting data into and out of the fields.
 
 ### Simple Example
 
