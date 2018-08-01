@@ -25,7 +25,7 @@ class CardSettingsColorPicker extends FormField<Color> {
               final _CardSettingsColorPickerState state = field;
               return GestureDetector(
                 onTap: () {
-                  state._showDialog();
+                  state._showDialog("Color for " + label);
                 },
                 child: CardSettingsField(
                   label: label,
@@ -50,14 +50,14 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   @override
   CardSettingsColorPicker get widget => super.widget;
 
-  void _showDialog() {
+  void _showDialog(String title) {
     Color _pickerColor = value;
 
     showDialog<Color>(
       context: context,
       builder: (BuildContext context) {
         return new AlertDialog(
-          title: const Text('Pick a color!'),
+          title: Text(title),
           content: new SingleChildScrollView(
             child: new ColorPicker(
               pickerColor: _pickerColor,
