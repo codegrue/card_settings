@@ -90,26 +90,13 @@ class CardSettingsField extends StatelessWidget {
         ? ''
         : CardSettings.of(context).labelSuffix;
 
-    // TextStyle labelStyle = (CardSettings.of(context).labelStyle == null)
-    //     ? Theme.of(context)
-    //         .textTheme
-    //         .subhead.
-    //         .copyWith(fontWeight: FontWeight.bold).merge(CardSettings.of(context).labelStyle)
-    //     : CardSettings.of(context).labelStyle;
-
-    TextStyle labelStyle = Theme.of(context)
-        .textTheme
-        .subhead
-        .copyWith(fontWeight: FontWeight.bold)
-        .merge(CardSettings.of(context).labelStyle);
-
     return Container(
       width: labelWidth,
       padding:
           EdgeInsets.only(right: CardSettings.of(context).labelPadding ?? 6.0),
       child: Text(
         label + labelSuffix,
-        style: labelStyle,
+        style: Theme.of(context).inputDecorationTheme.labelStyle,
         textAlign: labelAlign ?? CardSettings.of(context).labelAlign,
       ),
     );

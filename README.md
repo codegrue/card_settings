@@ -112,18 +112,18 @@ class MyApp extends StatelessWidget {
 Or if you want to apply a different theme to just the `CardSettings` heirarchy, you can wrap it in a `Theme` widget like so:
 
 ``` dart
-  Form(
-    key: _formKey,
-    child: Theme(
-      data: ThemeData(
-        primaryTextTheme: TextTheme(
-          title: TextStyle(color: Colors.lightBlue[50]), // text style for headers
-        ),
+  Theme(
+    data: Theme.of(context).copyWith(
+      primaryTextTheme: TextTheme(
+        title: TextStyle(color: Colors.lightBlue[50]), // style for headers
       ),
-      child: CardSettings(
-        ...
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0), // style for labels
       ),
-    )
+    ),
+    child: CardSettings(
+      ...
+    ),
   )
 ```
 
@@ -133,14 +133,13 @@ The `CardSettings` widget implements a few global settings that all child fields
 
 #### Labels
 
-You can control how the labels are rendered with four properties:
+You can control how the labels are rendered with three properties:
 
 ``` dart
   CardSettings(
     labelAlign: TextAlign.right, // change the label alignment
     labelSuffix: ':', // add an optional tag after the label
     labelPadding: 10.0, // control the spacing between the label and the content
-    labelStyle: TextStyle(fontStyle: FontStyle.italic, color: Colors.green), // style override
   )
 ```
 

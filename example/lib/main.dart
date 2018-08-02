@@ -77,10 +77,15 @@ class _PonyExampleState extends State<PonyExample> {
       body: Form(
         key: _formKey,
         child: Theme(
-          data: ThemeData(
+          data: Theme.of(context).copyWith(
             primaryTextTheme: TextTheme(
               title:
-                  TextStyle(color: Colors.lightBlue[50]), // text color headers
+                  TextStyle(color: Colors.lightBlue[50]), // style for headers
+            ),
+            inputDecorationTheme: InputDecorationTheme(
+              labelStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0), // style for labels
             ),
           ),
           child: CardSettings(

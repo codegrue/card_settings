@@ -10,7 +10,6 @@ class CardSettings extends InheritedWidget {
     this.labelAlign,
     this.labelPadding,
     this.labelSuffix,
-    this.labelStyle,
     this.children,
   }) : super(
           key: key,
@@ -29,7 +28,6 @@ class CardSettings extends InheritedWidget {
   final TextAlign labelAlign;
   final double labelPadding;
   final String labelSuffix;
-  final TextStyle labelStyle;
 
   static CardSettings of(BuildContext context) {
     final CardSettings inheritedCardSettings =
@@ -43,7 +41,6 @@ class CardSettings extends InheritedWidget {
     if (labelAlign != old.labelAlign) return true;
     if (labelPadding != old.labelPadding) return true;
     if (labelSuffix != old.labelSuffix) return true;
-    if (labelStyle != old.labelStyle) return true;
     return false;
   }
 }
