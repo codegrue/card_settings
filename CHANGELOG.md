@@ -30,3 +30,9 @@
 * Support theming of header text
 * Changed CardSettings to an InheritableWidget with global properties to control label appearance
 * Added a labelAlign property to all fields
+
+## [0.1.6] - 8/2/2018
+
+* Added contentAlign property to all fields to allow for right justification
+* Added labelAlign to CardHeaders to allow center or right positioning
+* Improved support of themes for input text and labels

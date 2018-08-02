@@ -36,7 +36,7 @@ class CardSettingsSwitch extends FormField<bool> {
                   Expanded(
                     child: Text(
                       state.value ? trueLabel : falseLabel,
-                      style: TextStyle(fontSize: 16.0),
+                      style: Theme.of(field.context).textTheme.subhead,
                       textAlign: contentAlign ??
                           CardSettings.of(field.context).contentAlign,
                     ),

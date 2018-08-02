@@ -37,7 +37,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
                     state.value == null
                         ? ''
                         : state.value.format(field.context),
-                    style: TextStyle(fontSize: 16.0),
+                    style: Theme.of(field.context).textTheme.subhead,
                     textAlign: contentAlign ??
                         CardSettings.of(field.context).contentAlign,
                   ),

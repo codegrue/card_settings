@@ -36,7 +36,7 @@ class CardSettingsListPicker extends FormField<String> {
                   errorText: field.errorText,
                   content: Text(
                     state.value ?? '',
-                    style: TextStyle(fontSize: 16.0),
+                    style: Theme.of(field.context).textTheme.subhead,
                     textAlign: contentAlign ??
                         CardSettings.of(field.context).contentAlign,
                   ),

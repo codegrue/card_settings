@@ -12,15 +12,15 @@ class MyApp extends StatelessWidget {
       title: 'Card Settings Example',
       home: new PonyExample(),
       theme: ThemeData(
-        accentColor: Colors.indigo[400], // used for card headers
-        cardColor: Colors.white, // used for field backgrounds
+        accentColor: Colors.indigo[400], // background color of card headers
+        cardColor: Colors.white, // background color of fields
         backgroundColor: Colors.indigo[100], // color outside the card
         primaryColor: Colors.teal, // color of page header
         buttonColor: Colors.lightBlueAccent[100], // background color of buttons
         textTheme: TextTheme(
-          button: TextStyle(
-            color: Colors.deepPurple, // text color of buttons
-          ),
+          button:
+              TextStyle(color: Colors.deepPurple[900]), // style of button text
+          subhead: TextStyle(color: Colors.grey[800]), // style of input text
         ),
       ),
     );
@@ -83,9 +83,8 @@ class _PonyExampleState extends State<PonyExample> {
                   TextStyle(color: Colors.lightBlue[50]), // style for headers
             ),
             inputDecorationTheme: InputDecorationTheme(
-              labelStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0), // style for labels
+              labelStyle:
+                  TextStyle(color: Colors.indigo[400]), // style for labels
             ),
           ),
           child: CardSettings(

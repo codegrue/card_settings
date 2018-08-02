@@ -38,7 +38,7 @@ class CardSettingsDatePicker extends FormField<DateTime> {
                     state.value == null
                         ? ''
                         : DateFormat.yMd().format(state.value),
-                    style: TextStyle(fontSize: 16.0),
+                    style: Theme.of(field.context).textTheme.subhead,
                     textAlign: contentAlign ??
                         CardSettings.of(field.context).contentAlign,
                   ),

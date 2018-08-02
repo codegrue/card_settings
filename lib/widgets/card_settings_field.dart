@@ -90,13 +90,19 @@ class CardSettingsField extends StatelessWidget {
         ? ''
         : CardSettings.of(context).labelSuffix;
 
+    TextStyle labelStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 16.0,
+    );
+
     return Container(
       width: labelWidth,
       padding:
           EdgeInsets.only(right: CardSettings.of(context).labelPadding ?? 6.0),
       child: Text(
         label + labelSuffix,
-        style: Theme.of(context).inputDecorationTheme.labelStyle,
+        style:
+            labelStyle.merge(Theme.of(context).inputDecorationTheme.labelStyle),
         textAlign: labelAlign ?? CardSettings.of(context).labelAlign,
       ),
     );
