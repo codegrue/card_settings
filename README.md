@@ -47,6 +47,7 @@ All fields in this package are compatible with the standard Flutter Form widget.
 ``` dart
   String title = "Spheria";
   String author = "Cody Leet";
+  String url = "http://www.codyleet.com/spheria"
 
   @override
   Widget build(BuildContext context) {
@@ -65,13 +66,13 @@ All fields in this package are compatible with the standard Flutter Form widget.
               onSaved: (value) => title = value,
             ),
             CardSettingsText(
-              label: 'Author',
-              initialValue: author,
+              label: 'URL',
+              initialValue: url,
               validator: (value) {
-                if (value == null || value.isEmpty)
-                  return 'Author is required.';
+                if (!value.startsWith('http:'))
+                  return 'Must be a valid website.';
               },
-              onSaved: (value) => author = value,
+              onSaved: (value) => url = value,
             ),
           ],
         ),
@@ -84,7 +85,7 @@ See the full demo example [here](https://pub.dartlang.org/packages/card_settings
 
 ### Theming
 
-The controls support the material design theme. If you want to customize the colors you do something like this:
+The widgets support the material design theme. This example shows what global theme values to set to determine how the various elements appear.
 
 ``` dart
 class MyApp extends StatelessWidget {
@@ -94,15 +95,64 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Card Settings Example',
       home: new HomePage(),
-      theme: Theme.of(context).copyWith(
-        accentColor: Colors.teal[400], // used for headers
-        cardColor: Colors.teal[100], // used for field backgrounds
-        backgroundColor: Colors.teal[200], // color outside the card
+      theme: ThemeData(
+        accentColor: Colors.indigo[400], // used for card headers
+        cardColor: Colors.white, // used for field backgrounds
+        backgroundColor: Colors.indigo[100], // color outside the card
+        primaryColor: Colors.teal, // color of page header
+        buttonColor: Colors.lightBlueAccent[100], // background color of buttons
+        textTheme: TextTheme(
+          button: TextStyle(color: Colors.deepPurple), // text style of buttons
+        ),
       ),
     );
   }
 }
 
+```
+
+Or if you want to apply a different theme to just the `CardSettings` heirarchy, you can wrap it in a `Theme` widget like so:
+
+``` dart
+  Form(
+    key: _formKey,
+    child: Theme(
+      data: ThemeData(
+        primaryTextTheme: TextTheme(
+          title: TextStyle(color: Colors.lightBlue[50]), // text style for headers
+        ),
+      ),
+      child: CardSettings(
+        ...
+      ),
+    )
+  )
+```
+
+### Global Properties
+
+The `CardSettings` widget implements a few global settings that all child fields can inherit. Currently it supports only label customization.
+
+#### Labels
+
+You can control how the labels are rendered with four properties:
+
+``` dart
+  CardSettings(
+    labelAlign: TextAlign.right, // change the label alignment
+    labelSuffix: ':', // add an optional tag after the label
+    labelPadding: 10.0, // control the spacing between the label and the content
+    labelStyle: TextStyle(fontStyle: FontStyle.italic, color: Colors.green), // style override
+  )
+```
+
+The `labelAlign` property is also available on each field, so you can override the global setting for individual fields.
+
+``` dart
+  CardSettingsText(
+    label: 'Last Name',
+    labelAlign: TextAlign.right,
+  )
 ```
 
 ### Dynamic Visibility

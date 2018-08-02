@@ -9,6 +9,7 @@ import 'card_settings_field.dart';
 class CardSettingsPassword extends StatelessWidget {
   CardSettingsPassword({
     this.label: 'Password',
+    this.labelAlign,
     this.initialValue,
     this.maxLength: 20,
     this.autovalidate: false,
@@ -21,6 +22,7 @@ class CardSettingsPassword extends StatelessWidget {
   });
 
   final String label;
+  final TextAlign labelAlign;
   final String initialValue;
   final bool autovalidate;
   final TextInputType keyboardType;
@@ -35,6 +37,7 @@ class CardSettingsPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return new CardSettingsField(
       label: label,
+      labelAlign: labelAlign,
       visible: visible,
       unitLabel: unitLabel,
       content: TextFormField(

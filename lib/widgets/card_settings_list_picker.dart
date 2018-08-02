@@ -7,15 +7,12 @@ import 'card_settings_field.dart';
 
 /// This is a list picker that allows an arbitrary list of options to be provided.
 class CardSettingsListPicker extends FormField<String> {
-  final String label;
-  final List<String> options;
-  final String initialValue;
-
   CardSettingsListPicker({
     Key key,
-    this.label: 'Label',
-    this.initialValue,
-    this.options,
+    String label: 'Label',
+    TextAlign labelAlign,
+    String initialValue,
+    List<String> options,
     bool autovalidate: false,
     bool visible: true,
     FormFieldSetter<String> onSaved,
@@ -30,10 +27,11 @@ class CardSettingsListPicker extends FormField<String> {
               final _CardSettingsListPickerState state = field;
               return GestureDetector(
                 onTap: () {
-                  state._showDialog();
+                  state._showDialog(label, options);
                 },
                 child: CardSettingsField(
                   label: label,
+                  labelAlign: labelAlign,
                   visible: visible,
                   errorText: field.errorText,
                   content: Text(
@@ -54,13 +52,13 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   @override
   CardSettingsListPicker get widget => super.widget;
 
-  void _showDialog() {
+  void _showDialog(String label, List<String> options) {
     showDialog<String>(
       context: context,
       builder: (BuildContext context) {
         return new PickerDialog(
-          items: widget.options,
-          title: Text('Select ' + widget.label),
+          items: options,
+          title: Text('Select ' + label),
           initialValue: value,
         );
       },

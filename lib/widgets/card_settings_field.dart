@@ -1,6 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'package:card_settings/card_settings.dart';
 import 'package:flutter/material.dart';
 
 /// This is the basic layout of a field in a CardSettings view. Typcially, it
@@ -11,11 +12,12 @@ class CardSettingsField extends StatelessWidget {
     this.content,
     this.showIcon: false,
     this.pickerIcon,
-    this.contentPaddingAdjustment = 0.0,
+    this.labelWidth = 120.0,
     this.contentOnNewLine = false,
     this.unitLabel,
     this.errorText,
     this.visible: true,
+    this.labelAlign,
   });
 
   final String label;
@@ -23,10 +25,11 @@ class CardSettingsField extends StatelessWidget {
   final Widget content;
   final bool showIcon;
   final IconData pickerIcon;
-  final double contentPaddingAdjustment;
+  final double labelWidth;
   final bool contentOnNewLine;
   final String errorText;
   final bool visible;
+  final TextAlign labelAlign;
 
   Widget build(BuildContext context) {
     return (visible)
@@ -43,7 +46,7 @@ class CardSettingsField extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     buildLeftDecoration(),
-                    buildLabel(),
+                    buildLabel(context),
                     buildInlineContent(context),
                     buildRightDecoration()
                   ],
@@ -82,15 +85,32 @@ class CardSettingsField extends StatelessWidget {
         : Container();
   }
 
-  Widget buildLabel() {
+  Widget buildLabel(BuildContext context) {
+    String labelSuffix = (CardSettings.of(context).labelSuffix == null)
+        ? ''
+        : CardSettings.of(context).labelSuffix;
+
+    // TextStyle labelStyle = (CardSettings.of(context).labelStyle == null)
+    //     ? Theme.of(context)
+    //         .textTheme
+    //         .subhead.
+    //         .copyWith(fontWeight: FontWeight.bold).merge(CardSettings.of(context).labelStyle)
+    //     : CardSettings.of(context).labelStyle;
+
+    TextStyle labelStyle = Theme.of(context)
+        .textTheme
+        .subhead
+        .copyWith(fontWeight: FontWeight.bold)
+        .merge(CardSettings.of(context).labelStyle);
+
     return Container(
-      width: 120.0 - contentPaddingAdjustment,
+      width: labelWidth,
+      padding:
+          EdgeInsets.only(right: CardSettings.of(context).labelPadding ?? 6.0),
       child: Text(
-        label,
-        style: TextStyle(
-          fontSize: 16.0,
-          fontWeight: FontWeight.bold,
-        ),
+        label + labelSuffix,
+        style: labelStyle,
+        textAlign: labelAlign ?? CardSettings.of(context).labelAlign,
       ),
     );
   }

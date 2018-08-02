@@ -10,6 +10,7 @@ class CardSettingsColorPicker extends FormField<Color> {
   CardSettingsColorPicker({
     Key key,
     String label: 'Label',
+    TextAlign labelAlign,
     Color initialValue: Colors.green,
     bool autovalidate: false,
     bool visible: true,
@@ -29,6 +30,7 @@ class CardSettingsColorPicker extends FormField<Color> {
                 },
                 child: CardSettingsField(
                   label: label,
+                  labelAlign: labelAlign,
                   visible: visible,
                   errorText: field.errorText,
                   content: Container(

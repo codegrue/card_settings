@@ -4,20 +4,46 @@
 import 'package:flutter/material.dart';
 
 /// This is the card wrapper that all the field controls are placed into
-class CardSettings extends StatelessWidget {
-  CardSettings({this.children});
+class CardSettings extends InheritedWidget {
+  CardSettings({
+    Key key,
+    this.labelAlign,
+    this.labelPadding,
+    this.labelSuffix,
+    this.labelStyle,
+    this.children,
+  }) : super(
+          key: key,
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(12.0),
+            child: Card(
+              elevation: 5.0,
+              child: Column(
+                children: children,
+              ),
+            ),
+          ),
+        );
 
   final List<Widget> children;
+  final TextAlign labelAlign;
+  final double labelPadding;
+  final String labelSuffix;
+  final TextStyle labelStyle;
 
-  Widget build(BuildContext context) {
-    return new SingleChildScrollView(
-      padding: EdgeInsets.all(12.0),
-      child: Card(
-        elevation: 5.0,
-        child: Column(
-          children: children,
-        ),
-      ),
-    );
+  static CardSettings of(BuildContext context) {
+    final CardSettings inheritedCardSettings =
+        context.inheritFromWidgetOfExactType(CardSettings);
+
+    return inheritedCardSettings;
+  }
+
+  @override
+  bool updateShouldNotify(CardSettings old) {
+    if (labelAlign != old.labelAlign) return true;
+    if (labelPadding != old.labelPadding) return true;
+    if (labelSuffix != old.labelSuffix) return true;
+    if (labelStyle != old.labelStyle) return true;
+    return false;
   }
 }

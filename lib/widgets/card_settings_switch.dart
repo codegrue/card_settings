@@ -9,6 +9,7 @@ class CardSettingsSwitch extends FormField<bool> {
   CardSettingsSwitch({
     Key key,
     String label: 'Label',
+    TextAlign labelAlign,
     String trueLabel: 'Yes',
     String falseLabel: 'No',
     bool initialValue: false,
@@ -27,6 +28,7 @@ class CardSettingsSwitch extends FormField<bool> {
               final _CardSettingsSwitchState state = field;
               return CardSettingsField(
                 label: label,
+                labelAlign: labelAlign,
                 visible: visible,
                 errorText: field.errorText,
                 content: Row(children: <Widget>[

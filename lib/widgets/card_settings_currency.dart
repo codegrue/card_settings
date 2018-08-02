@@ -11,6 +11,7 @@ import 'package:flutter_masked_text/flutter_masked_text.dart';
 class CardSettingsCurrency extends StatelessWidget {
   CardSettingsCurrency({
     this.label: 'Label',
+    this.labelAlign,
     this.initialValue,
     this.maxLength: 10,
     this.autovalidate: false,
@@ -24,6 +25,7 @@ class CardSettingsCurrency extends StatelessWidget {
   });
 
   final String label;
+  final TextAlign labelAlign;
   final double initialValue;
   final bool autovalidate;
   final String currencySymbol;
@@ -45,6 +47,7 @@ class CardSettingsCurrency extends StatelessWidget {
 
     return CardSettingsField(
       label: label,
+      labelAlign: labelAlign,
       visible: visible,
       unitLabel: currencyName,
       content: TextFormField(

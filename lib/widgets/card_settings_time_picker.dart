@@ -8,8 +8,9 @@ import 'card_settings_field.dart';
 class CardSettingsTimePicker extends FormField<TimeOfDay> {
   CardSettingsTimePicker({
     Key key,
-    label: 'Label',
-    initialValue,
+    String label: 'Label',
+    TextAlign labelAlign,
+    TimeOfDay initialValue,
     bool autovalidate: false,
     bool visible: true,
     FormFieldSetter<TimeOfDay> onSaved,
@@ -28,6 +29,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
                 },
                 child: CardSettingsField(
                   label: label,
+                  labelAlign: labelAlign,
                   visible: visible,
                   errorText: field.errorText,
                   content: Text(

@@ -76,155 +76,168 @@ class _PonyExampleState extends State<PonyExample> {
           )),
       body: Form(
         key: _formKey,
-        child: CardSettings(
-          children: <Widget>[
-            CardSettingsHeader(label: 'Bio'),
-            CardSettingsText(
-              label: 'Name',
-              initialValue: _ponyModel.name,
-              autovalidate: _autoValidate,
-              validator: (value) {
-                if (value == null || value.isEmpty)
-                  return 'Name type is required.';
-              },
-              onSaved: (value) => _ponyModel.name = value,
+        child: Theme(
+          data: ThemeData(
+            primaryTextTheme: TextTheme(
+              title:
+                  TextStyle(color: Colors.lightBlue[50]), // text color headers
             ),
-            CardSettingsListPicker(
-              label: 'Type',
-              initialValue: _ponyModel.type,
-              autovalidate: _autoValidate,
-              options: <String>['Earth', 'Unicorn', 'Pegasi', 'Alicorn'],
-              validator: (String value) {
-                if (value == null || value.isEmpty)
-                  return 'You must pick a type.';
-              },
-              onSaved: (value) => _ponyModel.type = value,
-            ),
-            CardSettingsNumberPicker(
-              label: 'Age',
-              initialValue: _ponyModel.age,
-              min: 1,
-              max: 30,
-              validator: (value) {
-                if (value == null) return 'Age is required.';
-                if (value > 20) return 'No grown-ups allwed!';
-                if (value < 3) return 'No Toddlers allowed!';
-              },
-              onSaved: (value) => _ponyModel.age = value,
-            ),
-            CardSettingsParagraph(
-              label: 'Description',
-              initialValue: _ponyModel.description,
-              numberOfLines: 5,
-              onSaved: (value) => _ponyModel.description = value,
-            ),
-            CardSettingsHeader(label: 'Colors'),
-            CardSettingsColorPicker(
-              label: 'Coat',
-              initialValue: intelligentCast<Color>(_ponyModel.coatColor),
-              validator: (value) {
-                if (value.computeLuminance() < .3)
-                  return 'This color is not cheery enough.';
-              },
-              onSaved: (value) => _ponyModel.coatColor = colorToString(value),
-            ),
-            CardSettingsColorPicker(
-              label: 'Mane',
-              initialValue: intelligentCast<Color>(_ponyModel.maneColor),
-              validator: (value) {
-                if (value.computeLuminance() > .7)
-                  return 'This color is too light.';
-              },
-              onSaved: (value) => _ponyModel.maneColor = colorToString(value),
-            ),
-            CardSettingsSwitch(
-              label: 'Has Spots?',
-              initialValue: _ponyModel.hasSpots,
-              onChanged: (value) => setState(() => _ponyModel.hasSpots = value),
-              onSaved: (value) => _ponyModel.hasSpots = value,
-            ),
-            CardSettingsColorPicker(
-              label: 'Spot',
-              initialValue: intelligentCast<Color>(_ponyModel.spotColor),
-              visible: _ponyModel.hasSpots,
-              onSaved: (value) => _ponyModel.spotColor = colorToString(value),
-            ),
-            CardSettingsHeader(label: 'Size'),
-            CardSettingsDouble(
-              label: 'Height',
-              unitLabel: 'feet',
-              initialValue: _ponyModel.height,
-              onSaved: (value) => _ponyModel.height = value,
-            ),
-            CardSettingsDouble(
-              label: 'Weight',
-              unitLabel: 'lbs',
-              initialValue: _ponyModel.weight,
-              validator: (value) {
-                if (value != null) {
-                  if (value > 70) return 'You won\'t fly at the weight.';
-                  if (value < 10) return 'Cmon, you are not a feather.';
-                }
-              },
-              onSaved: (value) => _ponyModel.weight = value,
-            ),
-            CardSettingsHeader(label: 'First Show'),
-            CardSettingsInstructions(
-              text: 'This is when this little horse got her big break',
-            ),
-            CardSettingsDatePicker(
-              label: 'Show Date',
-              initialValue: _ponyModel.showDateTime,
-              onSaved: (value) => _ponyModel.showDateTime =
-                  updateJustDate(value, _ponyModel.showDateTime),
-            ),
-            CardSettingsTimePicker(
-              label: 'Show Time',
-              initialValue: TimeOfDay(
-                  hour: _ponyModel.showDateTime.hour,
-                  minute: _ponyModel.showDateTime.minute),
-              onSaved: (value) => _ponyModel.showDateTime =
-                  updateJustTime(value, _ponyModel.showDateTime),
-            ),
-            CardSettingsCurrency(
-              label: 'Ticket Price',
-              initialValue: _ponyModel.ticketPrice,
-              validator: (value) {
-                if (value != null && value > 100) return 'No scalpers allowed!';
-              },
-              onSaved: (value) => _ponyModel.ticketPrice = value,
-            ),
-            CardSettingsHeader(label: 'Security'),
-            CardSettingsEmail(
-              initialValue: _ponyModel.email,
-              validator: (value) {
-                if (value == null || value.isEmpty) return 'Email is required.';
-                if (!value.contains('@'))
-                  return "Email not formatted correctly.";
-              },
-              onSaved: (value) => _ponyModel.email = value,
-            ),
-            CardSettingsPassword(
-              initialValue: _ponyModel.password,
-              validator: (value) {
-                if (value == null) return 'Password is required.';
-                if (value.length <= 6) return 'Must be more than 6 characters.';
-              },
-              onSaved: (value) => _ponyModel.password = value,
-            ),
-            CardSettingsHeader(label: 'Actions'),
-            CardSettingsButton(
-              label: 'SAVE',
-              onPressed: _savePressed,
-            ),
-            CardSettingsButton(
-              label: 'RESET',
-              onPressed: _resetPressed,
-              bottomSpacing: 4.0,
-              backgroundColor: Colors.redAccent,
-              textColor: Colors.white,
-            ),
-          ],
+          ),
+          child: CardSettings(
+            children: <Widget>[
+              CardSettingsHeader(label: 'Bio'),
+              CardSettingsText(
+                label: 'Name',
+                initialValue: _ponyModel.name,
+                autovalidate: _autoValidate,
+                validator: (value) {
+                  if (value == null || value.isEmpty)
+                    return 'Name type is required.';
+                },
+                onSaved: (value) => _ponyModel.name = value,
+              ),
+              CardSettingsListPicker(
+                label: 'Type',
+                labelAlign: TextAlign.left,
+                initialValue: _ponyModel.type,
+                autovalidate: _autoValidate,
+                options: <String>['Earth', 'Unicorn', 'Pegasi', 'Alicorn'],
+                validator: (String value) {
+                  if (value == null || value.isEmpty)
+                    return 'You must pick a type.';
+                },
+                onSaved: (value) => _ponyModel.type = value,
+              ),
+              CardSettingsNumberPicker(
+                label: 'Age',
+                initialValue: _ponyModel.age,
+                min: 1,
+                max: 30,
+                validator: (value) {
+                  if (value == null) return 'Age is required.';
+                  if (value > 20) return 'No grown-ups allwed!';
+                  if (value < 3) return 'No Toddlers allowed!';
+                },
+                onSaved: (value) => _ponyModel.age = value,
+              ),
+              CardSettingsParagraph(
+                label: 'Description',
+                initialValue: _ponyModel.description,
+                numberOfLines: 5,
+                onSaved: (value) => _ponyModel.description = value,
+              ),
+              CardSettingsHeader(label: 'Colors'),
+              CardSettingsColorPicker(
+                label: 'Coat',
+                initialValue: intelligentCast<Color>(_ponyModel.coatColor),
+                validator: (value) {
+                  if (value.computeLuminance() < .3)
+                    return 'This color is not cheery enough.';
+                },
+                onSaved: (value) => _ponyModel.coatColor = colorToString(value),
+              ),
+              CardSettingsColorPicker(
+                label: 'Mane',
+                initialValue: intelligentCast<Color>(_ponyModel.maneColor),
+                validator: (value) {
+                  if (value.computeLuminance() > .7)
+                    return 'This color is too light.';
+                },
+                onSaved: (value) => _ponyModel.maneColor = colorToString(value),
+              ),
+              CardSettingsSwitch(
+                label: 'Has Spots?',
+                initialValue: _ponyModel.hasSpots,
+                onChanged: (value) =>
+                    setState(() => _ponyModel.hasSpots = value),
+                onSaved: (value) => _ponyModel.hasSpots = value,
+              ),
+              CardSettingsColorPicker(
+                label: 'Spot',
+                initialValue: intelligentCast<Color>(_ponyModel.spotColor),
+                visible: _ponyModel.hasSpots,
+                onSaved: (value) => _ponyModel.spotColor = colorToString(value),
+              ),
+              CardSettingsHeader(label: 'Size'),
+              CardSettingsDouble(
+                label: 'Height',
+                unitLabel: 'feet',
+                initialValue: _ponyModel.height,
+                onSaved: (value) => _ponyModel.height = value,
+              ),
+              CardSettingsDouble(
+                label: 'Weight',
+                unitLabel: 'lbs',
+                initialValue: _ponyModel.weight,
+                validator: (value) {
+                  if (value != null) {
+                    if (value > 70) return 'You won\'t fly at the weight.';
+                    if (value < 10) return 'Cmon, you are not a feather.';
+                  }
+                },
+                onSaved: (value) => _ponyModel.weight = value,
+              ),
+              CardSettingsHeader(label: 'First Show'),
+              CardSettingsInstructions(
+                text: 'This is when this little horse got her big break',
+              ),
+              CardSettingsDatePicker(
+                label: 'Show Date',
+                initialValue: _ponyModel.showDateTime,
+                onSaved: (value) => _ponyModel.showDateTime =
+                    updateJustDate(value, _ponyModel.showDateTime),
+              ),
+              CardSettingsTimePicker(
+                label: 'Show Time',
+                initialValue: TimeOfDay(
+                    hour: _ponyModel.showDateTime.hour,
+                    minute: _ponyModel.showDateTime.minute),
+                onSaved: (value) => _ponyModel.showDateTime =
+                    updateJustTime(value, _ponyModel.showDateTime),
+              ),
+              CardSettingsCurrency(
+                label: 'Ticket Price',
+                initialValue: _ponyModel.ticketPrice,
+                validator: (value) {
+                  if (value != null && value > 100)
+                    return 'No scalpers allowed!';
+                },
+                onSaved: (value) => _ponyModel.ticketPrice = value,
+              ),
+              CardSettingsHeader(label: 'Security'),
+              CardSettingsEmail(
+                initialValue: _ponyModel.email,
+                validator: (value) {
+                  if (value == null || value.isEmpty)
+                    return 'Email is required.';
+                  if (!value.contains('@'))
+                    return "Email not formatted correctly.";
+                },
+                onSaved: (value) => _ponyModel.email = value,
+              ),
+              CardSettingsPassword(
+                initialValue: _ponyModel.password,
+                validator: (value) {
+                  if (value == null) return 'Password is required.';
+                  if (value.length <= 6)
+                    return 'Must be more than 6 characters.';
+                },
+                onSaved: (value) => _ponyModel.password = value,
+              ),
+              CardSettingsHeader(label: 'Actions'),
+              CardSettingsButton(
+                label: 'SAVE',
+                onPressed: _savePressed,
+              ),
+              CardSettingsButton(
+                label: 'RESET',
+                onPressed: _resetPressed,
+                bottomSpacing: 4.0,
+                backgroundColor: Colors.redAccent,
+                textColor: Colors.white,
+              ),
+            ],
+          ),
         ),
       ),
     );

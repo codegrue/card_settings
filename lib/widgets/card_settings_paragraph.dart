@@ -8,6 +8,7 @@ import 'card_settings_field.dart';
 class CardSettingsParagraph extends StatelessWidget {
   CardSettingsParagraph({
     this.label: 'Label',
+    this.labelAlign,
     this.initialValue,
     this.autovalidate: false,
     this.numberOfLines: 7,
@@ -19,6 +20,7 @@ class CardSettingsParagraph extends StatelessWidget {
   });
 
   final String label;
+  final TextAlign labelAlign;
   final String initialValue;
   final bool autovalidate;
   final int numberOfLines;
@@ -33,6 +35,7 @@ class CardSettingsParagraph extends StatelessWidget {
     return new CardSettingsField(
       contentOnNewLine: true,
       label: label,
+      labelAlign: labelAlign,
       visible: visible,
       content: Container(
         child: TextFormField(

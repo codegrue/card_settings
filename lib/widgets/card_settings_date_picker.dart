@@ -10,6 +10,7 @@ class CardSettingsDatePicker extends FormField<DateTime> {
   CardSettingsDatePicker({
     Key key,
     label: 'Label',
+    TextAlign labelAlign,
     initialValue,
     bool autovalidate: false,
     bool visible: true,
@@ -29,6 +30,7 @@ class CardSettingsDatePicker extends FormField<DateTime> {
                 },
                 child: CardSettingsField(
                   label: label,
+                  labelAlign: labelAlign,
                   visible: visible,
                   errorText: field.errorText,
                   content: Text(

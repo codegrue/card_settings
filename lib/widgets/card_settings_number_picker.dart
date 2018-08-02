@@ -9,6 +9,7 @@ import 'package:card_settings/helpers/converter_functions.dart';
 class CardSettingsNumberPicker extends StatelessWidget {
   CardSettingsNumberPicker({
     this.label: 'Label',
+    this.labelAlign,
     this.initialValue,
     @required this.min,
     @required this.max,
@@ -20,6 +21,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
 
   // Variables
   final String label;
+  final TextAlign labelAlign;
   final int initialValue;
   final int min;
   final int max;
@@ -34,6 +36,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return new CardSettingsListPicker(
       label: this.label,
+      labelAlign: labelAlign,
       visible: visible,
       initialValue: initialValue?.toString(),
       options:

@@ -22,3 +22,11 @@
 * Added CardSettingsEmail field
 * Added CardSettingsPassword field
 * Changed all TextFormFields to be stateless widget wrappers
+
+## [0.1.5] - 8/1/2018
+
+* Support default button style through themes
+* All text fields expose controller as optional parameter (except currency)
+* Support theming of header text
+* Changed CardSettings to an InheritableWidget with global properties to control label appearance
+* Added a labelAlign property to all fields

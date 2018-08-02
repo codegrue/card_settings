@@ -10,6 +10,7 @@ import 'package:card_settings/helpers/converter_functions.dart';
 class CardSettingsInt extends StatelessWidget {
   CardSettingsInt({
     this.label: 'Label',
+    this.labelAlign,
     this.initialValue: 0.0,
     this.maxLength: 10,
     this.autovalidate: false,
@@ -21,6 +22,7 @@ class CardSettingsInt extends StatelessWidget {
   });
 
   final String label;
+  final TextAlign labelAlign;
   final double initialValue;
   final bool autovalidate;
   final String unitLabel;
@@ -35,6 +37,7 @@ class CardSettingsInt extends StatelessWidget {
   Widget build(BuildContext context) {
     return new CardSettingsField(
       label: label,
+      labelAlign: labelAlign,
       visible: visible,
       unitLabel: unitLabel,
       content: TextFormField(
