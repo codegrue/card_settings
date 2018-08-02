@@ -22,7 +22,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
   // Variables
   final String label;
   final TextAlign labelAlign;
-  TextAlign contentAlign;
+  final TextAlign contentAlign;
   final int initialValue;
   final int min;
   final int max;

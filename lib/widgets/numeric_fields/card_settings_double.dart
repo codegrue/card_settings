@@ -23,7 +23,7 @@ class CardSettingsDouble extends StatelessWidget {
 
   final String label;
   final TextAlign labelAlign;
-  TextAlign contentAlign;
+  final TextAlign contentAlign;
   final double initialValue;
   final bool autovalidate;
   final String unitLabel;
