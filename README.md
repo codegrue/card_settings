@@ -60,8 +60,7 @@ All fields in this package are compatible with the standard Flutter Form widget.
               label: 'Title',
               initialValue: title,
               validator: (value) {
-                if (value == null || value.isEmpty)
-                  return 'Title is required.';
+                if (value == null || value.isEmpty) return 'Title is required.';
               },
               onSaved: (value) => title = value,
             ),
@@ -69,8 +68,7 @@ All fields in this package are compatible with the standard Flutter Form widget.
               label: 'URL',
               initialValue: url,
               validator: (value) {
-                if (!value.startsWith('http:'))
-                  return 'Must be a valid website.';
+                if (!value.startsWith('http:')) return 'Must be a valid website.';
               },
               onSaved: (value) => url = value,
             ),
