@@ -2,13 +2,14 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import '../card_settings_field.dart';
+import '../../card_settings.dart';
 
 /// This is a field that allows multiple lines of text to be entered.
 class CardSettingsParagraph extends StatelessWidget {
   CardSettingsParagraph({
     this.label: 'Label',
     this.labelAlign,
+    this.contentAlign: TextAlign.left,
     this.initialValue,
     this.autovalidate: false,
     this.numberOfLines: 7,
@@ -21,6 +22,7 @@ class CardSettingsParagraph extends StatelessWidget {
 
   final String label;
   final TextAlign labelAlign;
+  final TextAlign contentAlign;
   final String initialValue;
   final bool autovalidate;
   final int numberOfLines;
@@ -45,6 +47,7 @@ class CardSettingsParagraph extends StatelessWidget {
             border: InputBorder.none,
           ),
           initialValue: initialValue,
+          textAlign: contentAlign,
           autovalidate: autovalidate,
           validator: validator,
           onSaved: onSaved,

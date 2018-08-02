@@ -3,13 +3,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../card_settings_field.dart';
+import '../../card_settings.dart';
 
 /// This is a standard one line text entry field. It encapselates the [TextFormField] widget.
 class CardSettingsText extends StatelessWidget {
   CardSettingsText({
     this.label: 'Label',
     this.labelAlign,
+    this.contentAlign,
     this.initialValue,
     this.maxLength: 20,
     this.autovalidate: false,
@@ -23,6 +24,7 @@ class CardSettingsText extends StatelessWidget {
 
   final String label;
   final TextAlign labelAlign;
+  final TextAlign contentAlign;
   final String initialValue;
   final bool autovalidate;
   final TextInputType keyboardType;
@@ -44,6 +46,7 @@ class CardSettingsText extends StatelessWidget {
         decoration: InputDecoration(
             contentPadding: EdgeInsets.all(0.0), border: InputBorder.none),
         initialValue: initialValue,
+        textAlign: contentAlign ?? CardSettings.of(context).contentAlign,
         autovalidate: autovalidate,
         validator: validator,
         keyboardType: keyboardType,

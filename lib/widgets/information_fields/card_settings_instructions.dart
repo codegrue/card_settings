@@ -28,7 +28,10 @@ class CardSettingsInstructions extends StatelessWidget {
       padding: EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0),
       child: Row(
         children: <Widget>[
-          Text(text, style: textStyle),
+          Text(
+            text,
+            style: textStyle,
+          ),
         ],
       ),
     );

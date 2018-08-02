@@ -133,22 +133,24 @@ The `CardSettings` widget implements a few global settings that all child fields
 
 #### Labels
 
-You can control how the labels are rendered with three properties:
+You can control how the labels are rendered with four properties:
 
 ``` dart
   CardSettings(
     labelAlign: TextAlign.right, // change the label alignment
     labelSuffix: ':', // add an optional tag after the label
     labelPadding: 10.0, // control the spacing between the label and the content
+    contentAlign: TextAlign.left, // alignment of the entry widgets
   )
 ```
 
-The `labelAlign` property is also available on each field, so you can override the global setting for individual fields.
+The `labelAlign` and `contentAlign` properties are also available on each field, so you can override the global setting for individual fields.
 
 ``` dart
   CardSettingsText(
     label: 'Last Name',
-    labelAlign: TextAlign.right,
+    labelAlign: TextAlign.left,
+    contentAlign: TextAlign.right,
   )
 ```
 

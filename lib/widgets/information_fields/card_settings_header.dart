@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 class CardSettingsHeader extends StatelessWidget {
   CardSettingsHeader({
     this.label: 'Label',
+    this.labelAlign: TextAlign.left,
     this.height: 44.0,
     this.color,
   });
 
   final String label;
+  final TextAlign labelAlign;
   final double height;
   final Color color;
 
@@ -24,7 +26,13 @@ class CardSettingsHeader extends StatelessWidget {
       padding: EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0),
       child: Row(
         children: <Widget>[
-          Text(label, style: Theme.of(context).primaryTextTheme.title),
+          Expanded(
+            child: Text(
+              label,
+              style: Theme.of(context).primaryTextTheme.title,
+              textAlign: labelAlign,
+            ),
+          ),
         ],
       ),
     );

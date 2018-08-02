@@ -3,14 +3,14 @@
 
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import '../card_settings_field.dart';
-import '../../helpers/converter_functions.dart';
+import '../../card_settings.dart';
 
 /// This is a field for entering numeric integers
 class CardSettingsInt extends StatelessWidget {
   CardSettingsInt({
     this.label: 'Label',
     this.labelAlign,
+    this.contentAlign,
     this.initialValue: 0.0,
     this.maxLength: 10,
     this.autovalidate: false,
@@ -23,6 +23,7 @@ class CardSettingsInt extends StatelessWidget {
 
   final String label;
   final TextAlign labelAlign;
+  TextAlign contentAlign;
   final double initialValue;
   final bool autovalidate;
   final String unitLabel;
@@ -46,6 +47,7 @@ class CardSettingsInt extends StatelessWidget {
           border: InputBorder.none,
         ),
         initialValue: initialValue?.toString() ?? '',
+        textAlign: contentAlign ?? CardSettings.of(context).contentAlign,
         autovalidate: autovalidate,
         validator: _safeValidator,
         onSaved: _safeOnSaved,

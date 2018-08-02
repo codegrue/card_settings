@@ -2,7 +2,7 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import '../card_settings_field.dart';
+import '../../card_settings.dart';
 
 /// This field allows a time to be selected.
 class CardSettingsTimePicker extends FormField<TimeOfDay> {
@@ -10,6 +10,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
     Key key,
     String label: 'Label',
     TextAlign labelAlign,
+    TextAlign contentAlign,
     TimeOfDay initialValue,
     bool autovalidate: false,
     bool visible: true,
@@ -37,6 +38,8 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
                         ? ''
                         : state.value.format(field.context),
                     style: TextStyle(fontSize: 16.0),
+                    textAlign: contentAlign ??
+                        CardSettings.of(field.context).contentAlign,
                   ),
                   pickerIcon: Icons.arrow_drop_down,
                 ),

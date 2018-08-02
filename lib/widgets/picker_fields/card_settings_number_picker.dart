@@ -2,8 +2,7 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'card_settings_list_picker.dart';
-import '../../helpers/converter_functions.dart';
+import '../../card_settings.dart';
 
 /// This is a list picker that allows for a range of numbers to be speficied as pptions.
 class CardSettingsNumberPicker extends StatelessWidget {
@@ -11,6 +10,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
     this.label: 'Label',
     this.labelAlign,
     this.initialValue,
+    this.contentAlign,
     @required this.min,
     @required this.max,
     this.autovalidate: false,
@@ -22,6 +22,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
   // Variables
   final String label;
   final TextAlign labelAlign;
+  TextAlign contentAlign;
   final int initialValue;
   final int min;
   final int max;
@@ -37,6 +38,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
     return new CardSettingsListPicker(
       label: this.label,
       labelAlign: labelAlign,
+      contentAlign: contentAlign,
       visible: visible,
       initialValue: initialValue?.toString(),
       options:

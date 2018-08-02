@@ -3,8 +3,7 @@
 
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import '../card_settings_field.dart';
-import '../../helpers/converter_functions.dart';
+import '../../card_settings.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 /// This is a field for entering currency amounts
@@ -12,6 +11,7 @@ class CardSettingsCurrency extends StatelessWidget {
   CardSettingsCurrency({
     this.label: 'Label',
     this.labelAlign,
+    this.contentAlign,
     this.initialValue,
     this.maxLength: 10,
     this.autovalidate: false,
@@ -26,6 +26,7 @@ class CardSettingsCurrency extends StatelessWidget {
 
   final String label;
   final TextAlign labelAlign;
+  TextAlign contentAlign;
   final double initialValue;
   final bool autovalidate;
   final String currencySymbol;
@@ -57,6 +58,7 @@ class CardSettingsCurrency extends StatelessWidget {
           prefixText: currencySymbol,
         ),
         controller: controller,
+        textAlign: contentAlign ?? CardSettings.of(context).contentAlign,
         autovalidate: autovalidate,
         validator: _safeValidator,
         onSaved: _safeOnSaved,

@@ -1,9 +1,8 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import '../../helpers/picker_dialog.dart';
 import 'package:flutter/material.dart';
-import '../card_settings_field.dart';
+import '../../card_settings.dart';
 
 /// This is a list picker that allows an arbitrary list of options to be provided.
 class CardSettingsListPicker extends FormField<String> {
@@ -11,6 +10,7 @@ class CardSettingsListPicker extends FormField<String> {
     Key key,
     String label: 'Label',
     TextAlign labelAlign,
+    TextAlign contentAlign,
     String initialValue,
     List<String> options,
     bool autovalidate: false,
@@ -37,6 +37,8 @@ class CardSettingsListPicker extends FormField<String> {
                   content: Text(
                     state.value ?? '',
                     style: TextStyle(fontSize: 16.0),
+                    textAlign: contentAlign ??
+                        CardSettings.of(field.context).contentAlign,
                   ),
                   pickerIcon: Icons.arrow_drop_down,
                 ),

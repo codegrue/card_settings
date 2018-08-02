@@ -2,7 +2,7 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import '../card_settings_field.dart';
+import '../../card_settings.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 /// This is the color picker field
@@ -11,6 +11,7 @@ class CardSettingsColorPicker extends FormField<Color> {
     Key key,
     String label: 'Label',
     TextAlign labelAlign,
+    TextAlign contentAlign, // here for consistency, but does nothing.
     Color initialValue: Colors.green,
     bool autovalidate: false,
     bool visible: true,

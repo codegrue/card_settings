@@ -2,7 +2,7 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import '../card_settings_field.dart';
+import '../../card_settings.dart';
 
 /// This is a field that allows a boolean to be set via a switch widget.
 class CardSettingsSwitch extends FormField<bool> {
@@ -10,6 +10,7 @@ class CardSettingsSwitch extends FormField<bool> {
     Key key,
     String label: 'Label',
     TextAlign labelAlign,
+    TextAlign contentAlign,
     String trueLabel: 'Yes',
     String falseLabel: 'No',
     bool initialValue: false,
@@ -36,6 +37,8 @@ class CardSettingsSwitch extends FormField<bool> {
                     child: Text(
                       state.value ? trueLabel : falseLabel,
                       style: TextStyle(fontSize: 16.0),
+                      textAlign: contentAlign ??
+                          CardSettings.of(field.context).contentAlign,
                     ),
                   ),
                   Container(
