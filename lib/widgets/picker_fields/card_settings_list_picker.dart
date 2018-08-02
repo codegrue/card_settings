@@ -1,9 +1,9 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import '../helpers/picker_dialog.dart';
+import '../../helpers/picker_dialog.dart';
 import 'package:flutter/material.dart';
-import 'card_settings_field.dart';
+import '../card_settings_field.dart';
 
 /// This is a list picker that allows an arbitrary list of options to be provided.
 class CardSettingsListPicker extends FormField<String> {

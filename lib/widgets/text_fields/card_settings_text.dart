@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'card_settings_field.dart';
+import '../card_settings_field.dart';
 
 /// This is a standard one line text entry field. It encapselates the [TextFormField] widget.
 class CardSettingsText extends StatelessWidget {

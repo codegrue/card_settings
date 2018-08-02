@@ -2,7 +2,7 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'card_settings_field.dart';
+import '../card_settings_field.dart';
 
 /// This is a field that allows a boolean to be set via a switch widget.
 class CardSettingsSwitch extends FormField<bool> {

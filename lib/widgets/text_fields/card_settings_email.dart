@@ -3,19 +3,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'card_settings_field.dart';
+import '../card_settings_field.dart';
 
-/// This is a password field. It obscures the entered text.
-class CardSettingsPassword extends StatelessWidget {
-  CardSettingsPassword({
-    this.label: 'Password',
+/// This is a sepcial field used to collect email addresses
+class CardSettingsEmail extends StatelessWidget {
+  CardSettingsEmail({
+    this.label: 'Email',
     this.labelAlign,
     this.initialValue,
     this.maxLength: 20,
     this.autovalidate: false,
     this.validator,
     this.onSaved,
-    this.keyboardType: TextInputType.text,
+    this.keyboardType: TextInputType.emailAddress,
     this.unitLabel,
     this.visible: true,
     this.controller,
@@ -52,7 +52,6 @@ class CardSettingsPassword extends StatelessWidget {
         inputFormatters: [
           LengthLimitingTextInputFormatter(maxLength),
         ],
-        obscureText: true,
       ),
     );
   }
