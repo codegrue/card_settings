@@ -39,7 +39,7 @@ class PonyModel {
   String description =
       'An intelligent and dutiful scholar with an avid love of learning and skill in unicorn magic such as levitation, teleportation, and the creation of force fields.';
   double height = 3.5;
-  double weight = 45.25;
+  int weight = 45;
   DateTime showDateTime = DateTime(2010, 10, 10, 20, 30);
   double ticketPrice = 65.99;
   String email = 'me@nowhere.org';
@@ -48,21 +48,23 @@ class PonyModel {
 
 class PonyExample extends StatefulWidget {
   @override
-  _PonyExampleState createState() => new _PonyExampleState();
+  _PonyExampleState createState() => _PonyExampleState();
 }
 
 class _PonyExampleState extends State<PonyExample> {
-  final _ponyModel = new PonyModel();
+  final _ponyModel = PonyModel();
 
   bool _autoValidate = false;
 
-  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: new AppBar(
+      appBar: AppBar(
           title: Text("My Little Pony"),
           actions: <Widget>[
             IconButton(
@@ -99,6 +101,7 @@ class _PonyExampleState extends State<PonyExample> {
                     return 'Name type is required.';
                 },
                 onSaved: (value) => _ponyModel.name = value,
+                onChanged: (value) => _showSnackBar('Name', value),
               ),
               CardSettingsListPicker(
                 label: 'Type',
@@ -111,6 +114,7 @@ class _PonyExampleState extends State<PonyExample> {
                     return 'You must pick a type.';
                 },
                 onSaved: (value) => _ponyModel.type = value,
+                onChanged: (value) => _showSnackBar('Type', value),
               ),
               CardSettingsNumberPicker(
                 label: 'Age',
@@ -123,12 +127,14 @@ class _PonyExampleState extends State<PonyExample> {
                   if (value < 3) return 'No Toddlers allowed!';
                 },
                 onSaved: (value) => _ponyModel.age = value,
+                onChanged: (value) => _showSnackBar('Age', value),
               ),
               CardSettingsParagraph(
                 label: 'Description',
                 initialValue: _ponyModel.description,
                 numberOfLines: 5,
                 onSaved: (value) => _ponyModel.description = value,
+                onChanged: (value) => _showSnackBar('Description', value),
               ),
               CardSettingsHeader(label: 'Colors'),
               CardSettingsColorPicker(
@@ -139,6 +145,7 @@ class _PonyExampleState extends State<PonyExample> {
                     return 'This color is not cheery enough.';
                 },
                 onSaved: (value) => _ponyModel.coatColor = colorToString(value),
+                onChanged: (value) => _showSnackBar('Coat', value),
               ),
               CardSettingsColorPicker(
                 label: 'Mane',
@@ -148,12 +155,15 @@ class _PonyExampleState extends State<PonyExample> {
                     return 'This color is too light.';
                 },
                 onSaved: (value) => _ponyModel.maneColor = colorToString(value),
+                onChanged: (value) => _showSnackBar('Mane', value),
               ),
               CardSettingsSwitch(
                 label: 'Has Spots?',
                 initialValue: _ponyModel.hasSpots,
-                onChanged: (value) =>
-                    setState(() => _ponyModel.hasSpots = value),
+                onChanged: (value) {
+                  setState(() => _ponyModel.hasSpots = value);
+                  _showSnackBar('Has Spots?', value);
+                },
                 onSaved: (value) => _ponyModel.hasSpots = value,
               ),
               CardSettingsColorPicker(
@@ -161,6 +171,7 @@ class _PonyExampleState extends State<PonyExample> {
                 initialValue: intelligentCast<Color>(_ponyModel.spotColor),
                 visible: _ponyModel.hasSpots,
                 onSaved: (value) => _ponyModel.spotColor = colorToString(value),
+                onChanged: (value) => _showSnackBar('Spot', value),
               ),
               CardSettingsHeader(label: 'Size'),
               CardSettingsDouble(
@@ -168,8 +179,9 @@ class _PonyExampleState extends State<PonyExample> {
                 unitLabel: 'feet',
                 initialValue: _ponyModel.height,
                 onSaved: (value) => _ponyModel.height = value,
+                onChanged: (value) => _showSnackBar('Height', value),
               ),
-              CardSettingsDouble(
+              CardSettingsInt(
                 label: 'Weight',
                 unitLabel: 'lbs',
                 initialValue: _ponyModel.weight,
@@ -180,6 +192,7 @@ class _PonyExampleState extends State<PonyExample> {
                   }
                 },
                 onSaved: (value) => _ponyModel.weight = value,
+                onChanged: (value) => _showSnackBar('Weight', value),
               ),
               CardSettingsHeader(label: 'First Show'),
               CardSettingsInstructions(
@@ -190,6 +203,7 @@ class _PonyExampleState extends State<PonyExample> {
                 initialValue: _ponyModel.showDateTime,
                 onSaved: (value) => _ponyModel.showDateTime =
                     updateJustDate(value, _ponyModel.showDateTime),
+                onChanged: (value) => _showSnackBar('Show Date', value),
               ),
               CardSettingsTimePicker(
                 label: 'Show Time',
@@ -198,15 +212,17 @@ class _PonyExampleState extends State<PonyExample> {
                     minute: _ponyModel.showDateTime.minute),
                 onSaved: (value) => _ponyModel.showDateTime =
                     updateJustTime(value, _ponyModel.showDateTime),
+                onChanged: (value) => _showSnackBar('Show Time', value),
               ),
               CardSettingsCurrency(
                 label: 'Ticket Price',
                 initialValue: _ponyModel.ticketPrice,
-                validator: (value) {
-                  if (value != null && value > 100)
-                    return 'No scalpers allowed!';
-                },
-                onSaved: (value) => _ponyModel.ticketPrice = value,
+                // validator: (value) {
+                //   if (value != null && value > 100)
+                //     return 'No scalpers allowed!';
+                // },
+                //\onSaved: (value) => _ponyModel.ticketPrice = value,
+                onChanged: (value) => _showSnackBar('Ticket Price', value),
               ),
               CardSettingsHeader(label: 'Security'),
               CardSettingsEmail(
@@ -218,6 +234,7 @@ class _PonyExampleState extends State<PonyExample> {
                     return "Email not formatted correctly.";
                 },
                 onSaved: (value) => _ponyModel.email = value,
+                onChanged: (value) => _showSnackBar('Email', value),
               ),
               CardSettingsPassword(
                 initialValue: _ponyModel.password,
@@ -227,6 +244,7 @@ class _PonyExampleState extends State<PonyExample> {
                     return 'Must be more than 6 characters.';
                 },
                 onSaved: (value) => _ponyModel.password = value,
+                onChanged: (value) => _showSnackBar('Password', value),
               ),
               CardSettingsHeader(label: 'Actions'),
               CardSettingsButton(
@@ -260,6 +278,15 @@ class _PonyExampleState extends State<PonyExample> {
 
   void _resetPressed() {
     _formKey.currentState.reset();
+  }
+
+  void _showSnackBar(String label, value) {
+    _scaffoldKey.currentState.removeCurrentSnackBar();
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: Text(label + ' = ' + value.toString()),
+      ),
+    );
   }
 
   void _showResults() {

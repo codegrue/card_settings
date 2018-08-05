@@ -1,79 +1,86 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../card_settings.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
-/// This is a field for entering currency amounts
-class CardSettingsCurrency extends StatelessWidget {
+/// This is a password field. It obscures the entered text.
+class CardSettingsCurrency extends CardSettingsText {
   CardSettingsCurrency({
-    this.label: 'Label',
-    this.labelAlign,
-    this.contentAlign,
-    this.initialValue,
-    this.maxLength: 10,
-    this.autovalidate: false,
-    this.validator,
-    this.onSaved,
-    this.currencySymbol: '\$',
-    this.currencyName: 'USD',
-    this.decimalSeparator: '.',
-    this.thousandSeparator: ',',
-    this.visible: true,
-  });
-
-  final String label;
-  final TextAlign labelAlign;
-  final TextAlign contentAlign;
-  final double initialValue;
-  final bool autovalidate;
-  final String currencySymbol;
-  final String currencyName;
-  final String decimalSeparator;
-  final String thousandSeparator;
-  final int maxLength;
-  final bool visible;
-
-  // Events
-  final FormFieldValidator<double> validator;
-  final FormFieldSetter<double> onSaved;
-
-  Widget build(BuildContext context) {
-    var controller = new MoneyMaskedTextController(
-        decimalSeparator: decimalSeparator,
-        thousandSeparator: thousandSeparator);
-    controller.value = TextEditingValue(text: initialValue?.toString());
-
-    return CardSettingsField(
-      label: label,
-      labelAlign: labelAlign,
-      visible: visible,
-      unitLabel: currencyName,
-      content: TextFormField(
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(0.0),
-          border: InputBorder.none,
+    Key key,
+    String label: 'Label',
+    TextAlign labelAlign,
+    TextAlign contentAlign,
+    double initialValue: 0.0,
+    String currencySymbol: '\$',
+    String currencyName: 'USD',
+    String decimalSeparator: '.',
+    String thousandSeparator: ',',
+    int maxLength: 10,
+    bool visible: true,
+    bool enabled: true,
+    bool autofocus: false,
+    bool obscureText: false,
+    bool autocorrect: false,
+    bool autovalidate: false,
+    FormFieldValidator<double> validator,
+    FormFieldSetter<double> onSaved,
+    VoidCallback onEditingComplete,
+    ValueChanged<double> onChanged,
+    TextEditingController controller,
+    FocusNode focusNode,
+    TextInputType keyboardType,
+    TextInputAction textInputAction = TextInputAction.done,
+    TextStyle style,
+    bool maxLengthEnforced: true,
+    ValueChanged<String> onFieldSubmitted,
+    List<TextInputFormatter> inputFormatters,
+    Brightness keyboardAppearance,
+    EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
+  }) : super(
+          key: key,
+          label: label,
+          labelAlign: labelAlign,
+          contentAlign: contentAlign,
+          initialValue: initialValue.toString(),
+          unitLabel: currencyName,
           prefixText: currencySymbol,
-        ),
-        controller: controller,
-        textAlign: contentAlign ?? CardSettings.of(context).contentAlign,
-        autovalidate: autovalidate,
-        validator: _safeValidator,
-        onSaved: _safeOnSaved,
-        keyboardType: TextInputType.number,
-      ),
-    );
-  }
-
-  String _safeValidator(value) {
-    if (validator == null) return null;
-    return validator(intelligentCast<double>(value));
-  }
-
-  void _safeOnSaved(value) {
-    if (onSaved == null) return;
-    onSaved(intelligentCast<double>(value));
-  }
+          maxLength: maxLength,
+          visible: visible,
+          enabled: enabled,
+          autofocus: autofocus,
+          obscureText: obscureText,
+          autocorrect: autocorrect,
+          autovalidate: autovalidate,
+          validator: (value) {
+            if (validator == null) return null;
+            return validator(intelligentCast<double>(value));
+          },
+          onSaved: (value) {
+            if (onSaved == null) return;
+            onSaved(intelligentCast<double>(value));
+          },
+          onEditingComplete: onEditingComplete,
+          onChanged: (value) {
+            if (onChanged == null) return;
+            //onChanged((controller as MoneyMaskedTextController).numberValue);
+            onChanged(intelligentCast<double>(value));
+          },
+          controller: controller ??
+              MoneyMaskedTextController(
+                  decimalSeparator: decimalSeparator,
+                  thousandSeparator: thousandSeparator),
+          focusNode: focusNode,
+          keyboardType:
+              keyboardType ?? TextInputType.numberWithOptions(decimal: false),
+          textInputAction: textInputAction,
+          style: style,
+          maxLengthEnforced: maxLengthEnforced,
+          onFieldSubmitted: onFieldSubmitted,
+          inputFormatters: inputFormatters,
+          keyboardAppearance: keyboardAppearance,
+          scrollPadding: scrollPadding,
+        );
 }

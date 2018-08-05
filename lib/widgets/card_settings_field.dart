@@ -59,21 +59,22 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget buildInlineContent(BuildContext context) {
-    // if content is not a TextFormField, add a decorator to show validation errors
-    var wrappedContent = content;
-    if (wrappedContent is! TextFormField) {
-      final InputDecoration effectiveDecoration = const InputDecoration()
+    var decoratedContent = content;
+    if (content is TextField || content is TextFormField) {
+      // do nothing, these already have built in InputDecorations
+    } else {
+      // wrap in a decorator to show validation errors
+      final InputDecoration decoration = const InputDecoration()
           .applyDefaults(Theme.of(context).inputDecorationTheme)
           .copyWith(
               errorText: errorText,
               contentPadding: EdgeInsets.all(0.0),
               border: InputBorder.none);
 
-      wrappedContent =
-          InputDecorator(decoration: effectiveDecoration, child: content);
+      decoratedContent = InputDecorator(decoration: decoration, child: content);
     }
 
-    return Expanded(child: contentOnNewLine ? Text('') : wrappedContent);
+    return Expanded(child: contentOnNewLine ? Text('') : decoratedContent);
   }
 
   Widget buildRowContent() {

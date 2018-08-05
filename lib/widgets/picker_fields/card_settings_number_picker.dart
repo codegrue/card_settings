@@ -16,6 +16,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
     this.autovalidate: false,
     this.validator,
     this.onSaved,
+    this.onChanged,
     this.visible: true,
   }) : assert(min < max);
 
@@ -32,6 +33,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
   // Events
   final FormFieldValidator<int> validator;
   final FormFieldSetter<int> onSaved;
+  final ValueChanged<int> onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
       autovalidate: autovalidate,
       validator: _safeValidator,
       onSaved: _safeOnSaved,
+      onChanged: _safeOnChanged,
     );
   }
 
@@ -57,5 +60,10 @@ class CardSettingsNumberPicker extends StatelessWidget {
   void _safeOnSaved(value) {
     if (onSaved == null) return;
     onSaved(intelligentCast<int>(value));
+  }
+
+  void _safeOnChanged(value) {
+    if (onChanged == null) return;
+    onChanged(intelligentCast<int>(value));
   }
 }

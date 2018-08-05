@@ -15,6 +15,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
     bool autovalidate: false,
     bool visible: true,
     FormFieldSetter<TimeOfDay> onSaved,
+    this.onChanged,
     FormFieldValidator<TimeOfDay> validator,
   }) : super(
             key: key,
@@ -46,6 +47,8 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
               );
             });
 
+  final ValueChanged<TimeOfDay> onChanged;
+
   @override
   _CardSettingsTimePickerState createState() =>
       new _CardSettingsTimePickerState();
@@ -62,6 +65,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
     ).then((value) {
       if (value != null) {
         didChange(value);
+        widget.onChanged(value);
       }
     });
   }

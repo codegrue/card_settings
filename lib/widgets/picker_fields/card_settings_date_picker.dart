@@ -16,6 +16,7 @@ class CardSettingsDatePicker extends FormField<DateTime> {
     bool autovalidate: false,
     bool visible: true,
     FormFieldSetter<DateTime> onSaved,
+    this.onChanged,
     FormFieldValidator<DateTime> validator,
   }) : super(
             key: key,
@@ -47,6 +48,8 @@ class CardSettingsDatePicker extends FormField<DateTime> {
               );
             });
 
+  final ValueChanged<DateTime> onChanged;
+
   @override
   _CardSettingsDatePickerState createState() =>
       new _CardSettingsDatePickerState();
@@ -65,6 +68,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     ).then((value) {
       if (value != null) {
         didChange(value);
+        widget.onChanged(value);
       }
     });
   }

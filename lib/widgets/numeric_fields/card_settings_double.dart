@@ -1,73 +1,80 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../card_settings.dart';
 
-/// This is a field for entering numeric doubles
-class CardSettingsDouble extends StatelessWidget {
+/// This is a password field. It obscures the entered text.
+class CardSettingsDouble extends CardSettingsText {
   CardSettingsDouble({
-    this.label: 'Label',
-    this.labelAlign,
-    this.contentAlign,
-    this.initialValue: 0.0,
-    this.maxLength: 10,
-    this.autovalidate: false,
-    this.validator,
-    this.onSaved,
-    this.unitLabel,
-    this.visible: true,
-    this.controller,
-  });
-
-  final String label;
-  final TextAlign labelAlign;
-  final TextAlign contentAlign;
-  final double initialValue;
-  final bool autovalidate;
-  final String unitLabel;
-  final int maxLength;
-  final bool visible;
-  final TextEditingController controller;
-
-  // Events
-  final FormFieldValidator<double> validator;
-  final FormFieldSetter<double> onSaved;
-
-  Widget build(BuildContext context) {
-    return CardSettingsField(
-      label: label,
-      labelAlign: labelAlign,
-      visible: visible,
-      unitLabel: unitLabel,
-      content: TextFormField(
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(0.0),
-          border: InputBorder.none,
-        ),
-        initialValue: initialValue?.toString() ?? '',
-        textAlign: contentAlign ?? CardSettings.of(context).contentAlign,
-        autovalidate: autovalidate,
-        validator: _safeValidator,
-        onSaved: _safeOnSaved,
-        controller: controller,
-        keyboardType: TextInputType.number,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(maxLength),
-          WhitelistingTextInputFormatter(RegExp("[0-9]+.?[0-9]*")),
-        ],
-      ),
-    );
-  }
-
-  String _safeValidator(value) {
-    if (validator == null) return null;
-    return validator(intelligentCast<double>(value));
-  }
-
-  void _safeOnSaved(value) {
-    if (onSaved == null) return;
-    onSaved(intelligentCast<double>(value));
-  }
+    Key key,
+    String label: 'Label',
+    TextAlign labelAlign,
+    TextAlign contentAlign,
+    double initialValue: 0.0,
+    String unitLabel,
+    int maxLength: 10,
+    bool visible: true,
+    bool enabled: true,
+    bool autofocus: false,
+    bool obscureText: false,
+    bool autocorrect: false,
+    bool autovalidate: false,
+    FormFieldValidator<double> validator,
+    FormFieldSetter<double> onSaved,
+    VoidCallback onEditingComplete,
+    ValueChanged<double> onChanged,
+    TextEditingController controller,
+    FocusNode focusNode,
+    TextInputType keyboardType,
+    TextInputAction textInputAction = TextInputAction.done,
+    TextStyle style,
+    bool maxLengthEnforced: true,
+    ValueChanged<String> onFieldSubmitted,
+    List<TextInputFormatter> inputFormatters,
+    Brightness keyboardAppearance,
+    EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
+  }) : super(
+          key: key,
+          label: label,
+          labelAlign: labelAlign,
+          contentAlign: contentAlign,
+          initialValue: initialValue.toString(),
+          unitLabel: unitLabel,
+          maxLength: maxLength,
+          visible: visible,
+          enabled: enabled,
+          autofocus: autofocus,
+          obscureText: obscureText,
+          autocorrect: autocorrect,
+          autovalidate: autovalidate,
+          validator: (value) {
+            if (validator == null) return null;
+            return validator(intelligentCast<double>(value));
+          },
+          onSaved: (value) {
+            if (onSaved == null) return;
+            onSaved(intelligentCast<double>(value));
+          },
+          onEditingComplete: onEditingComplete,
+          onChanged: (value) {
+            if (onChanged == null) return;
+            onChanged(intelligentCast<double>(value));
+          },
+          controller: controller,
+          focusNode: focusNode,
+          keyboardType:
+              keyboardType ?? TextInputType.numberWithOptions(decimal: true),
+          textInputAction: textInputAction,
+          style: style,
+          maxLengthEnforced: maxLengthEnforced,
+          onFieldSubmitted: onFieldSubmitted,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(maxLength),
+            WhitelistingTextInputFormatter(RegExp("[0-9]+.?[0-9]*")),
+          ],
+          keyboardAppearance: keyboardAppearance,
+          scrollPadding: scrollPadding,
+        );
 }

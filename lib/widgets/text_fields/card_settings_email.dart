@@ -5,57 +5,61 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../card_settings.dart';
 
-/// This is a sepcial field used to collect email addresses
-class CardSettingsEmail extends StatelessWidget {
+/// This is a password field. It obscures the entered text.
+class CardSettingsEmail extends CardSettingsText {
   CardSettingsEmail({
-    this.label: 'Email',
-    this.labelAlign,
-    this.contentAlign,
-    this.initialValue,
-    this.maxLength: 20,
-    this.autovalidate: false,
-    this.validator,
-    this.onSaved,
-    this.keyboardType: TextInputType.emailAddress,
-    this.unitLabel,
-    this.visible: true,
-    this.controller,
-  });
-
-  final String label;
-  final TextAlign labelAlign;
-  final TextAlign contentAlign;
-  final String initialValue;
-  final bool autovalidate;
-  final TextInputType keyboardType;
-  final String unitLabel;
-  final int maxLength;
-  final bool visible;
-  final TextEditingController controller;
-
-  final FormFieldValidator<String> validator;
-  final FormFieldSetter<String> onSaved;
-
-  Widget build(BuildContext context) {
-    return new CardSettingsField(
-      label: label,
-      labelAlign: labelAlign,
-      visible: visible,
-      unitLabel: unitLabel,
-      content: TextFormField(
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(0.0), border: InputBorder.none),
-        initialValue: initialValue,
-        textAlign: contentAlign ?? CardSettings.of(context).contentAlign,
-        autovalidate: autovalidate,
-        validator: validator,
-        keyboardType: keyboardType,
-        onSaved: onSaved,
-        controller: controller,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(maxLength),
-        ],
-      ),
-    );
-  }
+    Key key,
+    String label: 'Email',
+    TextAlign labelAlign,
+    TextAlign contentAlign,
+    String initialValue,
+    int maxLength: 30,
+    bool visible: true,
+    bool enabled: true,
+    bool autofocus: false,
+    bool obscureText: false,
+    bool autocorrect: false,
+    bool autovalidate: false,
+    FormFieldValidator<String> validator,
+    FormFieldSetter<String> onSaved,
+    VoidCallback onEditingComplete,
+    ValueChanged<String> onChanged,
+    TextEditingController controller,
+    FocusNode focusNode,
+    TextInputType keyboardType = TextInputType.emailAddress,
+    TextInputAction textInputAction = TextInputAction.done,
+    TextStyle style,
+    bool maxLengthEnforced: true,
+    ValueChanged<String> onFieldSubmitted,
+    List<TextInputFormatter> inputFormatters,
+    Brightness keyboardAppearance,
+    EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
+  }) : super(
+          key: key,
+          label: label,
+          labelAlign: labelAlign,
+          contentAlign: contentAlign,
+          initialValue: initialValue,
+          maxLength: maxLength,
+          visible: visible,
+          enabled: enabled,
+          autofocus: autofocus,
+          obscureText: obscureText,
+          autocorrect: autocorrect,
+          autovalidate: autovalidate,
+          validator: validator,
+          onSaved: onSaved,
+          onEditingComplete: onEditingComplete,
+          onChanged: onChanged,
+          controller: controller,
+          focusNode: focusNode,
+          keyboardType: keyboardType,
+          textInputAction: textInputAction,
+          style: style,
+          maxLengthEnforced: maxLengthEnforced,
+          onFieldSubmitted: onFieldSubmitted,
+          inputFormatters: inputFormatters,
+          keyboardAppearance: keyboardAppearance,
+          scrollPadding: scrollPadding,
+        );
 }

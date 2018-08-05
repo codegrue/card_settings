@@ -2,59 +2,69 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../card_settings.dart';
 
-/// This is a field that allows multiple lines of text to be entered.
-class CardSettingsParagraph extends StatelessWidget {
+/// This is a password field. It obscures the entered text.
+class CardSettingsParagraph extends CardSettingsText {
   CardSettingsParagraph({
-    this.label: 'Label',
-    this.labelAlign,
-    this.contentAlign: TextAlign.left,
-    this.initialValue,
-    this.autovalidate: false,
-    this.numberOfLines: 7,
-    this.maxLength: 250,
-    this.validator,
-    this.onSaved,
-    this.visible: true,
-    this.controller,
-  });
-
-  final String label;
-  final TextAlign labelAlign;
-  final TextAlign contentAlign;
-  final String initialValue;
-  final bool autovalidate;
-  final int numberOfLines;
-  final int maxLength;
-  final bool visible;
-  final TextEditingController controller;
-
-  final FormFieldValidator<String> validator;
-  final FormFieldSetter<String> onSaved;
-
-  Widget build(BuildContext context) {
-    return new CardSettingsField(
-      contentOnNewLine: true,
-      label: label,
-      labelAlign: labelAlign,
-      visible: visible,
-      content: Container(
-        child: TextFormField(
-          maxLines: numberOfLines,
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(0.0),
-            border: InputBorder.none,
-          ),
+    Key key,
+    String label: 'Label',
+    TextAlign labelAlign,
+    TextAlign contentAlign: TextAlign.left,
+    String initialValue,
+    int maxLength: 250,
+    int numberOfLines: 7,
+    bool contentOnNewLine: true,
+    bool visible: true,
+    bool enabled: true,
+    bool autofocus: false,
+    bool obscureText: false,
+    bool autocorrect: true,
+    bool autovalidate: false,
+    FormFieldValidator<String> validator,
+    FormFieldSetter<String> onSaved,
+    VoidCallback onEditingComplete,
+    ValueChanged<String> onChanged,
+    TextEditingController controller,
+    FocusNode focusNode,
+    TextInputType keyboardType = TextInputType.multiline,
+    TextInputAction textInputAction = TextInputAction.done,
+    TextStyle style,
+    bool maxLengthEnforced: true,
+    ValueChanged<String> onFieldSubmitted,
+    List<TextInputFormatter> inputFormatters,
+    Brightness keyboardAppearance,
+    EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
+  }) : super(
+          key: key,
+          label: label,
+          labelAlign: labelAlign,
+          contentAlign: contentAlign,
           initialValue: initialValue,
-          textAlign: contentAlign,
+          contentOnNewLine: contentOnNewLine,
+          maxLength: maxLength,
+          numberOfLines: numberOfLines,
+          showCounter: true,
+          visible: visible,
+          enabled: enabled,
+          autofocus: autofocus,
+          obscureText: obscureText,
+          autocorrect: autocorrect,
           autovalidate: autovalidate,
           validator: validator,
           onSaved: onSaved,
+          onEditingComplete: onEditingComplete,
+          onChanged: onChanged,
           controller: controller,
-          maxLength: maxLength, // note, this will show the counter
-        ),
-      ),
-    );
-  }
+          focusNode: focusNode,
+          keyboardType: keyboardType,
+          textInputAction: textInputAction,
+          style: style,
+          maxLengthEnforced: maxLengthEnforced,
+          onFieldSubmitted: onFieldSubmitted,
+          inputFormatters: inputFormatters,
+          keyboardAppearance: keyboardAppearance,
+          scrollPadding: scrollPadding,
+        );
 }

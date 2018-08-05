@@ -16,6 +16,7 @@ class CardSettingsColorPicker extends FormField<Color> {
     bool autovalidate: false,
     bool visible: true,
     FormFieldSetter<Color> onSaved,
+    this.onChanged,
     FormFieldValidator<Color> validator,
   }) : super(
             key: key,
@@ -43,6 +44,8 @@ class CardSettingsColorPicker extends FormField<Color> {
                 ),
               );
             });
+
+  final ValueChanged<Color> onChanged;
 
   @override
   _CardSettingsColorPickerState createState() =>
@@ -84,6 +87,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
     ).then((value) {
       if (value != null) {
         didChange(value);
+        widget.onChanged(value);
       }
     });
   }

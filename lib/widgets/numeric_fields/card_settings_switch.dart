@@ -18,7 +18,7 @@ class CardSettingsSwitch extends FormField<bool> {
     bool visible: true,
     FormFieldSetter<bool> onSaved,
     FormFieldValidator<bool> validator,
-    final ValueChanged<bool> onChanged,
+    ValueChanged<bool> onChanged,
   }) : super(
             key: key,
             initialValue: initialValue ?? '',

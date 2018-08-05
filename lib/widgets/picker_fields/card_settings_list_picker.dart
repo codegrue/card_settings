@@ -17,6 +17,7 @@ class CardSettingsListPicker extends FormField<String> {
     bool visible: true,
     FormFieldSetter<String> onSaved,
     FormFieldValidator<String> validator,
+    this.onChanged,
   }) : super(
             key: key,
             initialValue: initialValue ?? '',
@@ -45,6 +46,8 @@ class CardSettingsListPicker extends FormField<String> {
               );
             });
 
+  final ValueChanged<String> onChanged;
+
   @override
   _CardSettingsListPickerState createState() =>
       new _CardSettingsListPickerState();
@@ -67,6 +70,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     ).then((value) {
       if (value != null) {
         didChange(value);
+        widget.onChanged(value);
       }
     });
   }
