@@ -42,6 +42,7 @@ class PonyModel {
   int weight = 45;
   DateTime showDateTime = DateTime(2010, 10, 10, 20, 30);
   double ticketPrice = 65.99;
+  int boxOfficePhone = 8005551212;
   String email = 'me@nowhere.org';
   String password = 'secret';
 }
@@ -217,12 +218,18 @@ class _PonyExampleState extends State<PonyExample> {
               CardSettingsCurrency(
                 label: 'Ticket Price',
                 initialValue: _ponyModel.ticketPrice,
-                // validator: (value) {
-                //   if (value != null && value > 100)
-                //     return 'No scalpers allowed!';
-                // },
-                //\onSaved: (value) => _ponyModel.ticketPrice = value,
+                validator: (value) {
+                  if (value != null && value > 100)
+                    return 'No scalpers allowed!';
+                },
+                onSaved: (value) => _ponyModel.ticketPrice = value,
                 onChanged: (value) => _showSnackBar('Ticket Price', value),
+              ),
+              CardSettingsPhone(
+                label: 'Box Office',
+                initialValue: _ponyModel.boxOfficePhone,
+                onSaved: (value) => _ponyModel.boxOfficePhone = value,
+                onChanged: (value) => _showSnackBar('Box Office', value),
               ),
               CardSettingsHeader(label: 'Security'),
               CardSettingsEmail(

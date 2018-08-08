@@ -31,6 +31,7 @@ export 'widgets/picker_fields/card_settings_time_picker.dart';
 export 'widgets/text_fields/card_settings_email.dart';
 export 'widgets/text_fields/card_settings_paragraph.dart';
 export 'widgets/text_fields/card_settings_password.dart';
+export 'widgets/text_fields/card_settings_phone.dart';
 export 'widgets/text_fields/card_settings_text.dart';
 
 // helpers
