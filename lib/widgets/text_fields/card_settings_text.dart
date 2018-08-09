@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 import '../../card_settings.dart';
 
 /// This is a standard one line text entry field. It's based on the [TextFormField] widget.
@@ -38,6 +39,7 @@ class CardSettingsText extends FormField<String> {
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
+    this.inputMask,
     Brightness keyboardAppearance,
     EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
   })  : //assert(initialValue == null || controller == null),
@@ -50,6 +52,7 @@ class CardSettingsText extends FormField<String> {
         assert(maxLengthEnforced != null),
         assert(scrollPadding != null),
         assert(maxLength == null || maxLength > 0),
+        assert(controller == null || inputMask == null),
         super(
           key: key,
           initialValue: initialValue,
@@ -107,6 +110,8 @@ class CardSettingsText extends FormField<String> {
 
   final TextEditingController controller;
 
+  final String inputMask;
+
   @override
   _CardSettingsTextState createState() => new _CardSettingsTextState();
 }
@@ -124,7 +129,12 @@ class _CardSettingsTextState extends FormFieldState<String> {
   void initState() {
     super.initState();
     if (widget.controller == null) {
-      _controller = new TextEditingController(text: widget.initialValue);
+      if (widget.inputMask == null) {
+        _controller = new TextEditingController(text: widget.initialValue);
+      } else {
+        _controller = MaskedTextController(
+            mask: widget.inputMask, text: widget.initialValue);
+      }
     } else {
       widget.controller.addListener(_handleControllerChanged);
     }

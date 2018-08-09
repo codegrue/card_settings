@@ -36,3 +36,9 @@
 * Added contentAlign property to all fields to allow for right justification
 * Added labelAlign to CardHeaders to allow center or right positioning
 * Improved support of themes for input text and labels
+
+## [0.1.7] - 8/8/2018
+
+* All fields not implement an onChange event.
+* Added a CardSettingsPhone widget
+* Enhanced CardSettingsText to allow a input mask (based on flutter_masked_text)

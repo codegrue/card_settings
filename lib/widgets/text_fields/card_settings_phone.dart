@@ -41,6 +41,7 @@ class CardSettingsPhone extends StatelessWidget {
   final TextAlign labelAlign;
   final TextAlign contentAlign;
   final int initialValue;
+  final String inputMask = '(000) 000-0000';
   final int maxLength;
   final bool visible;
   final bool enabled;
@@ -70,6 +71,7 @@ class CardSettingsPhone extends StatelessWidget {
       labelAlign: labelAlign,
       contentAlign: contentAlign,
       initialValue: initialValue.toString(),
+      inputMask: inputMask,
       maxLength: maxLength,
       visible: visible,
       enabled: enabled,
@@ -81,7 +83,7 @@ class CardSettingsPhone extends StatelessWidget {
       onSaved: _safeOnSaved,
       onEditingComplete: onEditingComplete,
       onChanged: _safeOnChanged,
-      controller: _composeController,
+      controller: controller,
       focusNode: focusNode,
       keyboardType:
           keyboardType ?? TextInputType.numberWithOptions(decimal: false),
@@ -95,31 +97,21 @@ class CardSettingsPhone extends StatelessWidget {
     );
   }
 
-  TextEditingController get _composeController {
-    if (controller != null) return controller;
-    var maskController = MaskedTextController(mask: '(000) 000-0000');
-    maskController.updateText(initialValue.toString());
-    return maskController;
-  }
-
   String _safeValidator(value) {
     if (validator == null) return null;
-    return validator(intelligentCast<int>(value));
+    String unmasked = unmaskValue(inputMask, value);
+    return validator(intelligentCast<int>(unmasked));
   }
 
   void _safeOnSaved(value) {
     if (onSaved == null) return;
-    onSaved(intelligentCast<int>(value));
+    String unmasked = unmaskValue(inputMask, value);
+    onSaved(intelligentCast<int>(unmasked));
   }
 
   void _safeOnChanged(value) {
     if (onChanged == null) return;
-    onChanged(_getValue(value));
-  }
-
-  int _getValue(value) {
-    //if (controller is MaskedTextController)
-    //return (controller as MaskedTextController).value;
-    return intelligentCast<int>(value);
+    String unmasked = unmaskValue(inputMask, value);
+    onChanged(intelligentCast<int>(unmasked));
   }
 }

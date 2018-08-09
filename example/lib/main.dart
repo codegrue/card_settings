@@ -44,7 +44,7 @@ class PonyModel {
   double ticketPrice = 65.99;
   int boxOfficePhone = 8005551212;
   String email = 'me@nowhere.org';
-  String password = 'secret';
+  String password = 'secret1';
 }
 
 class PonyExample extends StatefulWidget {
@@ -228,6 +228,10 @@ class _PonyExampleState extends State<PonyExample> {
               CardSettingsPhone(
                 label: 'Box Office',
                 initialValue: _ponyModel.boxOfficePhone,
+                validator: (value) {
+                  if (value != null && value.toString().length != 10)
+                    return 'Incomplete number';
+                },
                 onSaved: (value) => _ponyModel.boxOfficePhone = value,
                 onChanged: (value) => _showSnackBar('Box Office', value),
               ),
@@ -320,6 +324,7 @@ class _PonyExampleState extends State<PonyExample> {
                     DateFormat.yMd().format(_ponyModel.showDateTime)),
                 _buildRow('ShowTime',
                     DateFormat.jm().format(_ponyModel.showDateTime)),
+                _buildRow('Phone', _ponyModel.boxOfficePhone),
                 _buildRow('Price', _ponyModel.ticketPrice),
               ],
             ),

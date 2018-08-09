@@ -1,6 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
@@ -89,4 +90,16 @@ DateTime updateJustTime(TimeOfDay newTime, DateTime originalDateTime) {
     0, // millisecond
     0, // microsecond
   );
+}
+
+// used to reverse the value from an mask_formatter controller
+String unmaskValue(String mask, String maskedValue) {
+  String specialCharacters = '0A@*';
+  String unmaskedValue = '';
+
+  for (int i = 0; i < min(mask.length, maskedValue.length); i++) {
+    if (specialCharacters.contains(mask[i])) unmaskedValue += maskedValue[i];
+  }
+
+  return unmaskedValue;
 }

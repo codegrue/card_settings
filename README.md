@@ -16,6 +16,7 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
   - *CardSettingsParagraph* - Multiline text field with counter
   - *CardSettingsEmail* - A text field pre-configured for email input.
   - *CardSettingsPassword* - A text field pre-configured for passwords.
+  - *CardSettingsPhone* - A masked phone entry field (US style currently).
 - **Numeric Fields**
   - *CardSettingsDouble* - Field for double precision numbers
   - *CardSettingsInt* - Field for integer numbers
@@ -33,7 +34,7 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
 - **Actions**
   - *CardSettingsButton* - Actions buttons for the form
 
-All fields support `validate`, `onSaved`, `autovalidate`, and `visible`.
+All fields support `validate`, `onChange`, `onSaved`, `autovalidate`, and `visible`.
 
 The package also includes these additonal items:
 
@@ -173,6 +174,10 @@ Each field implements a `visible` property that you can use to control the visib
     visible: _ateOut,
   ),
 ```
+
+### Custom Fields
+
+The `CardSettingsField` is the basis of all other fields and can be used to build unique fields outside of this library. Its purpose is to govern layout with consistent decorations. The best way to make a custom field is to inherit from `FormField<T>`, which will manage the state of your field. The cleanest example of this is the `CardSettingsSwitch` widget. All you have to do is provide your custom widgets in the `content` property.
 
 ## Dependencies
 
