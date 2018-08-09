@@ -6,9 +6,9 @@ import 'package:flutter/rendering.dart';
 
 /// This helper widget managed the scrollable content inside a picker widget.
 class ScrollPicker extends StatelessWidget {
-  static const double DEFAULT_ITEM_HEIGHT = 50.0;
-  static const double DEFAULT_LISTVIEW_WIDTH = 100.0;
-  static const int DEFAULT_NUMBER_OF_VISIBLE_ITEMS = 5;
+  static const double defaultItemHeight = 50.0;
+  static const double defaultListviewWidth = 100.0;
+  static const int defaultNumberOfVisibleItems = 5;
 
   ///constructor for integer number picker
   ScrollPicker(
@@ -16,14 +16,14 @@ class ScrollPicker extends StatelessWidget {
       @required this.items,
       @required String initialValue,
       @required this.onChanged,
-      this.itemHeight = DEFAULT_ITEM_HEIGHT,
-      this.listViewWidth = DEFAULT_LISTVIEW_WIDTH,
-      this.numberOfVisibleItems = DEFAULT_NUMBER_OF_VISIBLE_ITEMS})
+      this.itemHeight = defaultItemHeight,
+      this.listViewWidth = defaultListviewWidth,
+      this.numberOfVisibleItems = defaultNumberOfVisibleItems})
       : assert(items != null),
         assert(numberOfVisibleItems % 2 != 0), // must be odd number
         selectedValue = initialValue,
         numberOfPaddingRows = ((numberOfVisibleItems - 1) ~/ 2),
-        scrollController = new ScrollController(
+        scrollController = ScrollController(
           initialScrollOffset: items.indexOf(initialValue) * itemHeight,
         ),
         listViewHeight = numberOfVisibleItems * itemHeight,
@@ -61,8 +61,8 @@ class ScrollPicker extends StatelessWidget {
 
     int itemCount = items.length + numberOfPaddingRows * 2;
 
-    return new NotificationListener(
-      child: new Container(
+    return NotificationListener(
+      child: Container(
         height: listViewHeight,
         width: listViewWidth,
         child: Stack(
@@ -83,8 +83,8 @@ class ScrollPicker extends StatelessWidget {
                     (value == selectedValue) ? selectedStyle : defaultStyle;
 
                 return isPaddingRow
-                    ? new Container() //empty items for padding rows
-                    : new GestureDetector(
+                    ? Container() //empty items for padding rows
+                    : GestureDetector(
                         onTap: () {
                           _itemTapped(index);
                         },
@@ -100,9 +100,9 @@ class ScrollPicker extends StatelessWidget {
             ),
             Center(
               child: Container(
-                height: DEFAULT_ITEM_HEIGHT,
-                decoration: new BoxDecoration(
-                  border: new Border(
+                height: defaultItemHeight,
+                decoration: BoxDecoration(
+                  border: Border(
                     top: BorderSide(color: themeData.accentColor, width: 1.0),
                     bottom:
                         BorderSide(color: themeData.accentColor, width: 1.0),
@@ -143,7 +143,7 @@ class ScrollPicker extends StatelessWidget {
 
     // animate to and center on the selected item
     scrollController.animateTo(itemIndex * itemHeight,
-        duration: new Duration(seconds: 1), curve: new ElasticOutCurve());
+        duration: Duration(seconds: 1), curve: ElasticOutCurve());
   }
 
   // indicates if user has stopped scrolling so we can center value in the middle

@@ -17,11 +17,11 @@ class CardSettingsHeader extends StatelessWidget {
   final double height;
   final Color color;
 
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(0.0),
-      decoration:
-          new BoxDecoration(color: color ?? Theme.of(context).accentColor),
+      decoration: BoxDecoration(color: color ?? Theme.of(context).accentColor),
       height: height,
       padding: EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0),
       child: Row(

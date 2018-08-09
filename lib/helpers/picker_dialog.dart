@@ -14,8 +14,8 @@ class PickerDialog extends StatefulWidget {
     this.titlePadding,
     Widget confirmWidget,
     Widget cancelWidget,
-  })  : confirmWidget = confirmWidget ?? new Text("OK"),
-        cancelWidget = cancelWidget ?? new Text("CANCEL");
+  })  : confirmWidget = confirmWidget ?? Text("OK"),
+        cancelWidget = cancelWidget ?? Text("CANCEL");
 
   // Variables
   final List<String> items;
@@ -26,7 +26,7 @@ class PickerDialog extends StatefulWidget {
   final Widget cancelWidget;
 
   @override
-  State<PickerDialog> createState() => new _PickerDialogState(initialValue);
+  State<PickerDialog> createState() => _PickerDialogState(initialValue);
 }
 
 class _PickerDialogState extends State<PickerDialog> {
@@ -34,13 +34,13 @@ class _PickerDialogState extends State<PickerDialog> {
 
   String selectedValue;
 
-  _handleValueChanged(String value) {
+  void _handleValueChanged(String value) {
     setState(() => selectedValue = value);
   }
 
   @override
   Widget build(BuildContext context) {
-    return new AlertDialog(
+    return AlertDialog(
       title: widget.title,
       titlePadding: widget.titlePadding,
       content: ScrollPicker(
@@ -49,11 +49,11 @@ class _PickerDialogState extends State<PickerDialog> {
         onChanged: _handleValueChanged,
       ),
       actions: [
-        new FlatButton(
+        FlatButton(
           onPressed: () => Navigator.of(context).pop(),
           child: widget.cancelWidget,
         ),
-        new FlatButton(
+        FlatButton(
             onPressed: () => Navigator.of(context).pop(selectedValue),
             child: widget.confirmWidget),
       ],

@@ -9,10 +9,10 @@ import '../../card_settings.dart';
 class CardSettingsDatePicker extends FormField<DateTime> {
   CardSettingsDatePicker({
     Key key,
-    label: 'Label',
+    String label: 'Label',
     TextAlign labelAlign,
     TextAlign contentAlign,
-    initialValue,
+    DateTime initialValue,
     bool autovalidate: false,
     bool visible: true,
     FormFieldSetter<DateTime> onSaved,
@@ -51,13 +51,12 @@ class CardSettingsDatePicker extends FormField<DateTime> {
   final ValueChanged<DateTime> onChanged;
 
   @override
-  _CardSettingsDatePickerState createState() =>
-      new _CardSettingsDatePickerState();
+  _CardSettingsDatePickerState createState() => _CardSettingsDatePickerState();
 }
 
 class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   @override
-  CardSettingsDatePicker get widget => super.widget;
+  CardSettingsDatePicker get widget => super.widget as CardSettingsDatePicker;
 
   void _showDialog() {
     showDatePicker(

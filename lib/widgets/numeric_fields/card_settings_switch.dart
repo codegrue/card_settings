@@ -21,7 +21,7 @@ class CardSettingsSwitch extends FormField<bool> {
     ValueChanged<bool> onChanged,
   }) : super(
             key: key,
-            initialValue: initialValue ?? '',
+            initialValue: initialValue,
             onSaved: onSaved,
             validator: validator,
             autovalidate: autovalidate,
@@ -59,7 +59,7 @@ class CardSettingsSwitch extends FormField<bool> {
             });
 
   @override
-  _CardSettingsSwitchState createState() => new _CardSettingsSwitchState();
+  _CardSettingsSwitchState createState() => _CardSettingsSwitchState();
 }
 
 class _CardSettingsSwitchState extends FormFieldState<bool> {}

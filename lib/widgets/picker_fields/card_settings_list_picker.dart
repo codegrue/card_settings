@@ -49,19 +49,18 @@ class CardSettingsListPicker extends FormField<String> {
   final ValueChanged<String> onChanged;
 
   @override
-  _CardSettingsListPickerState createState() =>
-      new _CardSettingsListPickerState();
+  _CardSettingsListPickerState createState() => _CardSettingsListPickerState();
 }
 
 class _CardSettingsListPickerState extends FormFieldState<String> {
   @override
-  CardSettingsListPicker get widget => super.widget;
+  CardSettingsListPicker get widget => super.widget as CardSettingsListPicker;
 
   void _showDialog(String label, List<String> options) {
     showDialog<String>(
       context: context,
       builder: (BuildContext context) {
-        return new PickerDialog(
+        return PickerDialog(
           items: options,
           title: Text('Select ' + label),
           initialValue: value,

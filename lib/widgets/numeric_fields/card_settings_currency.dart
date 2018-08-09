@@ -73,7 +73,7 @@ class CardSettingsCurrency extends StatefulWidget {
 
   @override
   CardSettingsCurrencyState createState() {
-    return new CardSettingsCurrencyState();
+    return CardSettingsCurrencyState();
   }
 }
 
@@ -91,6 +91,7 @@ class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return CardSettingsText(
       label: widget.label,
@@ -124,17 +125,17 @@ class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
     );
   }
 
-  String _safeValidator(value) {
+  String _safeValidator(String value) {
     if (widget.validator == null) return null;
     return widget.validator(intelligentCast<double>(value));
   }
 
-  void _safeOnSaved(value) {
+  void _safeOnSaved(String value) {
     if (widget.onSaved == null) return;
     widget.onSaved(intelligentCast<double>(value));
   }
 
-  void _safeOnChanged(value) {
+  void _safeOnChanged(String value) {
     if (widget.onChanged == null) return;
     if (_moneyController != null)
       widget.onChanged(_moneyController.numberValue);

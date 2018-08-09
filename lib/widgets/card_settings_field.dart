@@ -31,10 +31,11 @@ class CardSettingsField extends StatelessWidget {
   final bool visible;
   final TextAlign labelAlign;
 
+  @override
   Widget build(BuildContext context) {
     return (visible)
         ? Container(
-            decoration: new BoxDecoration(
+            decoration: BoxDecoration(
               border: Border(
                   bottom: BorderSide(
                       width: 1.0, color: Theme.of(context).dividerColor)),

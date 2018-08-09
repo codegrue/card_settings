@@ -37,14 +37,14 @@ class CardSettingsNumberPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new CardSettingsListPicker(
+    return CardSettingsListPicker(
       label: this.label,
       labelAlign: labelAlign,
       contentAlign: contentAlign,
       visible: visible,
       initialValue: initialValue?.toString(),
       options:
-          new List<String>.generate(max - min + 1, (i) => (i + min).toString()),
+          List<String>.generate(max - min + 1, (i) => (i + min).toString()),
       autovalidate: autovalidate,
       validator: _safeValidator,
       onSaved: _safeOnSaved,
@@ -52,17 +52,17 @@ class CardSettingsNumberPicker extends StatelessWidget {
     );
   }
 
-  String _safeValidator(value) {
+  String _safeValidator(String value) {
     if (validator == null) return null;
     return validator(intelligentCast<int>(value));
   }
 
-  void _safeOnSaved(value) {
+  void _safeOnSaved(String value) {
     if (onSaved == null) return;
     onSaved(intelligentCast<int>(value));
   }
 
-  void _safeOnChanged(value) {
+  void _safeOnChanged(String value) {
     if (onChanged == null) return;
     onChanged(intelligentCast<int>(value));
   }

@@ -32,16 +32,16 @@ class CardSettingsText extends FormField<String> {
     this.onChanged,
     this.controller,
     FocusNode focusNode,
-    TextInputType keyboardType = TextInputType.text,
-    TextCapitalization textCapitalization = TextCapitalization.none,
-    TextInputAction textInputAction = TextInputAction.done,
+    TextInputType keyboardType: TextInputType.text,
+    //TextCapitalization textCapitalization: TextCapitalization.none,
+    TextInputAction textInputAction: TextInputAction.done,
     TextStyle style,
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
     this.inputMask,
     Brightness keyboardAppearance,
-    EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
+    EdgeInsets scrollPadding: const EdgeInsets.all(20.0),
   })  : //assert(initialValue == null || controller == null),
         assert(keyboardType != null),
         assert(textInputAction != null),
@@ -81,7 +81,7 @@ class CardSettingsText extends FormField<String> {
                 ),
                 textAlign:
                     contentAlign ?? CardSettings.of(field.context).contentAlign,
-                textCapitalization: textCapitalization,
+                //textCapitalization: textCapitalization,
                 autofocus: autofocus,
                 obscureText: obscureText,
                 autocorrect: autocorrect,
@@ -113,7 +113,7 @@ class CardSettingsText extends FormField<String> {
   final String inputMask;
 
   @override
-  _CardSettingsTextState createState() => new _CardSettingsTextState();
+  _CardSettingsTextState createState() => _CardSettingsTextState();
 }
 
 class _CardSettingsTextState extends FormFieldState<String> {
@@ -123,14 +123,14 @@ class _CardSettingsTextState extends FormFieldState<String> {
       widget.controller ?? _controller;
 
   @override
-  CardSettingsText get widget => super.widget;
+  CardSettingsText get widget => super.widget as CardSettingsText;
 
   @override
   void initState() {
     super.initState();
     if (widget.controller == null) {
       if (widget.inputMask == null) {
-        _controller = new TextEditingController(text: widget.initialValue);
+        _controller = TextEditingController(text: widget.initialValue);
       } else {
         _controller = MaskedTextController(
             mask: widget.inputMask, text: widget.initialValue);
@@ -149,7 +149,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
 
       if (oldWidget.controller != null && widget.controller == null)
         _controller =
-            new TextEditingController.fromValue(oldWidget.controller.value);
+            TextEditingController.fromValue(oldWidget.controller.value);
       if (widget.controller != null) {
         setValue(widget.controller.text);
         if (oldWidget.controller == null) _controller = null;
@@ -177,7 +177,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
     }
   }
 
-  void _handleOnChanged(value) {
+  void _handleOnChanged(String value) {
     if (this.value != value) {
       didChange(value);
       widget.onChanged(value);

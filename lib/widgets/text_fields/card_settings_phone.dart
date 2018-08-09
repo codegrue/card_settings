@@ -63,6 +63,7 @@ class CardSettingsPhone extends StatelessWidget {
   final Brightness keyboardAppearance;
   final EdgeInsets scrollPadding;
 
+  @override
   Widget build(BuildContext context) {
     return CardSettingsText(
       key: key,
@@ -96,19 +97,19 @@ class CardSettingsPhone extends StatelessWidget {
     );
   }
 
-  String _safeValidator(value) {
+  String _safeValidator(String value) {
     if (validator == null) return null;
     String unmasked = unmaskValue(inputMask, value);
     return validator(intelligentCast<int>(unmasked));
   }
 
-  void _safeOnSaved(value) {
+  void _safeOnSaved(String value) {
     if (onSaved == null) return;
     String unmasked = unmaskValue(inputMask, value);
     onSaved(intelligentCast<int>(unmasked));
   }
 
-  void _safeOnChanged(value) {
+  void _safeOnChanged(String value) {
     if (onChanged == null) return;
     String unmasked = unmaskValue(inputMask, value);
     onChanged(intelligentCast<int>(unmasked));

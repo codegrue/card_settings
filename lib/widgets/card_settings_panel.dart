@@ -32,7 +32,7 @@ class CardSettings extends InheritedWidget {
   final TextAlign contentAlign;
 
   static CardSettings of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(CardSettings);
+    return context.inheritFromWidgetOfExactType(CardSettings) as CardSettings;
   }
 
   @override

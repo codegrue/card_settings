@@ -23,6 +23,7 @@ class CardSettingsButton extends StatelessWidget {
   // Events
   final VoidCallback onPressed;
 
+  @override
   Widget build(BuildContext context) {
     TextStyle buttonStyle =
         Theme.of(context).textTheme.button.copyWith(color: textColor);

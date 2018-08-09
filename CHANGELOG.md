@@ -42,3 +42,12 @@
 * All fields now implement an `onChange` event.
 * Added a `CardSettingsPhone` widget
 * Enhanced `CardSettingsText` to allow a input mask (based on flutter_masked_text)
+
+## [0.1.8] - 8/9/2018
+
+* Added a analysis_options.yaml file and a bunch if linter checks
+* Cleaned and tigtened code
+
+## [0.1.9-10] - 8/9/2018
+
+* Removed TextCapitalization from CardSettingsText due to an analysis error

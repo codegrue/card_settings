@@ -19,7 +19,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
     FormFieldValidator<TimeOfDay> validator,
   }) : super(
             key: key,
-            initialValue: initialValue ?? DateTime.now(),
+            initialValue: initialValue ?? TimeOfDay.now(),
             onSaved: onSaved,
             validator: validator,
             autovalidate: autovalidate,
@@ -50,13 +50,12 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
   final ValueChanged<TimeOfDay> onChanged;
 
   @override
-  _CardSettingsTimePickerState createState() =>
-      new _CardSettingsTimePickerState();
+  _CardSettingsTimePickerState createState() => _CardSettingsTimePickerState();
 }
 
 class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
   @override
-  CardSettingsTimePicker get widget => super.widget;
+  CardSettingsTimePicker get widget => super.widget as CardSettingsTimePicker;
 
   void _showDialog() {
     showTimePicker(

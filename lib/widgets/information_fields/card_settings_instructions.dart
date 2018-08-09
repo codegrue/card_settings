@@ -15,6 +15,7 @@ class CardSettingsInstructions extends StatelessWidget {
   final Color backgroundColor;
   final Color textColor;
 
+  @override
   Widget build(BuildContext context) {
     TextStyle textStyle = Theme.of(context)
         .primaryTextTheme
@@ -23,8 +24,8 @@ class CardSettingsInstructions extends StatelessWidget {
 
     return Container(
       margin: EdgeInsets.all(0.0),
-      decoration: new BoxDecoration(
-          color: backgroundColor ?? Theme.of(context).cardColor),
+      decoration:
+          BoxDecoration(color: backgroundColor ?? Theme.of(context).cardColor),
       padding: EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0),
       child: Row(
         children: <Widget>[

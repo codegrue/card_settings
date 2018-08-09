@@ -49,12 +49,12 @@ class CardSettingsColorPicker extends FormField<Color> {
 
   @override
   _CardSettingsColorPickerState createState() =>
-      new _CardSettingsColorPickerState();
+      _CardSettingsColorPickerState();
 }
 
 class _CardSettingsColorPickerState extends FormFieldState<Color> {
   @override
-  CardSettingsColorPicker get widget => super.widget;
+  CardSettingsColorPicker get widget => super.widget as CardSettingsColorPicker;
 
   void _showDialog(String title) {
     Color _pickerColor = value;
@@ -62,10 +62,10 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
     showDialog<Color>(
       context: context,
       builder: (BuildContext context) {
-        return new AlertDialog(
+        return AlertDialog(
           title: Text(title),
-          content: new SingleChildScrollView(
-            child: new ColorPicker(
+          content: SingleChildScrollView(
+            child: ColorPicker(
               pickerColor: _pickerColor,
               onColorChanged: (color) => _pickerColor = color,
               enableLabel: true,
@@ -73,11 +73,11 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
             ),
           ),
           actions: [
-            new FlatButton(
+            FlatButton(
               onPressed: () => Navigator.of(context).pop(),
               child: Text("CANCEL"),
             ),
-            new FlatButton(
+            FlatButton(
               onPressed: () => Navigator.of(context).pop(_pickerColor),
               child: Text("OK"),
             ),

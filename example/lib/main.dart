@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:card_settings/card_settings.dart';
 import 'package:intl/intl.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: 'Card Settings Example',
-      home: new PonyExample(),
+      home: PonyExample(),
       theme: ThemeData(
         accentColor: Colors.indigo[400], // background color of card headers
         cardColor: Colors.white, // background color of fields
@@ -100,6 +100,7 @@ class _PonyExampleState extends State<PonyExample> {
                 validator: (value) {
                   if (value == null || value.isEmpty)
                     return 'Name type is required.';
+                  return null;
                 },
                 onSaved: (value) => _ponyModel.name = value,
                 onChanged: (value) => _showSnackBar('Name', value),
@@ -113,6 +114,7 @@ class _PonyExampleState extends State<PonyExample> {
                 validator: (String value) {
                   if (value == null || value.isEmpty)
                     return 'You must pick a type.';
+                  return null;
                 },
                 onSaved: (value) => _ponyModel.type = value,
                 onChanged: (value) => _showSnackBar('Type', value),
@@ -126,6 +128,7 @@ class _PonyExampleState extends State<PonyExample> {
                   if (value == null) return 'Age is required.';
                   if (value > 20) return 'No grown-ups allwed!';
                   if (value < 3) return 'No Toddlers allowed!';
+                  return null;
                 },
                 onSaved: (value) => _ponyModel.age = value,
                 onChanged: (value) => _showSnackBar('Age', value),
@@ -144,6 +147,7 @@ class _PonyExampleState extends State<PonyExample> {
                 validator: (value) {
                   if (value.computeLuminance() < .3)
                     return 'This color is not cheery enough.';
+                  return null;
                 },
                 onSaved: (value) => _ponyModel.coatColor = colorToString(value),
                 onChanged: (value) => _showSnackBar('Coat', value),
@@ -154,6 +158,7 @@ class _PonyExampleState extends State<PonyExample> {
                 validator: (value) {
                   if (value.computeLuminance() > .7)
                     return 'This color is too light.';
+                  return null;
                 },
                 onSaved: (value) => _ponyModel.maneColor = colorToString(value),
                 onChanged: (value) => _showSnackBar('Mane', value),
@@ -191,6 +196,7 @@ class _PonyExampleState extends State<PonyExample> {
                     if (value > 70) return 'You won\'t fly at the weight.';
                     if (value < 10) return 'Cmon, you are not a feather.';
                   }
+                  return null;
                 },
                 onSaved: (value) => _ponyModel.weight = value,
                 onChanged: (value) => _showSnackBar('Weight', value),
@@ -221,6 +227,7 @@ class _PonyExampleState extends State<PonyExample> {
                 validator: (value) {
                   if (value != null && value > 100)
                     return 'No scalpers allowed!';
+                  return null;
                 },
                 onSaved: (value) => _ponyModel.ticketPrice = value,
                 onChanged: (value) => _showSnackBar('Ticket Price', value),
@@ -231,6 +238,7 @@ class _PonyExampleState extends State<PonyExample> {
                 validator: (value) {
                   if (value != null && value.toString().length != 10)
                     return 'Incomplete number';
+                  return null;
                 },
                 onSaved: (value) => _ponyModel.boxOfficePhone = value,
                 onChanged: (value) => _showSnackBar('Box Office', value),
@@ -243,6 +251,7 @@ class _PonyExampleState extends State<PonyExample> {
                     return 'Email is required.';
                   if (!value.contains('@'))
                     return "Email not formatted correctly.";
+                  return null;
                 },
                 onSaved: (value) => _ponyModel.email = value,
                 onChanged: (value) => _showSnackBar('Email', value),
@@ -253,6 +262,7 @@ class _PonyExampleState extends State<PonyExample> {
                   if (value == null) return 'Password is required.';
                   if (value.length <= 6)
                     return 'Must be more than 6 characters.';
+                  return null;
                 },
                 onSaved: (value) => _ponyModel.password = value,
                 onChanged: (value) => _showSnackBar('Password', value),
@@ -291,7 +301,7 @@ class _PonyExampleState extends State<PonyExample> {
     _formKey.currentState.reset();
   }
 
-  void _showSnackBar(String label, value) {
+  void _showSnackBar(String label, dynamic value) {
     _scaffoldKey.currentState.removeCurrentSnackBar();
     _scaffoldKey.currentState.showSnackBar(
       SnackBar(
@@ -301,10 +311,10 @@ class _PonyExampleState extends State<PonyExample> {
   }
 
   void _showResults() {
-    showDialog(
+    showDialog<String>(
       context: context,
       builder: (BuildContext context) {
-        return new AlertDialog(
+        return AlertDialog(
           title: Text('Updated Results'),
           content: SingleChildScrollView(
             child: Column(
@@ -330,8 +340,8 @@ class _PonyExampleState extends State<PonyExample> {
             ),
           ),
           actions: <Widget>[
-            new FlatButton(
-              child: new Text("Close"),
+            FlatButton(
+              child: Text("Close"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
