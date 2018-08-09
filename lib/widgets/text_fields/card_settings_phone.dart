@@ -4,7 +4,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../card_settings.dart';
-import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 /// This is a phone number field. It's designed for US numbers
 class CardSettingsPhone extends StatelessWidget {
