@@ -12,15 +12,15 @@
 
 ## [0.1.3] - 7/30/2018
 
-* Added CardSettingsCurrency field
-* Added CardSettingsInstructions field
-* Added CardSettingsButton field
+* Added `CardSettingsCurrency` field
+* Added `CardSettingsInstructions` field
+* Added `CardSettingsButton` field
 * Added ability to tap to select in pickers
 
 ## [0.1.4] - 7/31/2018
 
-* Added CardSettingsEmail field
-* Added CardSettingsPassword field
+* Added `CardSettingsEmail` field
+* Added `CardSettingsPassword` field
 * Changed all TextFormFields to be stateless widget wrappers
 
 ## [0.1.5] - 8/1/2018
@@ -28,8 +28,8 @@
 * Support default button style through themes
 * All text fields expose controller as optional parameter (except currency)
 * Support theming of header text
-* Changed CardSettings to an InheritableWidget with global properties to control label appearance
-* Added a labelAlign property to all fields
+* Changed `CardSettings` to an `InheritableWidget` with global properties to control label appearance
+* Added a `labelAlign` property to all fields
 
 ## [0.1.6] - 8/2/2018
 
@@ -39,6 +39,6 @@
 
 ## [0.1.7] - 8/8/2018
 
-* All fields not implement an onChange event.
-* Added a CardSettingsPhone widget
-* Enhanced CardSettingsText to allow a input mask (based on flutter_masked_text)
+* All fields now implement an `onChange` event.
+* Added a `CardSettingsPhone` widget
+* Enhanced `CardSettingsText` to allow a input mask (based on flutter_masked_text)
