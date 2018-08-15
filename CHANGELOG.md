@@ -51,3 +51,7 @@
 ## [0.1.9-10] - 8/9/2018
 
 * Removed TextCapitalization from CardSettingsText due to an analysis error
+
+## [0.1.11] - 8/15/2018
+
+* downgraded intl dependency to ^0.15.6
