@@ -13,6 +13,8 @@ class CardSettingsColorPicker extends FormField<Color> {
     TextAlign labelAlign,
     TextAlign contentAlign, // here for consistency, but does nothing.
     Color initialValue: Colors.green,
+    Icon icon,
+    Widget requiredIndicator,
     bool autovalidate: false,
     bool visible: true,
     FormFieldSetter<Color> onSaved,
@@ -34,6 +36,8 @@ class CardSettingsColorPicker extends FormField<Color> {
                   label: label,
                   labelAlign: labelAlign,
                   visible: visible,
+                  icon: icon,
+                  requiredIndicator: requiredIndicator,
                   errorText: field.errorText,
                   content: Container(
                     height: 20.0,

@@ -12,6 +12,8 @@ class CardSettingsListPicker extends FormField<String> {
     TextAlign labelAlign,
     TextAlign contentAlign,
     String initialValue,
+    Icon icon,
+    Widget requiredIndicator,
     List<String> options,
     bool autovalidate: false,
     bool visible: true,
@@ -34,6 +36,8 @@ class CardSettingsListPicker extends FormField<String> {
                   label: label,
                   labelAlign: labelAlign,
                   visible: visible,
+                  icon: icon,
+                  requiredIndicator: requiredIndicator,
                   errorText: field.errorText,
                   content: Text(
                     state.value ?? '',

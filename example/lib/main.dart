@@ -42,7 +42,7 @@ class PonyModel {
   int weight = 45;
   DateTime showDateTime = DateTime(2010, 10, 10, 20, 30);
   double ticketPrice = 65.99;
-  int boxOfficePhone = 8005551212;
+  int boxOfficePhone;
   String email = 'me@nowhere.org';
   String password = 'secret1';
 }
@@ -96,8 +96,9 @@ class _PonyExampleState extends State<PonyExample> {
               CardSettingsText(
                 label: 'Name',
                 initialValue: _ponyModel.name,
+                requiredIndicator:
+                    Text('*', style: TextStyle(color: Colors.red)),
                 autovalidate: _autoValidate,
-                icon: Icon(Icons.ac_unit),
                 validator: (value) {
                   if (value == null || value.isEmpty)
                     return 'Name type is required.';
@@ -207,14 +208,16 @@ class _PonyExampleState extends State<PonyExample> {
                 text: 'This is when this little horse got her big break',
               ),
               CardSettingsDatePicker(
-                label: 'Show Date',
+                icon: Icon(Icons.calendar_today),
+                label: 'Date',
                 initialValue: _ponyModel.showDateTime,
                 onSaved: (value) => _ponyModel.showDateTime =
                     updateJustDate(value, _ponyModel.showDateTime),
                 onChanged: (value) => _showSnackBar('Show Date', value),
               ),
               CardSettingsTimePicker(
-                label: 'Show Time',
+                icon: Icon(Icons.access_time),
+                label: 'Time',
                 initialValue: TimeOfDay(
                     hour: _ponyModel.showDateTime.hour,
                     minute: _ponyModel.showDateTime.minute),
@@ -222,17 +225,17 @@ class _PonyExampleState extends State<PonyExample> {
                     updateJustTime(value, _ponyModel.showDateTime),
                 onChanged: (value) => _showSnackBar('Show Time', value),
               ),
-              CardSettingsCurrency(
-                label: 'Ticket Price',
-                initialValue: _ponyModel.ticketPrice,
-                validator: (value) {
-                  if (value != null && value > 100)
-                    return 'No scalpers allowed!';
-                  return null;
-                },
-                onSaved: (value) => _ponyModel.ticketPrice = value,
-                onChanged: (value) => _showSnackBar('Ticket Price', value),
-              ),
+              // CardSettingsCurrency(
+              //   label: 'Ticket Price',
+              //   initialValue: _ponyModel.ticketPrice,
+              //   validator: (value) {
+              //     if (value != null && value > 100)
+              //       return 'No scalpers allowed!';
+              //     return null;
+              //   },
+              //   onSaved: (value) => _ponyModel.ticketPrice = value,
+              //   onChanged: (value) => _showSnackBar('Ticket Price', value),
+              // ),
               CardSettingsPhone(
                 label: 'Box Office',
                 initialValue: _ponyModel.boxOfficePhone,
@@ -246,6 +249,7 @@ class _PonyExampleState extends State<PonyExample> {
               ),
               CardSettingsHeader(label: 'Security'),
               CardSettingsEmail(
+                icon: Icon(Icons.person),
                 initialValue: _ponyModel.email,
                 validator: (value) {
                   if (value == null || value.isEmpty)
@@ -258,6 +262,7 @@ class _PonyExampleState extends State<PonyExample> {
                 onChanged: (value) => _showSnackBar('Email', value),
               ),
               CardSettingsPassword(
+                icon: Icon(Icons.lock),
                 initialValue: _ponyModel.password,
                 validator: (value) {
                   if (value == null) return 'Password is required.';

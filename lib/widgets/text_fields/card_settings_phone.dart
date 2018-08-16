@@ -13,7 +13,9 @@ class CardSettingsPhone extends StatelessWidget {
     this.labelAlign,
     this.contentAlign,
     this.initialValue,
-    this.maxLength,
+    this.maxLength: 10,
+    this.icon,
+    this.requiredIndicator,
     this.visible: true,
     this.enabled: true,
     this.autofocus: false,
@@ -37,8 +39,10 @@ class CardSettingsPhone extends StatelessWidget {
   final TextAlign labelAlign;
   final TextAlign contentAlign;
   final int initialValue;
-  final String inputMask = '(000) 000-0000';
+  final String inputMask = '(___) ___-____';
   final int maxLength;
+  final Icon icon;
+  final Widget requiredIndicator;
   final bool visible;
   final bool enabled;
   final bool autofocus;
@@ -67,6 +71,8 @@ class CardSettingsPhone extends StatelessWidget {
       initialValue: initialValue.toString(),
       inputMask: inputMask,
       maxLength: maxLength,
+      icon: icon,
+      requiredIndicator: requiredIndicator,
       visible: visible,
       enabled: enabled,
       autofocus: autofocus,

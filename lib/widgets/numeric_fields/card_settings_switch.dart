@@ -11,6 +11,8 @@ class CardSettingsSwitch extends FormField<bool> {
     String label: 'Label',
     TextAlign labelAlign,
     TextAlign contentAlign,
+    Icon icon,
+    Widget requiredIndicator,
     String trueLabel: 'Yes',
     String falseLabel: 'No',
     bool initialValue: false,
@@ -31,6 +33,8 @@ class CardSettingsSwitch extends FormField<bool> {
                 label: label,
                 labelAlign: labelAlign,
                 visible: visible,
+                icon: icon,
+                requiredIndicator: requiredIndicator,
                 errorText: field.errorText,
                 content: Row(children: <Widget>[
                   Expanded(

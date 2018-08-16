@@ -13,6 +13,8 @@ class CardSettingsDatePicker extends FormField<DateTime> {
     TextAlign labelAlign,
     TextAlign contentAlign,
     DateTime initialValue,
+    Icon icon,
+    Widget requiredIndicator,
     bool autovalidate: false,
     bool visible: true,
     FormFieldSetter<DateTime> onSaved,
@@ -34,6 +36,8 @@ class CardSettingsDatePicker extends FormField<DateTime> {
                   label: label,
                   labelAlign: labelAlign,
                   visible: visible,
+                  icon: icon,
+                  requiredIndicator: requiredIndicator,
                   errorText: field.errorText,
                   content: Text(
                     state.value == null

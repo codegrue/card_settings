@@ -18,6 +18,7 @@ class CardSettingsField extends StatelessWidget {
     this.errorText,
     this.visible: true,
     this.labelAlign,
+    this.requiredIndicator,
   });
 
   final String label;
@@ -29,7 +30,8 @@ class CardSettingsField extends StatelessWidget {
   final String errorText;
   final bool visible;
   final TextAlign labelAlign;
-  final Widget icon;
+  final Icon icon;
+  final Widget requiredIndicator;
 
   @override
   Widget build(BuildContext context) {
@@ -46,20 +48,19 @@ class CardSettingsField extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    buildLeftDecoration(),
-                    buildLabel(context),
-                    buildInlineContent(context),
-                    buildRightDecoration()
+                    _buildLabelRow(context),
+                    _buildInlineContent(context),
+                    _buildRightDecoration()
                   ],
                 ),
-                buildRowContent()
+                _buildRowContent()
               ],
             ),
           )
         : Container();
   }
 
-  Widget buildInlineContent(BuildContext context) {
+  Widget _buildInlineContent(BuildContext context) {
     var decoratedContent = content;
     if (content is TextField || content is TextFormField) {
       // do nothing, these already have built in InputDecorations
@@ -78,7 +79,7 @@ class CardSettingsField extends StatelessWidget {
     return Expanded(child: contentOnNewLine ? Text('') : decoratedContent);
   }
 
-  Widget buildRowContent() {
+  Widget _buildRowContent() {
     return (contentOnNewLine)
         ? Container(
             padding: EdgeInsets.only(top: 10.0),
@@ -87,39 +88,78 @@ class CardSettingsField extends StatelessWidget {
         : Container();
   }
 
-  Widget buildLabel(BuildContext context) {
-    String labelSuffix = (CardSettings.of(context).labelSuffix == null)
-        ? ''
-        : CardSettings.of(context).labelSuffix;
+  Widget _buildLabelRow(BuildContext context) {
+    return Container(
+      width: (contentOnNewLine) ? null : labelWidth,
+      padding:
+          EdgeInsets.only(right: CardSettings.of(context).labelPadding ?? 6.0),
+      child: Row(
+        children: <Widget>[
+          _buildLeftIcon(context),
+          _buildLabel(context),
+          _buildRequiredIndicator(context),
+          _buildLabelSuffix(context),
+        ],
+      ),
+    );
+  }
 
+  Widget _buildLabel(BuildContext context) {
+    return Text(
+      label,
+      style: _buildLabelStyle(context),
+      textAlign: labelAlign ?? CardSettings.of(context).labelAlign,
+    );
+  }
+
+  Widget _buildLabelSuffix(BuildContext context) {
+    return Text(
+      (CardSettings.of(context).labelSuffix == null)
+          ? ''
+          : CardSettings.of(context).labelSuffix,
+      style: _buildLabelStyle(context),
+    );
+  }
+
+  Widget _buildRequiredIndicator(BuildContext context) {
+    if (requiredIndicator == null) return Container();
+
+    if (requiredIndicator is Text) {
+      var indicatorStyle = (requiredIndicator as Text).style;
+      var style = _buildLabelStyle(context).merge(indicatorStyle);
+
+      return Text(
+        (requiredIndicator as Text).data,
+        style: style,
+      );
+    }
+
+    return requiredIndicator;
+  }
+
+  TextStyle _buildLabelStyle(BuildContext context) {
     TextStyle labelStyle = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 16.0,
     );
 
-    return Container(
-      width: labelWidth,
-      padding:
-          EdgeInsets.only(right: CardSettings.of(context).labelPadding ?? 6.0),
-      child: Text(
-        label + labelSuffix,
-        style:
-            labelStyle.merge(Theme.of(context).inputDecorationTheme.labelStyle),
-        textAlign: labelAlign ?? CardSettings.of(context).labelAlign,
-      ),
-    );
+    return labelStyle.merge(Theme.of(context).inputDecorationTheme.labelStyle);
   }
 
-  Widget buildLeftDecoration() {
+  Widget _buildLeftIcon(BuildContext context) {
     return (icon == null)
         ? Container()
         : Container(
-            width: 20.0,
-            child: icon,
+            margin: EdgeInsets.all(0.0),
+            padding: EdgeInsets.only(right: 4.0),
+            child: Icon(
+              icon.icon,
+              color: Theme.of(context).inputDecorationTheme.labelStyle.color,
+            ),
           );
   }
 
-  Widget buildRightDecoration() {
+  Widget _buildRightDecoration() {
     return (pickerIcon != null || unitLabel != null)
         ? Container(
             alignment: Alignment.centerRight,

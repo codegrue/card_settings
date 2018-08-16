@@ -12,6 +12,8 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
     TextAlign labelAlign,
     TextAlign contentAlign,
     TimeOfDay initialValue,
+    Icon icon,
+    Widget requiredIndicator,
     bool autovalidate: false,
     bool visible: true,
     FormFieldSetter<TimeOfDay> onSaved,
@@ -34,6 +36,8 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
                   labelAlign: labelAlign,
                   visible: visible,
                   errorText: field.errorText,
+                  icon: icon,
+                  requiredIndicator: requiredIndicator,
                   content: Text(
                     state.value == null
                         ? ''

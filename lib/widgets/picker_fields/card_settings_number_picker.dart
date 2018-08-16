@@ -11,6 +11,8 @@ class CardSettingsNumberPicker extends StatelessWidget {
     this.labelAlign,
     this.initialValue,
     this.contentAlign,
+    this.icon,
+    this.requiredIndicator,
     @required this.min,
     @required this.max,
     this.autovalidate: false,
@@ -24,6 +26,8 @@ class CardSettingsNumberPicker extends StatelessWidget {
   final String label;
   final TextAlign labelAlign;
   final TextAlign contentAlign;
+  final Icon icon;
+  final Widget requiredIndicator;
   final int initialValue;
   final int min;
   final int max;
@@ -43,6 +47,8 @@ class CardSettingsNumberPicker extends StatelessWidget {
       contentAlign: contentAlign,
       visible: visible,
       initialValue: initialValue?.toString(),
+      icon: icon,
+      requiredIndicator: requiredIndicator,
       options:
           List<String>.generate(max - min + 1, (i) => (i + min).toString()),
       autovalidate: autovalidate,
