@@ -16,6 +16,7 @@ class CardSettingsText extends FormField<String> {
     String initialValue,
     String unitLabel,
     String prefixText,
+    Widget icon,
     bool contentOnNewLine: false,
     int maxLength: 20,
     int numberOfLines: 1,
@@ -61,6 +62,7 @@ class CardSettingsText extends FormField<String> {
               labelAlign: labelAlign,
               visible: visible,
               unitLabel: unitLabel,
+              icon: icon,
               contentOnNewLine: contentOnNewLine,
               content: TextField(
                 controller: state._effectiveController,

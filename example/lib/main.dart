@@ -97,6 +97,7 @@ class _PonyExampleState extends State<PonyExample> {
                 label: 'Name',
                 initialValue: _ponyModel.name,
                 autovalidate: _autoValidate,
+                icon: Icon(Icons.ac_unit),
                 validator: (value) {
                   if (value == null || value.isEmpty)
                     return 'Name type is required.';

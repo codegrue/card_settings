@@ -56,3 +56,8 @@
 
 * downgraded intl dependency to ^0.15.6
 * removed a few properties that were reported as issues in dartpub analyze
+
+## [0.1.12] - vNext
+
+* Added `padding` and `cardElevation` to `CardSettings`
+* Added support for field `icon` to every widget

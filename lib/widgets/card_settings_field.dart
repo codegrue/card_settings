@@ -10,7 +10,7 @@ class CardSettingsField extends StatelessWidget {
   CardSettingsField({
     this.label: 'Label',
     this.content,
-    this.showIcon: false,
+    this.icon,
     this.pickerIcon,
     this.labelWidth = 120.0,
     this.contentOnNewLine = false,
@@ -23,13 +23,13 @@ class CardSettingsField extends StatelessWidget {
   final String label;
   final String unitLabel;
   final Widget content;
-  final bool showIcon;
   final IconData pickerIcon;
   final double labelWidth;
   final bool contentOnNewLine;
   final String errorText;
   final bool visible;
   final TextAlign labelAlign;
+  final Widget icon;
 
   @override
   Widget build(BuildContext context) {
@@ -111,12 +111,12 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget buildLeftDecoration() {
-    return (showIcon)
-        ? Container(
+    return (icon == null)
+        ? Container()
+        : Container(
             width: 20.0,
-            child: Text('X'),
-          )
-        : Container();
+            child: icon,
+          );
   }
 
   Widget buildRightDecoration() {
