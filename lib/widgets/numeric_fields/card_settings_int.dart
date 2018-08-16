@@ -23,7 +23,6 @@ class CardSettingsInt extends CardSettingsText {
     bool autovalidate: false,
     FormFieldValidator<int> validator,
     FormFieldSetter<int> onSaved,
-    VoidCallback onEditingComplete,
     ValueChanged<int> onChanged,
     TextEditingController controller,
     FocusNode focusNode,
@@ -33,8 +32,6 @@ class CardSettingsInt extends CardSettingsText {
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
-    Brightness keyboardAppearance,
-    EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
   }) : super(
           key: key,
           label: label,
@@ -57,7 +54,6 @@ class CardSettingsInt extends CardSettingsText {
             if (onSaved == null) return;
             onSaved(intelligentCast<int>(value));
           },
-          onEditingComplete: onEditingComplete,
           onChanged: (value) {
             if (onChanged == null) return;
             onChanged(intelligentCast<int>(value));
@@ -74,7 +70,5 @@ class CardSettingsInt extends CardSettingsText {
             LengthLimitingTextInputFormatter(maxLength),
             WhitelistingTextInputFormatter(RegExp("[0-9]+")),
           ],
-          keyboardAppearance: keyboardAppearance,
-          scrollPadding: scrollPadding,
         );
 }

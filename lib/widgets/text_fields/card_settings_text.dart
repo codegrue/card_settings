@@ -28,20 +28,16 @@ class CardSettingsText extends FormField<String> {
     bool autovalidate: false,
     FormFieldValidator<String> validator,
     FormFieldSetter<String> onSaved,
-    VoidCallback onEditingComplete,
     this.onChanged,
     this.controller,
     FocusNode focusNode,
     TextInputType keyboardType: TextInputType.text,
-    //TextCapitalization textCapitalization: TextCapitalization.none,
     TextInputAction textInputAction: TextInputAction.done,
     TextStyle style,
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
     this.inputMask,
-    Brightness keyboardAppearance,
-    EdgeInsets scrollPadding: const EdgeInsets.all(20.0),
   })  : //assert(initialValue == null || controller == null),
         assert(keyboardType != null),
         assert(textInputAction != null),
@@ -50,7 +46,6 @@ class CardSettingsText extends FormField<String> {
         assert(autocorrect != null),
         assert(autovalidate != null),
         assert(maxLengthEnforced != null),
-        assert(scrollPadding != null),
         assert(maxLength == null || maxLength > 0),
         assert(controller == null || inputMask == null),
         super(
@@ -81,7 +76,6 @@ class CardSettingsText extends FormField<String> {
                 ),
                 textAlign:
                     contentAlign ?? CardSettings.of(field.context).contentAlign,
-                //textCapitalization: textCapitalization,
                 autofocus: autofocus,
                 obscureText: obscureText,
                 autocorrect: autocorrect,
@@ -91,7 +85,6 @@ class CardSettingsText extends FormField<String> {
                     ? maxLength
                     : null, // if we want counter use default behavior
                 onChanged: state._handleOnChanged,
-                onEditingComplete: onEditingComplete,
                 onSubmitted: onFieldSubmitted,
                 inputFormatters: inputFormatters ??
                     [
@@ -99,8 +92,6 @@ class CardSettingsText extends FormField<String> {
                       LengthLimitingTextInputFormatter(maxLength)
                     ],
                 enabled: enabled,
-                scrollPadding: scrollPadding,
-                keyboardAppearance: keyboardAppearance,
               ),
             );
           },

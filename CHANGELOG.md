@@ -55,3 +55,4 @@
 ## [0.1.11] - 8/15/2018
 
 * downgraded intl dependency to ^0.15.6
+* removed a few properties that were reported as issues in dartpub analyze

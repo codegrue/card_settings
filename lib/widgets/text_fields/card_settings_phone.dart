@@ -22,7 +22,6 @@ class CardSettingsPhone extends StatelessWidget {
     this.autovalidate: false,
     this.validator,
     this.onSaved,
-    this.onEditingComplete,
     this.onChanged,
     this.controller,
     this.focusNode,
@@ -32,8 +31,6 @@ class CardSettingsPhone extends StatelessWidget {
     this.maxLengthEnforced: true,
     this.onFieldSubmitted,
     this.inputFormatters,
-    this.keyboardAppearance,
-    this.scrollPadding = const EdgeInsets.all(20.0),
   });
 
   final String label;
@@ -50,7 +47,6 @@ class CardSettingsPhone extends StatelessWidget {
   final bool autovalidate;
   final FormFieldValidator<int> validator;
   final FormFieldSetter<int> onSaved;
-  final VoidCallback onEditingComplete;
   final ValueChanged<int> onChanged;
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -60,8 +56,6 @@ class CardSettingsPhone extends StatelessWidget {
   final bool maxLengthEnforced;
   final ValueChanged<String> onFieldSubmitted;
   final List<TextInputFormatter> inputFormatters;
-  final Brightness keyboardAppearance;
-  final EdgeInsets scrollPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +75,6 @@ class CardSettingsPhone extends StatelessWidget {
       autovalidate: autovalidate,
       validator: _safeValidator,
       onSaved: _safeOnSaved,
-      onEditingComplete: onEditingComplete,
       onChanged: _safeOnChanged,
       controller: controller,
       focusNode: focusNode,
@@ -92,8 +85,6 @@ class CardSettingsPhone extends StatelessWidget {
       maxLengthEnforced: maxLengthEnforced,
       onFieldSubmitted: onFieldSubmitted,
       inputFormatters: inputFormatters,
-      keyboardAppearance: keyboardAppearance,
-      scrollPadding: scrollPadding,
     );
   }
 

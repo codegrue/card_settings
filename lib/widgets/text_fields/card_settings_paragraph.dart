@@ -24,7 +24,6 @@ class CardSettingsParagraph extends CardSettingsText {
     bool autovalidate: false,
     FormFieldValidator<String> validator,
     FormFieldSetter<String> onSaved,
-    VoidCallback onEditingComplete,
     ValueChanged<String> onChanged,
     TextEditingController controller,
     FocusNode focusNode,
@@ -34,8 +33,6 @@ class CardSettingsParagraph extends CardSettingsText {
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
-    Brightness keyboardAppearance,
-    EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
   }) : super(
           key: key,
           label: label,
@@ -54,7 +51,6 @@ class CardSettingsParagraph extends CardSettingsText {
           autovalidate: autovalidate,
           validator: validator,
           onSaved: onSaved,
-          onEditingComplete: onEditingComplete,
           onChanged: onChanged,
           controller: controller,
           focusNode: focusNode,
@@ -64,7 +60,5 @@ class CardSettingsParagraph extends CardSettingsText {
           maxLengthEnforced: maxLengthEnforced,
           onFieldSubmitted: onFieldSubmitted,
           inputFormatters: inputFormatters,
-          keyboardAppearance: keyboardAppearance,
-          scrollPadding: scrollPadding,
         );
 }

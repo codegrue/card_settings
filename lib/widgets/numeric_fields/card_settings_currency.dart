@@ -27,7 +27,6 @@ class CardSettingsCurrency extends StatefulWidget {
     this.autovalidate: false,
     this.validator,
     this.onSaved,
-    this.onEditingComplete,
     this.onChanged,
     this.controller,
     this.focusNode,
@@ -37,8 +36,6 @@ class CardSettingsCurrency extends StatefulWidget {
     this.maxLengthEnforced: true,
     this.onFieldSubmitted,
     this.inputFormatters,
-    this.keyboardAppearance,
-    this.scrollPadding = const EdgeInsets.all(20.0),
   });
 
   final String label;
@@ -58,7 +55,6 @@ class CardSettingsCurrency extends StatefulWidget {
   final bool autovalidate;
   final FormFieldValidator<double> validator;
   final FormFieldSetter<double> onSaved;
-  final VoidCallback onEditingComplete;
   final ValueChanged<double> onChanged;
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -68,8 +64,6 @@ class CardSettingsCurrency extends StatefulWidget {
   final bool maxLengthEnforced;
   final ValueChanged<String> onFieldSubmitted;
   final List<TextInputFormatter> inputFormatters;
-  final Brightness keyboardAppearance;
-  final EdgeInsets scrollPadding;
 
   @override
   CardSettingsCurrencyState createState() {
@@ -109,7 +103,6 @@ class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
       autovalidate: widget.autovalidate,
       validator: _safeValidator,
       onSaved: _safeOnSaved,
-      onEditingComplete: widget.onEditingComplete,
       onChanged: _safeOnChanged,
       controller: widget.controller ?? _moneyController,
       focusNode: widget.focusNode,
@@ -120,8 +113,6 @@ class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
       maxLengthEnforced: widget.maxLengthEnforced,
       onFieldSubmitted: widget.onFieldSubmitted,
       inputFormatters: widget.inputFormatters,
-      keyboardAppearance: widget.keyboardAppearance,
-      scrollPadding: widget.scrollPadding,
     );
   }
 
