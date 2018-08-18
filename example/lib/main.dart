@@ -225,17 +225,17 @@ class _PonyExampleState extends State<PonyExample> {
                     updateJustTime(value, _ponyModel.showDateTime),
                 onChanged: (value) => _showSnackBar('Show Time', value),
               ),
-              // CardSettingsCurrency(
-              //   label: 'Ticket Price',
-              //   initialValue: _ponyModel.ticketPrice,
-              //   validator: (value) {
-              //     if (value != null && value > 100)
-              //       return 'No scalpers allowed!';
-              //     return null;
-              //   },
-              //   onSaved: (value) => _ponyModel.ticketPrice = value,
-              //   onChanged: (value) => _showSnackBar('Ticket Price', value),
-              // ),
+              CardSettingsCurrency(
+                label: 'Ticket Price',
+                initialValue: _ponyModel.ticketPrice,
+                validator: (value) {
+                  if (value != null && value > 100)
+                    return 'No scalpers allowed!';
+                  return null;
+                },
+                onSaved: (value) => _ponyModel.ticketPrice = value,
+                onChanged: (value) => _showSnackBar('Ticket Price', value),
+              ),
               CardSettingsPhone(
                 label: 'Box Office',
                 initialValue: _ponyModel.boxOfficePhone,

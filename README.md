@@ -179,9 +179,19 @@ Each field implements a `visible` property that you can use to control the visib
 
 ### Masking
 
-The `CardSettingsText` widget has an `inputMask` property that forces entered text to conform to a given pattern. The default placeholder character is a `_` underscore. So for example, a US phone number would be `'(___) ___-____'`.
+The `CardSettingsText` widget has an `inputMask` property that forces entered text to conform to a given pattern. This is built upon the [flutter_masked_text](https://pub.dartlang.org/packages/flutter_masked_text)
+package and as such masks are formatted with the following characters:
+
+- 0: accept numbers
+- A: accept letters
+- @: accept numbers and letters
+- *: accept any character
+
+So for example, phone number would be '(000) 000-0000'.
 
 Note: `CardSettingsPhone` is a convenience widget that is pre-configured to use this pattern.
+
+Note2: `flutter_masked_text` is a controller and as such, you will not be able to use an inputMask and a custom controller at the same time. This might be rectified in the future.
 
 ### Custom Fields
 
@@ -192,6 +202,7 @@ The `CardSettingsField` is the basis of all other fields and can be used to buil
 This widget set relies on these external third-party components:
 
 - [flutter_colorpicker](https://pub.dartlang.org/packages/flutter_colorpicker)
+- [flutter_masked_text](https://pub.dartlang.org/packages/flutter_masked_text)
 
 ## Changelog
 

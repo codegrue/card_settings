@@ -1,9 +1,9 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'package:card_settings/Formatters/mask_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 import '../../card_settings.dart';
 
 /// This is a standard one line text entry field. It's based on the [TextFormField] widget.
@@ -93,7 +93,6 @@ class CardSettingsText extends FormField<String> {
                 inputFormatters: inputFormatters ??
                     [
                       // if we don't want the counter, use this maxLength instead
-                      _maskInputFormatter(inputMask),
                       LengthLimitingTextInputFormatter(maxLength)
                     ],
                 enabled: enabled,
@@ -107,11 +106,6 @@ class CardSettingsText extends FormField<String> {
   final TextEditingController controller;
 
   final String inputMask;
-
-  static TextInputFormatter _maskInputFormatter(String inputMask) {
-    if (inputMask == null) return null;
-    return MaskInputFormatter(inputMask);
-  }
 
   @override
   _CardSettingsTextState createState() => _CardSettingsTextState();
@@ -130,7 +124,12 @@ class _CardSettingsTextState extends FormFieldState<String> {
   void initState() {
     super.initState();
     if (widget.controller == null) {
-      _controller = TextEditingController(text: widget.initialValue);
+      if (widget.inputMask == null) {
+        _controller = TextEditingController(text: widget.initialValue);
+      } else {
+        _controller = MaskedTextController(
+            mask: widget.inputMask, text: widget.initialValue);
+      }
     } else {
       widget.controller.addListener(_handleControllerChanged);
     }

@@ -62,5 +62,3 @@
 * Added `padding` and `cardElevation` to `CardSettings`
 * Added support for field `icon` to every widget
 * Added a `requiredIndicator` to show next to a label
-* Refactored `inputMask` to use a formatter instead of a `flutter_masked_text` controller
-* [side by side support]
