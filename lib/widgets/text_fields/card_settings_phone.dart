@@ -28,7 +28,6 @@ class CardSettingsPhone extends StatelessWidget {
     this.controller,
     this.focusNode,
     this.keyboardType,
-    this.textInputAction = TextInputAction.done,
     this.style,
     this.maxLengthEnforced: true,
     this.onFieldSubmitted,
@@ -55,7 +54,6 @@ class CardSettingsPhone extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final TextInputType keyboardType;
-  final TextInputAction textInputAction;
   final TextStyle style;
   final bool maxLengthEnforced;
   final ValueChanged<String> onFieldSubmitted;
@@ -86,7 +84,6 @@ class CardSettingsPhone extends StatelessWidget {
       focusNode: focusNode,
       keyboardType:
           keyboardType ?? TextInputType.numberWithOptions(decimal: false),
-      textInputAction: textInputAction,
       style: style,
       maxLengthEnforced: maxLengthEnforced,
       onFieldSubmitted: onFieldSubmitted,

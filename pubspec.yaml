@@ -20,10 +20,9 @@ environment:
 
 flutter:
 
-
 # Steps to publish to pub.dartlang.org:
 # 1) Run unit tests: "flutter test"
 # 2) Verify no documentation issues: "dartdoc --no-auto-include-dependencies "
 # 3) Verify no code issues: "flutter analyze"
-# 3) Run dartpub review: "pana --verbosity compact"
+# 3) Run dartpub review: "pana . --verbosity compact"
 # 4) Publish: "flutter packages pub publish"

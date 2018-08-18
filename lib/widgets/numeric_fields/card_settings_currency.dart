@@ -33,7 +33,6 @@ class CardSettingsCurrency extends StatefulWidget {
     this.controller,
     this.focusNode,
     this.keyboardType,
-    this.textInputAction = TextInputAction.done,
     this.style,
     this.maxLengthEnforced: true,
     this.onFieldSubmitted,
@@ -63,7 +62,6 @@ class CardSettingsCurrency extends StatefulWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final TextInputType keyboardType;
-  final TextInputAction textInputAction;
   final TextStyle style;
   final bool maxLengthEnforced;
   final ValueChanged<String> onFieldSubmitted;
@@ -114,7 +112,6 @@ class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
       focusNode: widget.focusNode,
       keyboardType: widget.keyboardType ??
           TextInputType.numberWithOptions(decimal: false),
-      textInputAction: widget.textInputAction,
       style: widget.style,
       maxLengthEnforced: widget.maxLengthEnforced,
       onFieldSubmitted: widget.onFieldSubmitted,

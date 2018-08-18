@@ -29,7 +29,6 @@ class CardSettingsDouble extends CardSettingsText {
     TextEditingController controller,
     FocusNode focusNode,
     TextInputType keyboardType,
-    TextInputAction textInputAction = TextInputAction.done,
     TextStyle style,
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
@@ -66,7 +65,6 @@ class CardSettingsDouble extends CardSettingsText {
           focusNode: focusNode,
           keyboardType:
               keyboardType ?? TextInputType.numberWithOptions(decimal: true),
-          textInputAction: textInputAction,
           style: style,
           maxLengthEnforced: maxLengthEnforced,
           onFieldSubmitted: onFieldSubmitted,
