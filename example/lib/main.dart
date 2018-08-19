@@ -162,47 +162,47 @@ class _PonyExampleState extends State<PonyExample> {
       children: <Widget>[
         CardSettingsHeader(label: 'Bio'),
         _buildCardSettingsText_Name(_nameKey),
-        CardFieldLayout_TwoEqual(
-          child1: _buildCardSettingsListPicker_Type(_typeKey),
-          child2: _buildCardSettingsNumberPicker(_ageKey),
-        ),
+        CardFieldLayout_EqualSpaced(children: <Widget>[
+          _buildCardSettingsListPicker_Type(_typeKey),
+          _buildCardSettingsNumberPicker(_ageKey),
+        ]),
         _buildCardSettingsParagraph(_descriptionlKey),
         // note, different order than portrait to show state mapping
         CardSettingsHeader(label: 'Security'),
-        CardFieldLayout_TwoEqual(
-          child1: _buildCardSettingsEmail(_emailKey),
-          child2: _buildCardSettingsPassword(_passwordKey),
-        ),
+        CardFieldLayout_EqualSpaced(children: <Widget>[
+          _buildCardSettingsEmail(_emailKey),
+          _buildCardSettingsPassword(_passwordKey),
+        ]),
         CardSettingsHeader(label: 'Colors'),
-        CardFieldLayout_TwoEqual(
-          child1: _buildCardSettingsColorPicker_Coat(_coatKey),
-          child2: _buildCardSettingsColorPicker_Mane(_maneKey),
-        ),
-        CardFieldLayout_TwoEqual(
-          child1: _buildCardSettingsSwitch_Spots(_hasSpotsKey),
-          child2: _buildCardSettingsColorPicker_Spot(_spotKey),
-        ),
+        CardFieldLayout_EqualSpaced(children: <Widget>[
+          _buildCardSettingsColorPicker_Coat(_coatKey),
+          _buildCardSettingsColorPicker_Mane(_maneKey),
+        ]),
+        CardFieldLayout_EqualSpaced(children: <Widget>[
+          _buildCardSettingsSwitch_Spots(_hasSpotsKey),
+          _buildCardSettingsColorPicker_Spot(_spotKey),
+        ]),
         CardSettingsHeader(label: 'Size'),
-        CardFieldLayout_TwoEqual(
-          child1: _buildCardSettingsDouble_Height(_heightKey),
-          child2: _buildCardSettingsInt_Weight(_weightKey),
-        ),
+        CardFieldLayout_EqualSpaced(children: <Widget>[
+          _buildCardSettingsDouble_Height(_heightKey),
+          _buildCardSettingsInt_Weight(_weightKey),
+        ]),
         CardSettingsHeader(label: 'First Show'),
         _buildCardSettingsInstructions(),
-        CardFieldLayout_TwoEqual(
-          child1: _buildCardSettingsDatePicker(_dateKey),
-          child2: _buildCardSettingsTimePicker(_timeKey),
-        ),
-        CardFieldLayout_TwoEqual(
-          child1: _buildCardSettingsCurrency(_priceKey),
-          child2: _buildCardSettingsPhone(_phoneKey),
-        ),
+        CardFieldLayout_EqualSpaced(children: <Widget>[
+          _buildCardSettingsDatePicker(_dateKey),
+          _buildCardSettingsTimePicker(_timeKey),
+        ]),
+        CardFieldLayout_EqualSpaced(children: <Widget>[
+          _buildCardSettingsCurrency(_priceKey),
+          _buildCardSettingsPhone(_phoneKey),
+        ]),
         CardSettingsHeader(label: 'Actions'),
-        CardFieldLayout_ThreeEqual(
-          child1: _buildCardSettingsButton_Save(),
-          child2: _buildCardSettingsButton_Reset(),
-          child3: _buildCardSettingsButton_Close(),
-        ),
+        CardFieldLayout_EqualSpaced(children: <Widget>[
+          _buildCardSettingsButton_Save(),
+          _buildCardSettingsButton_Reset(),
+          _buildCardSettingsButton_Close(),
+        ]),
         Container(height: 4.0)
       ],
     );

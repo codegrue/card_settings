@@ -206,15 +206,36 @@ child: OrientationBuilder(
   builder: (context, orientation) {
     return (orientation == Orientation.portrait)
         ? CardSettings(
-          // Portrait layout here
-          CardSettingsEmail(key: _emailKey)
+          children: <Widget>[
+            // Portrait layout here
+            CardSettingsEmail(key: _emailKey)
+          ],
         )
         : CardSettings(
-          // Landscape layout here
-          CardSettingsEmail(key: _emailKey)
+          children: <Widget>[
+            // Landscape layout here
+            CardSettingsEmail(key: _emailKey)
+          ],
         );
   },
 )
+```
+
+You may with to have multiple fields on the same row when in landscape orientation. This required nested wrapper widgets to provide the proper dimensions. This library provides a few shortcut wrappers to produce cleaner code:
+
+- `CardFieldLayout_EqualSpaced` - Multiple fields in a row equally spaced
+
+Usage looks like this:
+
+``` dart
+CardSettings(
+  children: <Widget>[
+    CardFieldLayout_EqualSpaced(children: <Widget>[
+      CardSettingsEmail(),
+      CardSettingsPassword(),
+    ]),
+  ],
+);
 ```
 
 ### Custom Fields
