@@ -67,3 +67,4 @@
 ## [0.1.13] - 8/19/2018
 
 * Enhanced the example to show switching to landscape orientation
+* Created two functions to handle mutiple fields in a row.

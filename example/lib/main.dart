@@ -152,6 +152,7 @@ class _PonyExampleState extends State<PonyExample> {
         CardSettingsHeader(label: 'Actions'),
         _buildCardSettingsButton_Save(),
         _buildCardSettingsButton_Reset(),
+        Container(height: 4.0)
       ],
     );
   }
@@ -161,105 +162,66 @@ class _PonyExampleState extends State<PonyExample> {
       children: <Widget>[
         CardSettingsHeader(label: 'Bio'),
         _buildCardSettingsText_Name(_nameKey),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: _buildCardSettingsListPicker_Type(_typeKey),
-            ),
-            Expanded(
-              child: _buildCardSettingsNumberPicker(_ageKey),
-            ),
-          ],
+        CardFieldLayout_TwoEqual(
+          child1: _buildCardSettingsListPicker_Type(_typeKey),
+          child2: _buildCardSettingsNumberPicker(_ageKey),
         ),
         _buildCardSettingsParagraph(_descriptionlKey),
         // note, different order than portrait to show state mapping
         CardSettingsHeader(label: 'Security'),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: _buildCardSettingsEmail(_emailKey),
-            ),
-            Expanded(
-              child: _buildCardSettingsPassword(_passwordKey),
-            ),
-          ],
+        CardFieldLayout_TwoEqual(
+          child1: _buildCardSettingsEmail(_emailKey),
+          child2: _buildCardSettingsPassword(_passwordKey),
         ),
         CardSettingsHeader(label: 'Colors'),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: _buildCardSettingsColorPicker_Coat(_coatKey),
-            ),
-            Expanded(
-              child: _buildCardSettingsColorPicker_Mane(_maneKey),
-            ),
-          ],
+        CardFieldLayout_TwoEqual(
+          child1: _buildCardSettingsColorPicker_Coat(_coatKey),
+          child2: _buildCardSettingsColorPicker_Mane(_maneKey),
         ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: _buildCardSettingsSwitch_Spots(_hasSpotsKey),
-            ),
-            Expanded(
-              child: _buildCardSettingsColorPicker_Spot(_spotKey),
-            ),
-          ],
+        CardFieldLayout_TwoEqual(
+          child1: _buildCardSettingsSwitch_Spots(_hasSpotsKey),
+          child2: _buildCardSettingsColorPicker_Spot(_spotKey),
         ),
         CardSettingsHeader(label: 'Size'),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: _buildCardSettingsDouble_Height(_heightKey),
-            ),
-            Expanded(
-              child: _buildCardSettingsInt_Weight(_weightKey),
-            ),
-          ],
+        CardFieldLayout_TwoEqual(
+          child1: _buildCardSettingsDouble_Height(_heightKey),
+          child2: _buildCardSettingsInt_Weight(_weightKey),
         ),
         CardSettingsHeader(label: 'First Show'),
         _buildCardSettingsInstructions(),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: _buildCardSettingsDatePicker(_dateKey),
-            ),
-            Expanded(
-              child: _buildCardSettingsTimePicker(_timeKey),
-            ),
-          ],
+        CardFieldLayout_TwoEqual(
+          child1: _buildCardSettingsDatePicker(_dateKey),
+          child2: _buildCardSettingsTimePicker(_timeKey),
         ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: _buildCardSettingsCurrency(_priceKey),
-            ),
-            Expanded(
-              child: _buildCardSettingsPhone(_phoneKey),
-            ),
-          ],
+        CardFieldLayout_TwoEqual(
+          child1: _buildCardSettingsCurrency(_priceKey),
+          child2: _buildCardSettingsPhone(_phoneKey),
         ),
         CardSettingsHeader(label: 'Actions'),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: _buildCardSettingsButton_Save(),
-            ),
-            Expanded(
-              child: _buildCardSettingsButton_Reset(),
-            ),
-          ],
+        CardFieldLayout_ThreeEqual(
+          child1: _buildCardSettingsButton_Save(),
+          child2: _buildCardSettingsButton_Reset(),
+          child3: _buildCardSettingsButton_Close(),
         ),
+        Container(height: 4.0)
       ],
     );
   }
 
   /* BUILDERS FOR EACH FIELD */
 
+  CardSettingsButton _buildCardSettingsButton_Close() {
+    return CardSettingsButton(
+      label: 'CLOSE',
+      onPressed: _closePressed,
+      backgroundColor: Colors.greenAccent,
+    );
+  }
+
   CardSettingsButton _buildCardSettingsButton_Reset() {
     return CardSettingsButton(
       label: 'RESET',
       onPressed: _resetPressed,
-      bottomSpacing: 4.0,
       backgroundColor: Colors.redAccent,
       textColor: Colors.white,
     );
@@ -522,6 +484,10 @@ class _PonyExampleState extends State<PonyExample> {
 
   void _resetPressed() {
     _formKey.currentState.reset();
+  }
+
+  void _closePressed() {
+    // This is just a placeholder to have a third button
   }
 
   void _showSnackBar(String label, dynamic value) {

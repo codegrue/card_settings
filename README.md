@@ -193,6 +193,30 @@ Note: `CardSettingsPhone` is a convenience widget that is pre-configured to use 
 
 Note2: `flutter_masked_text` is a controller and as such, you will not be able to use an inputMask and a custom controller at the same time. This might be rectified in the future.
 
+### Orientation
+
+This suite allows for orientation switching. To configure this, wrap different layouts with an `OrientationBuilder'.
+
+You might want to have different fields in each layout, or a different field order. So that Flutter doesn't get confused tracking state under this circumstance, you must provide a unique state key for each individual field, using the same key in each layout.
+
+``` dart
+final GlobalKey<FormState> _emailKey = GlobalKey<FormState>();
+
+child: OrientationBuilder(
+  builder: (context, orientation) {
+    return (orientation == Orientation.portrait)
+        ? CardSettings(
+          // Portrait layout here
+          CardSettingsEmail(key: _emailKey)
+        )
+        : CardSettings(
+          // Landscape layout here
+          CardSettingsEmail(key: _emailKey)
+        );
+  },
+)
+```
+
 ### Custom Fields
 
 The `CardSettingsField` is the basis of all other fields and can be used to build unique fields outside of this library. Its purpose is to govern layout with consistent decorations. The best way to make a custom field is to inherit from `FormField<T>`, which will manage the state of your field. The cleanest example of this is the `CardSettingsSwitch` widget. All you have to do is provide your custom widgets in the `content` property.
