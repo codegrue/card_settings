@@ -57,9 +57,13 @@
 * downgraded intl dependency to ^0.15.6
 * removed a few properties that were reported as issues in dartpub analyze
 
-## [0.1.12] - vNext
+## [0.1.12] - 8/17/2018
 
 * Added `padding` and `cardElevation` to `CardSettings`
 * Added support for field `icon` to every widget
 * Added a `requiredIndicator` to show next to a label
 * Removed `textInputAction` property to be compatible with the current beta branch
+
+## [0.1.13] - 8/19/2018
+
+* Enhanced the example to show switching to landscape orientation

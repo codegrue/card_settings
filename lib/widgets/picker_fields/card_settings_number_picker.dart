@@ -7,6 +7,7 @@ import '../../card_settings.dart';
 /// This is a list picker that allows for a range of numbers to be speficied as pptions.
 class CardSettingsNumberPicker extends StatelessWidget {
   CardSettingsNumberPicker({
+    Key key,
     this.label: 'Label',
     this.labelAlign,
     this.initialValue,
@@ -42,6 +43,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardSettingsListPicker(
+      key: key,
       label: this.label,
       labelAlign: labelAlign,
       contentAlign: contentAlign,

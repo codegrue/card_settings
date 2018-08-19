@@ -8,6 +8,8 @@
             "name": "Flutter",
             "request": "launch",
             "type": "dart",
+            "program": "${workspaceFolder}/example/lib/main.dart",
+            "flutterMode": "debug",
         }
     ]
 }
