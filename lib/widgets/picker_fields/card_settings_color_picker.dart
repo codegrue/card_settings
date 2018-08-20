@@ -88,7 +88,6 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
         );
 
         Widget picker = Container(
-          height: 400.0,
           child: ColorPicker(
             pickerColor: _pickerColor,
             onColorChanged: (color) => _pickerColor = color,
