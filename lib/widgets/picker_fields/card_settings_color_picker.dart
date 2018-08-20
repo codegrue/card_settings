@@ -8,7 +8,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 // Constants
 const double _kPickerHeaderPortraitHeight = 60.0;
 const double _kPickerPortraitWidth = 330.0;
-const double _kPickerLandscapeWidth = 400.0;
+const double _kPickerLandscapeWidth = 530.0;
 const double _kDialogActionBarHeight = 52.0;
 
 /// This is the color picker field
@@ -120,51 +120,28 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
             builder: (BuildContext context, Orientation orientation) {
               assert(orientation != null);
               assert(context != null);
-              switch (orientation) {
-                case Orientation.portrait:
-                  return SizedBox(
-                    width: _kPickerPortraitWidth,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        header,
-                        Container(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              picker,
-                              Expanded(child: Container()),
-                              actions,
-                            ],
-                          ),
-                        ),
-                      ],
+              return SizedBox(
+                width: (orientation == Orientation.portrait)
+                    ? _kPickerPortraitWidth
+                    : _kPickerLandscapeWidth,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    header,
+                    Container(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          picker,
+                          actions,
+                        ],
+                      ),
                     ),
-                  );
-                case Orientation.landscape:
-                  return SizedBox(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        header,
-                        Container(
-                          width: _kPickerLandscapeWidth,
-                          child: Column(
-                            children: <Widget>[
-                              picker,
-                              Expanded(child: Container()),
-                              actions,
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-              }
-              return null;
+                  ],
+                ),
+              );
             },
           ),
         );
