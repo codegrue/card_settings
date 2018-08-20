@@ -67,4 +67,9 @@
 ## [0.1.13] - 8/19/2018
 
 * Enhanced the example to show switching to landscape orientation
-* Created two functions to handle mutiple fields in a row.
+* Created `CardFieldLayout_EqualSpaced` to handle mutiple fields in a row.
+
+## [0.1.14] - 8/20/2018
+
+* Added `CardFieldLayout_FractionallySpaced` for controlled spacing in a row
+* Fixed bug with labelAlign right not working

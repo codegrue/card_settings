@@ -224,6 +224,7 @@ child: OrientationBuilder(
 You may with to have multiple fields on the same row when in landscape orientation. This required nested wrapper widgets to provide the proper dimensions. This library provides a few shortcut wrappers to produce cleaner code:
 
 - `CardFieldLayout_EqualSpaced` - Multiple fields in a row equally spaced
+- `CardFieldLayout_FractionallySpaced` - Multiple fields in a row with controlled spacing
 
 Usage looks like this:
 
@@ -234,6 +235,22 @@ CardSettings(
       CardSettingsEmail(),
       CardSettingsPassword(),
     ]),
+  ],
+);
+```
+
+And to control the relative widths the Fractional version may be used:
+
+``` dart
+CardSettings(
+  children: <Widget>[
+    CardFieldLayout_FractionallySpaced(
+      children: <Widget>[
+        CardSettingsEmail(),
+        CardSettingsPassword(),
+      ],
+      widthFactors: <double>[0.75,0.25], // 75% and 25% respectively
+    ),
   ],
 );
 ```

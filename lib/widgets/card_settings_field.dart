@@ -96,6 +96,7 @@ class CardSettingsField extends StatelessWidget {
       child: Row(
         children: <Widget>[
           _buildLeftIcon(context),
+          _buildLabelSpacer(context),
           _buildLabel(context),
           _buildRequiredIndicator(context),
           _buildLabelSuffix(context),
@@ -108,8 +109,16 @@ class CardSettingsField extends StatelessWidget {
     return Text(
       label,
       style: _buildLabelStyle(context),
-      textAlign: labelAlign ?? CardSettings.of(context).labelAlign,
     );
+  }
+
+  Widget _buildLabelSpacer(BuildContext context) {
+    return ((labelAlign ??
+                CardSettings.of(context).labelAlign ??
+                TextAlign.left) ==
+            TextAlign.right)
+        ? Expanded(child: Container())
+        : Container();
   }
 
   Widget _buildLabelSuffix(BuildContext context) {

@@ -131,7 +131,7 @@ class _PonyExampleState extends State<PonyExample> {
         _buildCardSettingsText_Name(_nameKey),
         _buildCardSettingsListPicker_Type(_typeKey),
         _buildCardSettingsNumberPicker(_ageKey),
-        _buildCardSettingsParagraph(_descriptionlKey),
+        _buildCardSettingsParagraph(_descriptionlKey, 5),
         CardSettingsHeader(label: 'Colors'),
         _buildCardSettingsColorPicker_Coat(_coatKey),
         _buildCardSettingsColorPicker_Mane(_maneKey),
@@ -159,14 +159,18 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettings _buildLandscapeLayout() {
     return CardSettings(
+      labelPadding: 12.0,
       children: <Widget>[
         CardSettingsHeader(label: 'Bio'),
         _buildCardSettingsText_Name(_nameKey),
-        CardFieldLayout_EqualSpaced(children: <Widget>[
+        CardFieldLayout_FractionallySpaced(children: <Widget>[
           _buildCardSettingsListPicker_Type(_typeKey),
-          _buildCardSettingsNumberPicker(_ageKey),
+          _buildCardSettingsNumberPicker(_ageKey, labelAlign: TextAlign.right),
+        ], widthFactors: <double>[
+          0.7,
+          0.3
         ]),
-        _buildCardSettingsParagraph(_descriptionlKey),
+        _buildCardSettingsParagraph(_descriptionlKey, 3),
         // note, different order than portrait to show state mapping
         CardSettingsHeader(label: 'Security'),
         CardFieldLayout_EqualSpaced(children: <Widget>[
@@ -407,21 +411,23 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsParagraph _buildCardSettingsParagraph(Key key) {
+  CardSettingsParagraph _buildCardSettingsParagraph(Key key, int lines) {
     return CardSettingsParagraph(
       key: key,
       label: 'Description',
       initialValue: _ponyModel.description,
-      numberOfLines: 5,
+      numberOfLines: lines,
       onSaved: (value) => _ponyModel.description = value,
       onChanged: (value) => _showSnackBar('Description', value),
     );
   }
 
-  CardSettingsNumberPicker _buildCardSettingsNumberPicker(Key key) {
+  CardSettingsNumberPicker _buildCardSettingsNumberPicker(Key key,
+      {TextAlign labelAlign}) {
     return CardSettingsNumberPicker(
       key: key,
       label: 'Age',
+      labelAlign: labelAlign,
       initialValue: _ponyModel.age,
       min: 1,
       max: 30,
@@ -440,7 +446,6 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettingsListPicker(
       key: key,
       label: 'Type',
-      labelAlign: TextAlign.left,
       initialValue: _ponyModel.type,
       autovalidate: _autoValidate,
       options: <String>['Earth', 'Unicorn', 'Pegasi', 'Alicorn'],
