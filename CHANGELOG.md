@@ -73,3 +73,8 @@
 
 * Added `CardFieldLayout_FractionallySpaced` for controlled spacing in a row
 * Fixed bug with labelAlign right not working
+
+## [0.1.15] - 8/21/2018
+
+* Made Picker titles consistent with Material design pickers
+* Added landscape layput for `CardSettingsListPicker` and `CardSettingsNumberPicker`
