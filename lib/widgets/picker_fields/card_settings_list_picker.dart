@@ -66,7 +66,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
       builder: (BuildContext context) {
         return PickerDialog(
           items: options,
-          title: Text('Select ' + label),
+          title: 'Select ' + label,
           initialValue: value,
         );
       },

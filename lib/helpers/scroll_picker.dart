@@ -8,7 +8,7 @@ import 'package:flutter/rendering.dart';
 class ScrollPicker extends StatelessWidget {
   static const double defaultItemHeight = 50.0;
   static const double defaultListviewWidth = 100.0;
-  static const int defaultNumberOfVisibleItems = 5;
+  static const int defaultNumberOfVisibleItems = 7;
 
   ///constructor for integer number picker
   ScrollPicker(
@@ -90,7 +90,7 @@ class ScrollPicker extends StatelessWidget {
                         },
                         child: Container(
                           color: Colors
-                              .white, // seems to be necessary to allow touches outside the item text
+                              .transparent, // seems to be necessary to allow touches outside the item text
                           child: Center(
                             child: Text(value, style: itemStyle),
                           ),

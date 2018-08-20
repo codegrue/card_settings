@@ -73,7 +73,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
               pickerColor: _pickerColor,
               onColorChanged: (color) => _pickerColor = color,
               enableLabel: true,
-              pickerAreaHeightPercent: 0.8,
+              pickerAreaHeightPercent: 1.0,
             ),
           ),
           actions: [
