@@ -5,6 +5,12 @@ import 'package:flutter/material.dart';
 import '../../card_settings.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
+// Constants
+const double _kPickerHeaderPortraitHeight = 60.0;
+const double _kPickerPortraitWidth = 330.0;
+const double _kPickerLandscapeWidth = 400.0;
+const double _kDialogActionBarHeight = 52.0;
+
 /// This is the color picker field
 class CardSettingsColorPicker extends FormField<Color> {
   CardSettingsColorPicker({
@@ -66,26 +72,101 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
     showDialog<Color>(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(title),
-          content: SingleChildScrollView(
-            child: ColorPicker(
-              pickerColor: _pickerColor,
-              onColorChanged: (color) => _pickerColor = color,
-              enableLabel: true,
-              pickerAreaHeightPercent: 1.0,
+        Widget header = Container(
+          color: Theme.of(context).primaryColor,
+          height: _kPickerHeaderPortraitHeight,
+          child: Center(
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: 20.0,
+                color: const Color(0xffffffff),
+              ),
             ),
           ),
-          actions: [
-            FlatButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text("CANCEL"),
+          padding: EdgeInsets.all(20.0),
+        );
+
+        Widget picker = Container(
+          height: 400.0,
+          child: ColorPicker(
+            pickerColor: _pickerColor,
+            onColorChanged: (color) => _pickerColor = color,
+            enableLabel: true,
+            pickerAreaHeightPercent: 0.7,
+          ),
+        );
+
+        final Widget actions = ButtonTheme.bar(
+          child: Container(
+            height: _kDialogActionBarHeight,
+            child: ButtonBar(
+              children: <Widget>[
+                FlatButton(
+                  child: Text('CANCEL'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                FlatButton(
+                  child: Text('OK'),
+                  onPressed: () => Navigator.of(context).pop(_pickerColor),
+                ),
+              ],
             ),
-            FlatButton(
-              onPressed: () => Navigator.of(context).pop(_pickerColor),
-              child: Text("OK"),
-            ),
-          ],
+          ),
+        );
+
+        return Dialog(
+          child: OrientationBuilder(
+            builder: (BuildContext context, Orientation orientation) {
+              assert(orientation != null);
+              assert(context != null);
+              switch (orientation) {
+                case Orientation.portrait:
+                  return SizedBox(
+                    width: _kPickerPortraitWidth,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        header,
+                        Container(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              picker,
+                              Expanded(child: Container()),
+                              actions,
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                case Orientation.landscape:
+                  return SizedBox(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        header,
+                        Container(
+                          width: _kPickerLandscapeWidth,
+                          child: Column(
+                            children: <Widget>[
+                              picker,
+                              Expanded(child: Container()),
+                              actions,
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+              }
+              return null;
+            },
+          ),
         );
       },
     ).then((value) {
