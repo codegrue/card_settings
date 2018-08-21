@@ -8,7 +8,9 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 // Constants
 const double _kPickerHeaderPortraitHeight = 60.0;
 const double _kPickerPortraitWidth = 330.0;
+const double _kPickerPortraitHeight = 500.0;
 const double _kPickerLandscapeWidth = 530.0;
+const double _kPickerLandscapeHeight = 300.0;
 const double _kDialogActionBarHeight = 52.0;
 
 /// This is the color picker field
@@ -91,6 +93,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
           child: ColorPicker(
             pickerColor: _pickerColor,
             onColorChanged: (color) => _pickerColor = color,
+            colorPickerWidth: 1000.0,
             enableLabel: true,
             pickerAreaHeightPercent: 0.7,
           ),
@@ -123,6 +126,9 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
                 width: (orientation == Orientation.portrait)
                     ? _kPickerPortraitWidth
                     : _kPickerLandscapeWidth,
+                height: (orientation == Orientation.portrait)
+                    ? _kPickerPortraitHeight
+                    : _kPickerLandscapeHeight,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
