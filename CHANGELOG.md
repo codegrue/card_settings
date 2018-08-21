@@ -74,7 +74,7 @@
 * Added `CardFieldLayout_FractionallySpaced` for controlled spacing in a row
 * Fixed bug with labelAlign right not working
 
-## [0.1.15] - vNext
+## [0.1.15] - 8/20/2018
 
 * Added landscape layout and material title for `CardSettingsListPicker`
 * Added landscape layout and material title for `CardSettingsNumberPicker`
