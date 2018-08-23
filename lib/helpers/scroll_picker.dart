@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-/// This helper widget managed the scrollable content inside a picker widget.
+/// This helper widget manages the scrollable content inside a picker widget.
 class ScrollPicker extends StatelessWidget {
   static const double defaultItemHeight = 50.0;
   static const double defaultListviewWidth = 100.0;
