@@ -1,33 +1,34 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'package:card_settings/helpers/checkbox_dialog.dart';
 import 'package:flutter/material.dart';
 import '../../card_settings.dart';
 
 /// This is a list picker that allows an arbitrary list of options to be provided.
-class CardSettingsListPicker extends FormField<String> {
-  CardSettingsListPicker({
+class CardSettingsMultiselect extends FormField<List<String>> {
+  CardSettingsMultiselect({
     Key key,
     String label: 'Label',
     TextAlign labelAlign,
     TextAlign contentAlign,
-    String initialValue,
+    List<String> initialValues,
     Icon icon,
     Widget requiredIndicator,
     List<String> options,
     bool autovalidate: false,
     bool visible: true,
-    FormFieldSetter<String> onSaved,
-    FormFieldValidator<String> validator,
+    FormFieldSetter<List<String>> onSaved,
+    FormFieldValidator<List<String>> validator,
     this.onChanged,
   }) : super(
             key: key,
-            initialValue: initialValue ?? '',
+            initialValue: initialValues,
             onSaved: onSaved,
             validator: validator,
             autovalidate: autovalidate,
-            builder: (FormFieldState<String> field) {
-              final _CardSettingsListPickerState state = field;
+            builder: (FormFieldState<List<String>> field) {
+              final _CardSettingsMultiselectState state = field;
               return GestureDetector(
                 onTap: () {
                   state._showDialog(label, options);
@@ -39,35 +40,41 @@ class CardSettingsListPicker extends FormField<String> {
                   icon: icon,
                   requiredIndicator: requiredIndicator,
                   errorText: field.errorText,
-                  content: Text(
-                    state.value ?? '',
-                    style: Theme.of(field.context).textTheme.subhead,
-                    textAlign: contentAlign ??
-                        CardSettings.of(field.context).contentAlign,
+                  contentOnNewLine: true,
+                  content: Wrap(
+                    alignment: WrapAlignment.start,
+                    spacing: 4.0,
+                    runSpacing: 0.0,
+                    children: state.value
+                        .map(
+                          (s) => Chip(label: Text(s)),
+                        )
+                        .toList(),
                   ),
                   pickerIcon: Icons.arrow_drop_down,
                 ),
               );
             });
 
-  final ValueChanged<String> onChanged;
+  final ValueChanged<List<String>> onChanged;
 
   @override
-  _CardSettingsListPickerState createState() => _CardSettingsListPickerState();
+  _CardSettingsMultiselectState createState() =>
+      _CardSettingsMultiselectState();
 }
 
-class _CardSettingsListPickerState extends FormFieldState<String> {
+class _CardSettingsMultiselectState extends FormFieldState<List<String>> {
   @override
-  CardSettingsListPicker get widget => super.widget as CardSettingsListPicker;
+  CardSettingsMultiselect get widget => super.widget as CardSettingsMultiselect;
 
   void _showDialog(String label, List<String> options) {
-    showDialog<String>(
+    showDialog<List<String>>(
       context: context,
       builder: (BuildContext context) {
-        return PickerDialog(
+        return CheckboxDialog(
           items: options,
           title: 'Select ' + label,
-          initialValue: value,
+          initialValues: value,
         );
       },
     ).then((value) {

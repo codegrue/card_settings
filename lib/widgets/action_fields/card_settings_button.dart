@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class CardSettingsButton extends StatelessWidget {
   CardSettingsButton({
     this.label: 'Label',
-    this.onPressed,
+    @required this.onPressed,
     this.visible: true,
     this.backgroundColor,
     this.textColor,

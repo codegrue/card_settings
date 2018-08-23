@@ -53,7 +53,7 @@ class CardSettingsSwitch extends FormField<bool> {
                         value: state.value,
                         onChanged: (value) {
                           state.didChange(value);
-                          onChanged(value);
+                          if (onChanged != null) onChanged(value);
                         },
                       ),
                     ),

@@ -79,3 +79,9 @@
 * Added landscape layout and material title for `CardSettingsListPicker`
 * Added landscape layout and material title for `CardSettingsNumberPicker`
 * Added landscape layout and material title for `CardSettingsColorPicker`
+
+## [0.1.16] - vNext
+
+* Added `CardSettingsMultiselect` widget
+* Fixed bug when onChange was null
+* Fixed validation issue with phone numbers

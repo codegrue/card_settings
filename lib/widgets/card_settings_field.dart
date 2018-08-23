@@ -44,6 +44,7 @@ class CardSettingsField extends StatelessWidget {
             ),
             padding: EdgeInsets.all(14.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,

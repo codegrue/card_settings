@@ -28,6 +28,8 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
   - *CardSettingsColorPicker* - RGB Color Picker
   - *CardSettingsDatePicker* - Material Design Date Picker
   - *CardSettingsTimePicker* - Material Design Time Picker
+- **Selection**
+  - *CardSettingsMultiselect* - Select from a list of available options
 - **Informational Sections**
   - *CardSettingsHeader* - A control to put a header between form sections.
   - *CardSettingsInstructions* - Informational read-only text.

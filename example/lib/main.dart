@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:card_settings/card_settings.dart';
-import 'package:intl/intl.dart';
+import 'results.dart';
+import 'model.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,26 +28,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// example viewmodel for the form
-class PonyModel {
-  String name = 'Twilight Sparkle';
-  String type = 'Unicorn';
-  int age = 7;
-  String coatColor = 'D19FE4';
-  String maneColor = '273873';
-  bool hasSpots = false;
-  String spotColor = 'FF5198';
-  String description =
-      'An intelligent and dutiful scholar with an avid love of learning and skill in unicorn magic such as levitation, teleportation, and the creation of force fields.';
-  double height = 3.5;
-  int weight = 45;
-  DateTime showDateTime = DateTime(2010, 10, 10, 20, 30);
-  double ticketPrice = 65.99;
-  int boxOfficePhone = 8005551212;
-  String email = 'me@nowhere.org';
-  String password = 'secret1';
-}
-
 class PonyExample extends StatefulWidget {
   @override
   _PonyExampleState createState() => _PonyExampleState();
@@ -67,6 +48,7 @@ class _PonyExampleState extends State<PonyExample> {
   final GlobalKey<FormState> _typeKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _ageKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _descriptionlKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _hobbiesKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _coatKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _maneKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _hasSpotsKey = GlobalKey<FormState>();
@@ -132,6 +114,7 @@ class _PonyExampleState extends State<PonyExample> {
         _buildCardSettingsListPicker_Type(_typeKey),
         _buildCardSettingsNumberPicker(_ageKey),
         _buildCardSettingsParagraph(_descriptionlKey, 5),
+        _buildCardSettingsMultiselect(_hobbiesKey),
         CardSettingsHeader(label: 'Colors'),
         _buildCardSettingsColorPicker_Coat(_coatKey),
         _buildCardSettingsColorPicker_Mane(_maneKey),
@@ -171,6 +154,7 @@ class _PonyExampleState extends State<PonyExample> {
           0.3
         ]),
         _buildCardSettingsParagraph(_descriptionlKey, 3),
+        _buildCardSettingsMultiselect(_hobbiesKey),
         // note, different order than portrait to show state mapping
         CardSettingsHeader(label: 'Security'),
         CardFieldLayout_EqualSpaced(children: <Widget>[
@@ -411,6 +395,17 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
+  CardSettingsMultiselect _buildCardSettingsMultiselect(Key key) {
+    return CardSettingsMultiselect(
+      key: key,
+      label: 'Hobbies',
+      initialValues: _ponyModel.hobbies,
+      options: allHobbies,
+      onSaved: (value) => _ponyModel.hobbies = value,
+      onChanged: (value) => _showSnackBar('Hobbies', value),
+    );
+  }
+
   CardSettingsParagraph _buildCardSettingsParagraph(Key key, int lines) {
     return CardSettingsParagraph(
       key: key,
@@ -481,7 +476,7 @@ class _PonyExampleState extends State<PonyExample> {
 
     if (form.validate()) {
       form.save();
-      _showResults();
+      showResults(context, _ponyModel);
     } else {
       setState(() => _autoValidate = true);
     }
@@ -501,67 +496,6 @@ class _PonyExampleState extends State<PonyExample> {
       SnackBar(
         content: Text(label + ' = ' + value.toString()),
       ),
-    );
-  }
-
-  void _showResults() {
-    showDialog<String>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Updated Results'),
-          content: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                _buildResultsRow('Name', _ponyModel.name),
-                _buildResultsRow('Type', _ponyModel.type),
-                _buildResultsRow('Age', _ponyModel.age),
-                Text(_ponyModel.description),
-                _buildResultsRow('CoatColor', _ponyModel.coatColor),
-                _buildResultsRow('ManeColor', _ponyModel.maneColor),
-                _buildResultsRow('HasSpots', _ponyModel.hasSpots),
-                _buildResultsRow('SpotColor', _ponyModel.spotColor),
-                _buildResultsRow('Height', _ponyModel.height),
-                _buildResultsRow('Weight', _ponyModel.weight),
-                _buildResultsRow('ShowDate',
-                    DateFormat.yMd().format(_ponyModel.showDateTime)),
-                _buildResultsRow('ShowTime',
-                    DateFormat.jm().format(_ponyModel.showDateTime)),
-                _buildResultsRow('Phone', _ponyModel.boxOfficePhone),
-                _buildResultsRow('Price', _ponyModel.ticketPrice),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildResultsRow(String name, dynamic value) {
-    return Column(
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: Text(
-                '$name:',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            Text(value.toString()),
-          ],
-        ),
-        Container(height: 12.0),
-      ],
     );
   }
 }

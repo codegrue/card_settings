@@ -71,7 +71,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     ).then((value) {
       if (value != null) {
         didChange(value);
-        widget.onChanged(value);
+        if (widget.onChanged != null) widget.onChanged(value);
       }
     });
   }

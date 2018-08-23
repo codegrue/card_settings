@@ -93,19 +93,16 @@ class CardSettingsPhone extends StatelessWidget {
 
   String _safeValidator(String value) {
     if (validator == null) return null;
-    String unmasked = unmaskValue(inputMask, value);
-    return validator(intelligentCast<int>(unmasked));
+    return validator(intelligentCast<int>(value));
   }
 
   void _safeOnSaved(String value) {
     if (onSaved == null) return;
-    String unmasked = unmaskValue(inputMask, value);
-    onSaved(intelligentCast<int>(unmasked));
+    onSaved(intelligentCast<int>(value));
   }
 
   void _safeOnChanged(String value) {
     if (onChanged == null) return;
-    String unmasked = unmaskValue(inputMask, value);
-    onChanged(intelligentCast<int>(unmasked));
+    onChanged(intelligentCast<int>(value));
   }
 }

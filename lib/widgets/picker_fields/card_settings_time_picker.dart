@@ -68,7 +68,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
     ).then((value) {
       if (value != null) {
         didChange(value);
-        widget.onChanged(value);
+        if (widget.onChanged != null) widget.onChanged(value);
       }
     });
   }
