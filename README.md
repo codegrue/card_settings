@@ -223,7 +223,7 @@ child: OrientationBuilder(
 )
 ```
 
-You may have multiple fields on the same row in landscape orientation. This required nesting wraps widgets to provide the proper dimensions. This library provides a few shortcut wrappers to produce cleaner code:
+You may have multiple fields on the same row in landscape orientation. This requires wrapper widgets to provide the layout inside the row. This library provides a few of these shortcut wrappers to produce cleaner code:
 
 - `CardFieldLayout_EqualSpaced` - Multiple fields in a row equally spaced
 - `CardFieldLayout_FractionallySpaced` - Multiple fields in a row with controlled spacing
