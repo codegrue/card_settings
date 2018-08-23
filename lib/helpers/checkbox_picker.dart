@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-/// This helper widget managed the scrollable content inside a picker widget.
+/// This helper widget manages a scrollable checkbox list inside a picker widget.
 class CheckboxPicker extends StatefulWidget {
   static const double defaultItemHeight = 40.0;
   static const double defaultListviewWidth = 100.0;

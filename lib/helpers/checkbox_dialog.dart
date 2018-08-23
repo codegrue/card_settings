@@ -11,7 +11,7 @@ const double _kPickerPortraitWidth = 330.0;
 const double _kPickerLandscapeWidth = 400.0;
 const double _kDialogActionBarHeight = 52.0;
 
-/// This is a support widget that returns an AlertDialog as a Widget.
+/// This is a support widget that returns an Dialog with checkboxes as a Widget.
 /// It is designed to be used in the showDialog method of other fields.
 class CheckboxDialog extends StatefulWidget {
   CheckboxDialog({

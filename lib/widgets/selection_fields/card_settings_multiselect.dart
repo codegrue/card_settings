@@ -5,7 +5,7 @@ import 'package:card_settings/helpers/checkbox_dialog.dart';
 import 'package:flutter/material.dart';
 import '../../card_settings.dart';
 
-/// This is a list picker that allows an arbitrary list of options to be provided.
+/// This is a selection widget that allows an arbitrary list of options to be provided.
 class CardSettingsMultiselect extends FormField<List<String>> {
   CardSettingsMultiselect({
     Key key,
