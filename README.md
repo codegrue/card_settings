@@ -13,15 +13,15 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
 
 - **Text Fields**
   - *CardSettingsText* - Basic text field
-  - *CardSettingsParagraph* - Multiline text field with counter
-  - *CardSettingsEmail* - A text field pre-configured for email input.
-  - *CardSettingsPassword* - A text field pre-configured for passwords.
-  - *CardSettingsPhone* - A masked phone entry field (US style currently).
+  - *CardSettingsParagraph* - Multiline text field with a counter
+  - *CardSettingsEmail* - A text field pre-configured for email input
+  - *CardSettingsPassword* - A text field pre-configured for passwords
+  - *CardSettingsPhone* - A masked phone entry field (US style currently)
 - **Numeric Fields**
   - *CardSettingsDouble* - Field for double precision numbers
   - *CardSettingsInt* - Field for integer numbers
   - *CardSettingsCurrency* - Field for currency entry
-  - *CardSettingsSwitch* - Field for boolean state   
+  - *CardSettingsSwitch* - Field for boolean state
 - **Pickers**
   - *CardSettingsListPicker* - Picker list of arbitrary options
   - *CardSettingsNumberPicker* - Picker list of numbers in a given range
@@ -31,8 +31,8 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
 - **Selection**
   - *CardSettingsMultiselect* - Select from a list of available options
 - **Informational Sections**
-  - *CardSettingsHeader* - A control to put a header between form sections.
-  - *CardSettingsInstructions* - Informational read-only text.
+  - *CardSettingsHeader* - A control to put a header between form sections
+  - *CardSettingsInstructions* - Informational read-only text
 - **Actions**
   - *CardSettingsButton* - Actions buttons for the form
 
@@ -40,8 +40,8 @@ All fields support `validate`, `onChange`, `onSaved`, `autovalidate`, and `visib
 
 The package also includes these additonal items:
 
-- *CardSettingsField* - The base layout widget. You can use this to build custom fields.
-- *Converters* - a set of utility functions to assist in converting data into and out of the fields.
+- *CardSettingsField* - The base layout widget. You can use this to build custom fields
+- *Converters* - a set of utility functions to assist in converting data into and out of the fields
 
 ### Simple Example
 
@@ -113,7 +113,7 @@ class MyApp extends StatelessWidget {
 
 ```
 
-Or if you want to apply a different theme to just the `CardSettings` heirarchy, you can wrap it in a `Theme` widget like so:
+Or if you want to apply a different theme to the `CardSettings` hierarchy only, you can wrap it in a `Theme` widget like so:
 
 ``` dart
   Theme(
@@ -223,7 +223,7 @@ child: OrientationBuilder(
 )
 ```
 
-You may with to have multiple fields on the same row when in landscape orientation. This required nested wrapper widgets to provide the proper dimensions. This library provides a few shortcut wrappers to produce cleaner code:
+You may have multiple fields on the same row in landscape orientation. This required nesting wraps widgets to provide the proper dimensions. This library provides a few shortcut wrappers to produce cleaner code:
 
 - `CardFieldLayout_EqualSpaced` - Multiple fields in a row equally spaced
 - `CardFieldLayout_FractionallySpaced` - Multiple fields in a row with controlled spacing
