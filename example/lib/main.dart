@@ -36,6 +36,7 @@ class PonyExample extends StatefulWidget {
 class _PonyExampleState extends State<PonyExample> {
   final _ponyModel = PonyModel();
 
+  // once the form submits, this is flipped to true, and fields can then go into autovalidate mode.
   bool _autoValidate = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -227,6 +228,7 @@ class _PonyExampleState extends State<PonyExample> {
       key: key,
       icon: Icon(Icons.lock),
       initialValue: _ponyModel.password,
+      autovalidate: _autoValidate,
       validator: (value) {
         if (value == null) return 'Password is required.';
         if (value.length <= 6) return 'Must be more than 6 characters.';
@@ -242,9 +244,11 @@ class _PonyExampleState extends State<PonyExample> {
       key: key,
       icon: Icon(Icons.person),
       initialValue: _ponyModel.email,
+      autovalidate: _autoValidate,
       validator: (value) {
         if (value == null || value.isEmpty) return 'Email is required.';
-        if (!value.contains('@')) return "Email not formatted correctly.";
+        if (!value.contains('@'))
+          return "Email not formatted correctly."; // use regex in real application
         return null;
       },
       onSaved: (value) => _ponyModel.email = value,
@@ -257,6 +261,7 @@ class _PonyExampleState extends State<PonyExample> {
       key: key,
       label: 'Box Office',
       initialValue: _ponyModel.boxOfficePhone,
+      autovalidate: _autoValidate,
       validator: (value) {
         if (value != null && value.toString().length != 10)
           return 'Incomplete number';
@@ -272,6 +277,7 @@ class _PonyExampleState extends State<PonyExample> {
       key: key,
       label: 'Ticket Price',
       initialValue: _ponyModel.ticketPrice,
+      autovalidate: _autoValidate,
       validator: (value) {
         if (value != null && value > 100) return 'No scalpers allowed!';
         return null;
@@ -319,6 +325,7 @@ class _PonyExampleState extends State<PonyExample> {
       label: 'Weight',
       unitLabel: 'lbs',
       initialValue: _ponyModel.weight,
+      autovalidate: _autoValidate,
       validator: (value) {
         if (value != null) {
           if (value > 70) return 'You won\'t fly at the weight.';
@@ -371,6 +378,7 @@ class _PonyExampleState extends State<PonyExample> {
       key: key,
       label: 'Mane',
       initialValue: intelligentCast<Color>(_ponyModel.maneColor),
+      autovalidate: _autoValidate,
       validator: (value) {
         if (value.computeLuminance() > .7) return 'This color is too light.';
         return null;
@@ -385,6 +393,7 @@ class _PonyExampleState extends State<PonyExample> {
       key: key,
       label: 'Coat',
       initialValue: intelligentCast<Color>(_ponyModel.coatColor),
+      autovalidate: _autoValidate,
       validator: (value) {
         if (value.computeLuminance() < .3)
           return 'This color is not cheery enough.';

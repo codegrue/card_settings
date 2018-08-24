@@ -52,6 +52,8 @@ All fields in this package are compatible with the standard Flutter Form widget.
   String author = "Cody Leet";
   String url = "http://www.codyleet.com/spheria"
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
       body: Form(
