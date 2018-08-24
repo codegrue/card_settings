@@ -81,7 +81,7 @@ All fields in this package are compatible with the standard Flutter Form widget.
         ),
       ),
     );
-  }            
+  }
 ```
 
 See the full demo example [here](https://pub.dartlang.org/packages/card_settings#-example-tab-).
@@ -199,28 +199,30 @@ Note2: `flutter_masked_text` is a controller and as such, you will not be able t
 
 ### Orientation
 
-This suite allows for orientation switching. To configure this, wrap different layouts with an `OrientationBuilder'.
+This suite allows for orientation switching. To configure this, wrap different layouts with a [NativeDeviceOrientationReader](https://pub.dartlang.org/packages/native_device_orientation) object.
+*Note there is a bug in the flutter `OrientationBuilder` that may miscalculate landscape when the soft keyboard appears, so at this time it could cause overflow issues if used.*
 
 You might want to have different fields in each layout, or a different field order. So that Flutter doesn't get confused tracking state under this circumstance, you must provide a unique state key for each individual field, using the same key in each layout.
 
 ``` dart
 final GlobalKey<FormState> _emailKey = GlobalKey<FormState>();
 
-child: OrientationBuilder(
-  builder: (context, orientation) {
-    return (orientation == Orientation.portrait)
-        ? CardSettings(
-          children: <Widget>[
-            // Portrait layout here
-            CardSettingsEmail(key: _emailKey)
-          ],
-        )
-        : CardSettings(
-          children: <Widget>[
-            // Landscape layout here
-            CardSettingsEmail(key: _emailKey)
-          ],
-        );
+child: NativeDeviceOrientationReader(
+  builder: (context) {
+    var orientation = NativeDeviceOrientationReader.orientation(context);
+    return (orientation == NativeDeviceOrientation.portraitUp)
+      ? CardSettings(
+        children: <Widget>[
+          // Portrait layout here 
+          CardSettingsEmail(key: _emailKey)
+        ],
+      )
+      : CardSettings(
+        children: <Widget>[
+          // Landscape layout here
+          CardSettingsEmail(key: _emailKey)
+        ],
+      );
   },
 )
 ```

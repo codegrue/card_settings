@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:card_settings/card_settings.dart';
+import 'package:native_device_orientation/native_device_orientation.dart';
 import 'results.dart';
 import 'model.dart';
 
@@ -93,9 +94,11 @@ class _PonyExampleState extends State<PonyExample> {
                   TextStyle(color: Colors.indigo[400]), // style for labels
             ),
           ),
-          child: OrientationBuilder(
-            builder: (context, orientation) {
-              return (orientation == Orientation.portrait)
+          child: NativeDeviceOrientationReader(
+            builder: (context) {
+              var orientation =
+                  NativeDeviceOrientationReader.orientation(context);
+              return (orientation == NativeDeviceOrientation.portraitUp)
                   ? _buildPortraitLayout()
                   : _buildLandscapeLayout();
             },

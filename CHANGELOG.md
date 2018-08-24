@@ -1,5 +1,9 @@
 # Releases
 
+## [1.0.1] - 8/24/2018
+
+* Changed Example to use `NativeDeviceOrientationReader` for orientation changes.
+
 ## [1.0.0] - 8/24/2018
 
 * Ready for full release. No API changes predicted
