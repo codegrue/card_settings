@@ -1,5 +1,10 @@
 # Releases
 
+## [1.0.0] - 8/24/2018
+
+* Ready for full release. No API changes predicted
+* Added Discord channel to the collaboration section
+
 ## [0.1.16] - 8/23/2018
 
 * Added `CardSettingsMultiselect` widget
