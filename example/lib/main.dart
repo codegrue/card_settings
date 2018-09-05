@@ -469,6 +469,7 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettingsText(
       key: key,
       label: 'Name',
+      hintText: 'something cute...',
       initialValue: _ponyModel.name,
       requiredIndicator: Text('*', style: TextStyle(color: Colors.red)),
       autovalidate: _autoValidate,

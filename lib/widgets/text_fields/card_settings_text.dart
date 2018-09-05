@@ -16,6 +16,7 @@ class CardSettingsText extends FormField<String> {
     String initialValue,
     String unitLabel,
     String prefixText,
+    String hintText,
     Icon icon,
     Widget requiredIndicator,
     bool contentOnNewLine: false,
@@ -74,6 +75,7 @@ class CardSettingsText extends FormField<String> {
                   border: InputBorder.none,
                   errorText: field.errorText,
                   prefixText: prefixText,
+                  hintText: hintText,
                 ),
                 textAlign:
                     contentAlign ?? CardSettings.of(field.context).contentAlign,
