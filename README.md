@@ -1,5 +1,5 @@
 [![Pub Package](https://img.shields.io/pub/v/card_settings.svg)](https://pub.dartlang.org/packages/card_settings)
-[![Github Issues](http://githubbadges.herokuapp.com/codegrue/card_settings/issues.svg)](https://github.com/codegrue/card_settings/issues)
+[![Github Issues](http://githubbadges.herokuapp.com/codegrue/card_settings/issues.svg)](https://github.com/codegrue/card_settings/issues?utf8=%E2%9C%93&q=is%3Aopen+%21label%3Aenhancement+)
 
 
 # Card Settings
