@@ -1,5 +1,9 @@
 # Releases
 
+## [1.1.0] - 9/5/2018
+
+* Added `hintText` to `CardSettingsText` widget
+
 ## [1.0.1] - 8/24/2018
 
 * Changed Example to use `NativeDeviceOrientationReader` for orientation changes.
