@@ -1,5 +1,10 @@
 # Releases
 
+## [1.2.0] - 9/8/2018
+
+* Fixed overflow bug with picker dialogs on smaller screens
+* Refactored row layout helpers into a single flexible `CardFieldLayout`
+
 ## [1.1.0] - 9/5/2018
 
 * Added `hintText` to `CardSettingsText` widget
