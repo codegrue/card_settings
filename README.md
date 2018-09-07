@@ -226,7 +226,7 @@ Widget build(BuildContext context) {
 }
 ```
 
-You may have multiple fields on the same row in landscape orientation. This requires wrapper widgets to provide the layout inside the row. This library provides a `CardFieldLayout` helper widget to streamline this. It will be default make it's children equally spaced, but you can provide an array of flex values to control the relative sizes.
+You may have multiple fields on the same row in landscape orientation. This normally requires the use of container widgets to provide the layout inside the row. Instead, you can use the `CardFieldLayout` helper widget to streamline this. It will by default make it's children equally spaced, but you can provide an array of flex values to control the relative sizes.
 
 ``` dart
 // equally spaced example
@@ -239,8 +239,6 @@ CardSettings(
   ],
 );
 ```
-
-And to control the relative widths the Fractional version may be used:
 
 ``` dart
 // relative width example
