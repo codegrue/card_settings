@@ -6,10 +6,8 @@ import 'package:flutter/material.dart';
 
 // Constants
 const double _kPickerHeaderPortraitHeight = 60.0;
-const double _kPickerHeaderLandscapeWidth = 168.0;
-const double _kPickerPortraitWidth = 330.0;
-const double _kPickerLandscapeWidth = 400.0;
-const double _kDialogActionBarHeight = 52.0;
+const double _kDialogActionBarHeight = 50.0;
+const double _kDialogMargin = 30.0;
 
 /// This is a support widget that returns an Dialog with a picker as a Widget.
 /// It is designed to be used in the showDialog method of other fields.
@@ -57,46 +55,40 @@ class _PickerDialogState extends State<PickerDialog> {
   @override
   Widget build(BuildContext context) {
     assert(context != null);
-    final Widget actions = ButtonTheme.bar(
-      child: Container(
-        height: _kDialogActionBarHeight,
-        child: ButtonBar(
-          children: <Widget>[
-            FlatButton(
-              child: Text(localizations.cancelButtonLabel),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            FlatButton(
-              child: Text(localizations.okButtonLabel),
-              onPressed: () => Navigator.of(context).pop(selectedValue),
-            ),
-          ],
-        ),
-      ),
-    );
+
     return Dialog(
       child: OrientationBuilder(
         builder: (BuildContext context, Orientation orientation) {
           assert(orientation != null);
           assert(context != null);
-          final Widget picker = ScrollPicker(
-            key: _pickerKey,
-            items: widget.items,
-            initialValue: selectedValue,
-            onChanged: _handleValueChanged,
-            listViewWidth: (orientation == Orientation.portrait)
-                ? _kPickerPortraitWidth
-                : _kPickerLandscapeWidth,
-            numberOfVisibleItems: (orientation == Orientation.portrait) ? 7 : 5,
+
+          // calculate nunmber of items to show based on the vertical
+          // space the picker will have
+          var height =
+              MediaQuery.of(context).size.height - (_kDialogMargin * 2);
+          double spaceForPicker = height -
+              _kDialogActionBarHeight -
+              ((orientation == Orientation.portrait)
+                  ? _kPickerHeaderPortraitHeight
+                  : 0);
+          int numberOfItems =
+              (spaceForPicker / ScrollPicker.defaultItemHeight).floor();
+          if (numberOfItems.isEven) numberOfItems--;
+
+          final Widget picker = Container(
+            child: Center(
+              child: ScrollPicker(
+                key: _pickerKey,
+                items: widget.items,
+                initialValue: selectedValue,
+                onChanged: _handleValueChanged,
+                numberOfVisibleItems: numberOfItems,
+              ),
+            ),
           );
+
           final Widget header = Container(
             color: theme.primaryColor,
-            height: (orientation == Orientation.portrait)
-                ? _kPickerHeaderPortraitHeight
-                : null,
-            width: (orientation == Orientation.landscape)
-                ? _kPickerHeaderLandscapeWidth
-                : null,
             child: Center(
               child: Text(
                 widget.title,
@@ -108,47 +100,59 @@ class _PickerDialogState extends State<PickerDialog> {
             ),
             padding: EdgeInsets.all(20.0),
           );
+
+          final Widget actions = ButtonTheme.bar(
+            height: _kDialogActionBarHeight,
+            child: ButtonBar(
+              children: <Widget>[
+                FlatButton(
+                  child: Text(localizations.cancelButtonLabel),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                FlatButton(
+                  child: Text(localizations.okButtonLabel),
+                  onPressed: () => Navigator.of(context).pop(selectedValue),
+                ),
+              ],
+            ),
+          );
+
           switch (orientation) {
             case Orientation.portrait:
               return SizedBox(
-                width: _kPickerPortraitWidth,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    header,
-                    Container(
-                      color: theme.dialogBackgroundColor,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          picker,
-                          actions,
-                        ],
-                      ),
-                    ),
-                  ],
+                //width: width,
+                //height: height,
+                child: Container(
+                  color: theme.dialogBackgroundColor,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      header,
+                      Expanded(child: picker),
+                      actions,
+                    ],
+                  ),
                 ),
               );
             case Orientation.landscape:
               return SizedBox(
+                //width: width,
+                //height: height,
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     header,
-                    Container(
-                      color: theme.dialogBackgroundColor,
-                      width: _kPickerLandscapeWidth,
-                      child: Column(
-                        children: <Widget>[
-                          picker,
-                          Expanded(child: Container()),
-                          actions,
-                        ],
+                    Expanded(
+                      child: Container(
+                        color: theme.dialogBackgroundColor,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Expanded(child: picker),
+                            actions,
+                          ],
+                        ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               );

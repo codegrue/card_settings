@@ -114,28 +114,28 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettings(
       children: <Widget>[
         CardSettingsHeader(label: 'Bio'),
-        _buildCardSettingsText_Name(_nameKey),
-        _buildCardSettingsListPicker_Type(_typeKey),
-        _buildCardSettingsNumberPicker(_ageKey),
-        _buildCardSettingsParagraph(_descriptionlKey, 5),
-        _buildCardSettingsMultiselect(_hobbiesKey),
+        _buildCardSettingsText_Name(),
+        _buildCardSettingsListPicker_Type(),
+        _buildCardSettingsNumberPicker(),
+        _buildCardSettingsParagraph(5),
+        _buildCardSettingsMultiselect(),
         CardSettingsHeader(label: 'Colors'),
-        _buildCardSettingsColorPicker_Coat(_coatKey),
-        _buildCardSettingsColorPicker_Mane(_maneKey),
-        _buildCardSettingsSwitch_Spots(_hasSpotsKey),
-        _buildCardSettingsColorPicker_Spot(_spotKey),
+        _buildCardSettingsColorPicker_Coat(),
+        _buildCardSettingsColorPicker_Mane(),
+        _buildCardSettingsSwitch_Spots(),
+        _buildCardSettingsColorPicker_Spot(),
         CardSettingsHeader(label: 'Size'),
-        _buildCardSettingsDouble_Height(_heightKey),
-        _buildCardSettingsInt_Weight(_weightKey),
+        _buildCardSettingsDouble_Height(),
+        _buildCardSettingsInt_Weight(),
         CardSettingsHeader(label: 'First Show'),
         _buildCardSettingsInstructions(),
-        _buildCardSettingsDatePicker(_dateKey),
-        _buildCardSettingsTimePicker(_timeKey),
-        _buildCardSettingsCurrency(_priceKey),
-        _buildCardSettingsPhone(_phoneKey),
+        _buildCardSettingsDatePicker(),
+        _buildCardSettingsTimePicker(),
+        _buildCardSettingsCurrency(),
+        _buildCardSettingsPhone(),
         CardSettingsHeader(label: 'Security'),
-        _buildCardSettingsEmail(_emailKey),
-        _buildCardSettingsPassword(_passwordKey),
+        _buildCardSettingsEmail(),
+        _buildCardSettingsPassword(),
         CardSettingsHeader(label: 'Actions'),
         _buildCardSettingsButton_Save(),
         _buildCardSettingsButton_Reset(),
@@ -149,45 +149,45 @@ class _PonyExampleState extends State<PonyExample> {
       labelPadding: 12.0,
       children: <Widget>[
         CardSettingsHeader(label: 'Bio'),
-        _buildCardSettingsText_Name(_nameKey),
+        _buildCardSettingsText_Name(),
         CardFieldLayout_FractionallySpaced(children: <Widget>[
-          _buildCardSettingsListPicker_Type(_typeKey),
-          _buildCardSettingsNumberPicker(_ageKey, labelAlign: TextAlign.right),
+          _buildCardSettingsListPicker_Type(),
+          _buildCardSettingsNumberPicker(labelAlign: TextAlign.right),
         ], widthFactors: <double>[
           0.7,
           0.3
         ]),
-        _buildCardSettingsParagraph(_descriptionlKey, 3),
-        _buildCardSettingsMultiselect(_hobbiesKey),
+        _buildCardSettingsParagraph(3),
+        _buildCardSettingsMultiselect(),
         // note, different order than portrait to show state mapping
         CardSettingsHeader(label: 'Security'),
         CardFieldLayout_EqualSpaced(children: <Widget>[
-          _buildCardSettingsEmail(_emailKey),
-          _buildCardSettingsPassword(_passwordKey),
+          _buildCardSettingsEmail(),
+          _buildCardSettingsPassword(),
         ]),
         CardSettingsHeader(label: 'Colors'),
         CardFieldLayout_EqualSpaced(children: <Widget>[
-          _buildCardSettingsColorPicker_Coat(_coatKey),
-          _buildCardSettingsColorPicker_Mane(_maneKey),
+          _buildCardSettingsColorPicker_Coat(),
+          _buildCardSettingsColorPicker_Mane(),
         ]),
         CardFieldLayout_EqualSpaced(children: <Widget>[
-          _buildCardSettingsSwitch_Spots(_hasSpotsKey),
-          _buildCardSettingsColorPicker_Spot(_spotKey),
+          _buildCardSettingsSwitch_Spots(),
+          _buildCardSettingsColorPicker_Spot(),
         ]),
         CardSettingsHeader(label: 'Size'),
         CardFieldLayout_EqualSpaced(children: <Widget>[
-          _buildCardSettingsDouble_Height(_heightKey),
-          _buildCardSettingsInt_Weight(_weightKey),
+          _buildCardSettingsDouble_Height(),
+          _buildCardSettingsInt_Weight(),
         ]),
         CardSettingsHeader(label: 'First Show'),
         _buildCardSettingsInstructions(),
         CardFieldLayout_EqualSpaced(children: <Widget>[
-          _buildCardSettingsDatePicker(_dateKey),
-          _buildCardSettingsTimePicker(_timeKey),
+          _buildCardSettingsDatePicker(),
+          _buildCardSettingsTimePicker(),
         ]),
         CardFieldLayout_EqualSpaced(children: <Widget>[
-          _buildCardSettingsCurrency(_priceKey),
-          _buildCardSettingsPhone(_phoneKey),
+          _buildCardSettingsCurrency(),
+          _buildCardSettingsPhone(),
         ]),
         CardSettingsHeader(label: 'Actions'),
         CardFieldLayout_EqualSpaced(children: <Widget>[
@@ -226,9 +226,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsPassword _buildCardSettingsPassword(Key key) {
+  CardSettingsPassword _buildCardSettingsPassword() {
     return CardSettingsPassword(
-      key: key,
+      key: _passwordKey,
       icon: Icon(Icons.lock),
       initialValue: _ponyModel.password,
       autovalidate: _autoValidate,
@@ -242,9 +242,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsEmail _buildCardSettingsEmail(Key key) {
+  CardSettingsEmail _buildCardSettingsEmail() {
     return CardSettingsEmail(
-      key: key,
+      key: _emailKey,
       icon: Icon(Icons.person),
       initialValue: _ponyModel.email,
       autovalidate: _autoValidate,
@@ -259,9 +259,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsPhone _buildCardSettingsPhone(Key key) {
+  CardSettingsPhone _buildCardSettingsPhone() {
     return CardSettingsPhone(
-      key: key,
+      key: _phoneKey,
       label: 'Box Office',
       initialValue: _ponyModel.boxOfficePhone,
       autovalidate: _autoValidate,
@@ -275,9 +275,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsCurrency _buildCardSettingsCurrency(Key key) {
+  CardSettingsCurrency _buildCardSettingsCurrency() {
     return CardSettingsCurrency(
-      key: key,
+      key: _priceKey,
       label: 'Ticket Price',
       initialValue: _ponyModel.ticketPrice,
       autovalidate: _autoValidate,
@@ -290,9 +290,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsTimePicker _buildCardSettingsTimePicker(Key key) {
+  CardSettingsTimePicker _buildCardSettingsTimePicker() {
     return CardSettingsTimePicker(
-      key: key,
+      key: _timeKey,
       icon: Icon(Icons.access_time),
       label: 'Time',
       initialValue: TimeOfDay(
@@ -304,9 +304,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsDatePicker _buildCardSettingsDatePicker(Key key) {
+  CardSettingsDatePicker _buildCardSettingsDatePicker() {
     return CardSettingsDatePicker(
-      key: key,
+      key: _dateKey,
       icon: Icon(Icons.calendar_today),
       label: 'Date',
       initialValue: _ponyModel.showDateTime,
@@ -322,9 +322,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsInt _buildCardSettingsInt_Weight(Key key) {
+  CardSettingsInt _buildCardSettingsInt_Weight() {
     return CardSettingsInt(
-      key: key,
+      key: _weightKey,
       label: 'Weight',
       unitLabel: 'lbs',
       initialValue: _ponyModel.weight,
@@ -341,9 +341,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsDouble _buildCardSettingsDouble_Height(Key key) {
+  CardSettingsDouble _buildCardSettingsDouble_Height() {
     return CardSettingsDouble(
-      key: key,
+      key: _heightKey,
       label: 'Height',
       unitLabel: 'feet',
       initialValue: _ponyModel.height,
@@ -352,9 +352,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsColorPicker _buildCardSettingsColorPicker_Spot(Key key) {
+  CardSettingsColorPicker _buildCardSettingsColorPicker_Spot() {
     return CardSettingsColorPicker(
-      key: key,
+      key: _spotKey,
       label: 'Spot',
       initialValue: intelligentCast<Color>(_ponyModel.spotColor),
       visible: _ponyModel.hasSpots,
@@ -363,9 +363,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsSwitch _buildCardSettingsSwitch_Spots(Key key) {
+  CardSettingsSwitch _buildCardSettingsSwitch_Spots() {
     return CardSettingsSwitch(
-      key: key,
+      key: _hasSpotsKey,
       label: 'Has Spots?',
       initialValue: _ponyModel.hasSpots,
       onChanged: (value) {
@@ -376,9 +376,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsColorPicker _buildCardSettingsColorPicker_Mane(Key key) {
+  CardSettingsColorPicker _buildCardSettingsColorPicker_Mane() {
     return CardSettingsColorPicker(
-      key: key,
+      key: _maneKey,
       label: 'Mane',
       initialValue: intelligentCast<Color>(_ponyModel.maneColor),
       autovalidate: _autoValidate,
@@ -391,9 +391,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsColorPicker _buildCardSettingsColorPicker_Coat(Key key) {
+  CardSettingsColorPicker _buildCardSettingsColorPicker_Coat() {
     return CardSettingsColorPicker(
-      key: key,
+      key: _coatKey,
       label: 'Coat',
       initialValue: intelligentCast<Color>(_ponyModel.coatColor),
       autovalidate: _autoValidate,
@@ -407,9 +407,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsMultiselect _buildCardSettingsMultiselect(Key key) {
+  CardSettingsMultiselect _buildCardSettingsMultiselect() {
     return CardSettingsMultiselect(
-      key: key,
+      key: _hobbiesKey,
       label: 'Hobbies',
       initialValues: _ponyModel.hobbies,
       options: allHobbies,
@@ -418,9 +418,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsParagraph _buildCardSettingsParagraph(Key key, int lines) {
+  CardSettingsParagraph _buildCardSettingsParagraph(int lines) {
     return CardSettingsParagraph(
-      key: key,
+      key: _descriptionlKey,
       label: 'Description',
       initialValue: _ponyModel.description,
       numberOfLines: lines,
@@ -429,10 +429,10 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsNumberPicker _buildCardSettingsNumberPicker(Key key,
+  CardSettingsNumberPicker _buildCardSettingsNumberPicker(
       {TextAlign labelAlign}) {
     return CardSettingsNumberPicker(
-      key: key,
+      key: _ageKey,
       label: 'Age',
       labelAlign: labelAlign,
       initialValue: _ponyModel.age,
@@ -449,9 +449,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsListPicker _buildCardSettingsListPicker_Type(Key key) {
+  CardSettingsListPicker _buildCardSettingsListPicker_Type() {
     return CardSettingsListPicker(
-      key: key,
+      key: _typeKey,
       label: 'Type',
       initialValue: _ponyModel.type,
       autovalidate: _autoValidate,
@@ -465,9 +465,9 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsText _buildCardSettingsText_Name(Key key) {
+  CardSettingsText _buildCardSettingsText_Name() {
     return CardSettingsText(
-      key: key,
+      key: _nameKey,
       label: 'Name',
       hintText: 'something cute...',
       initialValue: _ponyModel.name,
