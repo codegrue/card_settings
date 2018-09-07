@@ -24,6 +24,12 @@ class MyApp extends StatelessWidget {
               TextStyle(color: Colors.deepPurple[900]), // style of button text
           subhead: TextStyle(color: Colors.grey[800]), // style of input text
         ),
+        primaryTextTheme: TextTheme(
+          title: TextStyle(color: Colors.lightBlue[50]), // style for headers
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
+        ),
       ),
     );
   }
@@ -69,44 +75,35 @@ class _PonyExampleState extends State<PonyExample> {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-          title: Text("My Little Pony"),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.save),
-              onPressed: _savePressed,
-            ),
-          ],
-          leading: IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: _resetPressed,
-          )),
+      appBar: appBar(),
       body: Form(
         key: _formKey,
-        child: Theme(
-          data: Theme.of(context).copyWith(
-            primaryTextTheme: TextTheme(
-              title:
-                  TextStyle(color: Colors.lightBlue[50]), // style for headers
-            ),
-            inputDecorationTheme: InputDecorationTheme(
-              labelStyle:
-                  TextStyle(color: Colors.indigo[400]), // style for labels
-            ),
-          ),
-          child: NativeDeviceOrientationReader(
-            builder: (context) {
-              var orientation =
-                  NativeDeviceOrientationReader.orientation(context);
-              return (orientation == NativeDeviceOrientation.portraitUp)
-                  ? _buildPortraitLayout()
-                  : _buildLandscapeLayout();
-            },
-          ),
+        child: NativeDeviceOrientationReader(
+          builder: (context) {
+            var orientation =
+                NativeDeviceOrientationReader.orientation(context);
+            return (orientation == NativeDeviceOrientation.portraitUp)
+                ? _buildPortraitLayout()
+                : _buildLandscapeLayout();
+          },
         ),
       ),
     );
   }
+
+  AppBar appBar() => AppBar(
+        title: Text("My Little Pony"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.save),
+            onPressed: _savePressed,
+          ),
+        ],
+        leading: IconButton(
+          icon: Icon(Icons.refresh),
+          onPressed: _resetPressed,
+        ),
+      );
 
   /* CARDSETTINGS FOR EACH LAYOUT */
 
