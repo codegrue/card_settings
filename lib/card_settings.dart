@@ -6,6 +6,7 @@ library card_settings;
 
 export 'widgets/card_settings_panel.dart';
 export 'widgets/card_settings_field.dart';
+export 'widgets/card_field_layout.dart';
 
 // action fields
 export 'widgets/action_fields/card_settings_button.dart';
@@ -41,4 +42,3 @@ export 'widgets/text_fields/card_settings_text.dart';
 export 'helpers/picker_dialog.dart';
 export 'helpers/scroll_picker.dart';
 export 'helpers/converter_functions.dart';
-export 'helpers/layout_functions.dart';

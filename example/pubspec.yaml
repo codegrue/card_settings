@@ -8,7 +8,6 @@ dependencies:
     sdk: flutter    
   card_settings:
     path: ../
-  native_device_orientation: ^0.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

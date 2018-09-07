@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:card_settings/card_settings.dart';
-import 'package:native_device_orientation/native_device_orientation.dart';
 import 'results.dart';
 import 'model.dart';
 
@@ -72,21 +71,17 @@ class _PonyExampleState extends State<PonyExample> {
 
   @override
   Widget build(BuildContext context) {
+    var orientation = MediaQuery.of(context).orientation;
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: appBar(),
       body: Form(
         key: _formKey,
-        child: NativeDeviceOrientationReader(
-          builder: (context) {
-            var orientation =
-                NativeDeviceOrientationReader.orientation(context);
-            return (orientation == NativeDeviceOrientation.portraitUp)
-                ? _buildPortraitLayout()
-                : _buildLandscapeLayout();
-          },
-        ),
+        child: (orientation == Orientation.portrait)
+            ? _buildPortraitLayout()
+            : _buildLandscapeLayout(),
       ),
     );
   }
@@ -147,50 +142,49 @@ class _PonyExampleState extends State<PonyExample> {
       children: <Widget>[
         CardSettingsHeader(label: 'Bio'),
         _buildCardSettingsText_Name(),
-        CardFieldLayout_FractionallySpaced(children: <Widget>[
-          _buildCardSettingsListPicker_Type(),
-          _buildCardSettingsNumberPicker(labelAlign: TextAlign.right),
-        ], widthFactors: <double>[
-          0.7,
-          0.3
-        ]),
+        CardFieldLayout(
+          <Widget>[
+            _buildCardSettingsListPicker_Type(),
+            _buildCardSettingsNumberPicker(labelAlign: TextAlign.right),
+          ],
+          flexValues: [2, 1],
+        ),
         _buildCardSettingsParagraph(3),
         _buildCardSettingsMultiselect(),
         // note, different order than portrait to show state mapping
         CardSettingsHeader(label: 'Security'),
-        CardFieldLayout_EqualSpaced(children: <Widget>[
+        CardFieldLayout(<Widget>[
           _buildCardSettingsEmail(),
           _buildCardSettingsPassword(),
         ]),
         CardSettingsHeader(label: 'Colors'),
-        CardFieldLayout_EqualSpaced(children: <Widget>[
+        CardFieldLayout(<Widget>[
           _buildCardSettingsColorPicker_Coat(),
           _buildCardSettingsColorPicker_Mane(),
         ]),
-        CardFieldLayout_EqualSpaced(children: <Widget>[
+        CardFieldLayout(<Widget>[
           _buildCardSettingsSwitch_Spots(),
           _buildCardSettingsColorPicker_Spot(),
         ]),
         CardSettingsHeader(label: 'Size'),
-        CardFieldLayout_EqualSpaced(children: <Widget>[
+        CardFieldLayout(<Widget>[
           _buildCardSettingsDouble_Height(),
           _buildCardSettingsInt_Weight(),
         ]),
         CardSettingsHeader(label: 'First Show'),
         _buildCardSettingsInstructions(),
-        CardFieldLayout_EqualSpaced(children: <Widget>[
+        CardFieldLayout(<Widget>[
           _buildCardSettingsDatePicker(),
           _buildCardSettingsTimePicker(),
         ]),
-        CardFieldLayout_EqualSpaced(children: <Widget>[
+        CardFieldLayout(<Widget>[
           _buildCardSettingsCurrency(),
           _buildCardSettingsPhone(),
         ]),
         CardSettingsHeader(label: 'Actions'),
-        CardFieldLayout_EqualSpaced(children: <Widget>[
+        CardFieldLayout(<Widget>[
           _buildCardSettingsButton_Save(),
           _buildCardSettingsButton_Reset(),
-          _buildCardSettingsButton_Close(),
         ]),
         Container(height: 4.0)
       ],
@@ -198,14 +192,6 @@ class _PonyExampleState extends State<PonyExample> {
   }
 
   /* BUILDERS FOR EACH FIELD */
-
-  CardSettingsButton _buildCardSettingsButton_Close() {
-    return CardSettingsButton(
-      label: 'CLOSE',
-      onPressed: _closePressed,
-      backgroundColor: Colors.greenAccent,
-    );
-  }
 
   CardSettingsButton _buildCardSettingsButton_Reset() {
     return CardSettingsButton(

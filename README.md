@@ -199,45 +199,40 @@ Note2: `flutter_masked_text` is a controller and as such, you will not be able t
 
 ### Orientation
 
-This suite allows for orientation switching. To configure this, wrap different layouts with a [NativeDeviceOrientationReader](https://pub.dartlang.org/packages/native_device_orientation) object.
-*Note there is a bug in the flutter `OrientationBuilder` that may miscalculate landscape when the soft keyboard appears, so at this time it could cause overflow issues if used.*
+This suite allows for orientation switching. To configure this, build different layouts depending on the orientation provided by `MediaQuery`.
 
 You might want to have different fields in each layout, or a different field order. So that Flutter doesn't get confused tracking state under this circumstance, you must provide a unique state key for each individual field, using the same key in each layout.
 
 ``` dart
-final GlobalKey<FormState> _emailKey = GlobalKey<FormState>();
+@override
+Widget build(BuildContext context) {
 
-child: NativeDeviceOrientationReader(
-  builder: (context) {
-    var orientation = NativeDeviceOrientationReader.orientation(context);
-    return (orientation == NativeDeviceOrientation.portraitUp)
-      ? CardSettings(
-        children: <Widget>[
-          // Portrait layout here 
-          CardSettingsEmail(key: _emailKey)
-        ],
-      )
-      : CardSettings(
-        children: <Widget>[
-          // Landscape layout here
-          CardSettingsEmail(key: _emailKey)
-        ],
-      );
-  },
-)
+  final GlobalKey<FormState> _emailKey = GlobalKey<FormState>();
+  var orientation = MediaQuery.of(context).orientation;
+
+  return Form
+    key: _formKey,(
+    child: (orientation == Orientation.portraitUp)
+        ? CardSettings(children: <Widget>[
+              // Portrait layout here
+              CardSettingsEmail(key: _emailKey)
+            ])
+        : CardSettings(children: <Widget>[
+              // Landscape layout here
+              CardSettingsEmail(key: _emailKey)
+            ]);
+    },
+  );
+}
 ```
 
-You may have multiple fields on the same row in landscape orientation. This requires wrapper widgets to provide the layout inside the row. This library provides a few of these shortcut wrappers to produce cleaner code:
-
-- `CardFieldLayout_EqualSpaced` - Multiple fields in a row equally spaced
-- `CardFieldLayout_FractionallySpaced` - Multiple fields in a row with controlled spacing
-
-Usage looks like this:
+You may have multiple fields on the same row in landscape orientation. This requires wrapper widgets to provide the layout inside the row. This library provides a `CardFieldLayout` helper widget to streamline this. It will be default make it's children equally spaced, but you can provide an array of flex values to control the relative sizes.
 
 ``` dart
+// equally spaced example
 CardSettings(
   children: <Widget>[
-    CardFieldLayout_EqualSpaced(children: <Widget>[
+    CardFieldLayout(children: <Widget>[
       CardSettingsEmail(),
       CardSettingsPassword(),
     ]),
@@ -248,6 +243,7 @@ CardSettings(
 And to control the relative widths the Fractional version may be used:
 
 ``` dart
+// relative width example
 CardSettings(
   children: <Widget>[
     CardFieldLayout_FractionallySpaced(
@@ -255,7 +251,7 @@ CardSettings(
         CardSettingsEmail(),
         CardSettingsPassword(),
       ],
-      widthFactors: <double>[0.75,0.25], // 75% and 25% respectively
+      flexValues: [2, 1], // 66% and 33% widths
     ),
   ],
 );
