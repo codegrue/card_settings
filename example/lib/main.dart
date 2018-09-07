@@ -482,10 +482,6 @@ class _PonyExampleState extends State<PonyExample> {
     _formKey.currentState.reset();
   }
 
-  void _closePressed() {
-    // This is just a placeholder to have a third button
-  }
-
   void _showSnackBar(String label, dynamic value) {
     _scaffoldKey.currentState.removeCurrentSnackBar();
     _scaffoldKey.currentState.showSnackBar(

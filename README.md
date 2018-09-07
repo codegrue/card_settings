@@ -1,10 +1,9 @@
+# Card Settings
+
 [![Pub Package](https://img.shields.io/pub/v/card_settings.svg)](https://pub.dartlang.org/packages/card_settings)
 [![Github Issues](http://githubbadges.herokuapp.com/codegrue/card_settings/issues.svg)](https://github.com/codegrue/card_settings/issues?utf8=%E2%9C%93&q=is%3Aopen+%21label%3Aenhancement+)
 
-
-# Card Settings
-
-A flutter package for building card based settings forms. This includes a library of pre-built form field widgets. The style is a bit like a cross between 
+A flutter package for building card based settings forms. This includes a library of pre-built form field widgets. The style is a bit like a cross between
 the cupertino settings screen and material design; The idea is it should be usable and intutive on both iOS and Android.
 
 ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/example.gif)
@@ -43,7 +42,7 @@ The package also includes these additonal items:
 - *CardSettingsField* - The base layout widget. You can use this to build custom fields
 - *Converters* - a set of utility functions to assist in converting data into and out of the fields
 
-### Simple Example
+## Simple Example
 
 All fields in this package are compatible with the standard Flutter Form widget. Simply wrap the CardSettings control in a form and use it as you normally would with the form functionality.
 
@@ -125,7 +124,7 @@ Or if you want to apply a different theme to the `CardSettings` hierarchy only, 
       ),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(color: Colors.deepPurple), // style for labels
-      ), 
+      ),
     ),
     child: CardSettings(
       ...
