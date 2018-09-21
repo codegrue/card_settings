@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 /// This attempts to intelligently cast any value to the desired type.
 T intelligentCast<T>(dynamic value) {
   // instead of empty string we want to return null
-  if (T.toString() == 'String' && value.toString().isEmpty) return null;
+  if (value.toString().isEmpty) return null;
 
   // already expected type, return it
   if (value is T) return value;
