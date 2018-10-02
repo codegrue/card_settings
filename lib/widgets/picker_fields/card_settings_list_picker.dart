@@ -36,7 +36,6 @@ class CardSettingsListPicker extends FormField<String> {
                 child: CardSettingsField(
                   label: label,
                   labelAlign: labelAlign,
-                  hintText: hintText,
                   visible: visible,
                   icon: icon,
                   requiredIndicator: requiredIndicator,
