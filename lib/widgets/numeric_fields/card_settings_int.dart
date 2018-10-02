@@ -64,13 +64,13 @@ class CardSettingsInt extends CardSettingsText {
           controller: controller,
           focusNode: focusNode,
           keyboardType:
-              keyboardType ?? TextInputType.numberWithOptions(decimal: false),
+              keyboardType ?? TextInputType.numberWithOptions(decimal: false, signed: true),
           style: style,
           maxLengthEnforced: maxLengthEnforced,
           onFieldSubmitted: onFieldSubmitted,
           inputFormatters: [
             LengthLimitingTextInputFormatter(maxLength),
-            WhitelistingTextInputFormatter(RegExp("[0-9]+")),
+            WhitelistingTextInputFormatter(RegExp(r"^-?\d+")),
           ],
         );
 }
