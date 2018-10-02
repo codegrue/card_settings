@@ -22,7 +22,7 @@ class ScrollPicker extends StatelessWidget {
         selectedValue = initialValue,
         numberOfPaddingRows = ((numberOfVisibleItems - 1) ~/ 2),
         scrollController = ScrollController(
-          initialScrollOffset: items.indexOf(initialValue) * itemHeight,
+          initialScrollOffset: items.contains(initialValue) ? items.indexOf(initialValue) * itemHeight : 0.0,
         ),
         listViewHeight = numberOfVisibleItems * itemHeight,
         super(key: key);
