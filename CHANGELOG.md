@@ -5,6 +5,7 @@
 * Removed hard coded word 'Select' from picker title
 * Added text capitalization to CardSettingsText
 * Set picker to first item if no initialvalue is provided
+* Added 'hintText' to CardListPicker
 
 ## [1.2.0] - 9/8/2018
 

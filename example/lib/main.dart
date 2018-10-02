@@ -437,6 +437,7 @@ class _PonyExampleState extends State<PonyExample> {
       key: _typeKey,
       label: 'Type',
       initialValue: _ponyModel.type,
+      hintText: 'Select One',
       autovalidate: _autoValidate,
       options: <String>['Earth', 'Unicorn', 'Pegasi', 'Alicorn'],
       validator: (String value) {

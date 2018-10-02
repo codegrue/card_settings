@@ -12,6 +12,7 @@ class CardSettingsListPicker extends FormField<String> {
     TextAlign labelAlign,
     TextAlign contentAlign,
     String initialValue,
+    String hintText,
     Icon icon,
     Widget requiredIndicator,
     List<String> options,
@@ -22,7 +23,7 @@ class CardSettingsListPicker extends FormField<String> {
     this.onChanged,
   }) : super(
             key: key,
-            initialValue: initialValue ?? '',
+            initialValue: initialValue ?? null,
             onSaved: onSaved,
             validator: validator,
             autovalidate: autovalidate,
@@ -35,13 +36,17 @@ class CardSettingsListPicker extends FormField<String> {
                 child: CardSettingsField(
                   label: label,
                   labelAlign: labelAlign,
+                  hintText: hintText,
                   visible: visible,
                   icon: icon,
                   requiredIndicator: requiredIndicator,
                   errorText: field.errorText,
                   content: Text(
-                    state.value ?? '',
-                    style: Theme.of(field.context).textTheme.subhead,
+                    state.value ?? hintText ?? '',
+                    style: Theme.of(field.context).textTheme.subhead.copyWith(
+                        color: (state.value == null)
+                            ? Theme.of(field.context).hintColor
+                            : Theme.of(field.context).textTheme.subhead.color),
                     textAlign: contentAlign ??
                         CardSettings.of(field.context).contentAlign,
                   ),
