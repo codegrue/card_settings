@@ -35,6 +35,7 @@ class CardSettingsText extends FormField<String> {
     this.controller,
     FocusNode focusNode,
     TextInputType keyboardType: TextInputType.text,
+    TextCapitalization textCapitalization: TextCapitalization.none,
     TextStyle style,
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
@@ -46,6 +47,7 @@ class CardSettingsText extends FormField<String> {
         assert(obscureText != null),
         assert(autocorrect != null),
         assert(autovalidate != null),
+        assert(textCapitalization != null),
         assert(maxLengthEnforced != null),
         assert(maxLength == null || maxLength > 0),
         assert(controller == null || inputMask == null),
@@ -69,6 +71,7 @@ class CardSettingsText extends FormField<String> {
                 controller: state._effectiveController,
                 focusNode: focusNode,
                 keyboardType: keyboardType,
+                textCapitalization: textCapitalization,
                 style: style,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(0.0),

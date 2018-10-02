@@ -1,5 +1,11 @@
 # Releases
 
+## [1.2.1] - 10/2/2018
+
+* Removed hard coded word 'Select' from picker title
+* Added text capitalization to CardSettingsText
+* Set picker to first item if no initialvalue is provided
+
 ## [1.2.0] - 9/8/2018
 
 * Fixed overflow bug with picker dialogs on smaller screens
