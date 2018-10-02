@@ -271,7 +271,7 @@ Please see the [Changelog](https://github.com/codegrue/card_settings/blob/master
 
 ## Contributions
 
-Feel free to contribute to this project.
+**NOTE: I am no longer actively developing on Flutter. Therefore, I am looking for at least two others to become owners of this project to keep it moving forward. Please contect me if interested.**
 
 If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/codegrue/card_settings/issues).
 
