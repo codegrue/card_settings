@@ -1,5 +1,9 @@
 # Releases
 
+## [1.2.2] - 11/2/2018
+
+* Fixed a crash bug with icons when a theme color is not provided
+
 ## [1.2.1] - 10/2/2018
 
 * Removed hard coded word 'Select' from picker title

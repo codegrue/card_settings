@@ -6,10 +6,6 @@ import 'package:flutter/rendering.dart';
 
 /// This helper widget manages the scrollable content inside a picker widget.
 class ScrollPicker extends StatelessWidget {
-  static const double defaultItemHeight = 50.0;
-  static const int defaultNumberOfVisibleItems = 7;
-
-  ///constructor for integer number picker
   ScrollPicker(
       {Key key,
       @required this.items,
@@ -28,6 +24,10 @@ class ScrollPicker extends StatelessWidget {
         ),
         listViewHeight = numberOfVisibleItems * itemHeight,
         super(key: key);
+
+  // Constants
+  static const double defaultItemHeight = 50.0;
+  static const int defaultNumberOfVisibleItems = 7;
 
   // Events
   final ValueChanged<String> onChanged;

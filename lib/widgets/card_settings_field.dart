@@ -157,6 +157,8 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget _buildLeftIcon(BuildContext context) {
+    TextStyle labelStyle = Theme.of(context).inputDecorationTheme.labelStyle;
+
     return (icon == null)
         ? Container()
         : Container(
@@ -164,7 +166,7 @@ class CardSettingsField extends StatelessWidget {
             padding: EdgeInsets.only(right: 4.0),
             child: Icon(
               icon.icon,
-              color: Theme.of(context).inputDecorationTheme.labelStyle.color,
+              color: (labelStyle == null) ? null : labelStyle.color,
             ),
           );
   }
