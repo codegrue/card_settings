@@ -10,6 +10,7 @@ class CardSettingsPassword extends CardSettingsText {
   CardSettingsPassword({
     Key key,
     String label: 'Password',
+	String hintText: '',
     TextAlign labelAlign,
     TextAlign contentAlign,
     String initialValue,
@@ -36,6 +37,7 @@ class CardSettingsPassword extends CardSettingsText {
           key: key,
           label: label,
           labelAlign: labelAlign,
+          hintText: hintText,
           contentAlign: contentAlign,
           initialValue: initialValue,
           maxLength: maxLength,
