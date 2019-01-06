@@ -13,6 +13,7 @@ class CardSettingsPhone extends StatelessWidget {
     this.labelAlign,
     this.contentAlign,
     this.initialValue,
+	this.contentOnNewLine,
     this.maxLength,
     this.icon,
     this.requiredIndicator,
@@ -38,6 +39,7 @@ class CardSettingsPhone extends StatelessWidget {
   final TextAlign labelAlign;
   final TextAlign contentAlign;
   final int initialValue;
+  final bool contentOnNewLine;
   final String inputMask = '(000) 000-0000';
   final int maxLength;
   final Icon icon;
@@ -67,6 +69,7 @@ class CardSettingsPhone extends StatelessWidget {
       labelAlign: labelAlign,
       contentAlign: contentAlign,
       initialValue: initialValue.toString(),
+	  contentOnNewLine: contentOnNewLine,
       inputMask: inputMask,
       maxLength: maxLength,
       icon: icon,
