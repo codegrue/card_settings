@@ -10,7 +10,7 @@ class CardSettingsEmail extends CardSettingsText {
   CardSettingsEmail({
     Key key,
     String label: 'Email',
-	bool contentOnNewLine: false,
+    bool contentOnNewLine: false,
     TextAlign labelAlign,
     TextAlign contentAlign,
     String initialValue,
@@ -38,7 +38,7 @@ class CardSettingsEmail extends CardSettingsText {
           label: label,
           labelAlign: labelAlign,
           contentAlign: contentAlign,
-	      contentOnNewLine: contentOnNewLine,
+          contentOnNewLine: contentOnNewLine,
           initialValue: initialValue,
           maxLength: maxLength,
           icon: icon,

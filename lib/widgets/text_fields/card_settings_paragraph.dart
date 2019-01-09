@@ -20,7 +20,7 @@ class CardSettingsParagraph extends CardSettingsText {
     bool contentOnNewLine: true,
     bool visible: true,
     bool enabled: true,
-	bool showCounter: true,
+    bool showCounter: true,
     bool autofocus: false,
     bool obscureText: false,
     bool autocorrect: true,
