@@ -19,6 +19,7 @@ class CardSettings extends InheritedWidget {
           child: SingleChildScrollView(
             padding: EdgeInsets.all(padding),
             child: Card(
+              margin: EdgeInsets.all(0.0),
               elevation: cardElevation,
               child: Column(
                 children: children,
