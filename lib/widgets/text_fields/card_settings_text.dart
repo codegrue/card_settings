@@ -177,7 +177,10 @@ class _CardSettingsTextState extends FormFieldState<String> {
   void _handleOnChanged(String value) {
     if (this.value != value) {
       didChange(value);
-      widget.onChanged(value);
+
+      if (widget.onChanged != null) {
+	      widget.onChanged(value);
+      }
     }
   }
 }
