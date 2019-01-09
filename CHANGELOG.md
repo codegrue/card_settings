@@ -1,5 +1,9 @@
 # Releases
 
+## [1.2.4] - 1/9/2019
+
+* Allow for zero width margin around card by setting padding to zero
+
 ## [1.2.3] - 1/9/2019
 
 * Fixes text color not reflecting custom color in the Instructions widget
