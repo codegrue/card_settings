@@ -1,5 +1,15 @@
 # Releases
 
+## [1.2.3] - 1/9/2019
+
+* Fixes text color not reflecting custom color in the Instructions widget
+* Added the ability to hide the counter in the paragraph control
+* Added missing hint text for the password field
+* fixed case where if there is no change handler then we crashed
+* Added missing contentOnNewLine field
+* Added missing contentOnNewLine field
+* Added missing contentOnNewLine field
+
 ## [1.2.2] - 11/2/2018
 
 * Fixed a crash bug with icons when a theme color is not provided
