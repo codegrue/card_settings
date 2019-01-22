@@ -396,6 +396,13 @@ class _PonyExampleState extends State<PonyExample> {
       label: 'Hobbies',
       initialValues: _ponyModel.hobbies,
       options: allHobbies,
+      autovalidate: _autoValidate,
+      validator: (List<String> value) {
+        if (value == null || value.isEmpty)
+          return 'You must pick at least one hobby.';
+
+        return null;
+      },
       onSaved: (value) => _ponyModel.hobbies = value,
       onChanged: (value) => _showSnackBar('Hobbies', value),
     );
@@ -458,7 +465,7 @@ class _PonyExampleState extends State<PonyExample> {
       requiredIndicator: Text('*', style: TextStyle(color: Colors.red)),
       autovalidate: _autoValidate,
       validator: (value) {
-        if (value == null || value.isEmpty) return 'Name type is required.';
+        if (value == null || value.isEmpty) return 'Name is required.';
         return null;
       },
       onSaved: (value) => _ponyModel.name = value,

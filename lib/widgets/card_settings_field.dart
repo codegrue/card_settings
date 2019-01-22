@@ -54,7 +54,7 @@ class CardSettingsField extends StatelessWidget {
                     _buildRightDecoration()
                   ],
                 ),
-                _buildRowContent()
+                _buildNewRowContent(context)
               ],
             ),
           )
@@ -62,6 +62,20 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget _buildInlineContent(BuildContext context) {
+    return Expanded(
+        child: contentOnNewLine ? Text('') : _buildDecoratedContent(context));
+  }
+
+  Widget _buildNewRowContent(BuildContext context) {
+    return (contentOnNewLine)
+        ? Container(
+            padding: EdgeInsets.only(top: 10.0),
+            child: _buildDecoratedContent(context),
+          )
+        : Container();
+  }
+
+  Widget _buildDecoratedContent(BuildContext context) {
     var decoratedContent = content;
     if (content is TextField || content is TextFormField) {
       // do nothing, these already have built in InputDecorations
@@ -77,16 +91,7 @@ class CardSettingsField extends StatelessWidget {
       decoratedContent = InputDecorator(decoration: decoration, child: content);
     }
 
-    return Expanded(child: contentOnNewLine ? Text('') : decoratedContent);
-  }
-
-  Widget _buildRowContent() {
-    return (contentOnNewLine)
-        ? Container(
-            padding: EdgeInsets.only(top: 10.0),
-            child: content,
-          )
-        : Container();
+    return decoratedContent;
   }
 
   Widget _buildLabelRow(BuildContext context) {

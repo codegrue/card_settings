@@ -1,5 +1,9 @@
 # Releases
 
+## [1.2.5] - 1/22/2019
+
+* Fixed validator text not showing up in any new line fields (e.g. CardSettingsMultiselect)
+
 ## [1.2.4] - 1/9/2019
 
 * Allow for zero width margin around card by setting padding to zero
