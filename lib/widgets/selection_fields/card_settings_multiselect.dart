@@ -3,6 +3,7 @@
 
 import 'package:card_settings/helpers/checkbox_dialog.dart';
 import 'package:flutter/material.dart';
+
 import '../../card_settings.dart';
 
 /// This is a selection widget that allows an arbitrary list of options to be provided.

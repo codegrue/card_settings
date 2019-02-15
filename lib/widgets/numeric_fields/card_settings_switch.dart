@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
+
 import '../../card_settings.dart';
 
 /// This is a field that allows a boolean to be set via a switch widget.

@@ -2,8 +2,9 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import '../../card_settings.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+
+import '../../card_settings.dart';
 
 // Constants
 const double _kPickerHeaderPortraitHeight = 60.0;
