@@ -194,7 +194,7 @@ So for example, phone number would be '(000) 000-0000'.
 
 Note: `CardSettingsPhone` is a convenience widget that is pre-configured to use this pattern.
 
-Note2: `flutter_masked_text` is a controller and as such, you will not be able to use an inputMask and a custom controller at the same time. This might be rectified in the future.
+Caution: `flutter_masked_text` is a controller and as such, you will not be able to use an inputMask and a custom controller at the same time. This might be rectified in the future.
 
 ### Orientation
 
