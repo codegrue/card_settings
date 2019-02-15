@@ -6,26 +6,28 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import '../../card_settings.dart';
 
 /// This is the date picker field
 class CardSettingsDatePicker extends FormField<DateTime> {
   CardSettingsDatePicker({
     Key key,
-    String label: 'Label',
-    TextAlign labelAlign,
-    TextAlign contentAlign,
-    DateTime initialValue,
-    DateTime firstDate,
-    DateTime lastDate,
-    Icon icon,
-    Widget requiredIndicator,
     bool autovalidate: false,
-    bool visible: true,
     FormFieldSetter<DateTime> onSaved,
+    FormFieldValidator<DateTime> validator,
+    DateTime initialValue,
+    this.visible = true,
+    this.label = 'Label',
     this.onChanged,
     this.justDate = false,
-    FormFieldValidator<DateTime> validator,
+    this.contentAlign,
+    this.icon,
+    this.labelAlign,
+    this.requiredIndicator,
+    this.firstDate,
+    this.lastDate,
+    this.style,
   }) : super(
           key: key,
           initialValue: initialValue ?? DateTime.now(),
@@ -33,22 +35,30 @@ class CardSettingsDatePicker extends FormField<DateTime> {
           validator: validator,
           autovalidate: autovalidate,
           builder: (FormFieldState<DateTime> field) =>
-              _CardSettingsDatePickerState(
-                style: Theme.of(field.context).textTheme.subhead,
-                textAlign:
-                    contentAlign ?? CardSettings.of(field.context).contentAlign,
-  
-                icon: icon,
-                labelAlign: labelAlign,
-                requiredIndicator: requiredIndicator,
-                visible: visible,
-                startDate: firstDate,
-                endDate: lastDate,
-              ).widget,
+              _CardSettingsDatePickerState().widget,
         );
 
   final ValueChanged<DateTime> onChanged;
+
   final bool justDate;
+
+  final String label;
+
+  final TextAlign labelAlign;
+
+  final TextAlign contentAlign;
+
+  final DateTime firstDate;
+
+  final DateTime lastDate;
+
+  final Icon icon;
+
+  final Widget requiredIndicator;
+
+  final bool visible;
+
+  final TextStyle style;
 
   @override
   _CardSettingsDatePickerState createState() => _CardSettingsDatePickerState();
@@ -58,34 +68,12 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   @override
   CardSettingsDatePicker get widget => super.widget as CardSettingsDatePicker;
 
-  _CardSettingsDatePickerState({
-    this.icon,
-    this.label,
-    this.labelAlign,
-    this.requiredIndicator,
-    this.style,
-    this.textAlign,
-    this.visible,
-    this.endDate,
-    this.startDate,
-  });
-
-  final String label;
-  final TextAlign labelAlign;
-  final Icon icon;
-  final Widget requiredIndicator;
-  final bool visible;
-  final TextStyle style;
-  final TextAlign textAlign;
-  final DateTime startDate;
-  final DateTime endDate;
-
   void _showDialog({bool showFullCalendar = false}) {
-    DateTime _startDate = startDate ?? DateTime.now();
+    DateTime _startDate = widget?.firstDate ?? DateTime.now();
     if ((value ?? DateTime.now()).isBefore(_startDate)) {
       _startDate = value;
     }
-    final _endDate = endDate ?? _startDate.add(Duration(days: 1800));
+    final _endDate = widget?.lastDate ?? _startDate.add(Duration(days: 1800));
     if (Platform.isIOS && !showFullCalendar) {
       showCupertinoModalPopup<DateTime>(
         context: context,
@@ -138,16 +126,17 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
         _showDialog(showFullCalendar: true);
       },
       child: CardSettingsField(
-        label: label ?? (widget.justDate ? "Date" : "Date Time"),
-        labelAlign: labelAlign,
-        visible: visible ?? true,
-        icon: icon ?? Icon(Icons.event),
-        requiredIndicator: requiredIndicator,
+        label: widget?.label ?? (widget.justDate ? "Date" : "Date Time"),
+        labelAlign: widget?.labelAlign,
+        visible: widget?.visible ?? true,
+        icon: widget?.icon ?? Icon(Icons.event),
+        requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
         content: Text(
           value == null ? '' : DateFormat.yMd().format(value),
-          style: style,
-          textAlign: textAlign,
+          style: widget?.style ?? Theme.of(context).textTheme.subhead,
+          textAlign:
+              widget?.contentAlign ?? CardSettings.of(context).contentAlign,
         ),
         pickerIcon: Icons.arrow_drop_down,
       ),

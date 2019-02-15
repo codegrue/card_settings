@@ -5,23 +5,26 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import '../../card_settings.dart';
 
 /// This field allows a time to be selected.
 class CardSettingsTimePicker extends FormField<TimeOfDay> {
   CardSettingsTimePicker({
     Key key,
-    String label: 'Label',
-    TextAlign labelAlign,
-    TextAlign contentAlign,
-    TimeOfDay initialValue,
-    Icon icon,
-    Widget requiredIndicator,
-    bool autovalidate: false,
-    bool visible: true,
     FormFieldSetter<TimeOfDay> onSaved,
-    this.onChanged,
     FormFieldValidator<TimeOfDay> validator,
+    TimeOfDay initialValue,
+    bool autovalidate: false,
+    bool enabled = true,
+    this.visible = true,
+    this.onChanged,
+    this.contentAlign,
+    this.requiredIndicator,
+    this.labelAlign,
+    this.label = 'Label',
+    this.icon,
+    this.style,
   }) : super(
           key: key,
           initialValue: initialValue ?? TimeOfDay.now(),
@@ -29,18 +32,24 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
           validator: validator,
           autovalidate: autovalidate,
           builder: (FormFieldState<TimeOfDay> field) =>
-              _CardSettingsTimePickerState(
-                style: Theme.of(field.context).textTheme.subhead,
-                textAlign:
-                    contentAlign ?? CardSettings.of(field.context).contentAlign,
-                icon: icon,
-                labelAlign: labelAlign,
-                requiredIndicator: requiredIndicator,
-                visible: visible,
-              ).widget,
+              _CardSettingsTimePickerState().widget,
         );
 
   final ValueChanged<TimeOfDay> onChanged;
+
+  final TextAlign labelAlign;
+
+  final TextAlign contentAlign;
+
+  final Icon icon;
+
+  final Widget requiredIndicator;
+
+  final bool visible;
+
+  final String label;
+
+  final TextStyle style;
 
   @override
   _CardSettingsTimePickerState createState() => _CardSettingsTimePickerState();
@@ -49,24 +58,6 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
 class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
   @override
   CardSettingsTimePicker get widget => super.widget as CardSettingsTimePicker;
-
-  _CardSettingsTimePickerState({
-    this.icon,
-    this.label,
-    this.labelAlign,
-    this.requiredIndicator,
-    this.style,
-    this.textAlign,
-    this.visible,
-  });
-
-  final String label;
-  final TextAlign labelAlign;
-  final Icon icon;
-  final Widget requiredIndicator;
-  final bool visible;
-  final TextStyle style;
-  final TextAlign textAlign;
 
   void _showDialog({bool showFullTimer = false}) {
     if (Platform.isIOS && !showFullTimer) {
@@ -118,16 +109,17 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
         _showDialog(showFullTimer: true);
       },
       child: CardSettingsField(
-        label: label ?? "Time",
-        labelAlign: labelAlign,
-        visible: visible ?? true,
-        icon: icon ?? Icon(Icons.event),
-        requiredIndicator: requiredIndicator,
+        label: widget?.label ?? "Time",
+        labelAlign: widget?.labelAlign,
+        visible: widget?.visible ?? true,
+        icon: widget?.icon ?? Icon(Icons.event),
+        requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
         content: Text(
           value == null ? '' : value.format(context),
-          style: style,
-          textAlign: textAlign,
+          style: widget?.style ?? Theme.of(context).textTheme.subhead,
+          textAlign:
+              widget?.contentAlign ?? CardSettings.of(context).contentAlign,
         ),
         pickerIcon: Icons.arrow_drop_down,
       ),

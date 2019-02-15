@@ -4,43 +4,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
+
 import '../../card_settings.dart';
 
-/// This is a standard one line text entry field. It's based on the [TextFormField] widget.
+/// This is a standard one line text entry  It's based on the [TextFormField] widget.
 class CardSettingsText extends FormField<String> {
   CardSettingsText({
     Key key,
-    String label: 'Label',
-    TextAlign labelAlign,
-    TextAlign contentAlign,
     String initialValue,
-    String unitLabel,
-    String prefixText,
-    String hintText,
-    Icon icon,
-    Widget requiredIndicator,
-    bool contentOnNewLine: false,
-    int maxLength: 20,
-    int numberOfLines: 1,
-    bool showCounter: false,
-    bool visible: true,
-    bool enabled: true,
-    bool autofocus: false,
-    bool obscureText: false,
-    bool autocorrect: true,
-    bool autovalidate: false,
-    FormFieldValidator<String> validator,
     FormFieldSetter<String> onSaved,
+    FormFieldValidator<String> validator,
+    bool autovalidate: false,
+    bool enabled: true,
     this.onChanged,
     this.controller,
-    FocusNode focusNode,
-    TextInputType keyboardType: TextInputType.text,
-    TextCapitalization textCapitalization: TextCapitalization.none,
-    TextStyle style,
-    bool maxLengthEnforced: true,
-    ValueChanged<String> onFieldSubmitted,
-    List<TextInputFormatter> inputFormatters,
+    this.textCapitalization = TextCapitalization.none,
+    this.keyboardType = TextInputType.text,
+    this.maxLengthEnforced = true,
     this.inputMask,
+    this.inputFormatters,
+    this.onFieldSubmitted,
+    this.style,
+    this.focusNode,
+    this.label = 'Label',
+    this.contentOnNewLine = false,
+    this.maxLength = 20,
+    this.numberOfLines = 1,
+    this.showCounter = false,
+    this.visible = true,
+    this.autocorrect = true,
+    this.obscureText = false,
+    this.autofocus = false,
+    this.contentAlign,
+    this.hintText,
+    this.icon,
+    this.labelAlign,
+    this.prefixText,
+    this.requiredIndicator,
+    this.unitLabel,
   })  : //assert(initialValue == null || controller == null),
         assert(keyboardType != null),
         assert(autofocus != null),
@@ -57,50 +58,8 @@ class CardSettingsText extends FormField<String> {
           onSaved: onSaved,
           validator: validator,
           autovalidate: autovalidate,
-          builder: (FormFieldState<String> field) {
-            final _CardSettingsTextState state = field;
-            return CardSettingsField(
-              label: label,
-              labelAlign: labelAlign,
-              visible: visible,
-              unitLabel: unitLabel,
-              icon: icon,
-              requiredIndicator: requiredIndicator,
-              contentOnNewLine: contentOnNewLine,
-              content: TextField(
-                controller: state._effectiveController,
-                focusNode: focusNode,
-                keyboardType: keyboardType,
-                textCapitalization: textCapitalization,
-                style: style,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(0.0),
-                  border: InputBorder.none,
-                  errorText: field.errorText,
-                  prefixText: prefixText,
-                  hintText: hintText,
-                ),
-                textAlign:
-                    contentAlign ?? CardSettings.of(field.context).contentAlign,
-                autofocus: autofocus,
-                obscureText: obscureText,
-                autocorrect: autocorrect,
-                maxLengthEnforced: maxLengthEnforced,
-                maxLines: numberOfLines,
-                maxLength: (showCounter)
-                    ? maxLength
-                    : null, // if we want counter use default behavior
-                onChanged: state._handleOnChanged,
-                onSubmitted: onFieldSubmitted,
-                inputFormatters: inputFormatters ??
-                    [
-                      // if we don't want the counter, use this maxLength instead
-                      LengthLimitingTextInputFormatter(maxLength)
-                    ],
-                enabled: enabled,
-              ),
-            );
-          },
+          builder: (FormFieldState<String> field) =>
+              _CardSettingsTextState().widget,
         );
 
   final ValueChanged<String> onChanged;
@@ -108,6 +67,52 @@ class CardSettingsText extends FormField<String> {
   final TextEditingController controller;
 
   final String inputMask;
+
+  final FocusNode focusNode;
+
+  final TextInputType keyboardType;
+
+  final TextCapitalization textCapitalization;
+
+  final TextStyle style;
+
+  final bool maxLengthEnforced;
+
+  final ValueChanged<String> onFieldSubmitted;
+
+  final List<TextInputFormatter> inputFormatters;
+
+  final String label;
+
+  final TextAlign labelAlign;
+
+  final TextAlign contentAlign;
+
+  final String unitLabel;
+
+  final String prefixText;
+
+  final String hintText;
+
+  final Icon icon;
+
+  final Widget requiredIndicator;
+
+  final bool contentOnNewLine;
+
+  final int maxLength;
+
+  final int numberOfLines;
+
+  final bool showCounter;
+
+  final bool visible;
+
+  final bool autofocus;
+
+  final bool obscureText;
+
+  final bool autocorrect;
 
   @override
   _CardSettingsTextState createState() => _CardSettingsTextState();
@@ -174,13 +179,58 @@ class _CardSettingsTextState extends FormFieldState<String> {
     }
   }
 
-  void _handleOnChanged(String value) {
-    if (this.value != value) {
-      didChange(value);
+  void _handleOnChanged(String _value) {
+    if (this.value != _value) {
+      didChange(_value);
 
       if (widget.onChanged != null) {
-	      widget.onChanged(value);
+        widget.onChanged(_value);
       }
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CardSettingsField(
+      label: widget.label,
+      labelAlign: widget?.labelAlign,
+      visible: widget?.visible,
+      unitLabel: widget?.unitLabel,
+      icon: widget?.icon,
+      requiredIndicator: widget?.requiredIndicator,
+      contentOnNewLine: widget?.contentOnNewLine ?? false,
+      content: TextField(
+        controller: _effectiveController,
+        focusNode: widget?.focusNode,
+        keyboardType: widget?.keyboardType,
+        textCapitalization: widget?.textCapitalization,
+        style: widget?.style ?? Theme.of(context).textTheme.subhead,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(0.0),
+          border: InputBorder.none,
+          errorText: errorText,
+          prefixText: widget?.prefixText,
+          hintText: widget?.hintText,
+        ),
+        textAlign:
+            widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+        autofocus: widget?.autofocus ?? false,
+        obscureText: widget?.obscureText ?? false,
+        autocorrect: widget?.autocorrect ?? true,
+        maxLengthEnforced: widget?.maxLengthEnforced ?? false,
+        maxLines: widget?.numberOfLines ?? 1,
+        maxLength: (widget?.showCounter ?? false)
+            ? widget?.maxLength
+            : null, // if we want counter use default behavior
+        onChanged: _handleOnChanged,
+        onSubmitted: widget?.onFieldSubmitted,
+        inputFormatters: widget?.inputFormatters ??
+            [
+              // if we don't want the counter, use this maxLength instead
+              LengthLimitingTextInputFormatter(widget?.maxLength)
+            ],
+        enabled: widget?.enabled,
+      ),
+    );
   }
 }
