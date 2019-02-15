@@ -1,58 +1,64 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import '../../card_settings.dart';
 
 /// This is the date picker field
 class CardSettingsDatePicker extends FormField<DateTime> {
   CardSettingsDatePicker({
     Key key,
-    String label: 'Label',
-    TextAlign labelAlign,
-    TextAlign contentAlign,
-    DateTime initialValue,
-    Icon icon,
-    Widget requiredIndicator,
     bool autovalidate: false,
-    bool visible: true,
     FormFieldSetter<DateTime> onSaved,
-    this.onChanged,
     FormFieldValidator<DateTime> validator,
+    DateTime initialValue,
+    this.visible = true,
+    this.label = 'Label',
+    this.onChanged,
+    this.justDate = false,
+    this.contentAlign,
+    this.icon,
+    this.labelAlign,
+    this.requiredIndicator,
+    this.firstDate,
+    this.lastDate,
+    this.style,
   }) : super(
-            key: key,
-            initialValue: initialValue ?? DateTime.now(),
-            onSaved: onSaved,
-            validator: validator,
-            autovalidate: autovalidate,
-            builder: (FormFieldState<DateTime> field) {
-              final _CardSettingsDatePickerState state = field;
-              return GestureDetector(
-                onTap: () {
-                  state._showDialog();
-                },
-                child: CardSettingsField(
-                  label: label,
-                  labelAlign: labelAlign,
-                  visible: visible,
-                  icon: icon,
-                  requiredIndicator: requiredIndicator,
-                  errorText: field.errorText,
-                  content: Text(
-                    state.value == null
-                        ? ''
-                        : DateFormat.yMd().format(state.value),
-                    style: Theme.of(field.context).textTheme.subhead,
-                    textAlign: contentAlign ??
-                        CardSettings.of(field.context).contentAlign,
-                  ),
-                  pickerIcon: Icons.arrow_drop_down,
-                ),
-              );
-            });
+          key: key,
+          initialValue: initialValue ?? DateTime.now(),
+          onSaved: onSaved,
+          validator: validator,
+          autovalidate: autovalidate,
+          builder: (FormFieldState<DateTime> field) =>
+              _CardSettingsDatePickerState().widget,
+        );
 
   final ValueChanged<DateTime> onChanged;
+
+  final bool justDate;
+
+  final String label;
+
+  final TextAlign labelAlign;
+
+  final TextAlign contentAlign;
+
+  final DateTime firstDate;
+
+  final DateTime lastDate;
+
+  final Icon icon;
+
+  final Widget requiredIndicator;
+
+  final bool visible;
+
+  final TextStyle style;
 
   @override
   _CardSettingsDatePickerState createState() => _CardSettingsDatePickerState();
@@ -62,17 +68,100 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   @override
   CardSettingsDatePicker get widget => super.widget as CardSettingsDatePicker;
 
-  void _showDialog() {
-    showDatePicker(
-      context: context,
-      initialDate: value,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
-    ).then((value) {
-      if (value != null) {
-        didChange(value);
-        if (widget.onChanged != null) widget.onChanged(value);
-      }
-    });
+  void _showDialog({bool showFullCalendar = false}) {
+    DateTime _startDate = widget?.firstDate ?? DateTime.now();
+    if ((value ?? DateTime.now()).isBefore(_startDate)) {
+      _startDate = value;
+    }
+    final _endDate = widget?.lastDate ?? _startDate.add(Duration(days: 1800));
+    if (Platform.isIOS && !showFullCalendar) {
+      showCupertinoModalPopup<DateTime>(
+        context: context,
+        builder: (BuildContext context) {
+          return _buildBottomPicker(
+            CupertinoDatePicker(
+              minimumDate: _startDate,
+              minimumYear: _startDate.year,
+              maximumDate: _endDate,
+              maximumYear: _endDate.year,
+              mode: widget.justDate
+                  ? CupertinoDatePickerMode.date
+                  : CupertinoDatePickerMode.dateAndTime,
+              initialDateTime: value ?? DateTime.now(),
+              onDateTimeChanged: (DateTime newDateTime) {
+                didChange(newDateTime);
+                if (widget.onChanged != null) widget.onChanged(newDateTime);
+              },
+            ),
+          );
+        },
+      ).then((_value) {
+        if (_value != null) {
+          didChange(_value);
+          if (widget.onChanged != null) widget.onChanged(_value);
+        }
+      });
+    } else {
+      showDatePicker(
+        context: context,
+        initialDate: value ?? DateTime.now(),
+        firstDate: _startDate,
+        lastDate: _endDate,
+      ).then((_value) {
+        if (_value != null) {
+          didChange(_value);
+          if (widget.onChanged != null) widget.onChanged(_value);
+        }
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        _showDialog();
+      },
+      onLongPress: () {
+        _showDialog(showFullCalendar: true);
+      },
+      child: CardSettingsField(
+        label: widget?.label ?? (widget.justDate ? "Date" : "Date Time"),
+        labelAlign: widget?.labelAlign,
+        visible: widget?.visible ?? true,
+        icon: widget?.icon ?? Icon(Icons.event),
+        requiredIndicator: widget?.requiredIndicator,
+        errorText: errorText,
+        content: Text(
+          value == null ? '' : DateFormat.yMd().format(value),
+          style: widget?.style ?? Theme.of(context).textTheme.subhead,
+          textAlign:
+              widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+        ),
+        pickerIcon: Icons.arrow_drop_down,
+      ),
+    );
+  }
+
+  Widget _buildBottomPicker(Widget picker) {
+    return Container(
+      height: kPickerSheetHeight,
+      padding: const EdgeInsets.only(top: 6.0),
+      color: CupertinoColors.white,
+      child: DefaultTextStyle(
+        style: const TextStyle(
+          color: CupertinoColors.black,
+          fontSize: 22.0,
+        ),
+        child: GestureDetector(
+          // Blocks taps from propagating to the modal sheet and popping.
+          onTap: () {},
+          child: SafeArea(
+            top: false,
+            child: picker,
+          ),
+        ),
+      ),
+    );
   }
 }

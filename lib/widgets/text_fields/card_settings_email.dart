@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../../card_settings.dart';
 
 /// This is a password field. It obscures the entered text.

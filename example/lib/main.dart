@@ -77,11 +77,13 @@ class _PonyExampleState extends State<PonyExample> {
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: appBar(),
-      body: Form(
-        key: _formKey,
-        child: (orientation == Orientation.portrait)
-            ? _buildPortraitLayout()
-            : _buildLandscapeLayout(),
+      body: SafeArea(
+        child: Form(
+          key: _formKey,
+          child: (orientation == Orientation.portrait)
+              ? _buildPortraitLayout()
+              : _buildLandscapeLayout(),
+        ),
       ),
     );
   }
@@ -290,12 +292,18 @@ class _PonyExampleState extends State<PonyExample> {
   CardSettingsDatePicker _buildCardSettingsDatePicker() {
     return CardSettingsDatePicker(
       key: _dateKey,
+      justDate: true,
       icon: Icon(Icons.calendar_today),
       label: 'Date',
       initialValue: _ponyModel.showDateTime,
       onSaved: (value) => _ponyModel.showDateTime =
           updateJustDate(value, _ponyModel.showDateTime),
-      onChanged: (value) => _showSnackBar('Show Date', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.showDateTime = value;
+        });
+        _showSnackBar('Show Date', _ponyModel.showDateTime);
+      },
     );
   }
 
@@ -494,6 +502,7 @@ class _PonyExampleState extends State<PonyExample> {
     _scaffoldKey.currentState.removeCurrentSnackBar();
     _scaffoldKey.currentState.showSnackBar(
       SnackBar(
+        duration: Duration(seconds: 1),
         content: Text(label + ' = ' + value.toString()),
       ),
     );

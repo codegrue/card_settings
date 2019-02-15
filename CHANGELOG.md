@@ -1,5 +1,10 @@
 # Releases
 
+## [1.3.1] - 2/15/2019
+
+* Updated Build Methodes for All Widgets (No More Errors for Dart 2)
+* Added Cupertino Widgets for Date, DateTime, Time and List Picker (onLongPress Overrides to material)
+
 ## [1.2.5] - 1/22/2019
 
 * Fixed validator text not showing up in any new line fields (e.g. CardSettingsMultiselect)
