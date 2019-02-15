@@ -59,8 +59,8 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
   @override
   CardSettingsTimePicker get widget => super.widget as CardSettingsTimePicker;
 
-  void _showDialog({bool showFullTimer = false}) {
-    if (Platform.isIOS && !showFullTimer) {
+  void _showDialog({bool showMaterial = false}) {
+    if (Platform.isIOS && !showMaterial) {
       showCupertinoModalPopup<DateTime>(
         context: context,
         builder: (BuildContext context) {
@@ -106,7 +106,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
         _showDialog();
       },
       onLongPress: () {
-        _showDialog(showFullTimer: true);
+        _showDialog(showMaterial: true);
       },
       child: CardSettingsField(
         label: widget?.label ?? "Time",

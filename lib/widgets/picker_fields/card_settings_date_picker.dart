@@ -68,13 +68,13 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   @override
   CardSettingsDatePicker get widget => super.widget as CardSettingsDatePicker;
 
-  void _showDialog({bool showFullCalendar = false}) {
+  void _showDialog({bool showMaterial = false}) {
     DateTime _startDate = widget?.firstDate ?? DateTime.now();
     if ((value ?? DateTime.now()).isBefore(_startDate)) {
       _startDate = value;
     }
     final _endDate = widget?.lastDate ?? _startDate.add(Duration(days: 1800));
-    if (Platform.isIOS && !showFullCalendar) {
+    if (Platform.isIOS && !showMaterial) {
       showCupertinoModalPopup<DateTime>(
         context: context,
         builder: (BuildContext context) {
@@ -123,7 +123,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
         _showDialog();
       },
       onLongPress: () {
-        _showDialog(showFullCalendar: true);
+        _showDialog(showMaterial: true);
       },
       child: CardSettingsField(
         label: widget?.label ?? (widget.justDate ? "Date" : "Date Time"),

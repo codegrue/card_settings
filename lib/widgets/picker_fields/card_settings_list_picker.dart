@@ -60,8 +60,9 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   @override
   CardSettingsListPicker get widget => super.widget as CardSettingsListPicker;
 
-  void _showDialog(String label, List<String> options) {
-    if (Platform.isIOS) {
+  void _showDialog(String label, List<String> options,
+      {bool showMaterial = false}) {
+    if (Platform.isIOS && !showMaterial) {
       final FixedExtentScrollController scrollController =
           FixedExtentScrollController(
               initialItem: options.indexOf(value ?? options.first));
@@ -137,6 +138,9 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     return GestureDetector(
       onTap: () {
         _showDialog(widget?.label, widget?.options);
+      },
+      onLongPress: () {
+        _showDialog(widget?.label, widget?.options, showMaterial: true);
       },
       child: CardSettingsField(
         label: widget?.label,
