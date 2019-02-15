@@ -4,6 +4,9 @@
 /// Package for building card based settings forms
 library card_settings;
 
+import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
 export 'widgets/card_settings_panel.dart';
 export 'widgets/card_settings_field.dart';
 export 'widgets/card_field_layout.dart';
@@ -42,3 +45,6 @@ export 'widgets/text_fields/card_settings_text.dart';
 export 'helpers/picker_dialog.dart';
 export 'helpers/scroll_picker.dart';
 export 'helpers/converter_functions.dart';
+
+const double kPickerSheetHeight = 216.0;
+const double kPickerItemHeight = 32.0;
