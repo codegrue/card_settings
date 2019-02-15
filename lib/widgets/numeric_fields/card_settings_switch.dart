@@ -2,68 +2,93 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:native_widgets/native_widgets.dart';
 import '../../card_settings.dart';
 
 /// This is a field that allows a boolean to be set via a switch widget.
 class CardSettingsSwitch extends FormField<bool> {
   CardSettingsSwitch({
     Key key,
-    String label: 'Label',
-    TextAlign labelAlign,
-    TextAlign contentAlign,
-    Icon icon,
-    Widget requiredIndicator,
-    String trueLabel: 'Yes',
-    String falseLabel: 'No',
-    bool initialValue: false,
     bool autovalidate: false,
-    bool visible: true,
     FormFieldSetter<bool> onSaved,
     FormFieldValidator<bool> validator,
-    ValueChanged<bool> onChanged,
+    bool initialValue = false,
+    this.trueLabel = "Yes",
+    this.falseLabel = "No",
+    this.visible = true,
+    this.label = 'Label',
+    this.requiredIndicator,
+    this.labelAlign,
+    this.icon,
+    this.contentAlign,
+    this.onChanged,
   }) : super(
             key: key,
             initialValue: initialValue,
             onSaved: onSaved,
             validator: validator,
             autovalidate: autovalidate,
-            builder: (FormFieldState<bool> field) {
-              final _CardSettingsSwitchState state = field;
-              return CardSettingsField(
-                label: label,
-                labelAlign: labelAlign,
-                visible: visible,
-                icon: icon,
-                requiredIndicator: requiredIndicator,
-                errorText: field.errorText,
-                content: Row(children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      state.value ? trueLabel : falseLabel,
-                      style: Theme.of(field.context).textTheme.subhead,
-                      textAlign: contentAlign ??
-                          CardSettings.of(field.context).contentAlign,
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(0.0),
-                    child: Container(
-                      height: 20.0,
-                      child: Switch(
-                        value: state.value,
-                        onChanged: (value) {
-                          state.didChange(value);
-                          if (onChanged != null) onChanged(value);
-                        },
-                      ),
-                    ),
-                  ),
-                ]),
-              );
-            });
+            builder: (FormFieldState<bool> field) =>
+                _CardSettingsSwitchState().widget);
+
+  final String label;
+
+  final TextAlign labelAlign;
+
+  final TextAlign contentAlign;
+
+  final Icon icon;
+
+  final Widget requiredIndicator;
+
+  final String trueLabel;
+
+  final String falseLabel;
+
+  final ValueChanged<bool> onChanged;
+
+  final bool visible;
 
   @override
   _CardSettingsSwitchState createState() => _CardSettingsSwitchState();
 }
 
-class _CardSettingsSwitchState extends FormFieldState<bool> {}
+class _CardSettingsSwitchState extends FormFieldState<bool> {
+  @override
+  CardSettingsSwitch get widget => super.widget as CardSettingsSwitch;
+
+  @override
+  Widget build(BuildContext context) {
+    return CardSettingsField(
+      label: widget?.label,
+      labelAlign: widget?.labelAlign,
+      visible: widget?.visible,
+      icon: widget?.icon,
+      requiredIndicator: widget?.requiredIndicator,
+      errorText: errorText,
+      content: Row(children: <Widget>[
+        Expanded(
+          child: Text(
+            value ? widget?.trueLabel : widget?.falseLabel,
+            style: Theme.of(context).textTheme.subhead,
+            textAlign:
+                widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.all(0.0),
+          child: Container(
+            height: 20.0,
+            child: NativeSwitch(
+              value: value,
+              onChanged: (value) {
+                didChange(value);
+                if (widget?.onChanged != null) widget?.onChanged(value);
+              },
+            ),
+          ),
+        ),
+      ]),
+    );
+  }
+}

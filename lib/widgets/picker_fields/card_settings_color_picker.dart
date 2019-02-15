@@ -17,47 +17,40 @@ const double _kDialogActionBarHeight = 52.0;
 class CardSettingsColorPicker extends FormField<Color> {
   CardSettingsColorPicker({
     Key key,
-    String label: 'Label',
-    TextAlign labelAlign,
-    TextAlign contentAlign, // here for consistency, but does nothing.
-    Color initialValue: Colors.green,
-    Icon icon,
-    Widget requiredIndicator,
     bool autovalidate: false,
-    bool visible: true,
     FormFieldSetter<Color> onSaved,
-    this.onChanged,
     FormFieldValidator<Color> validator,
+    Color initialValue = Colors.green,
+    this.onChanged,
+    this.visible = true,
+    this.contentAlign,
+    this.icon,
+    this.labelAlign,
+    this.requiredIndicator,
+    this.label = "Label",
   }) : super(
             key: key,
             initialValue: initialValue ?? Colors.black,
             onSaved: onSaved,
             validator: validator,
             autovalidate: autovalidate,
-            builder: (FormFieldState<Color> field) {
-              final _CardSettingsColorPickerState state = field;
-              return GestureDetector(
-                onTap: () {
-                  state._showDialog("Color for " + label);
-                },
-                child: CardSettingsField(
-                  label: label,
-                  labelAlign: labelAlign,
-                  visible: visible,
-                  icon: icon,
-                  requiredIndicator: requiredIndicator,
-                  errorText: field.errorText,
-                  content: Container(
-                    height: 20.0,
-                    decoration: BoxDecoration(
-                      color: state.value,
-                    ),
-                  ),
-                ),
-              );
-            });
+            builder: (FormFieldState<Color> field) =>
+                _CardSettingsColorPickerState().widget);
 
   final ValueChanged<Color> onChanged;
+
+  final TextAlign labelAlign;
+
+  /// here for consistency, but does nothing.
+  final TextAlign contentAlign;
+
+  final Icon icon;
+
+  final Widget requiredIndicator;
+
+  final String label;
+
+  final bool visible;
 
   @override
   _CardSettingsColorPickerState createState() =>
@@ -157,5 +150,28 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
         if (widget.onChanged != null) widget.onChanged(value);
       }
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        _showDialog("Color for " + widget?.label);
+      },
+      child: CardSettingsField(
+        label: widget?.label,
+        labelAlign: widget?.labelAlign,
+        visible: widget?.visible,
+        icon: widget?.icon,
+        requiredIndicator: widget?.requiredIndicator,
+        errorText: errorText,
+        content: Container(
+          height: 20.0,
+          decoration: BoxDecoration(
+            color: value,
+          ),
+        ),
+      ),
+    );
   }
 }

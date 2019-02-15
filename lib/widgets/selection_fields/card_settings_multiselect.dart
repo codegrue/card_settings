@@ -9,52 +9,41 @@ import '../../card_settings.dart';
 class CardSettingsMultiselect extends FormField<List<String>> {
   CardSettingsMultiselect({
     Key key,
-    String label: 'Label',
-    TextAlign labelAlign,
-    TextAlign contentAlign,
     List<String> initialValues,
-    Icon icon,
-    Widget requiredIndicator,
-    List<String> options,
-    bool autovalidate: false,
-    bool visible: true,
     FormFieldSetter<List<String>> onSaved,
     FormFieldValidator<List<String>> validator,
+    bool autovalidate: false,
     this.onChanged,
+    this.label = 'Label',
+    this.visible = true,
+    this.contentAlign,
+    this.icon,
+    this.labelAlign,
+    this.requiredIndicator,
+    this.options,
   }) : super(
-            key: key,
-            initialValue: initialValues,
-            onSaved: onSaved,
-            validator: validator,
-            autovalidate: autovalidate,
-            builder: (FormFieldState<List<String>> field) {
-              final _CardSettingsMultiselectState state = field;
-              return GestureDetector(
-                onTap: () {
-                  state._showDialog(label, options);
-                },
-                child: CardSettingsField(
-                  label: label,
-                  labelAlign: labelAlign,
-                  visible: visible,
-                  icon: icon,
-                  requiredIndicator: requiredIndicator,
-                  errorText: field.errorText,
-                  contentOnNewLine: true,
-                  content: Wrap(
-                    alignment: WrapAlignment.start,
-                    spacing: 4.0,
-                    runSpacing: 0.0,
-                    children: state.value
-                        .map(
-                          (s) => Chip(label: Text(s)),
-                        )
-                        .toList(),
-                  ),
-                  pickerIcon: Icons.arrow_drop_down,
-                ),
-              );
-            });
+          key: key,
+          initialValue: initialValues,
+          onSaved: onSaved,
+          validator: validator,
+          autovalidate: autovalidate,
+          builder: (FormFieldState<List<String>> field) =>
+              _CardSettingsMultiselectState().widget,
+        );
+
+  final String label;
+
+  final TextAlign labelAlign;
+
+  final TextAlign contentAlign;
+
+  final Icon icon;
+
+  final Widget requiredIndicator;
+
+  final List<String> options;
+
+  final bool visible;
 
   final ValueChanged<List<String>> onChanged;
 
@@ -83,5 +72,34 @@ class _CardSettingsMultiselectState extends FormFieldState<List<String>> {
         if (widget.onChanged != null) widget.onChanged(value);
       }
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        _showDialog(widget?.label, widget?.options);
+      },
+      child: CardSettingsField(
+        label: widget?.label,
+        labelAlign: widget?.labelAlign,
+        visible: widget?.visible,
+        icon: widget?.icon,
+        requiredIndicator: widget?.requiredIndicator,
+        errorText: errorText,
+        contentOnNewLine: true,
+        content: Wrap(
+          alignment: WrapAlignment.start,
+          spacing: 4.0,
+          runSpacing: 0.0,
+          children: value
+              .map(
+                (s) => Chip(label: Text(s)),
+              )
+              .toList(),
+        ),
+        pickerIcon: Icons.arrow_drop_down,
+      ),
+    );
   }
 }
