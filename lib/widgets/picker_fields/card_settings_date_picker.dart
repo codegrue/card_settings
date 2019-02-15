@@ -24,28 +24,31 @@ class CardSettingsDatePicker extends FormField<DateTime> {
     bool visible: true,
     FormFieldSetter<DateTime> onSaved,
     this.onChanged,
+    this.justDate = false,
     FormFieldValidator<DateTime> validator,
   }) : super(
-            key: key,
-            initialValue: initialValue ?? DateTime.now(),
-            onSaved: onSaved,
-            validator: validator,
-            autovalidate: autovalidate,
-            builder: (FormFieldState<DateTime> field) =>
-                _CardSettingsDatePickerState(
-                  style: Theme.of(field.context).textTheme.subhead,
-                  textAlign: contentAlign ??
-                      CardSettings.of(field.context).contentAlign,
-                  errorText: field.errorText,
-                  icon: icon,
-                  labelAlign: labelAlign,
-                  requiredIndicator: requiredIndicator,
-                  visible: visible,
-                  startDate: firstDate,
-                  endDate: lastDate,
-                ).widget);
+          key: key,
+          initialValue: initialValue ?? DateTime.now(),
+          onSaved: onSaved,
+          validator: validator,
+          autovalidate: autovalidate,
+          builder: (FormFieldState<DateTime> field) =>
+              _CardSettingsDatePickerState(
+                style: Theme.of(field.context).textTheme.subhead,
+                textAlign:
+                    contentAlign ?? CardSettings.of(field.context).contentAlign,
+  
+                icon: icon,
+                labelAlign: labelAlign,
+                requiredIndicator: requiredIndicator,
+                visible: visible,
+                startDate: firstDate,
+                endDate: lastDate,
+              ).widget,
+        );
 
   final ValueChanged<DateTime> onChanged;
+  final bool justDate;
 
   @override
   _CardSettingsDatePickerState createState() => _CardSettingsDatePickerState();
@@ -56,7 +59,6 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   CardSettingsDatePicker get widget => super.widget as CardSettingsDatePicker;
 
   _CardSettingsDatePickerState({
-    this.errorText,
     this.icon,
     this.label,
     this.labelAlign,
@@ -69,7 +71,6 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   });
 
   final String label;
-  final String errorText;
   final TextAlign labelAlign;
   final Icon icon;
   final Widget requiredIndicator;
@@ -84,7 +85,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     if ((value ?? DateTime.now()).isBefore(_startDate)) {
       _startDate = value;
     }
-    final _endDate = endDate ?? _startDate.add(Duration(days: 700));
+    final _endDate = endDate ?? _startDate.add(Duration(days: 1800));
     if (Platform.isIOS && !showFullCalendar) {
       showCupertinoModalPopup<DateTime>(
         context: context,
@@ -92,8 +93,12 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
           return _buildBottomPicker(
             CupertinoDatePicker(
               minimumDate: _startDate,
+              minimumYear: _startDate.year,
               maximumDate: _endDate,
-              mode: CupertinoDatePickerMode.dateAndTime,
+              maximumYear: _endDate.year,
+              mode: widget.justDate
+                  ? CupertinoDatePickerMode.date
+                  : CupertinoDatePickerMode.dateAndTime,
               initialDateTime: value ?? DateTime.now(),
               onDateTimeChanged: (DateTime newDateTime) {
                 didChange(newDateTime);
@@ -133,7 +138,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
         _showDialog(showFullCalendar: true);
       },
       child: CardSettingsField(
-        label: label ?? "Date Time",
+        label: label ?? (widget.justDate ? "Date" : "Date Time"),
         labelAlign: labelAlign,
         visible: visible ?? true,
         icon: icon ?? Icon(Icons.event),

@@ -292,20 +292,20 @@ class _PonyExampleState extends State<PonyExample> {
   CardSettingsDatePicker _buildCardSettingsDatePicker() {
     return CardSettingsDatePicker(
       key: _dateKey,
+      justDate: true,
       icon: Icon(Icons.calendar_today),
       label: 'Date',
-      initialValue: _date,
-      onSaved: (value) => _date = updateJustDate(value, _date),
+      initialValue: _ponyModel.showDateTime,
+      onSaved: (value) => _ponyModel.showDateTime =
+          updateJustDate(value, _ponyModel.showDateTime),
       onChanged: (value) {
         setState(() {
-          _date = value;
+          _ponyModel.showDateTime = value;
         });
-        _showSnackBar('Show Date', _date);
+        _showSnackBar('Show Date', _ponyModel.showDateTime);
       },
     );
   }
-
-  DateTime _date = DateTime.now();
 
   CardSettingsInstructions _buildCardSettingsInstructions() {
     return CardSettingsInstructions(
