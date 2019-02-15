@@ -146,7 +146,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
         content: Text(
-          value ?? widget?.hintText ?? '',
+          widget?.initialValue ?? widget?.hintText ?? '',
           style: Theme.of(context).textTheme.subhead.copyWith(
               color: (value == null)
                   ? Theme.of(context).hintColor

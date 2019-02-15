@@ -223,7 +223,12 @@ class _PonyExampleState extends State<PonyExample> {
         return null;
       },
       onSaved: (value) => _ponyModel.password = value,
-      onChanged: (value) => _showSnackBar('Password', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.password = value;
+        });
+        _showSnackBar('Password', value);
+      },
     );
   }
 
@@ -240,7 +245,12 @@ class _PonyExampleState extends State<PonyExample> {
         return null;
       },
       onSaved: (value) => _ponyModel.email = value,
-      onChanged: (value) => _showSnackBar('Email', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.email = value;
+        });
+        _showSnackBar('Email', value);
+      },
     );
   }
 
@@ -256,7 +266,12 @@ class _PonyExampleState extends State<PonyExample> {
         return null;
       },
       onSaved: (value) => _ponyModel.boxOfficePhone = value,
-      onChanged: (value) => _showSnackBar('Box Office', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.boxOfficePhone = value;
+        });
+        _showSnackBar('Box Office', value);
+      },
     );
   }
 
@@ -271,7 +286,12 @@ class _PonyExampleState extends State<PonyExample> {
         return null;
       },
       onSaved: (value) => _ponyModel.ticketPrice = value,
-      onChanged: (value) => _showSnackBar('Ticket Price', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.ticketPrice = value;
+        });
+        _showSnackBar('Ticket Price', value);
+      },
     );
   }
 
@@ -285,7 +305,13 @@ class _PonyExampleState extends State<PonyExample> {
           minute: _ponyModel.showDateTime.minute),
       onSaved: (value) => _ponyModel.showDateTime =
           updateJustTime(value, _ponyModel.showDateTime),
-      onChanged: (value) => _showSnackBar('Show Time', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.showDateTime =
+              updateJustTime(value, _ponyModel.showDateTime);
+        });
+        _showSnackBar('Show Time', value);
+      },
     );
   }
 
@@ -302,7 +328,8 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.showDateTime = value;
         });
-        _showSnackBar('Show Date', _ponyModel.showDateTime);
+        _showSnackBar(
+            'Show Date', updateJustDate(value, _ponyModel.showDateTime));
       },
     );
   }
@@ -328,7 +355,12 @@ class _PonyExampleState extends State<PonyExample> {
         return null;
       },
       onSaved: (value) => _ponyModel.weight = value,
-      onChanged: (value) => _showSnackBar('Weight', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.weight = value;
+        });
+        _showSnackBar('Weight', value);
+      },
     );
   }
 
@@ -339,7 +371,12 @@ class _PonyExampleState extends State<PonyExample> {
       unitLabel: 'feet',
       initialValue: _ponyModel.height,
       onSaved: (value) => _ponyModel.height = value,
-      onChanged: (value) => _showSnackBar('Height', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.height = value;
+        });
+        _showSnackBar('Height', value);
+      },
     );
   }
 
@@ -350,7 +387,12 @@ class _PonyExampleState extends State<PonyExample> {
       initialValue: intelligentCast<Color>(_ponyModel.spotColor),
       visible: _ponyModel.hasSpots,
       onSaved: (value) => _ponyModel.spotColor = colorToString(value),
-      onChanged: (value) => _showSnackBar('Spot', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.type = colorToString(value);
+        });
+        _showSnackBar('Spot', value);
+      },
     );
   }
 
@@ -359,11 +401,13 @@ class _PonyExampleState extends State<PonyExample> {
       key: _hasSpotsKey,
       label: 'Has Spots?',
       initialValue: _ponyModel.hasSpots,
+      onSaved: (value) => _ponyModel.hasSpots = value,
       onChanged: (value) {
-        setState(() => _ponyModel.hasSpots = value);
+        setState(() {
+          _ponyModel.hasSpots = value;
+        });
         _showSnackBar('Has Spots?', value);
       },
-      onSaved: (value) => _ponyModel.hasSpots = value,
     );
   }
 
@@ -378,7 +422,12 @@ class _PonyExampleState extends State<PonyExample> {
         return null;
       },
       onSaved: (value) => _ponyModel.maneColor = colorToString(value),
-      onChanged: (value) => _showSnackBar('Mane', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.maneColor = colorToString(value);
+        });
+        _showSnackBar('Mane', value);
+      },
     );
   }
 
@@ -394,7 +443,12 @@ class _PonyExampleState extends State<PonyExample> {
         return null;
       },
       onSaved: (value) => _ponyModel.coatColor = colorToString(value),
-      onChanged: (value) => _showSnackBar('Coat', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.coatColor = colorToString(value);
+        });
+        _showSnackBar('Coat', value);
+      },
     );
   }
 
@@ -412,7 +466,12 @@ class _PonyExampleState extends State<PonyExample> {
         return null;
       },
       onSaved: (value) => _ponyModel.hobbies = value,
-      onChanged: (value) => _showSnackBar('Hobbies', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.hobbies = value;
+        });
+        _showSnackBar('Hobbies', value);
+      },
     );
   }
 
@@ -423,7 +482,12 @@ class _PonyExampleState extends State<PonyExample> {
       initialValue: _ponyModel.description,
       numberOfLines: lines,
       onSaved: (value) => _ponyModel.description = value,
-      onChanged: (value) => _showSnackBar('Description', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.description = value;
+        });
+        _showSnackBar('Description', value);
+      },
     );
   }
 
@@ -443,7 +507,12 @@ class _PonyExampleState extends State<PonyExample> {
         return null;
       },
       onSaved: (value) => _ponyModel.age = value,
-      onChanged: (value) => _showSnackBar('Age', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.age = value;
+        });
+        _showSnackBar('Age', value);
+      },
     );
   }
 
@@ -460,7 +529,12 @@ class _PonyExampleState extends State<PonyExample> {
         return null;
       },
       onSaved: (value) => _ponyModel.type = value,
-      onChanged: (value) => _showSnackBar('Type', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.type = value;
+        });
+        _showSnackBar('Type', value);
+      },
     );
   }
 
@@ -477,7 +551,12 @@ class _PonyExampleState extends State<PonyExample> {
         return null;
       },
       onSaved: (value) => _ponyModel.name = value,
-      onChanged: (value) => _showSnackBar('Name', value),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.name = value;
+        });
+        _showSnackBar('Name', value);
+      },
     );
   }
 

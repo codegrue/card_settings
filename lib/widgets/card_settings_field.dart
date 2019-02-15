@@ -35,7 +35,7 @@ class CardSettingsField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (visible ?? true)
+    return (visible)
         ? Container(
             decoration: BoxDecoration(
               border: Border(
