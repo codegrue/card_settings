@@ -5,6 +5,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
+import 'dart:io';
 
 import '../../card_settings.dart';
 
@@ -134,6 +136,26 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isIOS) {
+      return GestureDetector(
+        onTap: () {
+          _showDialog(widget?.label, widget?.options);
+        },
+        child: CSControl(
+          widget?.label,
+          Text(
+            widget?.initialValue ?? widget?.hintText ?? '',
+            style: Theme.of(context).textTheme.subhead.copyWith(
+                color: (value == null)
+                    ? Theme.of(context).hintColor
+                    : Theme.of(context).textTheme.subhead.color),
+            textAlign:
+                widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+          ),
+          style: CSWidgetStyle(icon: widget?.icon),
+        ),
+      );
+    }
     return GestureDetector(
       onTap: () {
         _showDialog(widget?.label, widget?.options);

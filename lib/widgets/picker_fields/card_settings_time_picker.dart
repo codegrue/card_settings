@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 import '../../card_settings.dart';
 
@@ -101,6 +102,23 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isIOS) {
+      return GestureDetector(
+        onTap: () {
+          _showDialog();
+        },
+        child: CSControl(
+          widget?.label,
+          Text(
+            value == null ? '' : value.format(context),
+            style: widget?.style ?? Theme.of(context).textTheme.subhead,
+            textAlign:
+                widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+          ),
+          style: CSWidgetStyle(icon: widget?.icon),
+        ),
+      );
+    }
     return GestureDetector(
       onTap: () {
         _showDialog();

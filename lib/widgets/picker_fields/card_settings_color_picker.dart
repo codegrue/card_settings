@@ -158,13 +158,13 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
-      return CSControl(
-        widget?.label,
-        GestureDetector(
-          onTap: () {
-            _showDialog("Color for " + widget?.label);
-          },
-          child: Container(
+      return GestureDetector(
+        onTap: () {
+          _showDialog("Color for " + widget?.label);
+        },
+        child: CSControl(
+          widget?.label,
+          Container(
             height: 20.0,
             width: 100.0,
             decoration: BoxDecoration(
@@ -172,8 +172,8 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
+          style: CSWidgetStyle(icon: widget?.icon),
         ),
-        style: CSWidgetStyle(icon: widget?.icon),
       );
     }
     return GestureDetector(
