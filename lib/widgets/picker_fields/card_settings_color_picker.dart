@@ -3,6 +3,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'dart:io';
+import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 import '../../card_settings.dart';
 
@@ -155,6 +157,25 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isIOS) {
+      return CSControl(
+        widget?.label,
+        GestureDetector(
+          onTap: () {
+            _showDialog("Color for " + widget?.label);
+          },
+          child: Container(
+            height: 20.0,
+            width: 100.0,
+            decoration: BoxDecoration(
+              color: value,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+        ),
+        style: CSWidgetStyle(icon: widget?.icon),
+      );
+    }
     return GestureDetector(
       onTap: () {
         _showDialog("Color for " + widget?.label);
