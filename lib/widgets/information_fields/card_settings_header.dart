@@ -1,7 +1,10 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 /// This is a header to distinguish sections of the form.
 class CardSettingsHeader extends StatelessWidget {
@@ -19,6 +22,9 @@ class CardSettingsHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isIOS) {
+      return CSHeader(label);
+    }
     return Container(
       margin: EdgeInsets.all(0.0),
       decoration: BoxDecoration(color: color ?? Theme.of(context).accentColor),

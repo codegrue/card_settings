@@ -2,6 +2,8 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
+import 'dart:io';
 
 /// This is the card wrapper that all the field controls are placed into
 class CardSettings extends InheritedWidget {
@@ -16,16 +18,18 @@ class CardSettings extends InheritedWidget {
     this.children,
   }) : super(
           key: key,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.all(padding),
-            child: Card(
-              margin: EdgeInsets.all(0.0),
-              elevation: cardElevation,
-              child: Column(
-                children: children,
-              ),
-            ),
-          ),
+          child: Platform.isIOS
+              ? CupertinoSettings(children)
+              : SingleChildScrollView(
+                  padding: EdgeInsets.all(padding),
+                  child: Card(
+                    margin: EdgeInsets.all(0.0),
+                    elevation: cardElevation,
+                    child: Column(
+                      children: children,
+                    ),
+                  ),
+                ),
         );
 
   final List<Widget> children;

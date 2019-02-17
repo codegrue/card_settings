@@ -3,6 +3,8 @@
 
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
+import 'dart:io';
 
 /// This is the basic layout of a field in a CardSettings view. Typcially, it
 /// will not be used directly.
@@ -35,30 +37,45 @@ class CardSettingsField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (visible)
-        ? Container(
-            decoration: BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(
-                      width: 1.0, color: Theme.of(context).dividerColor)),
-            ),
-            padding: EdgeInsets.all(14.0),
-            child: Column(
+    if (visible) {
+      // if (Platform.isIOS) {
+      //   return Column(
+      //     crossAxisAlignment: CrossAxisAlignment.start,
+      //     children: <Widget>[
+      //       CSControl(
+      //         label,
+      //         content,
+      //         style: CSWidgetStyle(icon: icon),
+      //       ),
+      //       // _buildNewRowContent(context),
+      //     ],
+      //   );
+      // }
+      return Container(
+        decoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(
+                  width: 1.0, color: Theme.of(context).dividerColor)),
+        ),
+        padding: EdgeInsets.all(14.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    _buildLabelRow(context),
-                    _buildInlineContent(context),
-                    _buildRightDecoration()
-                  ],
-                ),
-                _buildNewRowContent(context)
+                _buildLabelRow(context),
+                _buildInlineContent(context),
+                _buildRightDecoration()
               ],
             ),
-          )
-        : Container();
+            _buildNewRowContent(context)
+          ],
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 
   Widget _buildInlineContent(BuildContext context) {
@@ -67,12 +84,14 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget _buildNewRowContent(BuildContext context) {
-    return (contentOnNewLine)
-        ? Container(
-            padding: EdgeInsets.only(top: 10.0),
-            child: _buildDecoratedContent(context),
-          )
-        : Container();
+    if (contentOnNewLine) {
+      return Container(
+        padding: EdgeInsets.only(top: 10.0),
+        child: _buildDecoratedContent(context),
+      );
+    } else {
+      return Container();
+    }
   }
 
   Widget _buildDecoratedContent(BuildContext context) {
