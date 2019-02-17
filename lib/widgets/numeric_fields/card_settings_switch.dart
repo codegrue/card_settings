@@ -67,7 +67,7 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
     if (Platform.isIOS) {
       return CSControl(
           widget?.label,
-          CupertinoSwitc
+          CupertinoSwitch(
             value: value,
             onChanged: (value) {
               didChange(value);
