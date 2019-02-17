@@ -3,6 +3,8 @@
 
 import 'package:card_settings/helpers/checkbox_dialog.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 import '../../card_settings.dart';
 
@@ -77,6 +79,22 @@ class _CardSettingsMultiselectState extends FormFieldState<List<String>> {
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isIOS) {
+      return CSControl(
+        widget?.label,
+        GestureDetector(
+          onTap: () {
+            _showDialog(widget?.label, widget?.options);
+          },
+          child: Text(value == null
+              ? "None Selected"
+              : value.length == 1
+                  ? "${value[0]}"
+                  : "${value[0]} & ${value.length - 1} more"),
+        ),
+        style: CSWidgetStyle(icon: widget?.icon),
+      );
+    }
     return GestureDetector(
       onTap: () {
         _showDialog(widget?.label, widget?.options);

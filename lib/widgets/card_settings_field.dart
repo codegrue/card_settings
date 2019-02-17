@@ -38,19 +38,6 @@ class CardSettingsField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (visible) {
-      // if (Platform.isIOS) {
-      //   return Column(
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: <Widget>[
-      //       CSControl(
-      //         label,
-      //         content,
-      //         style: CSWidgetStyle(icon: icon),
-      //       ),
-      //       // _buildNewRowContent(context),
-      //     ],
-      //   );
-      // }
       return Container(
         decoration: BoxDecoration(
           border: Border(
