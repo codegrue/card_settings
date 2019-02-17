@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:card_settings/card_settings.dart';
 import 'results.dart';
 import 'model.dart';
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 
 void main() => runApp(MyApp());
 
@@ -75,15 +77,15 @@ class _PonyExampleState extends State<PonyExample> {
 
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Platform.isIOS
+          ? CupertinoColors.lightBackgroundGray
+          : Theme.of(context).backgroundColor,
       appBar: appBar(),
-      body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: (orientation == Orientation.portrait)
-              ? _buildPortraitLayout()
-              : _buildLandscapeLayout(),
-        ),
+      body: Form(
+        key: _formKey,
+        child: (orientation == Orientation.portrait)
+            ? _buildPortraitLayout()
+            : _buildLandscapeLayout(),
       ),
     );
   }
@@ -105,90 +107,135 @@ class _PonyExampleState extends State<PonyExample> {
   /* CARDSETTINGS FOR EACH LAYOUT */
 
   CardSettings _buildPortraitLayout() {
-    return CardSettings(
-      children: <Widget>[
-        CardSettingsHeader(label: 'Bio'),
-        _buildCardSettingsText_Name(),
-        _buildCardSettingsListPicker_Type(),
-        _buildCardSettingsNumberPicker(),
-        _buildCardSettingsParagraph(5),
-        _buildCardSettingsMultiselect(),
-        CardSettingsHeader(label: 'Colors'),
-        _buildCardSettingsColorPicker_Coat(),
-        _buildCardSettingsColorPicker_Mane(),
-        _buildCardSettingsSwitch_Spots(),
-        _buildCardSettingsColorPicker_Spot(),
-        CardSettingsHeader(label: 'Size'),
-        _buildCardSettingsDouble_Height(),
-        _buildCardSettingsInt_Weight(),
-        CardSettingsHeader(label: 'First Show'),
-        _buildCardSettingsInstructions(),
-        _buildCardSettingsDatePicker(),
-        _buildCardSettingsTimePicker(),
-        _buildCardSettingsCurrency(),
-        _buildCardSettingsPhone(),
-        CardSettingsHeader(label: 'Security'),
-        _buildCardSettingsEmail(),
-        _buildCardSettingsPassword(),
-        CardSettingsHeader(label: 'Actions'),
-        _buildCardSettingsButton_Save(),
-        _buildCardSettingsButton_Reset(),
-        Container(height: 4.0)
+    return CardSettings.sectioned(
+      children: <CardSettingsSection>[
+        CardSettingsSection(
+          header: CardSettingsHeader(label: 'Bio'),
+          children: <Widget>[
+            _buildCardSettingsText_Name(),
+            _buildCardSettingsListPicker_Type(),
+            _buildCardSettingsNumberPicker(),
+            _buildCardSettingsParagraph(5),
+            _buildCardSettingsMultiselect(),
+          ],
+        ),
+        CardSettingsSection(
+          header: CardSettingsHeader(label: 'Colors'),
+          children: <Widget>[
+            _buildCardSettingsColorPicker_Coat(),
+            _buildCardSettingsColorPicker_Mane(),
+            _buildCardSettingsSwitch_Spots(),
+            _buildCardSettingsColorPicker_Spot(),
+          ],
+        ),
+        CardSettingsSection(
+          header: CardSettingsHeader(label: 'Size'),
+          children: <Widget>[
+            _buildCardSettingsDouble_Height(),
+            _buildCardSettingsInt_Weight(),
+          ],
+        ),
+        CardSettingsSection(
+          header: CardSettingsHeader(label: 'First Show'),
+          instructions: _buildCardSettingsInstructions(),
+          children: <Widget>[
+            _buildCardSettingsDatePicker(),
+            _buildCardSettingsTimePicker(),
+            _buildCardSettingsCurrency(),
+            _buildCardSettingsPhone(),
+          ],
+        ),
+        CardSettingsSection(
+          header: CardSettingsHeader(label: 'Security'),
+          children: <Widget>[
+            _buildCardSettingsEmail(),
+            _buildCardSettingsPassword(),
+          ],
+        ),
+        CardSettingsSection(
+          header: CardSettingsHeader(label: 'Actions'),
+          children: <Widget>[
+            _buildCardSettingsButton_Save(),
+            _buildCardSettingsButton_Reset(),
+          ],
+        ),
       ],
     );
   }
 
   CardSettings _buildLandscapeLayout() {
-    return CardSettings(
+    return CardSettings.sectioned(
       labelPadding: 12.0,
-      children: <Widget>[
-        CardSettingsHeader(label: 'Bio'),
-        _buildCardSettingsText_Name(),
-        CardFieldLayout(
-          <Widget>[
-            _buildCardSettingsListPicker_Type(),
-            _buildCardSettingsNumberPicker(labelAlign: TextAlign.right),
+      children: <CardSettingsSection>[
+        CardSettingsSection(
+          header: CardSettingsHeader(label: 'Bio'),
+          children: <Widget>[
+            _buildCardSettingsText_Name(),
+            CardFieldLayout(
+              <Widget>[
+                _buildCardSettingsListPicker_Type(),
+                _buildCardSettingsNumberPicker(labelAlign: TextAlign.right),
+              ],
+              flexValues: [2, 1],
+            ),
+            _buildCardSettingsParagraph(3),
+            _buildCardSettingsMultiselect(),
           ],
-          flexValues: [2, 1],
         ),
-        _buildCardSettingsParagraph(3),
-        _buildCardSettingsMultiselect(),
-        // note, different order than portrait to show state mapping
-        CardSettingsHeader(label: 'Security'),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsEmail(),
-          _buildCardSettingsPassword(),
-        ]),
-        CardSettingsHeader(label: 'Colors'),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsColorPicker_Coat(),
-          _buildCardSettingsColorPicker_Mane(),
-        ]),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsSwitch_Spots(),
-          _buildCardSettingsColorPicker_Spot(),
-        ]),
-        CardSettingsHeader(label: 'Size'),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsDouble_Height(),
-          _buildCardSettingsInt_Weight(),
-        ]),
-        CardSettingsHeader(label: 'First Show'),
-        _buildCardSettingsInstructions(),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsDatePicker(),
-          _buildCardSettingsTimePicker(),
-        ]),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsCurrency(),
-          _buildCardSettingsPhone(),
-        ]),
-        CardSettingsHeader(label: 'Actions'),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsButton_Save(),
-          _buildCardSettingsButton_Reset(),
-        ]),
-        Container(height: 4.0)
+        CardSettingsSection(
+          header: CardSettingsHeader(label: 'Security'),
+          children: <Widget>[
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsEmail(),
+              _buildCardSettingsPassword(),
+            ]),
+          ],
+        ),
+        CardSettingsSection(
+          header: CardSettingsHeader(label: 'Colors'),
+          children: <Widget>[
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsColorPicker_Coat(),
+              _buildCardSettingsColorPicker_Mane(),
+            ]),
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsSwitch_Spots(),
+              _buildCardSettingsColorPicker_Spot(),
+            ]),
+          ],
+        ),
+        CardSettingsSection(
+          header: CardSettingsHeader(label: 'Size'),
+          children: <Widget>[
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsDouble_Height(),
+              _buildCardSettingsInt_Weight(),
+            ]),
+          ],
+        ),
+        CardSettingsSection(
+          header: CardSettingsHeader(label: 'First Show'),
+          children: <Widget>[
+            _buildCardSettingsInstructions(),
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsDatePicker(),
+              _buildCardSettingsTimePicker(),
+            ]),
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsCurrency(),
+              _buildCardSettingsPhone(),
+            ]),
+          ],
+        ),
+        CardSettingsSection(
+          header: CardSettingsHeader(label: 'Actions'),
+          children: <Widget>[
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsButton_Save(),
+              _buildCardSettingsButton_Reset(),
+            ]),
+          ],
+        ),
       ],
     );
   }
@@ -198,6 +245,7 @@ class _PonyExampleState extends State<PonyExample> {
   CardSettingsButton _buildCardSettingsButton_Reset() {
     return CardSettingsButton(
       label: 'RESET',
+      isDestructive: true,
       onPressed: _resetPressed,
       backgroundColor: Colors.redAccent,
       textColor: Colors.white,

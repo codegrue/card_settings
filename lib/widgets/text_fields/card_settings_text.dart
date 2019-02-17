@@ -217,7 +217,6 @@ class _CardSettingsTextState extends FormFieldState<String> {
               //   hintText: widget?.hintText,
               // ),
               placeholder: widget?.hintText,
-              
               textAlign: TextAlign.end,
               autofocus: widget?.autofocus ?? false,
               obscureText: widget?.obscureText ?? false,

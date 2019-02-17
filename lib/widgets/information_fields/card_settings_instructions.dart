@@ -2,6 +2,7 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'dart:io';
 
@@ -23,9 +24,16 @@ class CardSettingsInstructions extends StatelessWidget {
         .primaryTextTheme
         .caption
         .copyWith(color: textColor ?? Theme.of(context).accentColor);
-    // if (Platform.isIOS) {
-    //   return CSHeader(text);
-    // }
+    if (Platform.isIOS) {
+      return Container(
+        padding: EdgeInsets.only(top: 8.0, left: 8.0),
+        child: Text(
+          text,
+          style: TextStyle(color: CupertinoColors.inactiveGray),
+        ),
+        color: CupertinoColors.lightBackgroundGray,
+      );
+    }
     return Container(
       margin: EdgeInsets.all(0.0),
       decoration:

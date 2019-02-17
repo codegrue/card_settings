@@ -6,7 +6,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
-import 'package:native_widgets/native_widgets.dart';
 
 import '../../card_settings.dart';
 
@@ -96,7 +95,7 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
           padding: EdgeInsets.all(0.0),
           child: Container(
             height: 20.0,
-            child: NativeSwitch(
+            child: CupertinoSwitch(
               value: value,
               onChanged: (value) {
                 didChange(value);

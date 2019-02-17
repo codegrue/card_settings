@@ -14,7 +14,6 @@ dependencies:
   flutter_cupertino_settings: ^0.0.9+1
   intl: ^0.15.6
   meta: ^1.1.6
-  native_widgets:
   
 dev_dependencies:
   flutter_test:
