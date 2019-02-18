@@ -1,8 +1,12 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 import '../../card_settings.dart';
 
@@ -29,6 +33,7 @@ class CardSettingsColorPicker extends FormField<Color> {
     this.labelAlign,
     this.requiredIndicator,
     this.label = "Label",
+    this.showMaterialIOS = false,
   }) : super(
             key: key,
             initialValue: initialValue ?? Colors.black,
@@ -53,6 +58,8 @@ class CardSettingsColorPicker extends FormField<Color> {
 
   final bool visible;
 
+  final bool showMaterialIOS;
+
   @override
   _CardSettingsColorPickerState createState() =>
       _CardSettingsColorPickerState();
@@ -63,98 +70,137 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   CardSettingsColorPicker get widget => super.widget as CardSettingsColorPicker;
 
   void _showDialog(String title) {
-    Color _pickerColor = value;
+    if (Platform.isIOS && !widget.showMaterialIOS) {
+      Color _pickerColor = value;
 
-    showDialog<Color>(
-      context: context,
-      builder: (BuildContext context) {
-        Widget header = Container(
-          color: Theme.of(context).primaryColor,
-          height: _kPickerHeaderPortraitHeight,
-          child: Center(
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: 20.0,
-                color: const Color(0xffffffff),
-              ),
-            ),
-          ),
-          padding: EdgeInsets.all(20.0),
-        );
-
-        Widget picker = Container(
-          child: ColorPicker(
-            pickerColor: _pickerColor,
-            onColorChanged: (color) => _pickerColor = color,
-            colorPickerWidth: 1000.0,
-            enableLabel: true,
-            pickerAreaHeightPercent: 0.7,
-          ),
-        );
-
-        final Widget actions = ButtonTheme.bar(
-          child: Container(
-            height: _kDialogActionBarHeight,
-            child: ButtonBar(
-              children: <Widget>[
-                FlatButton(
-                  child: Text('CANCEL'),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-                FlatButton(
-                  child: Text('OK'),
-                  onPressed: () => Navigator.of(context).pop(_pickerColor),
-                ),
-              ],
-            ),
-          ),
-        );
-
-        return Dialog(
-          child: OrientationBuilder(
-            builder: (BuildContext context, Orientation orientation) {
-              assert(orientation != null);
-              assert(context != null);
-              return SizedBox(
-                width: (orientation == Orientation.portrait)
-                    ? _kPickerPortraitWidth
-                    : _kPickerLandscapeWidth,
-                height: (orientation == Orientation.portrait)
-                    ? _kPickerPortraitHeight
-                    : _kPickerLandscapeHeight,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    header,
-                    Container(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          picker,
-                          actions,
-                        ],
+      showCupertinoDialog<Color>(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: Text(title),
+            content: Container(
+              height: 330.0,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Expanded(
+                    child: Material(
+                      color: Colors.transparent,
+                      child: ColorPicker(
+                        pickerColor: _pickerColor,
+                        onColorChanged: (color) => _pickerColor = color,
+                        colorPickerWidth: MediaQuery.of(context).size.width,
+                        pickerAreaHeightPercent: 0.7,
+                        enableAlpha: true,
                       ),
                     ),
-                  ],
-                ),
-              );
-            },
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                child: Text('Cancel'),
+                isDefaultAction: true,
+                onPressed: () =>
+                    Navigator.of(context, rootNavigator: true).pop(),
+              ),
+              CupertinoDialogAction(
+                child: Text('Ok'),
+                onPressed: () => Navigator.of(context, rootNavigator: true)
+                    .pop(_pickerColor),
+              ),
+            ],
+          );
+        },
+      ).then((value) {
+        if (value != null) {
+          didChange(value);
+          if (widget.onChanged != null) widget.onChanged(value);
+        }
+      });
+    } else {
+      Color _pickerColor = value;
+
+      Widget header = Container(
+        color: Theme.of(context).primaryColor,
+        height: _kPickerHeaderPortraitHeight,
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 20.0,
+              color: const Color(0xffffffff),
+            ),
           ),
-        );
-      },
-    ).then((value) {
-      if (value != null) {
-        didChange(value);
-        if (widget.onChanged != null) widget.onChanged(value);
-      }
-    });
+        ),
+        padding: EdgeInsets.all(20.0),
+      );
+
+      showDialog<Color>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: header,
+            titlePadding: const EdgeInsets.all(0.0),
+            contentPadding: const EdgeInsets.all(0.0),
+            content: SingleChildScrollView(
+              child: ColorPicker(
+                pickerColor: _pickerColor,
+                onColorChanged: (color) => _pickerColor = color,
+                colorPickerWidth: MediaQuery.of(context).size.width,
+                pickerAreaHeightPercent: 0.7,
+                enableAlpha: true,
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('CANCEL'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              FlatButton(
+                child: Text('OK'),
+                onPressed: () => Navigator.of(context).pop(_pickerColor),
+              ),
+            ],
+          );
+        },
+      ).then((value) {
+        if (value != null) {
+          didChange(value);
+          if (widget.onChanged != null) widget.onChanged(value);
+        }
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isIOS && !widget.showMaterialIOS) {
+      return Container(
+        child: widget?.visible == false
+            ? null
+            : GestureDetector(
+                onTap: () {
+                  _showDialog("Color for " + widget?.label);
+                },
+                child: CSControl(
+                  widget?.requiredIndicator != null
+                      ? (widget?.label ?? "") + ' *'
+                      : widget?.label,
+                  Container(
+                    height: 20.0,
+                    width: 100.0,
+                    decoration: BoxDecoration(
+                      color: value,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  style: CSWidgetStyle(icon: widget?.icon),
+                ),
+              ),
+      );
+    }
     return GestureDetector(
       onTap: () {
         _showDialog("Color for " + widget?.label);

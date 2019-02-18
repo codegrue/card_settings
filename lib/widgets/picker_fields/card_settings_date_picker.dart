@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:intl/intl.dart';
 
 import '../../card_settings.dart';
@@ -28,6 +29,7 @@ class CardSettingsDatePicker extends FormField<DateTime> {
     this.firstDate,
     this.lastDate,
     this.style,
+    this.showMaterialIOS = false,
   }) : super(
           key: key,
           initialValue: initialValue ?? DateTime.now(),
@@ -60,6 +62,8 @@ class CardSettingsDatePicker extends FormField<DateTime> {
 
   final TextStyle style;
 
+  final bool showMaterialIOS;
+
   @override
   _CardSettingsDatePickerState createState() => _CardSettingsDatePickerState();
 }
@@ -68,13 +72,14 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   @override
   CardSettingsDatePicker get widget => super.widget as CardSettingsDatePicker;
 
-  void _showDialog({bool showMaterial = false}) {
+  void _showDialog() {
     DateTime _startDate = widget?.firstDate ?? DateTime.now();
     if ((value ?? DateTime.now()).isBefore(_startDate)) {
       _startDate = value;
     }
     final _endDate = widget?.lastDate ?? _startDate.add(Duration(days: 1800));
-    if (Platform.isIOS && !showMaterial) {
+  
+    if (Platform.isIOS && !widget.showMaterialIOS) {
       showCupertinoModalPopup<DateTime>(
         context: context,
         builder: (BuildContext context) {
@@ -118,12 +123,30 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isIOS && !widget.showMaterialIOS) {
+      return Container(
+        child: widget?.visible == false
+            ? null
+            : GestureDetector(
+                onTap: () {
+                  _showDialog();
+                },
+                child: CSControl(
+                  widget?.label,
+                  Text(
+                    value == null ? '' : DateFormat.yMd().format(value),
+                    style: widget?.style ?? Theme.of(context).textTheme.subhead,
+                    textAlign: widget?.contentAlign ??
+                        CardSettings.of(context).contentAlign,
+                  ),
+                  style: CSWidgetStyle(icon: widget?.icon),
+                ),
+              ),
+      );
+    }
     return GestureDetector(
       onTap: () {
         _showDialog();
-      },
-      onLongPress: () {
-        _showDialog(showMaterial: true);
       },
       child: CardSettingsField(
         label: widget?.label ?? (widget.justDate ? "Date" : "Date Time"),

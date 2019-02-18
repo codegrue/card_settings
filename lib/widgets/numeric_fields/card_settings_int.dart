@@ -34,13 +34,19 @@ class CardSettingsInt extends CardSettingsText {
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
+    bool showMaterialIOS: false,
+
+    ///Shows a [red] [Border] around the [CupertinoTextField] since the [validator] does not exist
+    bool showErrorIOS: false,
   }) : super(
           key: key,
           label: label,
           labelAlign: labelAlign,
+          showMaterialIOS: showMaterialIOS,
           contentAlign: contentAlign,
           initialValue: initialValue.toString(),
           unitLabel: unitLabel,
+          showErrorIOS: showErrorIOS,
           icon: icon,
           requiredIndicator: requiredIndicator,
           maxLength: maxLength,

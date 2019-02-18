@@ -1,5 +1,13 @@
 # Releases
 
+## [1.4.] - 2/18/2019
+
+* Added Optional override for showing material on iOS
+* Added Cupertino Forms and all Cupertino Equilivant Controls and Actions
+* Updated Example
+* [Warning] For the text fields on iOS using [CupertinoTextFields] the [validator] and [onSaved] do not exist, please use [showErrorIOS] to show a [red] Border around the Text Field and [onChanged] and [onFieldSubmitted] to update the value like in the example.
+* Require Indicator on iOS will show * next to the label if [requireIndicator] is not equal to null.
+
 ## [1.3.1] - 2/15/2019
 
 * Updated Build Methodes for All Widgets (No More Errors for Dart 2)

@@ -34,10 +34,15 @@ class CardSettingsEmail extends CardSettingsText {
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
+    bool showMaterialIOS: false,
+
+    ///Shows a [red] [Border] around the [CupertinoTextField] since the [validator] does not exist
+    bool showErrorIOS: false,
   }) : super(
           key: key,
           label: label,
           labelAlign: labelAlign,
+          showMaterialIOS: showMaterialIOS,
           contentAlign: contentAlign,
           contentOnNewLine: contentOnNewLine,
           initialValue: initialValue,
@@ -52,6 +57,7 @@ class CardSettingsEmail extends CardSettingsText {
           autovalidate: autovalidate,
           validator: validator,
           onSaved: onSaved,
+          showErrorIOS: showErrorIOS,
           onChanged: onChanged,
           controller: controller,
           focusNode: focusNode,

@@ -2,6 +2,9 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
+import 'dart:io';
 
 /// This is a read only section of text
 class CardSettingsInstructions extends StatelessWidget {
@@ -9,11 +12,13 @@ class CardSettingsInstructions extends StatelessWidget {
     this.text: 'Instructions here...',
     this.backgroundColor,
     this.textColor,
+    this.showMaterialIOS = false,
   });
 
   final String text;
   final Color backgroundColor;
   final Color textColor;
+  final bool showMaterialIOS;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,16 @@ class CardSettingsInstructions extends StatelessWidget {
         .primaryTextTheme
         .caption
         .copyWith(color: textColor ?? Theme.of(context).accentColor);
-
+    if (Platform.isIOS && !showMaterialIOS) {
+      return Container(
+        padding: EdgeInsets.only(top: 8.0, left: 8.0),
+        child: Text(
+          text,
+          style: TextStyle(color: CupertinoColors.inactiveGray),
+        ),
+        color: CupertinoColors.lightBackgroundGray,
+      );
+    }
     return Container(
       margin: EdgeInsets.all(0.0),
       decoration:

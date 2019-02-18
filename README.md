@@ -37,6 +37,9 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
 
 All fields support `validate`, `onChange`, `onSaved`, `autovalidate`, and `visible`.
 
+* [Warning] For the text fields on iOS using [CupertinoTextFields] the [validator] and [onSaved] do not exist, please use [showErrorIOS] to show a [red] Border around the Text Field and [onChanged] and [onFieldSubmitted] to update the value like in the example.
+* Require Indicator on iOS will show * next to the label if [requireIndicator] is not equal to null. (For Example: 'label *')
+
 The package also includes these additonal items:
 
 - *CardSettingsField* - The base layout widget. You can use this to build custom fields

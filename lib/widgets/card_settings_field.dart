@@ -35,30 +35,32 @@ class CardSettingsField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (visible)
-        ? Container(
-            decoration: BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(
-                      width: 1.0, color: Theme.of(context).dividerColor)),
-            ),
-            padding: EdgeInsets.all(14.0),
-            child: Column(
+    if (visible) {
+      return Container(
+        decoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(
+                  width: 1.0, color: Theme.of(context).dividerColor)),
+        ),
+        padding: EdgeInsets.all(14.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    _buildLabelRow(context),
-                    _buildInlineContent(context),
-                    _buildRightDecoration()
-                  ],
-                ),
-                _buildNewRowContent(context)
+                _buildLabelRow(context),
+                _buildInlineContent(context),
+                _buildRightDecoration()
               ],
             ),
-          )
-        : Container();
+            _buildNewRowContent(context)
+          ],
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 
   Widget _buildInlineContent(BuildContext context) {
@@ -67,12 +69,14 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget _buildNewRowContent(BuildContext context) {
-    return (contentOnNewLine)
-        ? Container(
-            padding: EdgeInsets.only(top: 10.0),
-            child: _buildDecoratedContent(context),
-          )
-        : Container();
+    if (contentOnNewLine) {
+      return Container(
+        padding: EdgeInsets.only(top: 10.0),
+        child: _buildDecoratedContent(context),
+      );
+    } else {
+      return Container();
+    }
   }
 
   Widget _buildDecoratedContent(BuildContext context) {

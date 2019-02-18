@@ -38,35 +38,68 @@ class CardSettingsCurrency extends StatefulWidget {
     this.maxLengthEnforced: true,
     this.onFieldSubmitted,
     this.inputFormatters,
+    this.showMaterialIOS = false,
+    this.showErrorIOS = false,
   });
 
   final String label;
+
   final TextAlign labelAlign;
+
   final TextAlign contentAlign;
+
   final double initialValue;
+
   final Icon icon;
+
   final Widget requiredIndicator;
+
   final String currencySymbol;
+
   final String currencyName;
+
   final String decimalSeparator;
+
   final String thousandSeparator;
+
   final int maxLength;
+
   final bool visible;
+
   final bool enabled;
+
   final bool autofocus;
+
   final bool obscureText;
+
   final bool autocorrect;
+
   final bool autovalidate;
+
   final FormFieldValidator<double> validator;
+
   final FormFieldSetter<double> onSaved;
+
   final ValueChanged<double> onChanged;
+
   final TextEditingController controller;
+
   final FocusNode focusNode;
+
   final TextInputType keyboardType;
+
   final TextStyle style;
+
   final bool maxLengthEnforced;
+
   final ValueChanged<String> onFieldSubmitted;
+
   final List<TextInputFormatter> inputFormatters;
+
+  final bool showMaterialIOS;
+
+  ///Shows a [red] [Border] around the [CupertinoTextField] since the [validator] does not exist
+  final bool showErrorIOS;
 
   @override
   CardSettingsCurrencyState createState() {
@@ -91,7 +124,9 @@ class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
   @override
   Widget build(BuildContext context) {
     return CardSettingsText(
+      showMaterialIOS: widget?.showMaterialIOS,
       label: widget.label,
+      showErrorIOS: widget?.showErrorIOS,
       labelAlign: widget.labelAlign,
       contentAlign: widget.contentAlign,
       initialValue: widget.initialValue.toString(),

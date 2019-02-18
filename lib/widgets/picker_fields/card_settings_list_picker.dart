@@ -5,6 +5,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
+import 'dart:io';
 
 import '../../card_settings.dart';
 
@@ -25,6 +27,7 @@ class CardSettingsListPicker extends FormField<String> {
     this.contentAlign,
     this.hintText,
     this.options,
+    this.showMaterialIOS = false,
   }) : super(
             key: key,
             initialValue: initialValue ?? null,
@@ -52,6 +55,8 @@ class CardSettingsListPicker extends FormField<String> {
 
   final bool visible;
 
+  final bool showMaterialIOS;
+
   @override
   _CardSettingsListPickerState createState() => _CardSettingsListPickerState();
 }
@@ -60,9 +65,8 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   @override
   CardSettingsListPicker get widget => super.widget as CardSettingsListPicker;
 
-  void _showDialog(String label, List<String> options,
-      {bool showMaterial = false}) {
-    if (Platform.isIOS && !showMaterial) {
+  void _showDialog(String label, List<String> options) {
+    if (Platform.isIOS && !widget.showMaterialIOS) {
       final FixedExtentScrollController scrollController =
           FixedExtentScrollController(
               initialItem: options.indexOf(value ?? options.first));
@@ -135,6 +139,30 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isIOS && !widget.showMaterialIOS) {
+      return Container(
+        child: widget?.visible == false
+            ? null
+            : GestureDetector(
+                onTap: () {
+                  _showDialog(widget?.label, widget?.options);
+                },
+                child: CSControl(
+                  widget?.label,
+                  Text(
+                    widget?.initialValue ?? widget?.hintText ?? '',
+                    style: Theme.of(context).textTheme.subhead.copyWith(
+                        color: (value == null)
+                            ? Theme.of(context).hintColor
+                            : Theme.of(context).textTheme.subhead.color),
+                    textAlign: widget?.contentAlign ??
+                        CardSettings.of(context).contentAlign,
+                  ),
+                  style: CSWidgetStyle(icon: widget?.icon),
+                ),
+              ),
+      );
+    }
     return GestureDetector(
       onTap: () {
         _showDialog(widget?.label, widget?.options);

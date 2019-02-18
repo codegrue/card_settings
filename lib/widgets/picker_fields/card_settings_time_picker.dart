@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 import '../../card_settings.dart';
 
@@ -25,6 +26,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
     this.label = 'Label',
     this.icon,
     this.style,
+    this.showMaterialIOS = false,
   }) : super(
           key: key,
           initialValue: initialValue ?? TimeOfDay.now(),
@@ -51,6 +53,8 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
 
   final TextStyle style;
 
+  final bool showMaterialIOS;
+
   @override
   _CardSettingsTimePickerState createState() => _CardSettingsTimePickerState();
 }
@@ -59,8 +63,8 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
   @override
   CardSettingsTimePicker get widget => super.widget as CardSettingsTimePicker;
 
-  void _showDialog({bool showMaterial = false}) {
-    if (Platform.isIOS && !showMaterial) {
+  void _showDialog() {
+    if (Platform.isIOS && !widget.showMaterialIOS) {
       showCupertinoModalPopup<DateTime>(
         context: context,
         builder: (BuildContext context) {
@@ -101,12 +105,32 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isIOS && !widget.showMaterialIOS) {
+      return Container(
+        child: widget?.visible == false
+            ? null
+            : GestureDetector(
+                onTap: () {
+                  _showDialog();
+                },
+                child: CSControl(
+                  widget?.requiredIndicator != null
+                      ? (widget?.label ?? "") + ' *'
+                      : widget?.label,
+                  Text(
+                    value == null ? '' : value.format(context),
+                    style: widget?.style ?? Theme.of(context).textTheme.subhead,
+                    textAlign: widget?.contentAlign ??
+                        CardSettings.of(context).contentAlign,
+                  ),
+                  style: CSWidgetStyle(icon: widget?.icon),
+                ),
+              ),
+      );
+    }
     return GestureDetector(
       onTap: () {
         _showDialog();
-      },
-      onLongPress: () {
-        _showDialog(showMaterial: true);
       },
       child: CardSettingsField(
         label: widget?.label ?? "Time",

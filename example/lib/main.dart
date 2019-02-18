@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:card_settings/card_settings.dart';
 import 'results.dart';
 import 'model.dart';
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 void main() => runApp(MyApp());
 
@@ -69,28 +72,32 @@ class _PonyExampleState extends State<PonyExample> {
   final GlobalKey<FormState> _emailKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _passwordKey = GlobalKey<FormState>();
 
+  bool _showMaterialIOS = false;
+
   @override
   Widget build(BuildContext context) {
     var orientation = MediaQuery.of(context).orientation;
 
-    return Scaffold(
+    return PlatformScaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).backgroundColor,
-      appBar: appBar(),
-      body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: (orientation == Orientation.portrait)
-              ? _buildPortraitLayout()
-              : _buildLandscapeLayout(),
-        ),
-      ),
-    );
-  }
-
-  AppBar appBar() => AppBar(
+      backgroundColor: Platform.isIOS && !_showMaterialIOS
+          ? CupertinoColors.lightBackgroundGray
+          : Theme.of(context).backgroundColor,
+      appBar: PlatformAppBar(
         title: Text("My Little Pony"),
-        actions: <Widget>[
+        trailingActions: <Widget>[
+          Container(
+            child: Platform.isIOS
+                ? IconButton(
+                    icon: Icon(Icons.swap_calls),
+                    onPressed: () {
+                      setState(() {
+                        _showMaterialIOS = !_showMaterialIOS;
+                      });
+                    },
+                  )
+                : null,
+          ),
           IconButton(
             icon: Icon(Icons.save),
             onPressed: _savePressed,
@@ -100,95 +107,198 @@ class _PonyExampleState extends State<PonyExample> {
           icon: Icon(Icons.refresh),
           onPressed: _resetPressed,
         ),
-      );
+      ),
+      body: Form(
+        key: _formKey,
+        child: (orientation == Orientation.portrait)
+            ? _buildPortraitLayout()
+            : _buildLandscapeLayout(),
+      ),
+    );
+  }
 
   /* CARDSETTINGS FOR EACH LAYOUT */
 
   CardSettings _buildPortraitLayout() {
-    return CardSettings(
-      children: <Widget>[
-        CardSettingsHeader(label: 'Bio'),
-        _buildCardSettingsText_Name(),
-        _buildCardSettingsListPicker_Type(),
-        _buildCardSettingsNumberPicker(),
-        _buildCardSettingsParagraph(5),
-        _buildCardSettingsMultiselect(),
-        CardSettingsHeader(label: 'Colors'),
-        _buildCardSettingsColorPicker_Coat(),
-        _buildCardSettingsColorPicker_Mane(),
-        _buildCardSettingsSwitch_Spots(),
-        _buildCardSettingsColorPicker_Spot(),
-        CardSettingsHeader(label: 'Size'),
-        _buildCardSettingsDouble_Height(),
-        _buildCardSettingsInt_Weight(),
-        CardSettingsHeader(label: 'First Show'),
-        _buildCardSettingsInstructions(),
-        _buildCardSettingsDatePicker(),
-        _buildCardSettingsTimePicker(),
-        _buildCardSettingsCurrency(),
-        _buildCardSettingsPhone(),
-        CardSettingsHeader(label: 'Security'),
-        _buildCardSettingsEmail(),
-        _buildCardSettingsPassword(),
-        CardSettingsHeader(label: 'Actions'),
-        _buildCardSettingsButton_Save(),
-        _buildCardSettingsButton_Reset(),
-        Container(height: 4.0)
+    return CardSettings.sectioned(
+      showMaterialIOS: _showMaterialIOS,
+      children: <CardSettingsSection>[
+        CardSettingsSection(
+          showMaterialIOS: _showMaterialIOS,
+          header: CardSettingsHeader(
+            label: 'Bio',
+            showMaterialIOS: _showMaterialIOS,
+          ),
+          children: <Widget>[
+            _buildCardSettingsText_Name(),
+            _buildCardSettingsListPicker_Type(),
+            _buildCardSettingsNumberPicker(),
+            _buildCardSettingsParagraph(5),
+            _buildCardSettingsMultiselect(),
+          ],
+        ),
+        CardSettingsSection(
+          showMaterialIOS: _showMaterialIOS,
+          header: CardSettingsHeader(
+            label: 'Colors',
+            showMaterialIOS: _showMaterialIOS,
+          ),
+          children: <Widget>[
+            _buildCardSettingsColorPicker_Coat(),
+            _buildCardSettingsColorPicker_Mane(),
+            _buildCardSettingsSwitch_Spots(),
+            _buildCardSettingsColorPicker_Spot(),
+          ],
+        ),
+        CardSettingsSection(
+          showMaterialIOS: _showMaterialIOS,
+          header: CardSettingsHeader(
+            label: 'Size',
+            showMaterialIOS: _showMaterialIOS,
+          ),
+          children: <Widget>[
+            _buildCardSettingsDouble_Height(),
+            _buildCardSettingsInt_Weight(),
+          ],
+        ),
+        CardSettingsSection(
+          showMaterialIOS: _showMaterialIOS,
+          header: CardSettingsHeader(
+            label: 'First Show',
+            showMaterialIOS: _showMaterialIOS,
+          ),
+          instructions: _buildCardSettingsInstructions(),
+          children: <Widget>[
+            _buildCardSettingsDatePicker(),
+            _buildCardSettingsTimePicker(),
+            _buildCardSettingsCurrency(),
+            _buildCardSettingsPhone(),
+          ],
+        ),
+        CardSettingsSection(
+          showMaterialIOS: _showMaterialIOS,
+          header: CardSettingsHeader(
+            label: 'Security',
+            showMaterialIOS: _showMaterialIOS,
+          ),
+          children: <Widget>[
+            _buildCardSettingsEmail(),
+            _buildCardSettingsPassword(),
+          ],
+        ),
+        CardSettingsSection(
+          showMaterialIOS: _showMaterialIOS,
+          header: CardSettingsHeader(
+            label: 'Actions',
+            showMaterialIOS: _showMaterialIOS,
+          ),
+          children: <Widget>[
+            _buildCardSettingsButton_Save(),
+            _buildCardSettingsButton_Reset(),
+          ],
+        ),
       ],
     );
   }
 
   CardSettings _buildLandscapeLayout() {
-    return CardSettings(
+    return CardSettings.sectioned(
+      showMaterialIOS: _showMaterialIOS,
       labelPadding: 12.0,
-      children: <Widget>[
-        CardSettingsHeader(label: 'Bio'),
-        _buildCardSettingsText_Name(),
-        CardFieldLayout(
-          <Widget>[
-            _buildCardSettingsListPicker_Type(),
-            _buildCardSettingsNumberPicker(labelAlign: TextAlign.right),
+      children: <CardSettingsSection>[
+        CardSettingsSection(
+          showMaterialIOS: _showMaterialIOS,
+          header: CardSettingsHeader(
+            label: 'Bio',
+            showMaterialIOS: _showMaterialIOS,
+          ),
+          children: <Widget>[
+            _buildCardSettingsText_Name(),
+            CardFieldLayout(
+              <Widget>[
+                _buildCardSettingsListPicker_Type(),
+                _buildCardSettingsNumberPicker(labelAlign: TextAlign.right),
+              ],
+              flexValues: [2, 1],
+            ),
+            _buildCardSettingsParagraph(3),
+            _buildCardSettingsMultiselect(),
           ],
-          flexValues: [2, 1],
         ),
-        _buildCardSettingsParagraph(3),
-        _buildCardSettingsMultiselect(),
-        // note, different order than portrait to show state mapping
-        CardSettingsHeader(label: 'Security'),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsEmail(),
-          _buildCardSettingsPassword(),
-        ]),
-        CardSettingsHeader(label: 'Colors'),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsColorPicker_Coat(),
-          _buildCardSettingsColorPicker_Mane(),
-        ]),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsSwitch_Spots(),
-          _buildCardSettingsColorPicker_Spot(),
-        ]),
-        CardSettingsHeader(label: 'Size'),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsDouble_Height(),
-          _buildCardSettingsInt_Weight(),
-        ]),
-        CardSettingsHeader(label: 'First Show'),
-        _buildCardSettingsInstructions(),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsDatePicker(),
-          _buildCardSettingsTimePicker(),
-        ]),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsCurrency(),
-          _buildCardSettingsPhone(),
-        ]),
-        CardSettingsHeader(label: 'Actions'),
-        CardFieldLayout(<Widget>[
-          _buildCardSettingsButton_Save(),
-          _buildCardSettingsButton_Reset(),
-        ]),
-        Container(height: 4.0)
+        CardSettingsSection(
+          showMaterialIOS: _showMaterialIOS,
+          header: CardSettingsHeader(
+            label: 'Security',
+            showMaterialIOS: _showMaterialIOS,
+          ),
+          children: <Widget>[
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsEmail(),
+              _buildCardSettingsPassword(),
+            ]),
+          ],
+        ),
+        CardSettingsSection(
+          showMaterialIOS: _showMaterialIOS,
+          header: CardSettingsHeader(
+            label: 'Colors',
+            showMaterialIOS: _showMaterialIOS,
+          ),
+          children: <Widget>[
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsColorPicker_Coat(),
+              _buildCardSettingsColorPicker_Mane(),
+            ]),
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsSwitch_Spots(),
+              _buildCardSettingsColorPicker_Spot(),
+            ]),
+          ],
+        ),
+        CardSettingsSection(
+          showMaterialIOS: _showMaterialIOS,
+          header: CardSettingsHeader(
+            label: 'Size',
+            showMaterialIOS: _showMaterialIOS,
+          ),
+          children: <Widget>[
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsDouble_Height(),
+              _buildCardSettingsInt_Weight(),
+            ]),
+          ],
+        ),
+        CardSettingsSection(
+          showMaterialIOS: _showMaterialIOS,
+          header: CardSettingsHeader(
+            label: 'First Show',
+            showMaterialIOS: _showMaterialIOS,
+          ),
+          children: <Widget>[
+            _buildCardSettingsInstructions(),
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsDatePicker(),
+              _buildCardSettingsTimePicker(),
+            ]),
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsCurrency(),
+              _buildCardSettingsPhone(),
+            ]),
+          ],
+        ),
+        CardSettingsSection(
+          showMaterialIOS: _showMaterialIOS,
+          header: CardSettingsHeader(
+            label: 'Actions',
+            showMaterialIOS: _showMaterialIOS,
+          ),
+          children: <Widget>[
+            CardFieldLayout(<Widget>[
+              _buildCardSettingsButton_Save(),
+              _buildCardSettingsButton_Reset(),
+            ]),
+          ],
+        ),
       ],
     );
   }
@@ -197,7 +307,9 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsButton _buildCardSettingsButton_Reset() {
     return CardSettingsButton(
+      showMaterialIOS: _showMaterialIOS,
       label: 'RESET',
+      isDestructive: true,
       onPressed: _resetPressed,
       backgroundColor: Colors.redAccent,
       textColor: Colors.white,
@@ -206,6 +318,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsButton _buildCardSettingsButton_Save() {
     return CardSettingsButton(
+      showMaterialIOS: _showMaterialIOS,
       label: 'SAVE',
       onPressed: _savePressed,
     );
@@ -213,6 +326,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsPassword _buildCardSettingsPassword() {
     return CardSettingsPassword(
+      showMaterialIOS: _showMaterialIOS,
       key: _passwordKey,
       icon: Icon(Icons.lock),
       initialValue: _ponyModel.password,
@@ -234,6 +348,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsEmail _buildCardSettingsEmail() {
     return CardSettingsEmail(
+      showMaterialIOS: _showMaterialIOS,
       key: _emailKey,
       icon: Icon(Icons.person),
       initialValue: _ponyModel.email,
@@ -256,6 +371,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsPhone _buildCardSettingsPhone() {
     return CardSettingsPhone(
+      showMaterialIOS: _showMaterialIOS,
       key: _phoneKey,
       label: 'Box Office',
       initialValue: _ponyModel.boxOfficePhone,
@@ -277,6 +393,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsCurrency _buildCardSettingsCurrency() {
     return CardSettingsCurrency(
+      showMaterialIOS: _showMaterialIOS,
       key: _priceKey,
       label: 'Ticket Price',
       initialValue: _ponyModel.ticketPrice,
@@ -297,6 +414,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsTimePicker _buildCardSettingsTimePicker() {
     return CardSettingsTimePicker(
+      showMaterialIOS: _showMaterialIOS,
       key: _timeKey,
       icon: Icon(Icons.access_time),
       label: 'Time',
@@ -317,6 +435,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsDatePicker _buildCardSettingsDatePicker() {
     return CardSettingsDatePicker(
+      showMaterialIOS: _showMaterialIOS,
       key: _dateKey,
       justDate: true,
       icon: Icon(Icons.calendar_today),
@@ -336,12 +455,14 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsInstructions _buildCardSettingsInstructions() {
     return CardSettingsInstructions(
+      showMaterialIOS: _showMaterialIOS,
       text: 'This is when this little horse got her big break',
     );
   }
 
   CardSettingsInt _buildCardSettingsInt_Weight() {
     return CardSettingsInt(
+      showMaterialIOS: _showMaterialIOS,
       key: _weightKey,
       label: 'Weight',
       unitLabel: 'lbs',
@@ -366,6 +487,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsDouble _buildCardSettingsDouble_Height() {
     return CardSettingsDouble(
+      showMaterialIOS: _showMaterialIOS,
       key: _heightKey,
       label: 'Height',
       unitLabel: 'feet',
@@ -382,6 +504,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsColorPicker _buildCardSettingsColorPicker_Spot() {
     return CardSettingsColorPicker(
+      showMaterialIOS: _showMaterialIOS,
       key: _spotKey,
       label: 'Spot',
       initialValue: intelligentCast<Color>(_ponyModel.spotColor),
@@ -398,6 +521,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsSwitch _buildCardSettingsSwitch_Spots() {
     return CardSettingsSwitch(
+      showMaterialIOS: _showMaterialIOS,
       key: _hasSpotsKey,
       label: 'Has Spots?',
       initialValue: _ponyModel.hasSpots,
@@ -413,6 +537,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsColorPicker _buildCardSettingsColorPicker_Mane() {
     return CardSettingsColorPicker(
+      showMaterialIOS: _showMaterialIOS,
       key: _maneKey,
       label: 'Mane',
       initialValue: intelligentCast<Color>(_ponyModel.maneColor),
@@ -433,6 +558,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsColorPicker _buildCardSettingsColorPicker_Coat() {
     return CardSettingsColorPicker(
+      showMaterialIOS: _showMaterialIOS,
       key: _coatKey,
       label: 'Coat',
       initialValue: intelligentCast<Color>(_ponyModel.coatColor),
@@ -454,6 +580,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsMultiselect _buildCardSettingsMultiselect() {
     return CardSettingsMultiselect(
+      showMaterialIOS: _showMaterialIOS,
       key: _hobbiesKey,
       label: 'Hobbies',
       initialValues: _ponyModel.hobbies,
@@ -477,6 +604,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsParagraph _buildCardSettingsParagraph(int lines) {
     return CardSettingsParagraph(
+      showMaterialIOS: _showMaterialIOS,
       key: _descriptionlKey,
       label: 'Description',
       initialValue: _ponyModel.description,
@@ -494,6 +622,7 @@ class _PonyExampleState extends State<PonyExample> {
   CardSettingsNumberPicker _buildCardSettingsNumberPicker(
       {TextAlign labelAlign}) {
     return CardSettingsNumberPicker(
+      showMaterialIOS: _showMaterialIOS,
       key: _ageKey,
       label: 'Age',
       labelAlign: labelAlign,
@@ -518,6 +647,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsListPicker _buildCardSettingsListPicker_Type() {
     return CardSettingsListPicker(
+      showMaterialIOS: _showMaterialIOS,
       key: _typeKey,
       label: 'Type',
       initialValue: _ponyModel.type,
@@ -540,16 +670,19 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsText _buildCardSettingsText_Name() {
     return CardSettingsText(
+      showMaterialIOS: _showMaterialIOS,
       key: _nameKey,
       label: 'Name',
       hintText: 'something cute...',
       initialValue: _ponyModel.name,
       requiredIndicator: Text('*', style: TextStyle(color: Colors.red)),
       autovalidate: _autoValidate,
+      contentAlign: TextAlign.right,
       validator: (value) {
         if (value == null || value.isEmpty) return 'Name is required.';
         return null;
       },
+      showErrorIOS: _ponyModel.name == null || _ponyModel.name.isEmpty,
       onSaved: (value) => _ponyModel.name = value,
       onChanged: (value) {
         setState(() {
