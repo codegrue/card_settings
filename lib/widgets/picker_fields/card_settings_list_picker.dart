@@ -167,6 +167,9 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
       onTap: () {
         _showDialog(widget?.label, widget?.options);
       },
+      onLongPress: () {
+        _showDialog(widget?.label, widget?.options, showMaterial: true);
+      },
       child: CardSettingsField(
         label: widget?.label,
         labelAlign: widget?.labelAlign,
