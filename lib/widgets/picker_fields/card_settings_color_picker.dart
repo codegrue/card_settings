@@ -73,42 +73,47 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
     if (Platform.isIOS && !widget.showMaterialIOS) {
       Color _pickerColor = value;
 
-      showCupertinoDialog<Color>(
+      Widget header = Container(
+        // color: Theme.of(context).primaryColor,
+        height: _kPickerHeaderPortraitHeight,
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 20.0,
+              // color: const Color(0xffffffff),
+            ),
+          ),
+        ),
+        padding: EdgeInsets.all(20.0),
+      );
+      final _size = MediaQuery.of(context).size;
+      final _width = _size.width * 0.05;
+
+      showDialog<Color>(
         context: context,
         builder: (BuildContext context) {
-          return CupertinoAlertDialog(
-            title: Text(title),
-            content: Container(
-              height: 330.0,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Expanded(
-                    child: Material(
-                      color: Colors.transparent,
-                      child: ColorPicker(
-                        pickerColor: _pickerColor,
-                        onColorChanged: (color) => _pickerColor = color,
-                        colorPickerWidth: MediaQuery.of(context).size.width,
-                        pickerAreaHeightPercent: 0.7,
-                        enableAlpha: true,
-                      ),
-                    ),
-                  ),
-                ],
+          return AlertDialog(
+            title: header,
+            titlePadding: const EdgeInsets.all(0.0),
+            contentPadding: const EdgeInsets.all(0.0),
+            content: SingleChildScrollView(
+              child: ColorPicker(
+                pickerColor: _pickerColor,
+                onColorChanged: (color) => _pickerColor = color,
+                colorPickerWidth: 1000.0,
+                pickerAreaHeightPercent: 0.7,
+                enableAlpha: true,
               ),
             ),
             actions: <Widget>[
-              CupertinoDialogAction(
+              CupertinoButton(
                 child: Text('Cancel'),
-                isDefaultAction: true,
-                onPressed: () =>
-                    Navigator.of(context, rootNavigator: true).pop(),
+                onPressed: () => Navigator.of(context).pop(),
               ),
-              CupertinoDialogAction(
+              CupertinoButton(
                 child: Text('Ok'),
-                onPressed: () => Navigator.of(context, rootNavigator: true)
-                    .pop(_pickerColor),
+                onPressed: () => Navigator.of(context).pop(_pickerColor),
               ),
             ],
           );
@@ -148,7 +153,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
               child: ColorPicker(
                 pickerColor: _pickerColor,
                 onColorChanged: (color) => _pickerColor = color,
-                colorPickerWidth: MediaQuery.of(context).size.width,
+                colorPickerWidth: 1000.0,
                 pickerAreaHeightPercent: 0.7,
                 enableAlpha: true,
               ),
