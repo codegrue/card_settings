@@ -261,6 +261,15 @@ CardSettings(
 
 The `CardSettingsField` is the basis of all other fields and can be used to build unique fields outside of this library. Its purpose is to govern layout with consistent decorations. The best way to make a custom field is to inherit from `FormField<T>`, which will manage the state of your field. The cleanest example of this is the `CardSettingsSwitch` widget. All you have to do is provide your custom widgets in the `content` property.
 
+## Screenshots
+![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/Simulator Screen Shot - iPhone X - 2019-02-18 at 11.52.37)
+![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/Simulator Screen Shot - iPhone X - 2019-02-18 at 11.52.41)
+![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/Simulator Screen Shot - iPhone X - 2019-02-18 at 11.53.50)
+![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/Simulator Screen Shot - iPhone X - 2019-02-18 at 11.49.35)
+![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/Simulator Screen Shot - iPhone X - 2019-02-18 at 09.23.47)
+![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/Simulator Screen Shot - iPhone X - 2019-02-18 at 09.23.50)
+
+
 ## Dependencies
 
 This widget set relies on these external third-party components:
