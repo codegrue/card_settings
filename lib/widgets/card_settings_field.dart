@@ -3,8 +3,6 @@
 
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
-import 'dart:io';
 
 /// This is the basic layout of a field in a CardSettings view. Typcially, it
 /// will not be used directly.

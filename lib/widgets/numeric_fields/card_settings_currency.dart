@@ -38,6 +38,7 @@ class CardSettingsCurrency extends StatefulWidget {
     this.maxLengthEnforced: true,
     this.onFieldSubmitted,
     this.inputFormatters,
+    this.showMaterialIOS = false,
   });
 
   final String label;
@@ -67,6 +68,7 @@ class CardSettingsCurrency extends StatefulWidget {
   final bool maxLengthEnforced;
   final ValueChanged<String> onFieldSubmitted;
   final List<TextInputFormatter> inputFormatters;
+  final bool showMaterialIOS;
 
   @override
   CardSettingsCurrencyState createState() {
@@ -91,6 +93,7 @@ class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
   @override
   Widget build(BuildContext context) {
     return CardSettingsText(
+      showMaterialIOS: widget?.showMaterialIOS,
       label: widget.label,
       labelAlign: widget.labelAlign,
       contentAlign: widget.contentAlign,

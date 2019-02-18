@@ -34,10 +34,12 @@ class CardSettingsInt extends CardSettingsText {
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
+  bool showMaterialIOS: false,
   }) : super(
           key: key,
           label: label,
           labelAlign: labelAlign,
+          showMaterialIOS:showMaterialIOS,
           contentAlign: contentAlign,
           initialValue: initialValue.toString(),
           unitLabel: unitLabel,

@@ -27,6 +27,7 @@ class CardSettingsListPicker extends FormField<String> {
     this.contentAlign,
     this.hintText,
     this.options,
+    this.showMaterialIOS = false,
   }) : super(
             key: key,
             initialValue: initialValue ?? null,
@@ -54,6 +55,8 @@ class CardSettingsListPicker extends FormField<String> {
 
   final bool visible;
 
+  final bool showMaterialIOS;
+
   @override
   _CardSettingsListPickerState createState() => _CardSettingsListPickerState();
 }
@@ -63,7 +66,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   CardSettingsListPicker get widget => super.widget as CardSettingsListPicker;
 
   void _showDialog(String label, List<String> options) {
-    if (Platform.isIOS) {
+    if (Platform.isIOS && !widget.showMaterialIOS) {
       final FixedExtentScrollController scrollController =
           FixedExtentScrollController(
               initialItem: options.indexOf(value ?? options.first));
@@ -136,7 +139,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
+    if (Platform.isIOS && !widget.showMaterialIOS) {
       return GestureDetector(
         onTap: () {
           _showDialog(widget?.label, widget?.options);

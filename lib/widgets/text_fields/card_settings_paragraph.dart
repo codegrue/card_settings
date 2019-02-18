@@ -36,11 +36,13 @@ class CardSettingsParagraph extends CardSettingsText {
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
+   bool showMaterialIOS: false,
   }) : super(
           key: key,
           label: label,
           labelAlign: labelAlign,
           contentAlign: contentAlign,
+          showMaterialIOS:showMaterialIOS,
           initialValue: initialValue,
           contentOnNewLine: contentOnNewLine,
           maxLength: maxLength,

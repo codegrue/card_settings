@@ -17,9 +17,10 @@ class CardSettings extends InheritedWidget {
     this.padding: 12.0,
     this.cardElevation: 5.0,
     List<Widget> children,
+    bool showMaterialIOS: false,
   }) : super(
           key: key,
-          child: Platform.isIOS
+          child: Platform.isIOS && !showMaterialIOS
               ? CupertinoSettings(children)
               : SingleChildScrollView(
                   padding: EdgeInsets.all(padding),
@@ -42,9 +43,10 @@ class CardSettings extends InheritedWidget {
     this.padding: 12.0,
     this.cardElevation: 5.0,
     List<CardSettingsSection> children,
+    bool showMaterialIOS: false,
   }) : super(
           key: key,
-          child: Platform.isIOS
+          child: Platform.isIOS && !showMaterialIOS
               ? CupertinoSettings(_buildSections(children))
               : SingleChildScrollView(
                   padding: EdgeInsets.all(padding),
@@ -92,15 +94,17 @@ class CardSettingsSection {
     this.instructions,
     this.children,
     this.header,
+    this.showMaterialIOS = false,
   });
 
   final Widget header;
   final Widget instructions;
   final List<Widget> children;
+  final bool showMaterialIOS;
 
   List<Widget> build() {
     List<Widget> _children = <Widget>[];
-    if (Platform.isIOS) {
+    if (Platform.isIOS && !showMaterialIOS) {
       if (header != null) _children.add(header);
       if (children != null) _children.addAll(children);
       if (instructions != null) _children.add(instructions);

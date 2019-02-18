@@ -34,6 +34,7 @@ class CardSettingsPhone extends StatelessWidget {
     this.maxLengthEnforced: true,
     this.onFieldSubmitted,
     this.inputFormatters,
+    this.showMaterialIOS = false,
   });
 
   final String label;
@@ -61,6 +62,7 @@ class CardSettingsPhone extends StatelessWidget {
   final bool maxLengthEnforced;
   final ValueChanged<String> onFieldSubmitted;
   final List<TextInputFormatter> inputFormatters;
+  final   bool showMaterialIOS;
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +80,7 @@ class CardSettingsPhone extends StatelessWidget {
       visible: visible,
       enabled: enabled,
       autofocus: autofocus,
+      showMaterialIOS: showMaterialIOS,
       obscureText: obscureText,
       autocorrect: autocorrect,
       autovalidate: autovalidate,

@@ -35,11 +35,13 @@ class CardSettingsPassword extends CardSettingsText {
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
+     bool showMaterialIOS: false,
   }) : super(
           key: key,
           label: label,
           labelAlign: labelAlign,
           hintText: hintText,
+          showMaterialIOS:showMaterialIOS,
           contentAlign: contentAlign,
           contentOnNewLine: contentOnNewLine,
           initialValue: initialValue,

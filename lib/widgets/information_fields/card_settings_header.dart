@@ -13,16 +13,18 @@ class CardSettingsHeader extends StatelessWidget {
     this.labelAlign: TextAlign.left,
     this.height: 44.0,
     this.color,
+    this.showMaterialIOS = false,
   });
 
   final String label;
   final TextAlign labelAlign;
   final double height;
   final Color color;
+  final bool showMaterialIOS;
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
+    if (Platform.isIOS && !showMaterialIOS) {
       return CSHeader(label);
     }
     return Container(
