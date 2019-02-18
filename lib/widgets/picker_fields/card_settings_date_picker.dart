@@ -78,6 +78,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
       _startDate = value;
     }
     final _endDate = widget?.lastDate ?? _startDate.add(Duration(days: 1800));
+  
     if (Platform.isIOS && !widget.showMaterialIOS) {
       showCupertinoModalPopup<DateTime>(
         context: context,
