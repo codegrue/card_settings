@@ -2,7 +2,7 @@
 
 ## [1.4.] - 2/18/2019
 
-* Added Optional ovveride for showing material on iOS
+* Added Optional override for showing material on iOS
 * Added Cupertino Forms and all Cupertino Equilivant Controls and Actions
 * Updated Example
 * [Warning] For the text fields on iOS using [CupertinoTextFields] the [validator] and [onSaved] do not exist, please use [showErrorIOS] to show a [red] Border around the Text Field and [onChanged] and [onFieldSubmitted] to update the value like in the example.
