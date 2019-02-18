@@ -37,12 +37,16 @@ class CardSettingsButton extends StatelessWidget {
 
     if (visible) {
       if (Platform.isIOS && !showMaterialIOS) {
-        return CSButton(
-          isDestructive
-              ? CSButtonType.DESTRUCTIVE
-              : CSButtonType.DEFAULT_CENTER,
-          label,
-          onPressed,
+        return Container(
+          child: visible == false
+              ? null
+              : CSButton(
+                  isDestructive
+                      ? CSButtonType.DESTRUCTIVE
+                      : CSButtonType.DEFAULT_CENTER,
+                  label,
+                  onPressed,
+                ),
         );
         // return ListTile(
         //   title: CupertinoButton(

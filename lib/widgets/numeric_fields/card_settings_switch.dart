@@ -67,18 +67,23 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
-      return CSControl(
-          widget?.requiredIndicator != null
-              ? (widget?.label ?? "") + ' *'
-              : widget?.label,
-          CupertinoSwitch(
-            value: value,
-            onChanged: (value) {
-              didChange(value);
-              if (widget?.onChanged != null) widget?.onChanged(value);
-            },
-          ),
-          style: CSWidgetStyle(icon: widget?.icon));
+      return Container(
+        child: widget?.visible == false
+            ? null
+            : CSControl(
+                widget?.requiredIndicator != null
+                    ? (widget?.label ?? "") + ' *'
+                    : widget?.label,
+                CupertinoSwitch(
+                  value: value,
+                  onChanged: (value) {
+                    didChange(value);
+                    if (widget?.onChanged != null) widget?.onChanged(value);
+                  },
+                ),
+                style: CSWidgetStyle(icon: widget?.icon),
+              ),
+      );
     }
     return CardSettingsField(
       label: widget?.label,

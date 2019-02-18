@@ -1,10 +1,11 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'dart:io';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 import '../../card_settings.dart';
@@ -70,15 +71,48 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
 
   void _showDialog(String title) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
-      Navigator.push<Color>(
-        context,
-        MaterialPageRoute(
-          builder: (context) => FullScreenColorPicker(
-                initialColor: value,
-                label: title,
+      Color _pickerColor = value;
+
+      showCupertinoDialog<Color>(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: Text(title),
+            content: Container(
+              height: 330.0,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Expanded(
+                    child: Material(
+                      color: Colors.transparent,
+                      child: ColorPicker(
+                        pickerColor: _pickerColor,
+                        onColorChanged: (color) => _pickerColor = color,
+                        colorPickerWidth: MediaQuery.of(context).size.width,
+                        pickerAreaHeightPercent: 0.7,
+                        enableAlpha: true,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-          fullscreenDialog: true,
-        ),
+            ),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                child: Text('Cancel'),
+                isDefaultAction: true,
+                onPressed: () =>
+                    Navigator.of(context, rootNavigator: true).pop(),
+              ),
+              CupertinoDialogAction(
+                child: Text('Ok'),
+                onPressed: () => Navigator.of(context, rootNavigator: true)
+                    .pop(_pickerColor),
+              ),
+            ],
+          );
+        },
       ).then((value) {
         if (value != null) {
           didChange(value);
@@ -88,86 +122,47 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
     } else {
       Color _pickerColor = value;
 
+      Widget header = Container(
+        color: Theme.of(context).primaryColor,
+        height: _kPickerHeaderPortraitHeight,
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 20.0,
+              color: const Color(0xffffffff),
+            ),
+          ),
+        ),
+        padding: EdgeInsets.all(20.0),
+      );
+
       showDialog<Color>(
         context: context,
         builder: (BuildContext context) {
-          Widget header = Container(
-            color: Theme.of(context).primaryColor,
-            height: _kPickerHeaderPortraitHeight,
-            child: Center(
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: const Color(0xffffffff),
-                ),
+          return AlertDialog(
+            title: header,
+            titlePadding: const EdgeInsets.all(0.0),
+            contentPadding: const EdgeInsets.all(0.0),
+            content: SingleChildScrollView(
+              child: ColorPicker(
+                pickerColor: _pickerColor,
+                onColorChanged: (color) => _pickerColor = color,
+                colorPickerWidth: MediaQuery.of(context).size.width,
+                pickerAreaHeightPercent: 0.7,
+                enableAlpha: true,
               ),
             ),
-            padding: EdgeInsets.all(20.0),
-          );
-
-          Widget picker = Container(
-            child: ColorPicker(
-              pickerColor: _pickerColor,
-              onColorChanged: (color) => _pickerColor = color,
-              colorPickerWidth: MediaQuery.of(context).size.width,
-              enableLabel: true,
-              pickerAreaHeightPercent: 0.7,
-            ),
-          );
-
-          final Widget actions = ButtonTheme.bar(
-            child: Container(
-              height: _kDialogActionBarHeight,
-              child: ButtonBar(
-                children: <Widget>[
-                  FlatButton(
-                    child: Text('CANCEL'),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  FlatButton(
-                    child: Text('OK'),
-                    onPressed: () => Navigator.of(context).pop(_pickerColor),
-                  ),
-                ],
+            actions: <Widget>[
+              FlatButton(
+                child: Text('CANCEL'),
+                onPressed: () => Navigator.of(context).pop(),
               ),
-            ),
-          );
-
-          return SafeArea(
-            child: Dialog(
-              child: OrientationBuilder(
-                builder: (BuildContext context, Orientation orientation) {
-                  assert(orientation != null);
-                  assert(context != null);
-                  return SizedBox(
-                    width: (orientation == Orientation.portrait)
-                        ? _kPickerPortraitWidth
-                        : _kPickerLandscapeWidth,
-                    height: (orientation == Orientation.portrait)
-                        ? _kPickerPortraitHeight
-                        : _kPickerLandscapeHeight,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        header,
-                        Container(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              picker,
-                              actions,
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+              FlatButton(
+                child: Text('OK'),
+                onPressed: () => Navigator.of(context).pop(_pickerColor),
               ),
-            ),
+            ],
           );
         },
       ).then((value) {
@@ -182,24 +177,28 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
-      return GestureDetector(
-        onTap: () {
-          _showDialog("Color for " + widget?.label);
-        },
-        child: CSControl(
-          widget?.requiredIndicator != null
-              ? (widget?.label ?? "") + ' *'
-              : widget?.label,
-          Container(
-            height: 20.0,
-            width: 100.0,
-            decoration: BoxDecoration(
-              color: value,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-          ),
-          style: CSWidgetStyle(icon: widget?.icon),
-        ),
+      return Container(
+        child: widget?.visible == false
+            ? null
+            : GestureDetector(
+                onTap: () {
+                  _showDialog("Color for " + widget?.label);
+                },
+                child: CSControl(
+                  widget?.requiredIndicator != null
+                      ? (widget?.label ?? "") + ' *'
+                      : widget?.label,
+                  Container(
+                    height: 20.0,
+                    width: 100.0,
+                    decoration: BoxDecoration(
+                      color: value,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  style: CSWidgetStyle(icon: widget?.icon),
+                ),
+              ),
       );
     }
     return GestureDetector(
@@ -218,64 +217,6 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
           decoration: BoxDecoration(
             color: value,
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class FullScreenColorPicker extends StatefulWidget {
-  FullScreenColorPicker({this.initialColor, this.label});
-
-  final Color initialColor;
-  final String label;
-  @override
-  _FullScreenColorPickerState createState() => _FullScreenColorPickerState();
-}
-
-class _FullScreenColorPickerState extends State<FullScreenColorPicker> {
-  Color _pickerColor = Colors.white;
-  @override
-  void initState() {
-    _pickerColor = widget?.initialColor ?? Colors.white;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTextStyle(
-      style: const TextStyle(
-        fontFamily: '.SF UI Text',
-        inherit: false,
-        fontSize: 17.0,
-        color: CupertinoColors.black,
-      ),
-      child: Scaffold(
-        appBar: CupertinoNavigationBar(
-          // We're specifying a back label here because the previous page is a
-          // Material page. CupertinoPageRoutes could auto-populate these back
-          // labels.
-          previousPageTitle: 'Cupertino',
-          middle: Text(widget?.label ?? ""),
-          trailing: GestureDetector(
-            child: Text(
-              'Save',
-              style: TextStyle(
-                color: CupertinoColors.activeBlue,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onTap: () {
-              Navigator.of(context, rootNavigator: true).pop(_pickerColor);
-            },
-          ),
-        ),
-        body: ColorPicker(
-          pickerColor: _pickerColor,
-          onColorChanged: (color) => _pickerColor = color,
-          colorPickerWidth: MediaQuery.of(context).size.width,
-          enableLabel: true,
-          // pickerAreaHeightPercent: 0.7,
         ),
       ),
     );

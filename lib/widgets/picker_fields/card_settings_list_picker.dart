@@ -140,22 +140,26 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
-      return GestureDetector(
-        onTap: () {
-          _showDialog(widget?.label, widget?.options);
-        },
-        child: CSControl(
-          widget?.label,
-          Text(
-            widget?.initialValue ?? widget?.hintText ?? '',
-            style: Theme.of(context).textTheme.subhead.copyWith(
-                color: (value == null)
-                    ? Theme.of(context).hintColor
-                    : Theme.of(context).textTheme.subhead.color),
-            textAlign:
-                widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+      return Container(
+        child: widget?.visible == false
+            ? null
+            :  GestureDetector(
+          onTap: () {
+            _showDialog(widget?.label, widget?.options);
+          },
+          child: CSControl(
+            widget?.label,
+            Text(
+              widget?.initialValue ?? widget?.hintText ?? '',
+              style: Theme.of(context).textTheme.subhead.copyWith(
+                  color: (value == null)
+                      ? Theme.of(context).hintColor
+                      : Theme.of(context).textTheme.subhead.color),
+              textAlign:
+                  widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+            ),
+            style: CSWidgetStyle(icon: widget?.icon),
           ),
-          style: CSWidgetStyle(icon: widget?.icon),
         ),
       );
     }

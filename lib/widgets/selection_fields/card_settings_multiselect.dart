@@ -103,21 +103,25 @@ class _CardSettingsMultiselectState extends FormFieldState<List<String>> {
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
-      return GestureDetector(
-        onTap: () {
-          _showDialog(widget?.label, widget?.options);
-        },
-        child: CSControl(
-          widget?.requiredIndicator != null
-              ? (widget?.label ?? "") + ' *'
-              : widget?.label,
-          Text(value == null || value.isEmpty
-              ? "none selected"
-              : value.length == 1
-                  ? "${value[0]}"
-                  : "${value[0]} & ${value.length - 1} more"),
-          style: CSWidgetStyle(icon: widget?.icon),
-        ),
+      return Container(
+        child: widget?.visible == false
+            ? null
+            : GestureDetector(
+                onTap: () {
+                  _showDialog(widget?.label, widget?.options);
+                },
+                child: CSControl(
+                  widget?.requiredIndicator != null
+                      ? (widget?.label ?? "") + ' *'
+                      : widget?.label,
+                  Text(value == null || value.isEmpty
+                      ? "none selected"
+                      : value.length == 1
+                          ? "${value[0]}"
+                          : "${value[0]} & ${value.length - 1} more"),
+                  style: CSWidgetStyle(icon: widget?.icon),
+                ),
+              ),
       );
     }
     return GestureDetector(
