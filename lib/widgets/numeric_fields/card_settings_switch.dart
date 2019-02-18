@@ -26,6 +26,7 @@ class CardSettingsSwitch extends FormField<bool> {
     this.icon,
     this.contentAlign,
     this.onChanged,
+    this.showMaterialIOS = false,
   }) : super(
             key: key,
             initialValue: initialValue,
@@ -53,6 +54,8 @@ class CardSettingsSwitch extends FormField<bool> {
 
   final bool visible;
 
+  final bool showMaterialIOS;
+
   @override
   _CardSettingsSwitchState createState() => _CardSettingsSwitchState();
 }
@@ -63,9 +66,11 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
+    if (Platform.isIOS && !widget.showMaterialIOS) {
       return CSControl(
-          widget?.label,
+          widget?.requiredIndicator != null
+              ? (widget?.label ?? "") + ' *'
+              : widget?.label,
           CupertinoSwitch(
             value: value,
             onChanged: (value) {

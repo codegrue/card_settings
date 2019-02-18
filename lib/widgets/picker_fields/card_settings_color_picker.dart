@@ -1,6 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'dart:io';
@@ -31,6 +32,7 @@ class CardSettingsColorPicker extends FormField<Color> {
     this.labelAlign,
     this.requiredIndicator,
     this.label = "Label",
+    this.showMaterialIOS = false,
   }) : super(
             key: key,
             initialValue: initialValue ?? Colors.black,
@@ -55,6 +57,8 @@ class CardSettingsColorPicker extends FormField<Color> {
 
   final bool visible;
 
+  final bool showMaterialIOS;
+
   @override
   _CardSettingsColorPickerState createState() =>
       _CardSettingsColorPickerState();
@@ -65,105 +69,127 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   CardSettingsColorPicker get widget => super.widget as CardSettingsColorPicker;
 
   void _showDialog(String title) {
-    Color _pickerColor = value;
+    if (Platform.isIOS && !widget.showMaterialIOS) {
+      Navigator.push<Color>(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FullScreenColorPicker(
+                initialColor: value,
+                label: title,
+              ),
+          fullscreenDialog: true,
+        ),
+      ).then((value) {
+        if (value != null) {
+          didChange(value);
+          if (widget.onChanged != null) widget.onChanged(value);
+        }
+      });
+    } else {
+      Color _pickerColor = value;
 
-    showDialog<Color>(
-      context: context,
-      builder: (BuildContext context) {
-        Widget header = Container(
-          color: Theme.of(context).primaryColor,
-          height: _kPickerHeaderPortraitHeight,
-          child: Center(
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: 20.0,
-                color: const Color(0xffffffff),
+      showDialog<Color>(
+        context: context,
+        builder: (BuildContext context) {
+          Widget header = Container(
+            color: Theme.of(context).primaryColor,
+            height: _kPickerHeaderPortraitHeight,
+            child: Center(
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: const Color(0xffffffff),
+                ),
               ),
             ),
-          ),
-          padding: EdgeInsets.all(20.0),
-        );
+            padding: EdgeInsets.all(20.0),
+          );
 
-        Widget picker = Container(
-          child: ColorPicker(
-            pickerColor: _pickerColor,
-            onColorChanged: (color) => _pickerColor = color,
-            colorPickerWidth: 1000.0,
-            enableLabel: true,
-            pickerAreaHeightPercent: 0.7,
-          ),
-        );
-
-        final Widget actions = ButtonTheme.bar(
-          child: Container(
-            height: _kDialogActionBarHeight,
-            child: ButtonBar(
-              children: <Widget>[
-                FlatButton(
-                  child: Text('CANCEL'),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-                FlatButton(
-                  child: Text('OK'),
-                  onPressed: () => Navigator.of(context).pop(_pickerColor),
-                ),
-              ],
+          Widget picker = Container(
+            child: ColorPicker(
+              pickerColor: _pickerColor,
+              onColorChanged: (color) => _pickerColor = color,
+              colorPickerWidth: MediaQuery.of(context).size.width,
+              enableLabel: true,
+              pickerAreaHeightPercent: 0.7,
             ),
-          ),
-        );
+          );
 
-        return Dialog(
-          child: OrientationBuilder(
-            builder: (BuildContext context, Orientation orientation) {
-              assert(orientation != null);
-              assert(context != null);
-              return SizedBox(
-                width: (orientation == Orientation.portrait)
-                    ? _kPickerPortraitWidth
-                    : _kPickerLandscapeWidth,
-                height: (orientation == Orientation.portrait)
-                    ? _kPickerPortraitHeight
-                    : _kPickerLandscapeHeight,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    header,
-                    Container(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          picker,
-                          actions,
-                        ],
-                      ),
+          final Widget actions = ButtonTheme.bar(
+            child: Container(
+              height: _kDialogActionBarHeight,
+              child: ButtonBar(
+                children: <Widget>[
+                  FlatButton(
+                    child: Text('CANCEL'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  FlatButton(
+                    child: Text('OK'),
+                    onPressed: () => Navigator.of(context).pop(_pickerColor),
+                  ),
+                ],
+              ),
+            ),
+          );
+
+          return SafeArea(
+            child: Dialog(
+              child: OrientationBuilder(
+                builder: (BuildContext context, Orientation orientation) {
+                  assert(orientation != null);
+                  assert(context != null);
+                  return SizedBox(
+                    width: (orientation == Orientation.portrait)
+                        ? _kPickerPortraitWidth
+                        : _kPickerLandscapeWidth,
+                    height: (orientation == Orientation.portrait)
+                        ? _kPickerPortraitHeight
+                        : _kPickerLandscapeHeight,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        header,
+                        Container(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              picker,
+                              actions,
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              );
-            },
-          ),
-        );
-      },
-    ).then((value) {
-      if (value != null) {
-        didChange(value);
-        if (widget.onChanged != null) widget.onChanged(value);
-      }
-    });
+                  );
+                },
+              ),
+            ),
+          );
+        },
+      ).then((value) {
+        if (value != null) {
+          didChange(value);
+          if (widget.onChanged != null) widget.onChanged(value);
+        }
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
+    if (Platform.isIOS && !widget.showMaterialIOS) {
       return GestureDetector(
         onTap: () {
           _showDialog("Color for " + widget?.label);
         },
         child: CSControl(
-          widget?.label,
+          widget?.requiredIndicator != null
+              ? (widget?.label ?? "") + ' *'
+              : widget?.label,
           Container(
             height: 20.0,
             width: 100.0,
@@ -192,6 +218,64 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
           decoration: BoxDecoration(
             color: value,
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class FullScreenColorPicker extends StatefulWidget {
+  FullScreenColorPicker({this.initialColor, this.label});
+
+  final Color initialColor;
+  final String label;
+  @override
+  _FullScreenColorPickerState createState() => _FullScreenColorPickerState();
+}
+
+class _FullScreenColorPickerState extends State<FullScreenColorPicker> {
+  Color _pickerColor = Colors.white;
+  @override
+  void initState() {
+    _pickerColor = widget?.initialColor ?? Colors.white;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTextStyle(
+      style: const TextStyle(
+        fontFamily: '.SF UI Text',
+        inherit: false,
+        fontSize: 17.0,
+        color: CupertinoColors.black,
+      ),
+      child: Scaffold(
+        appBar: CupertinoNavigationBar(
+          // We're specifying a back label here because the previous page is a
+          // Material page. CupertinoPageRoutes could auto-populate these back
+          // labels.
+          previousPageTitle: 'Cupertino',
+          middle: Text(widget?.label ?? ""),
+          trailing: GestureDetector(
+            child: Text(
+              'Save',
+              style: TextStyle(
+                color: CupertinoColors.activeBlue,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).pop(_pickerColor);
+            },
+          ),
+        ),
+        body: ColorPicker(
+          pickerColor: _pickerColor,
+          onColorChanged: (color) => _pickerColor = color,
+          colorPickerWidth: MediaQuery.of(context).size.width,
+          enableLabel: true,
+          // pickerAreaHeightPercent: 0.7,
         ),
       ),
     );

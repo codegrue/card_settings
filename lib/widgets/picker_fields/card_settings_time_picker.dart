@@ -26,6 +26,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
     this.label = 'Label',
     this.icon,
     this.style,
+    this.showMaterialIOS = false,
   }) : super(
           key: key,
           initialValue: initialValue ?? TimeOfDay.now(),
@@ -52,6 +53,8 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
 
   final TextStyle style;
 
+  final bool showMaterialIOS;
+
   @override
   _CardSettingsTimePickerState createState() => _CardSettingsTimePickerState();
 }
@@ -60,8 +63,8 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
   @override
   CardSettingsTimePicker get widget => super.widget as CardSettingsTimePicker;
 
-  void _showDialog({bool showFullTimer = false}) {
-    if (Platform.isIOS && !showFullTimer) {
+  void _showDialog() {
+    if (Platform.isIOS && !widget.showMaterialIOS) {
       showCupertinoModalPopup<DateTime>(
         context: context,
         builder: (BuildContext context) {
@@ -102,13 +105,15 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
+    if (Platform.isIOS && !widget.showMaterialIOS) {
       return GestureDetector(
         onTap: () {
           _showDialog();
         },
         child: CSControl(
-          widget?.label,
+          widget?.requiredIndicator != null
+              ? (widget?.label ?? "") + ' *'
+              : widget?.label,
           Text(
             value == null ? '' : value.format(context),
             style: widget?.style ?? Theme.of(context).textTheme.subhead,
@@ -122,9 +127,6 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
     return GestureDetector(
       onTap: () {
         _showDialog();
-      },
-      onLongPress: () {
-        _showDialog(showFullTimer: true);
       },
       child: CardSettingsField(
         label: widget?.label ?? "Time",

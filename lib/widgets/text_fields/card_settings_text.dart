@@ -45,6 +45,7 @@ class CardSettingsText extends FormField<String> {
     this.prefixText,
     this.requiredIndicator,
     this.unitLabel,
+    this.showMaterialIOS = false,
   })  : //assert(initialValue == null || controller == null),
         assert(keyboardType != null),
         assert(autofocus != null),
@@ -116,6 +117,8 @@ class CardSettingsText extends FormField<String> {
   final bool obscureText;
 
   final bool autocorrect;
+
+  final bool showMaterialIOS;
 
   @override
   _CardSettingsTextState createState() => _CardSettingsTextState();
@@ -194,9 +197,11 @@ class _CardSettingsTextState extends FormFieldState<String> {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
+    if (Platform.isIOS && !widget.showMaterialIOS) {
       return CSControl(
-        widget?.label,
+        widget?.requiredIndicator != null
+            ? (widget?.label ?? "") + ' *'
+            : widget?.label,
         Expanded(
           child: Container(
             padding: EdgeInsets.only(left: 10.0),
