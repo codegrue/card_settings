@@ -263,7 +263,7 @@ The `CardSettingsField` is the basis of all other fields and can be used to buil
 
 ## Screenshots
 
-Android             |  iOS
+Material             |  Cupertino
 :-------------------------:|:-------------------------:
 ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/1.png)  |  ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/3.png)
 :-------------------------:|:-------------------------:
