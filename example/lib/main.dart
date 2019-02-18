@@ -682,6 +682,7 @@ class _PonyExampleState extends State<PonyExample> {
         if (value == null || value.isEmpty) return 'Name is required.';
         return null;
       },
+      showErrorIOS: _ponyModel.name == null || _ponyModel.name.isEmpty,
       onSaved: (value) => _ponyModel.name = value,
       onChanged: (value) {
         setState(() {

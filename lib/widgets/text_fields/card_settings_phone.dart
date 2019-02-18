@@ -35,6 +35,7 @@ class CardSettingsPhone extends StatelessWidget {
     this.onFieldSubmitted,
     this.inputFormatters,
     this.showMaterialIOS = false,
+    this.showErrorIOS = false,
   });
 
   final String label;
@@ -62,7 +63,8 @@ class CardSettingsPhone extends StatelessWidget {
   final bool maxLengthEnforced;
   final ValueChanged<String> onFieldSubmitted;
   final List<TextInputFormatter> inputFormatters;
-  final   bool showMaterialIOS;
+  final bool showMaterialIOS;
+  final bool showErrorIOS;
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +89,7 @@ class CardSettingsPhone extends StatelessWidget {
       validator: _safeValidator,
       onSaved: _safeOnSaved,
       onChanged: _safeOnChanged,
+      showErrorIOS: showErrorIOS,
       controller: controller,
       focusNode: focusNode,
       keyboardType:

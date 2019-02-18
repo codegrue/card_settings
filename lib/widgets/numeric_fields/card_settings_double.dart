@@ -34,7 +34,8 @@ class CardSettingsDouble extends CardSettingsText {
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
-   bool showMaterialIOS: false,
+    bool showMaterialIOS: false,
+    bool showErrorIOS: false,
   }) : super(
           key: key,
           label: label,
@@ -50,6 +51,7 @@ class CardSettingsDouble extends CardSettingsText {
           enabled: enabled,
           autofocus: autofocus,
           obscureText: obscureText,
+          showErrorIOS: showErrorIOS,
           autocorrect: autocorrect,
           autovalidate: autovalidate,
           validator: (value) {
