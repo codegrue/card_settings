@@ -37,6 +37,8 @@ class CardSettingsParagraph extends CardSettingsText {
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
     bool showMaterialIOS: false,
+
+    ///Shows a [red] [Border] around the [CupertinoTextField] since the [validator] does not exist
     bool showErrorIOS: false,
   }) : super(
           key: key,

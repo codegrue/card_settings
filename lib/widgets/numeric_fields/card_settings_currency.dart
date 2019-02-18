@@ -43,33 +43,62 @@ class CardSettingsCurrency extends StatefulWidget {
   });
 
   final String label;
+
   final TextAlign labelAlign;
+
   final TextAlign contentAlign;
+
   final double initialValue;
+
   final Icon icon;
+
   final Widget requiredIndicator;
+
   final String currencySymbol;
+
   final String currencyName;
+
   final String decimalSeparator;
+
   final String thousandSeparator;
+
   final int maxLength;
+
   final bool visible;
+
   final bool enabled;
+
   final bool autofocus;
+
   final bool obscureText;
+
   final bool autocorrect;
+
   final bool autovalidate;
+
   final FormFieldValidator<double> validator;
+
   final FormFieldSetter<double> onSaved;
+
   final ValueChanged<double> onChanged;
+
   final TextEditingController controller;
+
   final FocusNode focusNode;
+
   final TextInputType keyboardType;
+
   final TextStyle style;
+
   final bool maxLengthEnforced;
+
   final ValueChanged<String> onFieldSubmitted;
+
   final List<TextInputFormatter> inputFormatters;
+
   final bool showMaterialIOS;
+
+  ///Shows a [red] [Border] around the [CupertinoTextField] since the [validator] does not exist
   final bool showErrorIOS;
 
   @override

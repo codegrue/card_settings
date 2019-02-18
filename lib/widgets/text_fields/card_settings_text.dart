@@ -135,6 +135,7 @@ class CardSettingsText extends FormField<String> {
 
   final OverlayVisibilityMode showClearButtonIOS;
 
+  ///Shows a [red] [Border] around the [CupertinoTextField] since the [validator] does not exist
   final bool showErrorIOS;
 
   @override
@@ -215,95 +216,150 @@ class _CardSettingsTextState extends FormFieldState<String> {
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
+      final _child = Container(
+        child: CupertinoTextField(
+          prefix: widget?.prefixText == null ? null : Text(widget.prefixText),
+          suffix: widget?.unitLabel == null ? null : Text(widget.unitLabel),
+          controller: _effectiveController,
+
+          focusNode: widget?.focusNode,
+          keyboardType: widget?.keyboardType,
+          textCapitalization: widget?.textCapitalization,
+          style: widget?.style ?? Theme.of(context).textTheme.subhead,
+          // decoration: InputDecoration(
+          //   contentPadding: EdgeInsets.all(0.0),
+          //   border: InputBorder.none,
+          //   errorText: errorText,
+          //   prefixText: widget?.prefixText,
+          //   hintText: widget?.hintText,
+          // ),
+          decoration: widget?.showErrorIOS ?? false
+              ? BoxDecoration(
+                  border: Border.all(color: Colors.red),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(4.0),
+                  ),
+                )
+              : BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      color: CupertinoColors.lightBackgroundGray,
+                      style: BorderStyle.solid,
+                      width: 0.0,
+                    ),
+                    bottom: BorderSide(
+                      color: CupertinoColors.lightBackgroundGray,
+                      style: BorderStyle.solid,
+                      width: 0.0,
+                    ),
+                    left: BorderSide(
+                      color: CupertinoColors.lightBackgroundGray,
+                      style: BorderStyle.solid,
+                      width: 0.0,
+                    ),
+                    right: BorderSide(
+                      color: CupertinoColors.lightBackgroundGray,
+                      style: BorderStyle.solid,
+                      width: 0.0,
+                    ),
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(4.0),
+                  ),
+                ),
+          clearButtonMode: widget?.showClearButtonIOS,
+          placeholder: widget?.hintText,
+          textAlign: TextAlign.end,
+          autofocus: widget?.autofocus ?? false,
+          obscureText: widget?.obscureText ?? false,
+          autocorrect: widget?.autocorrect ?? true,
+          maxLengthEnforced: widget?.maxLengthEnforced ?? false,
+          maxLines: widget?.numberOfLines ?? 1,
+          maxLength: (widget?.showCounter ?? false)
+              ? widget?.maxLength
+              : null, // if we want counter use default behavior
+          onChanged: _handleOnChanged,
+          onSubmitted: widget?.onFieldSubmitted,
+          inputFormatters: widget?.inputFormatters ??
+              [
+                // if we don't want the counter, use this maxLength instead
+                LengthLimitingTextInputFormatter(widget?.maxLength)
+              ],
+          enabled: widget?.enabled,
+        ),
+      );
       return Container(
         child: widget?.visible == false
             ? null
-            : CSControl(
-                widget?.requiredIndicator != null
-                    ? (widget?.label ?? "") + ' *'
-                    : widget?.label,
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(left: 10.0),
-                    child: CupertinoTextField(
-                      prefix: widget?.prefixText == null
-                          ? null
-                          : Text(widget.prefixText),
-                      suffix: widget?.unitLabel == null
-                          ? null
-                          : Text(widget.unitLabel),
-                      controller: _effectiveController,
-
-                      focusNode: widget?.focusNode,
-                      keyboardType: widget?.keyboardType,
-                      textCapitalization: widget?.textCapitalization,
-                      style:
-                          widget?.style ?? Theme.of(context).textTheme.subhead,
-                      // decoration: InputDecoration(
-                      //   contentPadding: EdgeInsets.all(0.0),
-                      //   border: InputBorder.none,
-                      //   errorText: errorText,
-                      //   prefixText: widget?.prefixText,
-                      //   hintText: widget?.hintText,
-                      // ),
-                      decoration: widget?.showErrorIOS ?? false
-                          ? BoxDecoration(
-                              border: Border.all(color: Colors.red),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(4.0),
-                              ),
-                            )
-                          : BoxDecoration(
-                              border: Border(
-                                top: BorderSide(
-                                  color: CupertinoColors.lightBackgroundGray,
-                                  style: BorderStyle.solid,
-                                  width: 0.0,
-                                ),
-                                bottom: BorderSide(
-                                  color: CupertinoColors.lightBackgroundGray,
-                                  style: BorderStyle.solid,
-                                  width: 0.0,
-                                ),
-                                left: BorderSide(
-                                  color: CupertinoColors.lightBackgroundGray,
-                                  style: BorderStyle.solid,
-                                  width: 0.0,
-                                ),
-                                right: BorderSide(
-                                  color: CupertinoColors.lightBackgroundGray,
-                                  style: BorderStyle.solid,
-                                  width: 0.0,
-                                ),
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(4.0),
-                              ),
-                            ),
-                      clearButtonMode: widget?.showClearButtonIOS,
-                      placeholder: widget?.hintText,
-                      textAlign: TextAlign.end,
-                      autofocus: widget?.autofocus ?? false,
-                      obscureText: widget?.obscureText ?? false,
-                      autocorrect: widget?.autocorrect ?? true,
-                      maxLengthEnforced: widget?.maxLengthEnforced ?? false,
-                      maxLines: widget?.numberOfLines ?? 1,
-                      maxLength: (widget?.showCounter ?? false)
-                          ? widget?.maxLength
-                          : null, // if we want counter use default behavior
-                      onChanged: _handleOnChanged,
-                      onSubmitted: widget?.onFieldSubmitted,
-                      inputFormatters: widget?.inputFormatters ??
-                          [
-                            // if we don't want the counter, use this maxLength instead
-                            LengthLimitingTextInputFormatter(widget?.maxLength)
-                          ],
-                      enabled: widget?.enabled,
-                    ),
+            : widget?.contentOnNewLine == true
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      CSControl(
+                        widget?.requiredIndicator != null
+                            ? (widget?.label ?? "") + ' *'
+                            : widget?.label,
+                        Container(),
+                        style: CSWidgetStyle(icon: widget?.icon),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(5.0),
+                        child: _child,
+                        color: CupertinoColors.white,
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(5.0),
+                        color: CupertinoColors.white,
+                        child: widget?.showCounter ?? false
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    "${_controller?.text?.length ?? 0}/${widget?.maxLength}",
+                                    style: TextStyle(
+                                      color: CupertinoColors.inactiveGray,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : null,
+                      ),
+                    ],
+                  )
+                : Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      CSControl(
+                        widget?.requiredIndicator != null
+                            ? (widget?.label ?? "") + ' *'
+                            : widget?.label,
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.only(left: 10.0),
+                            child: _child,
+                          ),
+                        ),
+                        style: CSWidgetStyle(icon: widget?.icon),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(5.0),
+                        color: CupertinoColors.white,
+                        child: widget?.showCounter ?? false
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    "${_controller?.text?.length ?? 0}/${widget?.maxLength}",
+                                    style: TextStyle(
+                                      color: CupertinoColors.inactiveGray,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : null,
+                      ),
+                    ],
                   ),
-                ),
-                style: CSWidgetStyle(icon: widget?.icon),
-              ),
       );
     }
     return CardSettingsField(

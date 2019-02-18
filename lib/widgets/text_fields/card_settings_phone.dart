@@ -39,31 +39,58 @@ class CardSettingsPhone extends StatelessWidget {
   });
 
   final String label;
+
   final TextAlign labelAlign;
+
   final TextAlign contentAlign;
+
   final int initialValue;
+
   final bool contentOnNewLine;
+
   final String inputMask = '(000) 000-0000';
+
   final int maxLength;
+
   final Icon icon;
+
   final Widget requiredIndicator;
+
   final bool visible;
+
   final bool enabled;
+
   final bool autofocus;
+
   final bool obscureText;
+
   final bool autocorrect;
+
   final bool autovalidate;
+
   final FormFieldValidator<int> validator;
+
   final FormFieldSetter<int> onSaved;
+
   final ValueChanged<int> onChanged;
+
   final TextEditingController controller;
+
   final FocusNode focusNode;
+
   final TextInputType keyboardType;
+
   final TextStyle style;
+
   final bool maxLengthEnforced;
+
   final ValueChanged<String> onFieldSubmitted;
+
   final List<TextInputFormatter> inputFormatters;
+
   final bool showMaterialIOS;
+
+  ///Shows a [red] [Border] around the [CupertinoTextField] since the [validator] does not exist
   final bool showErrorIOS;
 
   @override
