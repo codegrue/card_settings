@@ -129,8 +129,8 @@ class CardSettingsText extends FormField<String> {
 
   @override
 
-  ///Since there are no Validators for the Cupertino Text Field on iOS if the [validator]
-  ///is not equal to [null] and the text is [empty] there will be a red border for the Text Field.
+  ///Since there is no [validator] for the Cupertino Text Field on iOS, use [showErrorIOS]
+  ///to show a [red] error [Border] for the Text Field
   final FormFieldValidator<String> validator;
 
   final OverlayVisibilityMode showClearButtonIOS;
