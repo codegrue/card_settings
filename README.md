@@ -194,7 +194,7 @@ So for example, phone number would be '(000) 000-0000'.
 
 Note: `CardSettingsPhone` is a convenience widget that is pre-configured to use this pattern.
 
-Note2: `flutter_masked_text` is a controller and as such, you will not be able to use an inputMask and a custom controller at the same time. This might be rectified in the future.
+Caution: `flutter_masked_text` is a controller and as such, you will not be able to use an inputMask and a custom controller at the same time. This might be rectified in the future.
 
 ### Orientation
 
@@ -269,9 +269,14 @@ This widget set relies on these external third-party components:
 
 Please see the [Changelog](https://github.com/codegrue/card_settings/blob/master/CHANGELOG.md) page to know what's recently changed.
 
-## Contributions
+## Authors
 
-**NOTE: I am no longer actively developing on Flutter. Therefore, I am looking for at least two others to become owners of this project to keep it moving forward. Please contect me if interested.**
+  - Jeff Jorczak <jeff@jorczak.com>
+  - Rody Davis Jr <rody.davis.jr@gmail.com>
+
+**NOTE: We would like a third author for redundency. Please contect us if interested.**
+
+## Contributions
 
 If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/codegrue/card_settings/issues).
 
