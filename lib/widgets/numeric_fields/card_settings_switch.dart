@@ -105,7 +105,7 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
           padding: EdgeInsets.all(0.0),
           child: Container(
             height: 20.0,
-            child: CupertinoSwitch(
+            child: Switch(
               value: value,
               onChanged: (value) {
                 didChange(value);
