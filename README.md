@@ -262,13 +262,14 @@ CardSettings(
 The `CardSettingsField` is the basis of all other fields and can be used to build unique fields outside of this library. Its purpose is to govern layout with consistent decorations. The best way to make a custom field is to inherit from `FormField<T>`, which will manage the state of your field. The cleanest example of this is the `CardSettingsSwitch` widget. All you have to do is provide your custom widgets in the `content` property.
 
 ## Screenshots
-![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/1.png)
-![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/2.png)
-![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/5.png)
-![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/3.png)
-![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/7.png)
-![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/4.png)
 
+Android             |  iOS
+:-------------------------:|:-------------------------:
+![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/1.png)  |  ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/3.png)
+:-------------------------:|:-------------------------:
+![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/2.png)  |  ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/7.png)
+:-------------------------:|:-------------------------:
+![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/5.png)  |  ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/4.png)
 
 ## Dependencies
 
