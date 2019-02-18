@@ -308,7 +308,9 @@ class _CardSettingsTextState extends FormFieldState<String> {
                         color: CupertinoColors.white,
                       ),
                       Container(
-                        padding: EdgeInsets.all(5.0),
+                        padding: widget?.showCounter ?? false
+                            ? EdgeInsets.all(5.0)
+                            : null,
                         color: CupertinoColors.white,
                         child: widget?.showCounter ?? false
                             ? Row(
@@ -342,7 +344,9 @@ class _CardSettingsTextState extends FormFieldState<String> {
                         style: CSWidgetStyle(icon: widget?.icon),
                       ),
                       Container(
-                        padding: EdgeInsets.all(5.0),
+                        padding: widget?.showCounter ?? false
+                            ? EdgeInsets.all(5.0)
+                            : null,
                         color: CupertinoColors.white,
                         child: widget?.showCounter ?? false
                             ? Row(
