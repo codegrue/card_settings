@@ -5,7 +5,6 @@ import 'results.dart';
 import 'model.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,25 +14,25 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Card Settings Example',
       home: PonyExample(),
-      // theme: ThemeData(
-      //   accentColor: Colors.indigo[400], // background color of card headers
-      //   cardColor: Colors.white, // background color of fields
-      //   backgroundColor: Colors.indigo[100], // color outside the card
-      //   primaryColor: Colors.teal, // color of page header
-      //   buttonColor: Colors.lightBlueAccent[100], // background color of buttons
-      //   textTheme: TextTheme(
-      //     button:
-      //         TextStyle(color: Colors.deepPurple[900]), // style of button text
-      //     subhead: TextStyle(color: Colors.grey[800]), // style of input text
-      //   ),
-      //   primaryTextTheme: TextTheme(
-      //     title: TextStyle(color: Colors.lightBlue[50]), // style for headers
-      //   ),
-      //   inputDecorationTheme: InputDecorationTheme(
-      //     labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
-      //   ),
-      //
-      theme: ThemeData.light(),
+      theme: ThemeData(
+        accentColor: Colors.indigo[400], // background color of card headers
+        cardColor: Colors.white, // background color of fields
+        backgroundColor: Colors.indigo[100], // color outside the card
+        primaryColor: Colors.teal, // color of page header
+        buttonColor: Colors.lightBlueAccent[100], // background color of buttons
+        textTheme: TextTheme(
+          button:
+              TextStyle(color: Colors.deepPurple[900]), // style of button text
+          subhead: TextStyle(color: Colors.grey[800]), // style of input text
+        ),
+        primaryTextTheme: TextTheme(
+          title: TextStyle(color: Colors.lightBlue[50]), // style for headers
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
+        ),
+      ),
+      darkTheme: ThemeData.dark(),
     );
   }
 }
@@ -72,6 +71,7 @@ class _PonyExampleState extends State<PonyExample> {
   final GlobalKey<FormState> _phoneKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _emailKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _passwordKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _sliderKey = GlobalKey<FormState>();
 
   bool _showMaterialIOS = false;
 
@@ -696,7 +696,7 @@ class _PonyExampleState extends State<PonyExample> {
   CardSettingsSlider _buildCardSettingsDouble_Slider() {
     return CardSettingsSlider(
       showMaterialIOS: _showMaterialIOS,
-      key: _typeKey,
+      key: _sliderKey,
       label: 'Rating',
       initialValue: _ponyModel.rating,
       autovalidate: _autoValidate,

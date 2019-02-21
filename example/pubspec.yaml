@@ -4,7 +4,6 @@ description: A Flutter project that demonstrated the use of the card_settings pa
 dependencies:
   flutter:
     sdk: flutter
-  flutter_platform_widgets: ^0.9.5
   flutter_localizations:
     sdk: flutter    
   card_settings:
