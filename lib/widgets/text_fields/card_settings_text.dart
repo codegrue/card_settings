@@ -305,13 +305,13 @@ class _CardSettingsTextState extends FormFieldState<String> {
                       Container(
                         padding: EdgeInsets.all(5.0),
                         child: _child,
-                        color: CupertinoColors.white,
+                        // color: CupertinoColors.white,
                       ),
                       Container(
                         padding: widget?.showCounter ?? false
                             ? EdgeInsets.all(5.0)
                             : null,
-                        color: CupertinoColors.white,
+                        // color: CupertinoColors.white,
                         child: widget?.showCounter ?? false
                             ? Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -347,7 +347,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
                         padding: widget?.showCounter ?? false
                             ? EdgeInsets.all(5.0)
                             : null,
-                        color: CupertinoColors.white,
+                        // color: CupertinoColors.white,
                         child: widget?.showCounter ?? false
                             ? Row(
                                 mainAxisAlignment: MainAxisAlignment.end,

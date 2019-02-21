@@ -15,24 +15,25 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Card Settings Example',
       home: PonyExample(),
-      theme: ThemeData(
-        accentColor: Colors.indigo[400], // background color of card headers
-        cardColor: Colors.white, // background color of fields
-        backgroundColor: Colors.indigo[100], // color outside the card
-        primaryColor: Colors.teal, // color of page header
-        buttonColor: Colors.lightBlueAccent[100], // background color of buttons
-        textTheme: TextTheme(
-          button:
-              TextStyle(color: Colors.deepPurple[900]), // style of button text
-          subhead: TextStyle(color: Colors.grey[800]), // style of input text
-        ),
-        primaryTextTheme: TextTheme(
-          title: TextStyle(color: Colors.lightBlue[50]), // style for headers
-        ),
-        inputDecorationTheme: InputDecorationTheme(
-          labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
-        ),
-      ),
+      // theme: ThemeData(
+      //   accentColor: Colors.indigo[400], // background color of card headers
+      //   cardColor: Colors.white, // background color of fields
+      //   backgroundColor: Colors.indigo[100], // color outside the card
+      //   primaryColor: Colors.teal, // color of page header
+      //   buttonColor: Colors.lightBlueAccent[100], // background color of buttons
+      //   textTheme: TextTheme(
+      //     button:
+      //         TextStyle(color: Colors.deepPurple[900]), // style of button text
+      //     subhead: TextStyle(color: Colors.grey[800]), // style of input text
+      //   ),
+      //   primaryTextTheme: TextTheme(
+      //     title: TextStyle(color: Colors.lightBlue[50]), // style for headers
+      //   ),
+      //   inputDecorationTheme: InputDecorationTheme(
+      //     labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
+      //   ),
+      //
+      theme: ThemeData.dark(),
     );
   }
 }
@@ -78,14 +79,11 @@ class _PonyExampleState extends State<PonyExample> {
   Widget build(BuildContext context) {
     var orientation = MediaQuery.of(context).orientation;
 
-    return PlatformScaffold(
+    return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Platform.isIOS && !_showMaterialIOS
-          ? CupertinoColors.lightBackgroundGray
-          : Theme.of(context).backgroundColor,
-      appBar: PlatformAppBar(
+      appBar: AppBar(
         title: Text("My Little Pony"),
-        trailingActions: <Widget>[
+        actions: <Widget>[
           Container(
             child: Platform.isIOS
                 ? IconButton(
@@ -539,7 +537,7 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettingsColorPicker(
       showMaterialIOS: _showMaterialIOS,
       key: _maneKey,
-      label: 'Mane',
+      label: 'Mane of many colors',
       initialValue: intelligentCast<Color>(_ponyModel.maneColor),
       autovalidate: _autoValidate,
       validator: (value) {

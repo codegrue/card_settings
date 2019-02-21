@@ -29,7 +29,10 @@ class CardSettingsHeader extends StatelessWidget {
     }
     return Container(
       margin: EdgeInsets.all(0.0),
-      decoration: BoxDecoration(color: color ?? Theme.of(context).accentColor),
+      decoration: BoxDecoration(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey
+              : color ?? Theme.of(context).accentColor),
       height: height,
       padding: EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0),
       child: Row(

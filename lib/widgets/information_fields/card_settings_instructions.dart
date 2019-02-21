@@ -33,7 +33,7 @@ class CardSettingsInstructions extends StatelessWidget {
           text,
           style: TextStyle(color: CupertinoColors.inactiveGray),
         ),
-        color: CupertinoColors.lightBackgroundGray,
+        // color: CupertinoColors.lightBackgroundGray,
       );
     }
     return Container(

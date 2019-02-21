@@ -3,6 +3,7 @@
 
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 /// This is the basic layout of a field in a CardSettings view. Typcially, it
 /// will not be used directly.
@@ -39,17 +40,21 @@ class CardSettingsField extends StatelessWidget {
       return Container(
         decoration: BoxDecoration(
           border: Border(
-              bottom: BorderSide(
-                  width: 1.0, color: Theme.of(context).dividerColor)),
+            bottom:
+                BorderSide(width: 1.0, color: Theme.of(context).dividerColor),
+          ),
         ),
         padding: EdgeInsets.all(14.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                _buildLabelRow(context),
+                Expanded(
+                  child: _buildLabelRow(context),
+                ),
                 _buildInlineContent(context),
                 _buildRightDecoration()
               ],
@@ -107,8 +112,11 @@ class CardSettingsField extends StatelessWidget {
         children: <Widget>[
           _buildLeftIcon(context),
           _buildLabelSpacer(context),
-          _buildLabel(context),
-          _buildRequiredIndicator(context),
+           _buildRequiredIndicator(context),
+          Expanded(
+            child: _buildLabel(context),
+          ),
+         
           _buildLabelSuffix(context),
         ],
       ),
@@ -116,7 +124,7 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget _buildLabel(BuildContext context) {
-    return Text(
+    return AutoSizeText(
       label,
       style: _buildLabelStyle(context),
     );

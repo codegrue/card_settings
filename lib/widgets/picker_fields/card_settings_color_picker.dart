@@ -73,50 +73,46 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
     if (Platform.isIOS && !widget.showMaterialIOS) {
       Color _pickerColor = value;
 
-      Widget header = Container(
-        // color: Theme.of(context).primaryColor,
-        height: _kPickerHeaderPortraitHeight,
-        child: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 20.0,
-              // color: const Color(0xffffffff),
-            ),
-          ),
-        ),
-        padding: EdgeInsets.all(20.0),
-      );
-      final _size = MediaQuery.of(context).size;
-      final _width = _size.width * 0.05;
-
       showDialog<Color>(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-            title: header,
-            titlePadding: const EdgeInsets.all(0.0),
-            contentPadding: const EdgeInsets.all(0.0),
-            content: SingleChildScrollView(
-              child: ColorPicker(
-                pickerColor: _pickerColor,
-                onColorChanged: (color) => _pickerColor = color,
-                colorPickerWidth: 1000.0,
-                pickerAreaHeightPercent: 0.7,
-                enableAlpha: true,
+          return OrientationBuilder(builder: (context, orientation) {
+            return AlertDialog(
+              title: Container(
+                height: _kPickerHeaderPortraitHeight,
+                child: Center(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
+                padding: EdgeInsets.all(20.0),
               ),
-            ),
-            actions: <Widget>[
-              CupertinoButton(
-                child: Text('Cancel'),
-                onPressed: () => Navigator.of(context).pop(),
+              titlePadding: const EdgeInsets.all(0.0),
+              contentPadding: const EdgeInsets.all(0.0),
+              content: SingleChildScrollView(
+                child: ColorPicker(
+                  pickerColor: _pickerColor,
+                  onColorChanged: (color) => _pickerColor = color,
+                  colorPickerWidth: 1000.0,
+                  pickerAreaHeightPercent: 0.7,
+                  enableAlpha: true,
+                ),
               ),
-              CupertinoButton(
-                child: Text('Ok'),
-                onPressed: () => Navigator.of(context).pop(_pickerColor),
-              ),
-            ],
-          );
+              actions: <Widget>[
+                CupertinoButton(
+                  child: Text('Cancel'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                CupertinoButton(
+                  child: Text('Ok'),
+                  onPressed: () => Navigator.of(context).pop(_pickerColor),
+                ),
+              ],
+            );
+          });
         },
       ).then((value) {
         if (value != null) {
@@ -127,48 +123,48 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
     } else {
       Color _pickerColor = value;
 
-      Widget header = Container(
-        color: Theme.of(context).primaryColor,
-        height: _kPickerHeaderPortraitHeight,
-        child: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 20.0,
-              color: const Color(0xffffffff),
-            ),
-          ),
-        ),
-        padding: EdgeInsets.all(20.0),
-      );
-
       showDialog<Color>(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-            title: header,
-            titlePadding: const EdgeInsets.all(0.0),
-            contentPadding: const EdgeInsets.all(0.0),
-            content: SingleChildScrollView(
-              child: ColorPicker(
-                pickerColor: _pickerColor,
-                onColorChanged: (color) => _pickerColor = color,
-                colorPickerWidth: 1000.0,
-                pickerAreaHeightPercent: 0.7,
-                enableAlpha: true,
+          return OrientationBuilder(builder: (context, orientation) {
+            return AlertDialog(
+              title: Container(
+                color: Theme.of(context).primaryColor,
+                height: _kPickerHeaderPortraitHeight,
+                child: Center(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: const Color(0xffffffff),
+                    ),
+                  ),
+                ),
+                padding: EdgeInsets.all(20.0),
               ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('CANCEL'),
-                onPressed: () => Navigator.of(context).pop(),
+              titlePadding: const EdgeInsets.all(0.0),
+              contentPadding: const EdgeInsets.all(0.0),
+              content: SingleChildScrollView(
+                child: ColorPicker(
+                  pickerColor: _pickerColor,
+                  onColorChanged: (color) => _pickerColor = color,
+                  colorPickerWidth: 1000.0,
+                  pickerAreaHeightPercent: 0.7,
+                  enableAlpha: true,
+                ),
               ),
-              FlatButton(
-                child: Text('OK'),
-                onPressed: () => Navigator.of(context).pop(_pickerColor),
-              ),
-            ],
-          );
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('CANCEL'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                FlatButton(
+                  child: Text('OK'),
+                  onPressed: () => Navigator.of(context).pop(_pickerColor),
+                ),
+              ],
+            );
+          });
         },
       ).then((value) {
         if (value != null) {

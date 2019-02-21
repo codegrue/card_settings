@@ -18,17 +18,21 @@ class CardSettings extends InheritedWidget {
     this.cardElevation: 5.0,
     List<Widget> children,
     bool showMaterialIOS: false,
+    this.shrinkWrap = false,
   }) : super(
           key: key,
           child: Platform.isIOS && !showMaterialIOS
-              ? CupertinoSettings(children)
-              : SingleChildScrollView(
-                  padding: EdgeInsets.all(padding),
-                  child: SafeArea(
+              ? CupertinoSettings(items: children)
+              : SafeArea(
+                  child: Container(
+                    padding: EdgeInsets.all(padding),
                     child: Card(
                       margin: EdgeInsets.all(0.0),
                       elevation: cardElevation,
-                      child: Column(children: children),
+                      child: ListView(
+                        children: children,
+                        shrinkWrap: shrinkWrap,
+                      ),
                     ),
                   ),
                 ),
@@ -44,17 +48,21 @@ class CardSettings extends InheritedWidget {
     this.cardElevation: 5.0,
     List<CardSettingsSection> children,
     bool showMaterialIOS: false,
+    this.shrinkWrap = false,
   }) : super(
           key: key,
           child: Platform.isIOS && !showMaterialIOS
-              ? CupertinoSettings(_buildSections(children))
-              : SingleChildScrollView(
-                  padding: EdgeInsets.all(padding),
-                  child: SafeArea(
+              ? CupertinoSettings(items: _buildSections(children))
+              : SafeArea(
+                  child: Container(
+                    padding: EdgeInsets.all(padding),
                     child: Card(
                       margin: EdgeInsets.all(0.0),
                       elevation: cardElevation,
-                      child: Column(children: _buildSections(children)),
+                      child: ListView(
+                        children: _buildSections(children),
+                        shrinkWrap: shrinkWrap,
+                      ),
                     ),
                   ),
                 ),
@@ -66,6 +74,7 @@ class CardSettings extends InheritedWidget {
   final TextAlign contentAlign;
   final double padding;
   final double cardElevation;
+  final bool shrinkWrap;
 
   static CardSettings of(BuildContext context) {
     return context.inheritFromWidgetOfExactType(CardSettings) as CardSettings;
