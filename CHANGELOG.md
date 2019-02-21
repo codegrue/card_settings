@@ -1,6 +1,12 @@
 # Releases
 
-## [1.4.] - 2/18/2019
+## [1.4.1] - 2/21/2019
+
+* Added Slider
+* Added Dark Mode Support
+* Updated Example
+
+## [1.4.0] - 2/18/2019
 
 * Added Optional override for showing material on iOS
 * Added Cupertino Forms and all Cupertino Equilivant Controls and Actions

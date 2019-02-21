@@ -22,7 +22,10 @@ class CardSettings extends InheritedWidget {
   }) : super(
           key: key,
           child: Platform.isIOS && !showMaterialIOS
-              ? CupertinoSettings(items: children)
+              ? CupertinoSettings(
+                  items: children,
+                  shrinkWrap: shrinkWrap,
+                )
               : SafeArea(
                   child: Container(
                     padding: EdgeInsets.all(padding),
@@ -52,19 +55,13 @@ class CardSettings extends InheritedWidget {
   }) : super(
           key: key,
           child: Platform.isIOS && !showMaterialIOS
-              ? CupertinoSettings(items: _buildSections(children))
-              : SafeArea(
-                  child: Container(
-                    padding: EdgeInsets.all(padding),
-                    child: Card(
-                      margin: EdgeInsets.all(0.0),
-                      elevation: cardElevation,
-                      child: ListView(
-                        children: _buildSections(children),
-                        shrinkWrap: shrinkWrap,
-                      ),
-                    ),
-                  ),
+              ? CupertinoSettings(
+                  items: _getWidgets(children),
+                  shrinkWrap: shrinkWrap,
+                )
+              : ListView(
+                  children: _buildSections(children),
+                  shrinkWrap: shrinkWrap,
                 ),
         );
 
@@ -89,10 +86,24 @@ class CardSettings extends InheritedWidget {
     return false;
   }
 
-  static List<Widget> _buildSections(List<CardSettingsSection> sections) {
+  static List<Widget> _getWidgets(List<CardSettingsSection> sections) {
     List<Widget> _children = <Widget>[];
     for (var row in sections) {
       _children.addAll(row.build());
+    }
+    return _children;
+  }
+
+  static List<Widget> _buildSections(List<CardSettingsSection> sections) {
+    List<Widget> _children = <Widget>[];
+    for (var row in sections) {
+      _children.add(SafeArea(
+        child: Card(
+          child: Column(
+            children: row.build(),
+          ),
+        ),
+      ));
     }
     return _children;
   }
@@ -123,6 +134,6 @@ class CardSettingsSection {
       if (children != null) _children.addAll(children);
     }
 
-    return _children?.map((c) => SafeArea(child: c))?.toList();
+    return _children;
   }
 }
