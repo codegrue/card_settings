@@ -23,6 +23,7 @@ class PonyModel {
   int boxOfficePhone = 8005551212;
   String email = 'me@nowhere.org';
   String password = 'secret1';
+  double rating = 0.0;
 }
 
 const List<String> allHobbies = <String>[

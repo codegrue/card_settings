@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       //     labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
       //   ),
       //
-      theme: ThemeData.dark(),
+      theme: ThemeData.light(),
     );
   }
 }
@@ -171,6 +171,7 @@ class _PonyExampleState extends State<PonyExample> {
             _buildCardSettingsTimePicker(),
             _buildCardSettingsCurrency(),
             _buildCardSettingsPhone(),
+            _buildCardSettingsDouble_Slider(),
           ],
         ),
         CardSettingsSection(
@@ -282,6 +283,7 @@ class _PonyExampleState extends State<PonyExample> {
               _buildCardSettingsCurrency(),
               _buildCardSettingsPhone(),
             ]),
+            _buildCardSettingsDouble_Slider(),
           ],
         ),
         CardSettingsSection(
@@ -687,6 +689,27 @@ class _PonyExampleState extends State<PonyExample> {
           _ponyModel.name = value;
         });
         _showSnackBar('Name', value);
+      },
+    );
+  }
+
+  CardSettingsSlider _buildCardSettingsDouble_Slider() {
+    return CardSettingsSlider(
+      showMaterialIOS: _showMaterialIOS,
+      key: _typeKey,
+      label: 'Rating',
+      initialValue: _ponyModel.rating,
+      autovalidate: _autoValidate,
+      validator: (double value) {
+        if (value == null) return 'You must pick a rating.';
+        return null;
+      },
+      onSaved: (value) => _ponyModel.rating = value,
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.rating = value;
+        });
+        _showSnackBar('Rating', value);
       },
     );
   }
