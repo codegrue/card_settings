@@ -52,7 +52,7 @@ All fields in this package are compatible with the standard Flutter Form widget.
 ``` dart
   String title = "Spheria";
   String author = "Cody Leet";
-  String url = "http://www.codyleet.com/spheria"
+  String url = "http://www.codyleet.com/spheria";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
