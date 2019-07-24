@@ -37,8 +37,7 @@ class CardSettingsDatePicker extends FormField<DateTime> {
           validator: validator,
           autovalidate: autovalidate,
           builder: (FormFieldState<DateTime> field) =>
-              _CardSettingsDatePickerState().widget,
-        );
+              (field as _CardSettingsDatePickerState)._build(field.context));
 
   final ValueChanged<DateTime> onChanged;
 
@@ -121,8 +120,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _build(BuildContext context) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
       return Container(
         child: widget?.visible == false

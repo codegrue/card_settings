@@ -65,7 +65,7 @@ class CardSettingsText extends FormField<String> {
           validator: validator,
           autovalidate: autovalidate,
           builder: (FormFieldState<String> field) =>
-              _CardSettingsTextState().widget,
+              (field as _CardSettingsTextState)._build(field.context),
         );
 
   final ValueChanged<String> onChanged;
@@ -213,8 +213,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _build(BuildContext context) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
       final _child = Container(
         child: CupertinoTextField(

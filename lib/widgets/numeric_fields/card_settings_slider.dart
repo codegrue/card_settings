@@ -39,7 +39,7 @@ class CardSettingsSlider extends FormField<double> {
             validator: validator,
             autovalidate: autovalidate,
             builder: (FormFieldState<double> field) =>
-                _CardSettingsSliderState().widget);
+                (field as _CardSettingsSliderState)._build(field.context));
 
   final String label;
 
@@ -73,8 +73,7 @@ class _CardSettingsSliderState extends FormFieldState<double> {
   @override
   CardSettingsSlider get widget => super.widget as CardSettingsSlider;
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _build(BuildContext context) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
       return Container(
         child: widget?.visible == false

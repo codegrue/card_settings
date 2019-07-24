@@ -34,7 +34,7 @@ class CardSettingsSwitch extends FormField<bool> {
             validator: validator,
             autovalidate: autovalidate,
             builder: (FormFieldState<bool> field) =>
-                _CardSettingsSwitchState().widget);
+                (field as _CardSettingsSwitchState)._build(field.context));
 
   final String label;
 
@@ -64,8 +64,7 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
   @override
   CardSettingsSwitch get widget => super.widget as CardSettingsSwitch;
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _build(BuildContext context) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
       return Container(
         child: widget?.visible == false

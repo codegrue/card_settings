@@ -41,7 +41,7 @@ class CardSettingsColorPicker extends FormField<Color> {
             validator: validator,
             autovalidate: autovalidate,
             builder: (FormFieldState<Color> field) =>
-                _CardSettingsColorPickerState().widget);
+                (field as _CardSettingsColorPickerState)._build(field.context));
 
   final ValueChanged<Color> onChanged;
 
@@ -175,8 +175,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _build(BuildContext context) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
       return Container(
         child: widget?.visible == false
