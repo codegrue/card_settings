@@ -273,7 +273,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
           obscureText: widget?.obscureText ?? false,
           autocorrect: widget?.autocorrect ?? true,
           maxLengthEnforced: widget?.maxLengthEnforced ?? false,
-          maxLines: widget?.numberOfLines ?? 1,
+          maxLines: widget?.numberOfLines,
           maxLength: (widget?.showCounter ?? false)
               ? widget?.maxLength
               : null, // if we want counter use default behavior
@@ -398,7 +398,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
         obscureText: widget?.obscureText ?? false,
         autocorrect: widget?.autocorrect ?? true,
         maxLengthEnforced: widget?.maxLengthEnforced ?? false,
-        maxLines: widget?.numberOfLines ?? 1,
+        maxLines: widget?.numberOfLines,
         maxLength: (widget?.showCounter ?? false)
             ? widget?.maxLength
             : null, // if we want counter use default behavior
