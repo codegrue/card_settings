@@ -33,7 +33,7 @@ class CardSettingsMultiselect extends FormField<List<String>> {
           validator: validator,
           autovalidate: autovalidate,
           builder: (FormFieldState<List<String>> field) =>
-              _CardSettingsMultiselectState().widget,
+              (field as _CardSettingsMultiselectState)._build(field.context),
         );
 
   final String label;
@@ -100,8 +100,7 @@ class _CardSettingsMultiselectState extends FormFieldState<List<String>> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _build(BuildContext context) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
       return Container(
         child: widget?.visible == false

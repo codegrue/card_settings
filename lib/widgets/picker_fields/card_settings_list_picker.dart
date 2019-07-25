@@ -35,7 +35,8 @@ class CardSettingsListPicker extends FormField<String> {
             validator: validator,
             autovalidate: autovalidate,
             builder: (FormFieldState<String> field) =>
-                _CardSettingsListPickerState().widget);
+                (field as _CardSettingsListPickerState)._build(field.context)
+        );
 
   final ValueChanged<String> onChanged;
 
@@ -137,8 +138,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _build(BuildContext context) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
       return Container(
         child: widget?.visible == false

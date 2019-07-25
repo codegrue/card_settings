@@ -111,11 +111,16 @@ class CardSettingsField extends StatelessWidget {
       child: Row(
         children: <Widget>[
           _buildLeftIcon(context),
-          _buildLabelSpacer(context),
-           _buildRequiredIndicator(context),
+          _buildLabelSpacer(context),          
           Expanded(
-            child: _buildLabel(context),
+            child: Row(
+              children: <Widget>[
+                _buildLabel(context),
+                _buildRequiredIndicator(context),
+              ],
+            ),
           ),
+          
          
           _buildLabelSuffix(context),
         ],

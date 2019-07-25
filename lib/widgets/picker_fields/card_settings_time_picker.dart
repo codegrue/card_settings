@@ -34,7 +34,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
           validator: validator,
           autovalidate: autovalidate,
           builder: (FormFieldState<TimeOfDay> field) =>
-              _CardSettingsTimePickerState().widget,
+              (field as _CardSettingsTimePickerState)._build(field.context),
         );
 
   final ValueChanged<TimeOfDay> onChanged;
@@ -103,8 +103,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _build(BuildContext context) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
       return Container(
         child: widget?.visible == false
