@@ -15,15 +15,7 @@ dependencies:
   meta: ^1.1.6
   auto_size_text: ^1.0.0
   cupertino_icons: ^0.1.2
-  # flutter_cupertino_settings: ^0.0.9+1
-  flutter_cupertino_settings:
-    git:
-      url: https://github.com/AppleEducate/flutter_cupertino_settings
-
-# dependency_overrides:
-#   flutter_cupertino_settings:
-#     git:
-#       url: https://github.com/AppleEducate/flutter_cupertino_settings
+  flutter_cupertino_settings: ^0.1.0
 
 dev_dependencies:
   flutter_test:
