@@ -268,7 +268,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
                 ),
           clearButtonMode: widget?.showClearButtonIOS,
           placeholder: widget?.hintText,
-          textAlign: TextAlign.end,
+          textAlign: widget?.contentAlign ?? TextAlign.end,
           autofocus: widget?.autofocus ?? false,
           obscureText: widget?.obscureText ?? false,
           autocorrect: widget?.autocorrect ?? true,
