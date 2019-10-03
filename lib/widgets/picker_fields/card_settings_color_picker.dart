@@ -12,11 +12,6 @@ import '../../card_settings.dart';
 
 // Constants
 const double _kPickerHeaderPortraitHeight = 60.0;
-const double _kPickerPortraitWidth = 330.0;
-const double _kPickerPortraitHeight = 500.0;
-const double _kPickerLandscapeWidth = 530.0;
-const double _kPickerLandscapeHeight = 300.0;
-const double _kDialogActionBarHeight = 52.0;
 
 /// This is the color picker field
 class CardSettingsColorPicker extends FormField<Color> {

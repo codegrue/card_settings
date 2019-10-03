@@ -1,7 +1,8 @@
 # Card Settings
 
 [![Pub Package](https://img.shields.io/pub/v/card_settings.svg)](https://pub.dartlang.org/packages/card_settings)
-[![Github Issues](http://githubbadges.herokuapp.com/codegrue/card_settings/issues.svg)](https://github.com/codegrue/card_settings/issues?utf8=%E2%9C%93&q=is%3Aopen+%21label%3Aenhancement+)
+
+NOTE: THIS LIBRARY IS NO LONGER BEING MAINTAINED. IF YOU WOULD LIKE TO CONVERT IT TO A COMMUNITY PROJECT, PLEASE CONTACT THE AUTHORS.
 
 A flutter package for building card based settings forms. This includes a library of pre-built form field widgets. The style is a bit like a cross between
 the cupertino settings screen and material design; The idea is it should be usable and intutive on both iOS and Android.
@@ -11,45 +12,45 @@ the cupertino settings screen and material design; The idea is it should be usab
 This package consists of a CardSettings layout wrapper and a series of form field options including:
 
 - **Text Fields**
-  - *CardSettingsText* - Basic text field
-  - *CardSettingsParagraph* - Multiline text field with a counter
-  - *CardSettingsEmail* - A text field pre-configured for email input
-  - *CardSettingsPassword* - A text field pre-configured for passwords
-  - *CardSettingsPhone* - A masked phone entry field (US style currently)
+  - _CardSettingsText_ - Basic text field
+  - _CardSettingsParagraph_ - Multiline text field with a counter
+  - _CardSettingsEmail_ - A text field pre-configured for email input
+  - _CardSettingsPassword_ - A text field pre-configured for passwords
+  - _CardSettingsPhone_ - A masked phone entry field (US style currently)
 - **Numeric Fields**
-  - *CardSettingsDouble* - Field for double precision numbers
-  - *CardSettingsInt* - Field for integer numbers
-  - *CardSettingsCurrency* - Field for currency entry
-  - *CardSettingsSwitch* - Field for boolean state
+  - _CardSettingsDouble_ - Field for double precision numbers
+  - _CardSettingsInt_ - Field for integer numbers
+  - _CardSettingsCurrency_ - Field for currency entry
+  - _CardSettingsSwitch_ - Field for boolean state
 - **Pickers**
-  - *CardSettingsListPicker* - Picker list of arbitrary options
-  - *CardSettingsNumberPicker* - Picker list of numbers in a given range
-  - *CardSettingsColorPicker* - RGB Color Picker
-  - *CardSettingsDatePicker* - Material Design Date Picker
-  - *CardSettingsTimePicker* - Material Design Time Picker
+  - _CardSettingsListPicker_ - Picker list of arbitrary options
+  - _CardSettingsNumberPicker_ - Picker list of numbers in a given range
+  - _CardSettingsColorPicker_ - RGB Color Picker
+  - _CardSettingsDatePicker_ - Material Design Date Picker
+  - _CardSettingsTimePicker_ - Material Design Time Picker
 - **Selection**
-  - *CardSettingsMultiselect* - Select from a list of available options
+  - _CardSettingsMultiselect_ - Select from a list of available options
 - **Informational Sections**
-  - *CardSettingsHeader* - A control to put a header between form sections
-  - *CardSettingsInstructions* - Informational read-only text
+  - _CardSettingsHeader_ - A control to put a header between form sections
+  - _CardSettingsInstructions_ - Informational read-only text
 - **Actions**
-  - *CardSettingsButton* - Actions buttons for the form
+  - _CardSettingsButton_ - Actions buttons for the form
 
 All fields support `validate`, `onChange`, `onSaved`, `autovalidate`, and `visible`.
 
-* [Warning] For the text fields on iOS using [CupertinoTextFields] the [validator] and [onSaved] do not exist, please use [showErrorIOS] to show a [red] Border around the Text Field and [onChanged] and [onFieldSubmitted] to update the value like in the example.
-* Require Indicator on iOS will show * next to the label if [requireIndicator] is not equal to null. (For Example: 'label *')
+- [Warning] For the text fields on iOS using [CupertinoTextFields] the [validator] and [onSaved] do not exist, please use [showErrorIOS] to show a [red] Border around the Text Field and [onChanged] and [onFieldSubmitted] to update the value like in the example.
+- Require Indicator on iOS will show _next to the label if [requireIndicator] is not equal to null. (For Example: 'label _')
 
 The package also includes these additonal items:
 
-- *CardSettingsField* - The base layout widget. You can use this to build custom fields
-- *Converters* - a set of utility functions to assist in converting data into and out of the fields
+- _CardSettingsField_ - The base layout widget. You can use this to build custom fields
+- _Converters_ - a set of utility functions to assist in converting data into and out of the fields
 
 ## Simple Example
 
 All fields in this package are compatible with the standard Flutter Form widget. Simply wrap the CardSettings control in a form and use it as you normally would with the form functionality.
 
-``` dart
+```dart
   String title = "Spheria";
   String author = "Cody Leet";
   String url = "http://www.codyleet.com/spheria";
@@ -92,7 +93,7 @@ See the full demo example [here](https://pub.dartlang.org/packages/card_settings
 
 The widgets support the material design theme. This example shows what global theme values to set to determine how the various elements appear.
 
-``` dart
+```dart
 class MyApp extends StatelessWidget {
 
   @override
@@ -119,7 +120,7 @@ class MyApp extends StatelessWidget {
 
 Or if you want to apply a different theme to the `CardSettings` hierarchy only, you can wrap it in a `Theme` widget like so:
 
-``` dart
+```dart
   Theme(
     data: Theme.of(context).copyWith(
       primaryTextTheme: TextTheme(
@@ -143,7 +144,7 @@ The `CardSettings` widget implements a few global settings that all child fields
 
 You can control how the labels are rendered with four properties:
 
-``` dart
+```dart
   CardSettings(
     labelAlign: TextAlign.right, // change the label alignment
     labelSuffix: ':', // add an optional tag after the label
@@ -156,7 +157,7 @@ You can control how the labels are rendered with four properties:
 
 The `labelAlign` and `contentAlign` properties are also available on each field, so you can override the global setting for individual fields.
 
-``` dart
+```dart
   CardSettingsText(
     label: 'Last Name',
     labelAlign: TextAlign.left,
@@ -168,7 +169,7 @@ The `labelAlign` and `contentAlign` properties are also available on each field,
 
 Each field implements a `visible` property that you can use to control the visibility based on the value of other fields. In this example, the switch field controls the visibility of the text field:
 
-``` dart
+```dart
   bool _ateOut = false;
 
   CardSettingsSwitch(
@@ -191,7 +192,7 @@ package and as such masks are formatted with the following characters:
 - 0: accept numbers
 - A: accept letters
 - @: accept numbers and letters
-- *: accept any character
+- \*: accept any character
 
 So for example, phone number would be '(000) 000-0000'.
 
@@ -205,7 +206,7 @@ This suite allows for orientation switching. To configure this, build different 
 
 You might want to have different fields in each layout, or a different field order. So that Flutter doesn't get confused tracking state under this circumstance, you must provide a unique state key for each individual field, using the same key in each layout.
 
-``` dart
+```dart
 @override
 Widget build(BuildContext context) {
 
@@ -230,7 +231,7 @@ Widget build(BuildContext context) {
 
 You may have multiple fields on the same row in landscape orientation. This normally requires the use of container widgets to provide the layout inside the row. Instead, you can use the `CardFieldLayout` helper widget to streamline this. It will by default make it's children equally spaced, but you can provide an array of flex values to control the relative sizes.
 
-``` dart
+```dart
 // equally spaced example
 CardSettings(
   children: <Widget>[
@@ -242,7 +243,7 @@ CardSettings(
 );
 ```
 
-``` dart
+```dart
 // relative width example
 CardSettings(
   children: <Widget>[
@@ -263,13 +264,13 @@ The `CardSettingsField` is the basis of all other fields and can be used to buil
 
 ## Screenshots
 
-Material             |  Cupertino
-:-------------------------:|:-------------------------:
-![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/1.png)  |  ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/3.png)
-:-------------------------:|:-------------------------:
-![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/2.png)  |  ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/7.png)
-:-------------------------:|:-------------------------:
-![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/5.png)  |  ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/4.png)
+|                                         Material                                          |                                       Cupertino                                       |
+| :---------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: |
+| ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/1.png) | ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/3.png) |
+|                                :-------------------------:                                |                              :-------------------------:                              |
+| ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/2.png) | ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/7.png) |
+|                                :-------------------------:                                |                              :-------------------------:                              |
+| ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/android/5.png) | ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/ios/4.png) |
 
 ## Dependencies
 
@@ -284,8 +285,8 @@ Please see the [Changelog](https://github.com/codegrue/card_settings/blob/master
 
 ## Authors
 
-  - Jeff Jorczak <jeff@jorczak.com>
-  - Rody Davis Jr <rody.davis.jr@gmail.com>
+- Jeff Jorczak <jeff@jorczak.com>
+- Rody Davis Jr <rody.davis.jr@gmail.com>
 
 **NOTE: We would like a third author for redundency. Please contect us if interested.**
 

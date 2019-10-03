@@ -6,7 +6,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
-import 'dart:io';
 
 import '../../card_settings.dart';
 
@@ -35,8 +34,7 @@ class CardSettingsListPicker extends FormField<String> {
             validator: validator,
             autovalidate: autovalidate,
             builder: (FormFieldState<String> field) =>
-                (field as _CardSettingsListPickerState)._build(field.context)
-        );
+                (field as _CardSettingsListPickerState)._build(field.context));
 
   final ValueChanged<String> onChanged;
 

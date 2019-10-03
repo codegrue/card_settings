@@ -1,6 +1,6 @@
 name: card_settings
 description: A flutter package for building card based settings forms. This includes a library of pre-built form field widgets.
-version: 1.4.1
+version: 1.4.2
 authors:
   - Jeff Jorczak <jeff@jorczak.com>
   - Rody Davis Jr <rody.davis.jr@gmail.com>
@@ -17,15 +17,14 @@ dependencies:
   cupertino_icons: ^0.1.2
   # flutter_cupertino_settings: ^0.0.9+1
   flutter_cupertino_settings:
-   git:
-    url: https://github.com/AppleEducate/flutter_cupertino_settings
-
+    git:
+      url: https://github.com/AppleEducate/flutter_cupertino_settings
 
 # dependency_overrides:
 #   flutter_cupertino_settings:
 #     git:
 #       url: https://github.com/AppleEducate/flutter_cupertino_settings
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
