@@ -5,13 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../card_settings.dart';
+import '../../models/common_card_field_attributes.dart';
 
 /// This is a phone number field. It's designed for US numbers
-class CardSettingsPhone extends StatelessWidget {
+class CardSettingsPhone extends StatelessWidget
+    implements CommonCardFieldAttributes {
   CardSettingsPhone({
     Key key,
     this.label: 'Label',
+    this.labelWidth,
     this.labelAlign,
+    this.hintText,
+    this.prefixText,
     this.contentAlign,
     this.initialValue,
     this.contentOnNewLine = false,
@@ -38,11 +43,23 @@ class CardSettingsPhone extends StatelessWidget {
     this.showErrorIOS = false,
   });
 
+  @override
   final String label;
 
+  @override
+  final double labelWidth;
+
+  @override
   final TextAlign labelAlign;
 
+  @override
   final TextAlign contentAlign;
+
+  @override
+  final String hintText;
+
+  @override
+  final String prefixText;
 
   final int initialValue;
 
@@ -52,6 +69,7 @@ class CardSettingsPhone extends StatelessWidget {
 
   final int maxLength;
 
+  @override
   final Icon icon;
 
   final Widget requiredIndicator;
@@ -98,12 +116,15 @@ class CardSettingsPhone extends StatelessWidget {
     return CardSettingsText(
       key: key,
       label: label,
+      labelWidth: labelWidth,
       labelAlign: labelAlign,
       contentAlign: contentAlign,
       initialValue: initialValue.toString(),
       contentOnNewLine: contentOnNewLine,
       inputMask: inputMask,
       maxLength: maxLength,
+      hintText: hintText,
+      prefixText: prefixText,
       icon: icon,
       requiredIndicator: requiredIndicator,
       visible: visible,

@@ -73,7 +73,7 @@ class _PonyExampleState extends State<PonyExample> {
   final GlobalKey<FormState> _passwordKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _sliderKey = GlobalKey<FormState>();
 
-  bool _showMaterialIOS = false;
+  bool _showMaterialIOS = true;
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +120,7 @@ class _PonyExampleState extends State<PonyExample> {
   CardSettings _buildPortraitLayout() {
     return CardSettings.sectioned(
       showMaterialIOS: _showMaterialIOS,
+      labelWidth: 100,
       children: <CardSettingsSection>[
         CardSettingsSection(
           showMaterialIOS: _showMaterialIOS,
@@ -132,7 +133,7 @@ class _PonyExampleState extends State<PonyExample> {
             _buildCardSettingsListPicker_Type(),
             _buildCardSettingsNumberPicker(),
             _buildCardSettingsParagraph(5),
-            _buildCardSettingsMultiselect(),
+            //_buildCardSettingsMultiselect(),
           ],
         ),
         CardSettingsSection(
@@ -327,6 +328,7 @@ class _PonyExampleState extends State<PonyExample> {
   CardSettingsPassword _buildCardSettingsPassword() {
     return CardSettingsPassword(
       showMaterialIOS: _showMaterialIOS,
+      labelWidth: 150.0,
       key: _passwordKey,
       icon: Icon(Icons.lock),
       initialValue: _ponyModel.password,
@@ -349,6 +351,7 @@ class _PonyExampleState extends State<PonyExample> {
   CardSettingsEmail _buildCardSettingsEmail() {
     return CardSettingsEmail(
       showMaterialIOS: _showMaterialIOS,
+      labelWidth: 150.0,
       key: _emailKey,
       icon: Icon(Icons.person),
       initialValue: _ponyModel.email,
@@ -539,7 +542,7 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettingsColorPicker(
       showMaterialIOS: _showMaterialIOS,
       key: _maneKey,
-      label: 'Mane of many colors',
+      label: 'Mane',
       initialValue: intelligentCast<Color>(_ponyModel.maneColor),
       autovalidate: _autoValidate,
       validator: (value) {

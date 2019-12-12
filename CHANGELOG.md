@@ -1,5 +1,12 @@
 # Releases
 
+## [1.5.0] - 12/12/2019
+
+- Upgraded intl dpendency to 1.16.0 <https://github.com/codegrue/card_settings/issues/82>
+- Added code to restrict double's number of decimal digits <https://github.com/codegrue/card_settings/issues/81>
+- Added .IsDense to field content so heights line up
+- Added global labelWidth property <https://github.com/codegrue/card_settings/issues/80>
+
 ## [1.4.2] - 10/3/2019
 
 - text align will now used property or end if null

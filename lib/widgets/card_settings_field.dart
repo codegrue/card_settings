@@ -13,7 +13,7 @@ class CardSettingsField extends StatelessWidget {
     this.content,
     this.icon,
     this.pickerIcon,
-    this.labelWidth = 120.0,
+    this.labelWidth,
     this.contentOnNewLine = false,
     this.unitLabel,
     this.errorText,
@@ -49,13 +49,12 @@ class CardSettingsField extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                _buildLabelBlock(context),
                 Expanded(
-                  child: _buildLabelRow(context),
+                  child: _buildInlineContent(context),
                 ),
-                _buildInlineContent(context),
                 _buildRightDecoration()
               ],
             ),
@@ -69,8 +68,7 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget _buildInlineContent(BuildContext context) {
-    return Expanded(
-        child: contentOnNewLine ? Text('') : _buildDecoratedContent(context));
+    return contentOnNewLine ? Text('') : _buildDecoratedContent(context);
   }
 
   Widget _buildNewRowContent(BuildContext context) {
@@ -95,6 +93,7 @@ class CardSettingsField extends StatelessWidget {
           .copyWith(
               errorText: errorText,
               contentPadding: EdgeInsets.all(0.0),
+              isDense: true,
               border: InputBorder.none);
 
       decoratedContent = InputDecorator(decoration: decoration, child: content);
@@ -103,32 +102,32 @@ class CardSettingsField extends StatelessWidget {
     return decoratedContent;
   }
 
-  Widget _buildLabelRow(BuildContext context) {
+  Widget _buildLabelBlock(BuildContext context) {
     return Container(
-      width: (contentOnNewLine) ? null : labelWidth,
+      width: (contentOnNewLine)
+          ? 300.0 //TODO: somehow set this to a calculation
+          : labelWidth ?? CardSettings.of(context).labelWidth ?? 120.0,
       padding:
           EdgeInsets.only(right: CardSettings.of(context).labelPadding ?? 6.0),
       child: Row(
         children: <Widget>[
           _buildLeftIcon(context),
-          _buildLabelSpacer(context),          
+          _buildLabelSpacer(context),
           Expanded(
             child: Row(
               children: <Widget>[
-                _buildLabel(context),
-                _buildRequiredIndicator(context),
+                _buildLabelText(context),
+                _buildlabelRequiredIndicator(context),
               ],
             ),
           ),
-          
-         
           _buildLabelSuffix(context),
         ],
       ),
     );
   }
 
-  Widget _buildLabel(BuildContext context) {
+  Widget _buildLabelText(BuildContext context) {
     return AutoSizeText(
       label,
       style: _buildLabelStyle(context),
@@ -153,7 +152,7 @@ class CardSettingsField extends StatelessWidget {
     );
   }
 
-  Widget _buildRequiredIndicator(BuildContext context) {
+  Widget _buildlabelRequiredIndicator(BuildContext context) {
     if (requiredIndicator == null) return Container();
 
     if (requiredIndicator is Text) {

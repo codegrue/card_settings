@@ -2,8 +2,6 @@
 
 [![Pub Package](https://img.shields.io/pub/v/card_settings.svg)](https://pub.dartlang.org/packages/card_settings)
 
-NOTE: THIS LIBRARY IS NO LONGER BEING MAINTAINED. IF YOU WOULD LIKE TO CONVERT IT TO A COMMUNITY PROJECT, PLEASE CONTACT THE AUTHORS.
-
 A flutter package for building card based settings forms. This includes a library of pre-built form field widgets. The style is a bit like a cross between
 the cupertino settings screen and material design; The idea is it should be usable and intutive on both iOS and Android.
 
@@ -147,6 +145,7 @@ You can control how the labels are rendered with four properties:
 ```dart
   CardSettings(
     labelAlign: TextAlign.right, // change the label alignment
+    labelWidth: 120.0, // change how wide the label portion is
     labelSuffix: ':', // add an optional tag after the label
     labelPadding: 10.0, // control the spacing between the label and the content
     contentAlign: TextAlign.left, // alignment of the entry widgets

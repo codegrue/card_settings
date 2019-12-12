@@ -11,6 +11,7 @@ class CardSettings extends InheritedWidget {
   CardSettings({
     Key key,
     this.labelAlign,
+    this.labelWidth,
     this.labelPadding,
     this.labelSuffix,
     this.contentAlign: TextAlign.left,
@@ -44,6 +45,7 @@ class CardSettings extends InheritedWidget {
   CardSettings.sectioned({
     Key key,
     this.labelAlign,
+    this.labelWidth,
     this.labelPadding,
     this.labelSuffix,
     this.contentAlign: TextAlign.left,
@@ -66,6 +68,7 @@ class CardSettings extends InheritedWidget {
         );
 
   final TextAlign labelAlign;
+  final double labelWidth;
   final double labelPadding;
   final String labelSuffix;
   final TextAlign contentAlign;
@@ -74,12 +77,14 @@ class CardSettings extends InheritedWidget {
   final bool shrinkWrap;
 
   static CardSettings of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(CardSettings) as CardSettings;
+    return context.dependOnInheritedWidgetOfExactType<CardSettings>();
   }
 
+  // notify child widgets if a setting changes on the overall wrapper
   @override
   bool updateShouldNotify(CardSettings old) {
     if (labelAlign != old.labelAlign) return true;
+    if (labelWidth != old.labelWidth) return true;
     if (labelPadding != old.labelPadding) return true;
     if (labelSuffix != old.labelSuffix) return true;
     if (contentAlign != old.contentAlign) return true;
