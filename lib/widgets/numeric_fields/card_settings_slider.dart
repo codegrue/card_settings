@@ -23,6 +23,7 @@ class CardSettingsSlider extends FormField<double> {
     this.label = 'Label',
     this.requiredIndicator,
     this.labelAlign,
+    this.labelWidth,
     this.icon,
     this.contentAlign,
     this.onChanged,
@@ -44,6 +45,8 @@ class CardSettingsSlider extends FormField<double> {
   final String label;
 
   final TextAlign labelAlign;
+
+  final double labelWidth;
 
   final TextAlign contentAlign;
 
@@ -101,6 +104,7 @@ class _CardSettingsSliderState extends FormFieldState<double> {
     return CardSettingsField(
       label: widget?.label,
       labelAlign: widget?.labelAlign,
+      labelWidth: widget?.labelWidth,
       visible: widget?.visible,
       icon: widget?.icon,
       requiredIndicator: widget?.requiredIndicator,
@@ -111,23 +115,46 @@ class _CardSettingsSliderState extends FormFieldState<double> {
             padding: EdgeInsets.all(0.0),
             child: Container(
               height: 20.0,
-              child: Slider(
-                activeColor: Theme.of(context).primaryColor,
-                value: value,
-                divisions: widget?.divisions,
-                min: widget?.min ?? 0,
-                max: widget?.max ?? 1,
-                onChangeEnd: widget?.onChangedEnd,
-                onChangeStart: widget?.onChangedStart,
-                onChanged: (value) {
-                  didChange(value);
-                  if (widget?.onChanged != null) widget?.onChanged(value);
-                },
+              child: SliderTheme(
+                data: SliderThemeData(
+                  trackShape: CustomTrackShape(),
+                ),
+                child: Slider(
+                  activeColor: Theme.of(context).primaryColor,
+                  value: value,
+                  divisions: widget?.divisions,
+                  min: widget?.min ?? 0,
+                  max: widget?.max ?? 1,
+                  onChangeEnd: widget?.onChangedEnd,
+                  onChangeStart: widget?.onChangedStart,
+                  onChanged: (value) {
+                    didChange(value);
+                    if (widget?.onChanged != null) widget?.onChanged(value);
+                  },
+                ),
               ),
             ),
           ),
         ),
       ]),
     );
+  }
+}
+
+// https://github.com/flutter/flutter/issues/37057
+class CustomTrackShape extends RoundedRectSliderTrackShape {
+  Rect getPreferredRect({
+    @required RenderBox parentBox,
+    Offset offset = Offset.zero,
+    @required SliderThemeData sliderTheme,
+    bool isEnabled = false,
+    bool isDiscrete = false,
+  }) {
+    final double trackHeight = sliderTheme.trackHeight;
+    final double trackLeft = offset.dx;
+    final double trackTop =
+        offset.dy + (parentBox.size.height - trackHeight) / 2;
+    final double trackWidth = parentBox.size.width;
+    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
 }

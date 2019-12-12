@@ -680,7 +680,6 @@ class _PonyExampleState extends State<PonyExample> {
       initialValue: _ponyModel.name,
       requiredIndicator: Text('*', style: TextStyle(color: Colors.red)),
       autovalidate: _autoValidate,
-      contentAlign: TextAlign.right,
       validator: (value) {
         if (value == null || value.isEmpty) return 'Name is required.';
         return null;
