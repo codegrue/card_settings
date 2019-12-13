@@ -1,6 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'package:card_settings/helpers/decimal_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -19,6 +20,7 @@ class CardSettingsDouble extends CardSettingsText {
     Widget requiredIndicator,
     String unitLabel,
     int maxLength: 10,
+    int decimalDigits,
     bool visible: true,
     bool enabled: true,
     bool autofocus: false,
@@ -80,6 +82,7 @@ class CardSettingsDouble extends CardSettingsText {
           inputFormatters: [
             LengthLimitingTextInputFormatter(maxLength),
             WhitelistingTextInputFormatter(RegExp("[0-9]+.?[0-9]*")),
+            DecimalTextInputFormatter(decimalDigits: decimalDigits)
           ],
         );
 }

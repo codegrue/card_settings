@@ -494,6 +494,7 @@ class _PonyExampleState extends State<PonyExample> {
       key: _heightKey,
       label: 'Height',
       unitLabel: 'feet',
+      decimalDigits: 2,
       initialValue: _ponyModel.height,
       onSaved: (value) => _ponyModel.height = value,
       onChanged: (value) {
