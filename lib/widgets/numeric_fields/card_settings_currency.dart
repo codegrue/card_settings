@@ -38,7 +38,7 @@ class CardSettingsCurrency extends StatefulWidget {
     this.maxLengthEnforced: true,
     this.onFieldSubmitted,
     this.inputFormatters,
-    this.showMaterialIOS = false,
+    this.showMaterialonIOS = false,
     this.showErrorIOS = false,
   });
 
@@ -96,7 +96,7 @@ class CardSettingsCurrency extends StatefulWidget {
 
   final List<TextInputFormatter> inputFormatters;
 
-  final bool showMaterialIOS;
+  final bool showMaterialonIOS;
 
   ///Shows a [red] [Border] around the [CupertinoTextField] since the [validator] does not exist
   final bool showErrorIOS;
@@ -124,7 +124,7 @@ class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
   @override
   Widget build(BuildContext context) {
     return CardSettingsText(
-      showMaterialIOS: widget?.showMaterialIOS,
+      showMaterialonIOS: widget?.showMaterialonIOS,
       label: widget.label,
       showErrorIOS: widget?.showErrorIOS,
       labelAlign: widget.labelAlign,

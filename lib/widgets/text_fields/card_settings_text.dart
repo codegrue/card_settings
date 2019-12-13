@@ -49,7 +49,7 @@ class CardSettingsText extends FormField<String>
     this.requiredIndicator,
     this.unitLabel,
     this.showErrorIOS = false,
-    this.showMaterialIOS = false,
+    this.showMaterialonIOS = false,
     this.showClearButtonIOS = OverlayVisibilityMode.never,
   })  : //assert(initialValue == null || controller == null),
         assert(keyboardType != null),
@@ -132,7 +132,7 @@ class CardSettingsText extends FormField<String>
 
   final bool autocorrect;
 
-  final bool showMaterialIOS;
+  final bool showMaterialonIOS;
 
   @override
 
@@ -226,7 +226,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
   }
 
   Widget _build(BuildContext context) {
-    if (Platform.isIOS && !widget.showMaterialIOS) {
+    if (Platform.isIOS && !widget.showMaterialonIOS) {
       return _buildCupertinoTextbox(context);
     } else {
       return _buildMaterialTextbox(context);

@@ -39,7 +39,7 @@ class CardSettingsPhone extends StatelessWidget
     this.maxLengthEnforced: true,
     this.onFieldSubmitted,
     this.inputFormatters,
-    this.showMaterialIOS = false,
+    this.showMaterialonIOS = false,
     this.showErrorIOS = false,
   });
 
@@ -106,7 +106,7 @@ class CardSettingsPhone extends StatelessWidget
 
   final List<TextInputFormatter> inputFormatters;
 
-  final bool showMaterialIOS;
+  final bool showMaterialonIOS;
 
   ///Shows a [red] [Border] around the [CupertinoTextField] since the [validator] does not exist
   final bool showErrorIOS;
@@ -130,7 +130,7 @@ class CardSettingsPhone extends StatelessWidget
       visible: visible,
       enabled: enabled,
       autofocus: autofocus,
-      showMaterialIOS: showMaterialIOS,
+      showMaterialonIOS: showMaterialonIOS,
       obscureText: obscureText,
       autocorrect: autocorrect,
       autovalidate: autovalidate,

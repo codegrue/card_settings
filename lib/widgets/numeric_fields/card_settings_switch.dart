@@ -26,7 +26,7 @@ class CardSettingsSwitch extends FormField<bool> {
     this.icon,
     this.contentAlign,
     this.onChanged,
-    this.showMaterialIOS = false,
+    this.showMaterialonIOS = false,
   }) : super(
             key: key,
             initialValue: initialValue,
@@ -54,7 +54,7 @@ class CardSettingsSwitch extends FormField<bool> {
 
   final bool visible;
 
-  final bool showMaterialIOS;
+  final bool showMaterialonIOS;
 
   @override
   _CardSettingsSwitchState createState() => _CardSettingsSwitchState();
@@ -65,7 +65,7 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
   CardSettingsSwitch get widget => super.widget as CardSettingsSwitch;
 
   Widget _build(BuildContext context) {
-    if (Platform.isIOS && !widget.showMaterialIOS) {
+    if (Platform.isIOS && !widget.showMaterialonIOS) {
       return Container(
         child: widget?.visible == false
             ? null

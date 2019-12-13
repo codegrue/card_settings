@@ -29,15 +29,15 @@ class CardSettingsDatePicker extends FormField<DateTime> {
     this.firstDate,
     this.lastDate,
     this.style,
-    this.showMaterialIOS = false,
+    this.showMaterialonIOS = false,
   }) : super(
-          key: key,
-          initialValue: initialValue ?? DateTime.now(),
-          onSaved: onSaved,
-          validator: validator,
-          autovalidate: autovalidate,
-          builder: (FormFieldState<DateTime> field) =>
-              (field as _CardSettingsDatePickerState)._build(field.context));
+            key: key,
+            initialValue: initialValue ?? DateTime.now(),
+            onSaved: onSaved,
+            validator: validator,
+            autovalidate: autovalidate,
+            builder: (FormFieldState<DateTime> field) =>
+                (field as _CardSettingsDatePickerState)._build(field.context));
 
   final ValueChanged<DateTime> onChanged;
 
@@ -61,7 +61,7 @@ class CardSettingsDatePicker extends FormField<DateTime> {
 
   final TextStyle style;
 
-  final bool showMaterialIOS;
+  final bool showMaterialonIOS;
 
   @override
   _CardSettingsDatePickerState createState() => _CardSettingsDatePickerState();
@@ -77,8 +77,8 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
       _startDate = value;
     }
     final _endDate = widget?.lastDate ?? _startDate.add(Duration(days: 1800));
-  
-    if (Platform.isIOS && !widget.showMaterialIOS) {
+
+    if (Platform.isIOS && !widget.showMaterialonIOS) {
       showCupertinoModalPopup<DateTime>(
         context: context,
         builder: (BuildContext context) {
@@ -121,7 +121,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   }
 
   Widget _build(BuildContext context) {
-    if (Platform.isIOS && !widget.showMaterialIOS) {
+    if (Platform.isIOS && !widget.showMaterialonIOS) {
       return Container(
         child: widget?.visible == false
             ? null

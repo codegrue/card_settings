@@ -33,7 +33,7 @@ class CardSettingsColorPicker extends FormField<Color> {
     this.pickerType = CardSettingsColorPickerType.colors,
     this.requiredIndicator,
     this.label = "Label",
-    this.showMaterialIOS = false,
+    this.showMaterialonIOS = false,
   }) : super(
             key: key,
             initialValue: initialValue ?? Colors.black,
@@ -58,7 +58,7 @@ class CardSettingsColorPicker extends FormField<Color> {
 
   final bool visible;
 
-  final bool showMaterialIOS;
+  final bool showMaterialonIOS;
 
   final CardSettingsColorPickerType pickerType;
 
@@ -71,16 +71,49 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   @override
   CardSettingsColorPicker get widget => super.widget as CardSettingsColorPicker;
 
+  Color pickerColor;
+
   void _showDialog(String title) {
-    if (Platform.isIOS && !widget.showMaterialIOS) {
-      _showDialogCupertino(title, value);
+    pickerColor = value;
+
+    Widget _pickerControl;
+
+    switch (widget.pickerType) {
+      case CardSettingsColorPickerType.colors:
+        _pickerControl = ColorPicker(
+          pickerColor: pickerColor,
+          onColorChanged: (color) => pickerColor = color,
+          colorPickerWidth: 1000.0,
+          pickerAreaHeightPercent: 0.3,
+          enableAlpha: true,
+          displayThumbColor: true,
+          enableLabel: true,
+          paletteType: PaletteType.hsv,
+        );
+        break;
+      case CardSettingsColorPickerType.material:
+        _pickerControl = MaterialPicker(
+          pickerColor: pickerColor,
+          onColorChanged: (color) => pickerColor = color,
+          enableLabel: true, // only on portrait mode
+        );
+        break;
+      case CardSettingsColorPickerType.block:
+        _pickerControl = BlockPicker(
+          pickerColor: pickerColor,
+          onColorChanged: (color) => pickerColor = color,
+        );
+        break;
+    }
+
+    if (Platform.isIOS && !widget.showMaterialonIOS) {
+      _showDialogCupertino(title, _pickerControl);
     } else {
-      _showDialogMaterial(title, value);
+      _showDialogMaterial(title, _pickerControl);
     }
   }
 
-  void _showDialogCupertino(String title, Color value) {
-    Color _pickerColor = value;
+  void _showDialogCupertino(String title, Widget pickerControl) {
     showDialog<Color>(
       context: context,
       builder: (BuildContext context) {
@@ -101,13 +134,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
             titlePadding: const EdgeInsets.all(0.0),
             contentPadding: const EdgeInsets.all(0.0),
             content: SingleChildScrollView(
-              child: ColorPicker(
-                pickerColor: _pickerColor,
-                onColorChanged: (color) => _pickerColor = color,
-                colorPickerWidth: 1000.0,
-                pickerAreaHeightPercent: 0.3,
-                enableAlpha: true,
-              ),
+              child: pickerControl,
             ),
             actions: <Widget>[
               CupertinoButton(
@@ -116,7 +143,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
               ),
               CupertinoButton(
                 child: Text('Ok'),
-                onPressed: () => Navigator.of(context).pop(_pickerColor),
+                onPressed: () => Navigator.of(context).pop(pickerColor),
               ),
             ],
           );
@@ -130,38 +157,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
     });
   }
 
-  void _showDialogMaterial(String title, Color value) {
-    Color _pickerColor = value;
-    Widget _pickerControl;
-
-    switch (widget.pickerType) {
-      case CardSettingsColorPickerType.colors:
-        _pickerControl = ColorPicker(
-          pickerColor: _pickerColor,
-          onColorChanged: (color) => _pickerColor = color,
-          colorPickerWidth: 1000.0,
-          pickerAreaHeightPercent: 0.3,
-          enableAlpha: true,
-          displayThumbColor: true,
-          enableLabel: true,
-          paletteType: PaletteType.hsv,
-        );
-        break;
-      case CardSettingsColorPickerType.material:
-        _pickerControl = MaterialPicker(
-          pickerColor: _pickerColor,
-          onColorChanged: (color) => _pickerColor = color,
-          enableLabel: true, // only on portrait mode
-        );
-        break;
-      case CardSettingsColorPickerType.block:
-        _pickerControl = BlockPicker(
-          pickerColor: _pickerColor,
-          onColorChanged: (color) => _pickerColor = color,
-        );
-        break;
-    }
-
+  void _showDialogMaterial(String title, Widget pickerControl) {
     showDialog<Color>(
       context: context,
       builder: (BuildContext context) {
@@ -183,7 +179,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
             ),
             titlePadding: const EdgeInsets.all(0.0),
             contentPadding: const EdgeInsets.all(0.0),
-            content: SingleChildScrollView(child: _pickerControl),
+            content: SingleChildScrollView(child: pickerControl),
             actions: <Widget>[
               FlatButton(
                 child: Text('CANCEL'),
@@ -191,7 +187,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
               ),
               FlatButton(
                 child: Text('OK'),
-                onPressed: () => Navigator.of(context).pop(_pickerColor),
+                onPressed: () => Navigator.of(context).pop(pickerColor),
               ),
             ],
           );
@@ -206,7 +202,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   }
 
   Widget _build(BuildContext context) {
-    if (Platform.isIOS && !widget.showMaterialIOS) {
+    if (Platform.isIOS && !widget.showMaterialonIOS) {
       return Container(
         child: widget?.visible == false
             ? null

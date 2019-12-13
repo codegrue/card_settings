@@ -16,7 +16,7 @@ class CardSettingsButton extends StatelessWidget {
     this.textColor,
     this.bottomSpacing: 0.0,
     this.isDestructive = false,
-    this.showMaterialIOS = false,
+    this.showMaterialonIOS = false,
   });
 
   final String label;
@@ -25,7 +25,7 @@ class CardSettingsButton extends StatelessWidget {
   final Color backgroundColor;
   final Color textColor;
   final double bottomSpacing;
-  final bool showMaterialIOS;
+  final bool showMaterialonIOS;
 
   // Events
   final VoidCallback onPressed;
@@ -36,7 +36,7 @@ class CardSettingsButton extends StatelessWidget {
         Theme.of(context).textTheme.button.copyWith(color: textColor);
 
     if (visible) {
-      if (Platform.isIOS && !showMaterialIOS) {
+      if (Platform.isIOS && !showMaterialonIOS) {
         return Container(
           child: visible == false
               ? null

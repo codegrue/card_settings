@@ -25,7 +25,7 @@ class CardSettingsMultiselect extends FormField<List<String>> {
     this.labelAlign,
     this.requiredIndicator,
     this.options,
-    this.showMaterialIOS = false,
+    this.showMaterialonIOS = false,
   }) : super(
           key: key,
           initialValue: initialValues,
@@ -52,7 +52,7 @@ class CardSettingsMultiselect extends FormField<List<String>> {
 
   final ValueChanged<List<String>> onChanged;
 
-  final bool showMaterialIOS;
+  final bool showMaterialonIOS;
 
   @override
   _CardSettingsMultiselectState createState() =>
@@ -64,7 +64,7 @@ class _CardSettingsMultiselectState extends FormFieldState<List<String>> {
   CardSettingsMultiselect get widget => super.widget as CardSettingsMultiselect;
 
   void _showDialog(String label, List<String> options) {
-    if (Platform.isIOS && !widget.showMaterialIOS) {
+    if (Platform.isIOS && !widget.showMaterialonIOS) {
       Navigator.push<List<String>>(
         context,
         MaterialPageRoute(
@@ -101,7 +101,7 @@ class _CardSettingsMultiselectState extends FormFieldState<List<String>> {
   }
 
   Widget _build(BuildContext context) {
-    if (Platform.isIOS && !widget.showMaterialIOS) {
+    if (Platform.isIOS && !widget.showMaterialonIOS) {
       return Container(
         child: widget?.visible == false
             ? null

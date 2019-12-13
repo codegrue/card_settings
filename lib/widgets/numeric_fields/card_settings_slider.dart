@@ -32,7 +32,7 @@ class CardSettingsSlider extends FormField<double> {
     this.min,
     this.max,
     this.divisions,
-    this.showMaterialIOS = false,
+    this.showMaterialonIOS = false,
   }) : super(
             key: key,
             initialValue: initialValue,
@@ -62,7 +62,7 @@ class CardSettingsSlider extends FormField<double> {
 
   final bool visible;
 
-  final bool showMaterialIOS;
+  final bool showMaterialonIOS;
 
   final int divisions;
 
@@ -77,7 +77,7 @@ class _CardSettingsSliderState extends FormFieldState<double> {
   CardSettingsSlider get widget => super.widget as CardSettingsSlider;
 
   Widget _build(BuildContext context) {
-    if (Platform.isIOS && !widget.showMaterialIOS) {
+    if (Platform.isIOS && !widget.showMaterialonIOS) {
       return Container(
         child: widget?.visible == false
             ? null

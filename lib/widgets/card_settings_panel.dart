@@ -18,11 +18,11 @@ class CardSettings extends InheritedWidget {
     this.padding: 12.0,
     this.cardElevation: 5.0,
     List<Widget> children,
-    bool showMaterialIOS: false,
+    bool showMaterialonIOS: false,
     this.shrinkWrap = false,
   }) : super(
           key: key,
-          child: Platform.isIOS && !showMaterialIOS
+          child: Platform.isIOS && !showMaterialonIOS
               ? CupertinoSettings(
                   items: children,
                   shrinkWrap: shrinkWrap,
@@ -52,11 +52,11 @@ class CardSettings extends InheritedWidget {
     this.padding: 12.0,
     this.cardElevation: 5.0,
     List<CardSettingsSection> children,
-    bool showMaterialIOS: false,
+    bool showMaterialonIOS: false,
     this.shrinkWrap = false,
   }) : super(
           key: key,
-          child: Platform.isIOS && !showMaterialIOS
+          child: Platform.isIOS && !showMaterialonIOS
               ? CupertinoSettings(
                   items: _getWidgets(children),
                   shrinkWrap: shrinkWrap,
@@ -119,17 +119,17 @@ class CardSettingsSection {
     this.instructions,
     this.children,
     this.header,
-    this.showMaterialIOS = false,
+    this.showMaterialonIOS = false,
   });
 
   final Widget header;
   final Widget instructions;
   final List<Widget> children;
-  final bool showMaterialIOS;
+  final bool showMaterialonIOS;
 
   List<Widget> build() {
     List<Widget> _children = <Widget>[];
-    if (Platform.isIOS && !showMaterialIOS) {
+    if (Platform.isIOS && !showMaterialonIOS) {
       if (header != null) _children.add(header);
       if (children != null) _children.addAll(children);
       if (instructions != null) _children.add(instructions);
