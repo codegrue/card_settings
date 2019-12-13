@@ -81,6 +81,7 @@ class _PonyExampleState extends State<PonyExample> {
 
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: Text("My Little Pony"),
         actions: <Widget>[
@@ -121,6 +122,7 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettings.sectioned(
       showMaterialonIOS: _showMaterialonIOS,
       labelWidth: 100,
+      cardElevation: 10,
       children: <CardSettingsSection>[
         CardSettingsSection(
           showMaterialonIOS: _showMaterialonIOS,

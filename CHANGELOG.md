@@ -1,5 +1,9 @@
 # Releases
 
+## [1.5.2] - 12/13/2019
+
+- Fixed elevation not showing in .sectioned version. Padding as well. <https://github.com/codegrue/card_settings/issues/63>
+
 ## [1.5.1] - 12/13/2019
 
 - Fixed display of ColorPicker

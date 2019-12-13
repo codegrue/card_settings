@@ -15,7 +15,7 @@ class CardSettings extends InheritedWidget {
     this.labelPadding,
     this.labelSuffix,
     this.contentAlign: TextAlign.left,
-    this.padding: 12.0,
+    this.padding: 8.0,
     this.cardElevation: 5.0,
     List<Widget> children,
     bool showMaterialonIOS: false,
@@ -49,7 +49,7 @@ class CardSettings extends InheritedWidget {
     this.labelPadding,
     this.labelSuffix,
     this.contentAlign: TextAlign.left,
-    this.padding: 12.0,
+    this.padding: 8.0,
     this.cardElevation: 5.0,
     List<CardSettingsSection> children,
     bool showMaterialonIOS: false,
@@ -62,7 +62,7 @@ class CardSettings extends InheritedWidget {
                   shrinkWrap: shrinkWrap,
                 )
               : ListView(
-                  children: _buildSections(children),
+                  children: _buildSections(children, cardElevation, padding),
                   shrinkWrap: shrinkWrap,
                 ),
         );
@@ -99,13 +99,18 @@ class CardSettings extends InheritedWidget {
     return _children;
   }
 
-  static List<Widget> _buildSections(List<CardSettingsSection> sections) {
+  static List<Widget> _buildSections(List<CardSettingsSection> sections,
+      double cardElevation, double padding) {
     List<Widget> _children = <Widget>[];
     for (var row in sections) {
       _children.add(SafeArea(
-        child: Card(
-          child: Column(
-            children: row.build(),
+        child: Container(
+          padding: EdgeInsets.fromLTRB(padding, padding, padding, 0.0),
+          child: Card(
+            elevation: cardElevation,
+            child: Column(
+              children: row.build(),
+            ),
           ),
         ),
       ));
