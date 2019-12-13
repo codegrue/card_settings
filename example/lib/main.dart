@@ -661,6 +661,7 @@ class _PonyExampleState extends State<PonyExample> {
       hintText: 'Select One',
       autovalidate: _autoValidate,
       options: <String>['Earth', 'Unicorn', 'Pegasi', 'Alicorn'],
+      values: <String>['E', 'U', 'P', 'A'],
       validator: (String value) {
         if (value == null || value.isEmpty) return 'You must pick a type.';
         return null;

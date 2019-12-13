@@ -1,7 +1,7 @@
 // example viewmodel for the form
 class PonyModel {
   String name = 'Twilight Sparkle';
-  String type = 'Unicorn';
+  String type = 'U';
   int age = 7;
   String coatColor = 'D19FE4';
   String maneColor = '273873';

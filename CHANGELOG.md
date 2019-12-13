@@ -1,5 +1,9 @@
 # Releases
 
+## [1.5.3] - 12/13/2019
+
+- Enhanced ListPicker to allow a list of values separate from options. <https://github.com/codegrue/card_settings/issues/60>
+
 ## [1.5.2] - 12/13/2019
 
 - Fixed elevation not showing in .sectioned version. Padding as well. <https://github.com/codegrue/card_settings/issues/63>

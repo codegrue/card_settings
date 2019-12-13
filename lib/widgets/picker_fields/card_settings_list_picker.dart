@@ -26,8 +26,11 @@ class CardSettingsListPicker extends FormField<String> {
     this.contentAlign,
     this.hintText,
     this.options,
+    this.values,
     this.showMaterialonIOS = false,
-  }) : super(
+  })  : assert(values == null || options.length == values.length,
+            "If you provide 'values', they need the same number as 'options'"),
+        super(
             key: key,
             initialValue: initialValue ?? null,
             onSaved: onSaved,
@@ -52,6 +55,8 @@ class CardSettingsListPicker extends FormField<String> {
 
   final List<String> options;
 
+  List<String> values;
+
   final bool visible;
 
   final bool showMaterialonIOS;
@@ -64,11 +69,18 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   @override
   CardSettingsListPicker get widget => super.widget as CardSettingsListPicker;
 
-  void _showDialog(String label, List<String> options) {
+  void _showDialog(String label, List<String> options, List<String> values) {
+    int optionIndex = widget.values.indexOf(value);
+    String option;
+    if (optionIndex >= 0) {
+      option = widget.options[optionIndex];
+    } else {
+      optionIndex = 0; // set to first element in the list
+    }
+
     if (Platform.isIOS && !widget.showMaterialonIOS) {
       final FixedExtentScrollController scrollController =
-          FixedExtentScrollController(
-              initialItem: options.indexOf(value ?? options.first));
+          FixedExtentScrollController(initialItem: optionIndex);
       showCupertinoModalPopup<String>(
         context: context,
         builder: (BuildContext context) {
@@ -78,8 +90,8 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
               itemExtent: kPickerItemHeight,
               backgroundColor: CupertinoColors.white,
               onSelectedItemChanged: (int index) {
-                didChange(value);
-                widget.onChanged(options[index]);
+                didChange(values[index]);
+                widget.onChanged(values[index]);
               },
               children: List<Widget>.generate(options.length, (int index) {
                 return Center(
@@ -89,8 +101,9 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
             ),
           );
         },
-      ).then((value) {
-        if (value != null) {
+      ).then((option) {
+        if (option != null) {
+          String value = values[options.indexOf(option) ?? 0];
           didChange(value);
           if (widget.onChanged != null) widget.onChanged(value);
         }
@@ -102,11 +115,13 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
           return PickerDialog(
             items: options,
             title: label,
-            initialValue: value,
+            initialValue: option,
           );
         },
-      ).then((value) {
-        if (value != null) {
+      ).then((option) {
+        if (option != null) {
+          int optionIndex = options.indexOf(option);
+          String value = values[optionIndex];
           didChange(value);
           if (widget.onChanged != null) widget.onChanged(value);
         }
@@ -137,18 +152,28 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   }
 
   Widget _build(BuildContext context) {
+    // if values are not provided, copy the options over and use those
+    if (widget.values == null) widget.values = widget.options;
+
+    // get the content label from options based on value
+    int optionIndex = widget.values.indexOf(value);
+    String content = widget?.hintText ?? '';
+    if (optionIndex >= 0) {
+      content = widget.options[optionIndex];
+    }
+
     if (Platform.isIOS && !widget.showMaterialonIOS) {
       return Container(
         child: widget?.visible == false
             ? null
             : GestureDetector(
                 onTap: () {
-                  _showDialog(widget?.label, widget?.options);
+                  _showDialog(widget?.label, widget?.options, widget?.values);
                 },
                 child: CSControl(
                   widget?.label,
                   Text(
-                    widget?.initialValue ?? widget?.hintText ?? '',
+                    content,
                     style: Theme.of(context).textTheme.subhead.copyWith(
                         color: (value == null)
                             ? Theme.of(context).hintColor
@@ -163,7 +188,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     }
     return GestureDetector(
       onTap: () {
-        _showDialog(widget?.label, widget?.options);
+        _showDialog(widget?.label, widget?.options, widget?.values);
       },
       child: CardSettingsField(
         label: widget?.label,
@@ -173,7 +198,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
         content: Text(
-          widget?.initialValue ?? widget?.hintText ?? '',
+          content,
           style: Theme.of(context).textTheme.subhead.copyWith(
               color: (value == null)
                   ? Theme.of(context).hintColor
