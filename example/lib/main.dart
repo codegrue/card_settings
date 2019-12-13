@@ -511,6 +511,7 @@ class _PonyExampleState extends State<PonyExample> {
       showMaterialIOS: _showMaterialIOS,
       key: _spotKey,
       label: 'Spot',
+      pickerType: CardSettingsColorPickerType.block,
       initialValue: intelligentCast<Color>(_ponyModel.spotColor),
       visible: _ponyModel.hasSpots,
       onSaved: (value) => _ponyModel.spotColor = colorToString(value),
@@ -546,6 +547,7 @@ class _PonyExampleState extends State<PonyExample> {
       label: 'Mane',
       initialValue: intelligentCast<Color>(_ponyModel.maneColor),
       autovalidate: _autoValidate,
+      pickerType: CardSettingsColorPickerType.material,
       validator: (value) {
         if (value.computeLuminance() > .7) return 'This color is too light.';
         return null;

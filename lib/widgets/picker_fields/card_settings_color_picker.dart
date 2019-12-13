@@ -5,13 +5,17 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/block_picker.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_colorpicker/material_picker.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 import '../../card_settings.dart';
 
 // Constants
 const double _kPickerHeaderPortraitHeight = 60.0;
+
+enum CardSettingsColorPickerType { colors, material, block }
 
 /// This is the color picker field
 class CardSettingsColorPicker extends FormField<Color> {
@@ -26,6 +30,7 @@ class CardSettingsColorPicker extends FormField<Color> {
     this.contentAlign,
     this.icon,
     this.labelAlign,
+    this.pickerType = CardSettingsColorPickerType.colors,
     this.requiredIndicator,
     this.label = "Label",
     this.showMaterialIOS = false,
@@ -55,6 +60,8 @@ class CardSettingsColorPicker extends FormField<Color> {
 
   final bool showMaterialIOS;
 
+  final CardSettingsColorPickerType pickerType;
+
   @override
   _CardSettingsColorPickerState createState() =>
       _CardSettingsColorPickerState();
@@ -66,111 +73,136 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
 
   void _showDialog(String title) {
     if (Platform.isIOS && !widget.showMaterialIOS) {
-      Color _pickerColor = value;
-
-      showDialog<Color>(
-        context: context,
-        builder: (BuildContext context) {
-          return OrientationBuilder(builder: (context, orientation) {
-            return AlertDialog(
-              title: Container(
-                height: _kPickerHeaderPortraitHeight,
-                child: Center(
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 20.0,
-                    ),
-                  ),
-                ),
-                padding: EdgeInsets.all(20.0),
-              ),
-              titlePadding: const EdgeInsets.all(0.0),
-              contentPadding: const EdgeInsets.all(0.0),
-              content: SingleChildScrollView(
-                child: ColorPicker(
-                  pickerColor: _pickerColor,
-                  onColorChanged: (color) => _pickerColor = color,
-                  colorPickerWidth: 1000.0,
-                  pickerAreaHeightPercent: 0.3,
-                  enableAlpha: true,
-                ),
-              ),
-              actions: <Widget>[
-                CupertinoButton(
-                  child: Text('Cancel'),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-                CupertinoButton(
-                  child: Text('Ok'),
-                  onPressed: () => Navigator.of(context).pop(_pickerColor),
-                ),
-              ],
-            );
-          });
-        },
-      ).then((value) {
-        if (value != null) {
-          didChange(value);
-          if (widget.onChanged != null) widget.onChanged(value);
-        }
-      });
+      _showDialogCupertino(title, value);
     } else {
-      Color _pickerColor = value;
+      _showDialogMaterial(title, value);
+    }
+  }
 
-      showDialog<Color>(
-        context: context,
-        builder: (BuildContext context) {
-          return OrientationBuilder(builder: (context, orientation) {
-            return AlertDialog(
-              title: Container(
-                color: Theme.of(context).primaryColor,
-                height: _kPickerHeaderPortraitHeight,
-                child: Center(
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: const Color(0xffffffff),
-                    ),
+  void _showDialogCupertino(String title, Color value) {
+    Color _pickerColor = value;
+    showDialog<Color>(
+      context: context,
+      builder: (BuildContext context) {
+        return OrientationBuilder(builder: (context, orientation) {
+          return AlertDialog(
+            title: Container(
+              height: _kPickerHeaderPortraitHeight,
+              child: Center(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 20.0,
                   ),
                 ),
-                padding: EdgeInsets.all(20.0),
               ),
-              titlePadding: const EdgeInsets.all(0.0),
-              contentPadding: const EdgeInsets.all(0.0),
-              content: SingleChildScrollView(
-                child: ColorPicker(
-                  pickerColor: _pickerColor,
-                  onColorChanged: (color) => _pickerColor = color,
-                  colorPickerWidth: 1000.0,
-                  pickerAreaHeightPercent: 0.3,
-                  enableAlpha: true,
-                  displayThumbColor: true,
-                  enableLabel: true,
-                  paletteType: PaletteType.hsv,
-                ),
+              padding: EdgeInsets.all(20.0),
+            ),
+            titlePadding: const EdgeInsets.all(0.0),
+            contentPadding: const EdgeInsets.all(0.0),
+            content: SingleChildScrollView(
+              child: ColorPicker(
+                pickerColor: _pickerColor,
+                onColorChanged: (color) => _pickerColor = color,
+                colorPickerWidth: 1000.0,
+                pickerAreaHeightPercent: 0.3,
+                enableAlpha: true,
               ),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text('CANCEL'),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-                FlatButton(
-                  child: Text('OK'),
-                  onPressed: () => Navigator.of(context).pop(_pickerColor),
-                ),
-              ],
-            );
-          });
-        },
-      ).then((value) {
-        if (value != null) {
-          didChange(value);
-          if (widget.onChanged != null) widget.onChanged(value);
-        }
-      });
+            ),
+            actions: <Widget>[
+              CupertinoButton(
+                child: Text('Cancel'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              CupertinoButton(
+                child: Text('Ok'),
+                onPressed: () => Navigator.of(context).pop(_pickerColor),
+              ),
+            ],
+          );
+        });
+      },
+    ).then((value) {
+      if (value != null) {
+        didChange(value);
+        if (widget.onChanged != null) widget.onChanged(value);
+      }
+    });
+  }
+
+  void _showDialogMaterial(String title, Color value) {
+    Color _pickerColor = value;
+    Widget _pickerControl;
+
+    switch (widget.pickerType) {
+      case CardSettingsColorPickerType.colors:
+        _pickerControl = ColorPicker(
+          pickerColor: _pickerColor,
+          onColorChanged: (color) => _pickerColor = color,
+          colorPickerWidth: 1000.0,
+          pickerAreaHeightPercent: 0.3,
+          enableAlpha: true,
+          displayThumbColor: true,
+          enableLabel: true,
+          paletteType: PaletteType.hsv,
+        );
+        break;
+      case CardSettingsColorPickerType.material:
+        _pickerControl = MaterialPicker(
+          pickerColor: _pickerColor,
+          onColorChanged: (color) => _pickerColor = color,
+          enableLabel: true, // only on portrait mode
+        );
+        break;
+      case CardSettingsColorPickerType.block:
+        _pickerControl = BlockPicker(
+          pickerColor: _pickerColor,
+          onColorChanged: (color) => _pickerColor = color,
+        );
+        break;
     }
+
+    showDialog<Color>(
+      context: context,
+      builder: (BuildContext context) {
+        return OrientationBuilder(builder: (context, orientation) {
+          return AlertDialog(
+            title: Container(
+              color: Theme.of(context).primaryColor,
+              height: _kPickerHeaderPortraitHeight,
+              child: Center(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: const Color(0xffffffff),
+                  ),
+                ),
+              ),
+              padding: EdgeInsets.all(20.0),
+            ),
+            titlePadding: const EdgeInsets.all(0.0),
+            contentPadding: const EdgeInsets.all(0.0),
+            content: SingleChildScrollView(child: _pickerControl),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('CANCEL'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              FlatButton(
+                child: Text('OK'),
+                onPressed: () => Navigator.of(context).pop(_pickerColor),
+              ),
+            ],
+          );
+        });
+      },
+    ).then((value) {
+      if (value != null) {
+        didChange(value);
+        if (widget.onChanged != null) widget.onChanged(value);
+      }
+    });
   }
 
   Widget _build(BuildContext context) {
