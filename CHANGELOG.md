@@ -1,6 +1,6 @@
 # Releases
 
-## [1.5.0] - 12/12/2019
+## [1.5.1] - 12/13/2019
 
 - Fixed display of ColorPicker
 - Added pickerType property to pick one of "Colors", "Material", or "Block". <https://github.com/codegrue/card_settings/issues/62>
