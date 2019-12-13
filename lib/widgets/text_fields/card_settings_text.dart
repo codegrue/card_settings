@@ -103,7 +103,6 @@ class CardSettingsText extends FormField<String>
   @override
   final TextAlign contentAlign;
 
-  @override
   final String unitLabel;
 
   @override

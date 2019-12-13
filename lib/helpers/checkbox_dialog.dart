@@ -57,21 +57,19 @@ class _CheckboxDialogState extends State<CheckboxDialog> {
   @override
   Widget build(BuildContext context) {
     assert(context != null);
-    final Widget actions = ButtonTheme.bar(
-      child: Container(
-        height: _kDialogActionBarHeight,
-        child: ButtonBar(
-          children: <Widget>[
-            FlatButton(
-              child: Text(localizations.cancelButtonLabel),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            FlatButton(
-              child: Text(localizations.okButtonLabel),
-              onPressed: () => Navigator.of(context).pop(selectedValues),
-            ),
-          ],
-        ),
+    final Widget actions = Container(
+      height: _kDialogActionBarHeight,
+      child: ButtonBar(
+        children: <Widget>[
+          FlatButton(
+            child: Text(localizations.cancelButtonLabel),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          FlatButton(
+            child: Text(localizations.okButtonLabel),
+            onPressed: () => Navigator.of(context).pop(selectedValues),
+          ),
+        ],
       ),
     );
     return Dialog(

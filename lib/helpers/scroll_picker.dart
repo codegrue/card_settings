@@ -151,7 +151,6 @@ class ScrollPicker extends StatelessWidget {
     ScrollController scrollController,
   ) {
     return notification is UserScrollNotification &&
-        notification.direction == ScrollDirection.idle &&
-        scrollController.position.activity is! HoldScrollActivity;
+        notification.direction == ScrollDirection.idle;
   }
 }

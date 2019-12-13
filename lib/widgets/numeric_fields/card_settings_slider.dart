@@ -143,6 +143,7 @@ class _CardSettingsSliderState extends FormFieldState<double> {
 
 // https://github.com/flutter/flutter/issues/37057
 class CustomTrackShape extends RoundedRectSliderTrackShape {
+  @override
   Rect getPreferredRect({
     @required RenderBox parentBox,
     Offset offset = Offset.zero,

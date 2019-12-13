@@ -133,7 +133,7 @@ class _PonyExampleState extends State<PonyExample> {
             _buildCardSettingsListPicker_Type(),
             _buildCardSettingsNumberPicker(),
             _buildCardSettingsParagraph(5),
-            //_buildCardSettingsMultiselect(),
+            _buildCardSettingsMultiselect(),
           ],
         ),
         CardSettingsSection(

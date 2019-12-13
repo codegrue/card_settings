@@ -101,20 +101,17 @@ class _PickerDialogState extends State<PickerDialog> {
             padding: EdgeInsets.all(20.0),
           );
 
-          final Widget actions = ButtonTheme.bar(
-            height: _kDialogActionBarHeight,
-            child: ButtonBar(
-              children: <Widget>[
-                FlatButton(
-                  child: Text(localizations.cancelButtonLabel),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-                FlatButton(
-                  child: Text(localizations.okButtonLabel),
-                  onPressed: () => Navigator.of(context).pop(selectedValue),
-                ),
-              ],
-            ),
+          final Widget actions = ButtonBar(
+            children: <Widget>[
+              FlatButton(
+                child: Text(localizations.cancelButtonLabel),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              FlatButton(
+                child: Text(localizations.okButtonLabel),
+                onPressed: () => Navigator.of(context).pop(selectedValue),
+              ),
+            ],
           );
 
           switch (orientation) {
