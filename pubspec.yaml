@@ -6,7 +6,7 @@ homepage: https://github.com/codegrue/card_settings
 dependencies:
   flutter:
     sdk: flutter
-  flutter_colorpicker: ^0.2.1
+  flutter_colorpicker: ^0.2.6
   flutter_masked_text: ^0.7.0
   intl: ^0.16.0
   meta: ^1.1.6
