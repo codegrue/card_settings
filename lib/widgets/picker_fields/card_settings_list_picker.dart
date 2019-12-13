@@ -55,7 +55,7 @@ class CardSettingsListPicker extends FormField<String> {
 
   final List<String> options;
 
-  List<String> values;
+  final List<String> values;
 
   final bool visible;
 
@@ -69,11 +69,14 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   @override
   CardSettingsListPicker get widget => super.widget as CardSettingsListPicker;
 
-  void _showDialog(String label, List<String> options, List<String> values) {
-    int optionIndex = widget.values.indexOf(value);
+  List<String> values;
+  List<String> options;
+
+  void _showDialog(String label) {
+    int optionIndex = values.indexOf(value);
     String option;
     if (optionIndex >= 0) {
-      option = widget.options[optionIndex];
+      option = options[optionIndex];
     } else {
       optionIndex = 0; // set to first element in the list
     }
@@ -152,14 +155,20 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   }
 
   Widget _build(BuildContext context) {
-    // if values are not provided, copy the options over and use those
-    if (widget.values == null) widget.values = widget.options;
+    // make local mutable copies of values and options
+    options = widget.options;
+    if (widget.values == null) {
+      // if values are not provided, copy the options over and use those
+      values = widget.options;
+    } else {
+      values = widget.values;
+    }
 
     // get the content label from options based on value
-    int optionIndex = widget.values.indexOf(value);
+    int optionIndex = values.indexOf(value);
     String content = widget?.hintText ?? '';
     if (optionIndex >= 0) {
-      content = widget.options[optionIndex];
+      content = options[optionIndex];
     }
 
     if (Platform.isIOS && !widget.showMaterialonIOS) {
@@ -168,7 +177,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
             ? null
             : GestureDetector(
                 onTap: () {
-                  _showDialog(widget?.label, widget?.options, widget?.values);
+                  _showDialog(widget?.label);
                 },
                 child: CSControl(
                   widget?.label,
@@ -188,7 +197,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     }
     return GestureDetector(
       onTap: () {
-        _showDialog(widget?.label, widget?.options, widget?.values);
+        _showDialog(widget?.label);
       },
       child: CardSettingsField(
         label: widget?.label,
