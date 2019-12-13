@@ -23,7 +23,7 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
 - **Pickers**
   - _CardSettingsListPicker_ - Picker list of arbitrary options
   - _CardSettingsNumberPicker_ - Picker list of numbers in a given range
-  - _CardSettingsColorPicker_ - RGB Color Picker
+  - _CardSettingsColorPicker_ - Picker for colors with three flavors: RGB, Material, and Block
   - _CardSettingsDatePicker_ - Material Design Date Picker
   - _CardSettingsTimePicker_ - Material Design Time Picker
 - **Selection**
