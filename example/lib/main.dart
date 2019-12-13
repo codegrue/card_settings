@@ -122,7 +122,6 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettings.sectioned(
       showMaterialonIOS: _showMaterialonIOS,
       labelWidth: 100,
-      cardElevation: 10,
       children: <CardSettingsSection>[
         CardSettingsSection(
           showMaterialonIOS: _showMaterialonIOS,
