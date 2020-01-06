@@ -1,5 +1,9 @@
 # Releases
 
+## [1.5.4] - 1/6/2020
+
+- Allowed label width to be set for CardSettingsSwitch. <https://github.com/codegrue/card_settings/issues/86>
+
 ## [1.5.3] - 12/13/2019
 
 - Enhanced ListPicker to allow a list of values separate from options. <https://github.com/codegrue/card_settings/issues/60>

@@ -529,7 +529,8 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettingsSwitch(
       showMaterialonIOS: _showMaterialonIOS,
       key: _hasSpotsKey,
-      label: 'Has Spots?',
+      label: 'Does this horse have spots?',
+      labelWidth: 240.0,
       initialValue: _ponyModel.hasSpots,
       onSaved: (value) => _ponyModel.hasSpots = value,
       onChanged: (value) {

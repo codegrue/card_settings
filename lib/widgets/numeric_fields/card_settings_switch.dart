@@ -21,6 +21,7 @@ class CardSettingsSwitch extends FormField<bool> {
     this.falseLabel = "No",
     this.visible = true,
     this.label = 'Label',
+    this.labelWidth,
     this.requiredIndicator,
     this.labelAlign,
     this.icon,
@@ -39,6 +40,8 @@ class CardSettingsSwitch extends FormField<bool> {
   final String label;
 
   final TextAlign labelAlign;
+
+  final double labelWidth;
 
   final TextAlign contentAlign;
 
@@ -87,6 +90,7 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
     return CardSettingsField(
       label: widget?.label,
       labelAlign: widget?.labelAlign,
+      labelWidth: widget?.labelWidth,
       visible: widget?.visible,
       icon: widget?.icon,
       requiredIndicator: widget?.requiredIndicator,
