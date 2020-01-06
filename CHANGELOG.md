@@ -1,5 +1,9 @@
 # Releases
 
+## [1.5.5] - 1/6/2020
+
+- Updated library references to latest for: flutter_cupertino_settings, flutter_masked_text
+
 ## [1.5.4] - 1/6/2020
 
 - Allowed label width to be set for CardSettingsSwitch. <https://github.com/codegrue/card_settings/issues/86>
