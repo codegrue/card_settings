@@ -69,10 +69,10 @@ class _CardSettingsMultiselectState extends FormFieldState<List<String>> {
         context,
         MaterialPageRoute(
           builder: (context) => FullScreenSelect(
-                initialItems: value,
-                options: options,
-                label: label,
-              ),
+            initialItems: value,
+            options: options,
+            label: label,
+          ),
           fullscreenDialog: true,
         ),
       ).then((value) {
