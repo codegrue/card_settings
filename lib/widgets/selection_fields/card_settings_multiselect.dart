@@ -1,11 +1,11 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'package:card_settings/helpers/checkbox_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
+import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
 import '../../card_settings.dart';
 
@@ -65,39 +65,44 @@ class _CardSettingsMultiselectState extends FormFieldState<List<String>> {
 
   void _showDialog(String label, List<String> options) {
     if (Platform.isIOS && !widget.showMaterialonIOS) {
-      Navigator.push<List<String>>(
-        context,
-        MaterialPageRoute(
-          builder: (context) => FullScreenSelect(
-            initialItems: value,
-            options: options,
-            label: label,
-          ),
-          fullscreenDialog: true,
-        ),
-      ).then((value) {
-        if (value != null) {
-          didChange(value);
-          if (widget.onChanged != null) widget.onChanged(value);
-        }
-      });
+      _showCupertinoSelectPicker(options, label);
     } else {
-      showDialog<List<String>>(
-        context: context,
-        builder: (BuildContext context) {
-          return CheckboxDialog(
-            items: options,
-            title: 'Select ' + label,
-            initialValues: value,
-          );
-        },
-      ).then((value) {
-        if (value != null) {
-          didChange(value);
-          if (widget.onChanged != null) widget.onChanged(value);
-        }
-      });
+      _showMaterialCheckboxPicker(options, label);
     }
+  }
+
+  void _showMaterialCheckboxPicker(List<String> options, String label) {
+    showMaterialCheckboxPicker(
+      context: context,
+      title: 'Select ' + label,
+      items: options,
+      selectedItems: value,
+      onChanged: (List<String> selectedValues) {
+        if (selectedValues != null) {
+          didChange(selectedValues);
+          if (widget.onChanged != null) widget.onChanged(selectedValues);
+        }
+      },
+    );
+  }
+
+  void _showCupertinoSelectPicker(List<String> options, String label) {
+    Navigator.push<List<String>>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FullScreenSelect(
+          initialItems: value,
+          options: options,
+          label: label,
+        ),
+        fullscreenDialog: true,
+      ),
+    ).then((selectedValues) {
+      if (selectedValues != null) {
+        didChange(selectedValues);
+        if (widget.onChanged != null) widget.onChanged(selectedValues);
+      }
+    });
   }
 
   Widget _build(BuildContext context) {

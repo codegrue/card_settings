@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
+import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
 import '../../card_settings.dart';
 
@@ -82,57 +83,62 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     }
 
     if (Platform.isIOS && !widget.showMaterialonIOS) {
-      final FixedExtentScrollController scrollController =
-          FixedExtentScrollController(initialItem: optionIndex);
-      showCupertinoModalPopup<String>(
-        context: context,
-        builder: (BuildContext context) {
-          return _buildBottomPicker(
-            CupertinoPicker(
-              scrollController: scrollController,
-              itemExtent: kPickerItemHeight,
-              backgroundColor: CupertinoColors.white,
-              onSelectedItemChanged: (int index) {
-                didChange(values[index]);
-                widget.onChanged(values[index]);
-              },
-              children: List<Widget>.generate(options.length, (int index) {
-                return Center(
-                  child: Text(options[index].toString()),
-                );
-              }),
-            ),
-          );
-        },
-      ).then((option) {
-        if (option != null) {
-          String value = values[options.indexOf(option) ?? 0];
-          didChange(value);
-          if (widget.onChanged != null) widget.onChanged(value);
-        }
-      });
+      _showCupertinoBottomPicker(optionIndex);
     } else {
-      showDialog<String>(
-        context: context,
-        builder: (BuildContext context) {
-          return PickerDialog(
-            items: options,
-            title: label,
-            initialValue: option,
-          );
-        },
-      ).then((option) {
+      _showMaterialScrollPicker(label, option);
+    }
+  }
+
+  void _showCupertinoBottomPicker(int optionIndex) {
+    final FixedExtentScrollController scrollController =
+        FixedExtentScrollController(initialItem: optionIndex);
+    showCupertinoModalPopup<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return _buildCupertinoBottomPicker(
+          CupertinoPicker(
+            scrollController: scrollController,
+            itemExtent: kPickerItemHeight,
+            backgroundColor: CupertinoColors.white,
+            onSelectedItemChanged: (int index) {
+              didChange(values[index]);
+              widget.onChanged(values[index]);
+            },
+            children: List<Widget>.generate(options.length, (int index) {
+              return Center(
+                child: Text(options[index].toString()),
+              );
+            }),
+          ),
+        );
+      },
+    ).then((option) {
+      if (option != null) {
+        String value = values[options.indexOf(option) ?? 0];
+        didChange(value);
+        if (widget.onChanged != null) widget.onChanged(value);
+      }
+    });
+  }
+
+  void _showMaterialScrollPicker(String label, String option) {
+    showMaterialScrollPicker(
+      context: context,
+      title: label,
+      items: options,
+      selectedItem: option,
+      onChanged: (option) {
         if (option != null) {
           int optionIndex = options.indexOf(option);
           String value = values[optionIndex];
           didChange(value);
           if (widget.onChanged != null) widget.onChanged(value);
         }
-      });
-    }
+      },
+    );
   }
 
-  Widget _buildBottomPicker(Widget picker) {
+  Widget _buildCupertinoBottomPicker(Widget picker) {
     return Container(
       height: kPickerSheetHeight,
       padding: const EdgeInsets.only(top: 6.0),

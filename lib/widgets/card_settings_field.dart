@@ -105,7 +105,7 @@ class CardSettingsField extends StatelessWidget {
   Widget _buildLabelBlock(BuildContext context) {
     return Container(
       width: (contentOnNewLine)
-          ? 300.0 //TODO: somehow set this to a calculation
+          ? 260.0 //TODO: remove hard coded width
           : labelWidth ?? CardSettings.of(context).labelWidth ?? 120.0,
       padding:
           EdgeInsets.only(right: CardSettings.of(context).labelPadding ?? 6.0),

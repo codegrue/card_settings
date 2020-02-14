@@ -1,12 +1,16 @@
 # Releases
 
+## [1.6.0] - 2/13/2020
+
+- removed pickers and instead referenced the `flutter_material_pickers` package
+
 ## [1.5.5] - 1/6/2020
 
-- Updated library references to latest for: flutter_cupertino_settings, flutter_masked_text
+- Updated library references to latest for: `flutter_cupertino_settings`, `flutter_masked_text`
 
 ## [1.5.4] - 1/6/2020
 
-- Allowed label width to be set for CardSettingsSwitch. <https://github.com/codegrue/card_settings/issues/86>
+- Allowed label width to be set for `CardSettingsSwitch`. <https://github.com/codegrue/card_settings/issues/86>
 
 ## [1.5.3] - 12/13/2019
 
