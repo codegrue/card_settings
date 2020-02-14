@@ -139,10 +139,10 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
                   _showDialog();
                 },
                 child: CSControl(
-                  widget?.requiredIndicator != null
-                      ? (widget?.label ?? "") + ' *'
-                      : widget?.label,
-                  Container(
+                  nameWidget: widget?.requiredIndicator != null
+                      ? Text((widget?.label ?? "") + ' *')
+                      : Text(widget?.label),
+                  contentWidget: Container(
                     height: 20.0,
                     width: 100.0,
                     decoration: BoxDecoration(

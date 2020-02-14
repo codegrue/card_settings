@@ -115,10 +115,10 @@ class _CardSettingsMultiselectState extends FormFieldState<List<String>> {
                   _showDialog(widget?.label, widget?.options);
                 },
                 child: CSControl(
-                  widget?.requiredIndicator != null
-                      ? (widget?.label ?? "") + ' *'
-                      : widget?.label,
-                  Text(value == null || value.isEmpty
+                  nameWidget: widget?.requiredIndicator != null
+                      ? Text((widget?.label ?? "") + ' *')
+                      : Text(widget?.label),
+                  contentWidget: Text(value == null || value.isEmpty
                       ? "none selected"
                       : value.length == 1
                           ? "${value[0]}"

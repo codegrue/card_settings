@@ -1,5 +1,9 @@
 # Releases
 
+## [1.6.1] - 2/13/2020
+
+- updated to use latest version of `flutter_cupertino_settings`
+
 ## [1.6.0] - 2/13/2020
 
 - removed pickers and instead referenced the `flutter_material_pickers` package

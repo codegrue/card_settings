@@ -82,10 +82,10 @@ class _CardSettingsSliderState extends FormFieldState<double> {
         child: widget?.visible == false
             ? null
             : CSControl(
-                widget?.requiredIndicator != null
-                    ? (widget?.label ?? "") + ' *'
-                    : widget?.label,
-                CupertinoSlider(
+                nameWidget: widget?.requiredIndicator != null
+                    ? Text((widget?.label ?? "") + ' *')
+                    : Text(widget?.label),
+                contentWidget: CupertinoSlider(
                   value: value,
                   divisions: widget?.divisions,
                   min: widget?.min ?? 0,

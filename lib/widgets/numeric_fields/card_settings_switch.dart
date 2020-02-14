@@ -73,10 +73,10 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
         child: widget?.visible == false
             ? null
             : CSControl(
-                widget?.requiredIndicator != null
-                    ? (widget?.label ?? "") + ' *'
-                    : widget?.label,
-                CupertinoSwitch(
+                nameWidget: widget?.requiredIndicator != null
+                    ? Text((widget?.label ?? "") + ' *')
+                    : Text(widget?.label),
+                contentWidget: CupertinoSwitch(
                   value: value,
                   onChanged: (value) {
                     didChange(value);

@@ -130,8 +130,10 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
                   _showDialog();
                 },
                 child: CSControl(
-                  widget?.label,
-                  Text(
+                  nameWidget: widget?.requiredIndicator != null
+                      ? Text((widget?.label ?? "") + ' *')
+                      : Text(widget?.label),
+                  contentWidget: Text(
                     value == null ? '' : DateFormat.yMd().format(value),
                     style: widget?.style ?? Theme.of(context).textTheme.subhead,
                     textAlign: widget?.contentAlign ??

@@ -307,10 +307,10 @@ class _CardSettingsTextState extends FormFieldState<String> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     CSControl(
-                      widget?.requiredIndicator != null
-                          ? (widget?.label ?? "") + ' *'
-                          : widget?.label,
-                      Container(),
+                      nameWidget: widget?.requiredIndicator != null
+                          ? Text((widget?.label ?? "") + ' *')
+                          : Text(widget?.label),
+                      contentWidget: Container(),
                       style: CSWidgetStyle(icon: widget?.icon),
                     ),
                     Container(
@@ -347,10 +347,10 @@ class _CardSettingsTextState extends FormFieldState<String> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     CSControl(
-                      widget?.requiredIndicator != null
-                          ? (widget?.label ?? "") + ' *'
-                          : widget?.label,
-                      Expanded(
+                      nameWidget: widget?.requiredIndicator != null
+                          ? Text((widget?.label ?? "") + ' *')
+                          : Text(widget?.label),
+                      contentWidget: Expanded(
                         child: Container(
                           padding: EdgeInsets.only(left: 10.0),
                           child: _child,
