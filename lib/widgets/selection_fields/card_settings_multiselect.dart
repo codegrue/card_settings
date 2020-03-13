@@ -18,7 +18,7 @@ class CardSettingsMultiselect extends FormField<List<String>> {
     FormFieldValidator<List<String>> validator,
     bool autovalidate: false,
     this.onChanged,
-    this.label = 'Label',
+    this.label = 'Select',
     this.visible = true,
     this.contentAlign,
     this.icon,
@@ -74,7 +74,7 @@ class _CardSettingsMultiselectState extends FormFieldState<List<String>> {
   void _showMaterialCheckboxPicker(List<String> options, String label) {
     showMaterialCheckboxPicker(
       context: context,
-      title: 'Select ' + label,
+      title: label,
       items: options,
       selectedItems: value,
       onChanged: (List<String> selectedValues) {
