@@ -3,6 +3,7 @@
 ## [1.7.0] - 3/13/2020
 
 - **_(breaking change)_** removed `showErrorIOS` as the `validator` now works for both material and cupertino. This affects: `CardSettingsText`, `CardSettingsParagraph` , `CardSettingsEmail`, `CardSettingsDouble`, `CardSettingsCurrency`, `CardSettingsInt`, `CardSettingsPassword`, `CardSettingsPhone`
+- removed the word 'Select' from the hard coded label of `CardSettingsMultiselect` to allow for localization
 - example app: changed s`howMaterialonIOS` swap icon to show android or apple logo
 - example app: added a dialog on save to mention there are validation errors, as the button appeard to do nothing previosly
 
