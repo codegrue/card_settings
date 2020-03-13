@@ -48,7 +48,6 @@ class CardSettingsText extends FormField<String>
     this.prefixText,
     this.requiredIndicator,
     this.unitLabel,
-    this.showErrorIOS = false,
     this.showMaterialonIOS = false,
     this.showClearButtonIOS = OverlayVisibilityMode.never,
   })  : //assert(initialValue == null || controller == null),
@@ -134,21 +133,16 @@ class CardSettingsText extends FormField<String>
 
   final bool showMaterialonIOS;
 
-  @override
-
   ///Since the CupertinoTextField does not support onSaved, please use [onChanged] or [onFieldSubmitted] instead
+  @override
   final FormFieldSetter<String> onSaved;
 
+  ///In material mode this shows the validation text under the field
+  ///In cupertino mode, it shows a [red] [Border] around the [CupertinoTextField]
   @override
-
-  ///Since there is no [validator] for the Cupertino Text Field on iOS, use [showErrorIOS]
-  ///to show a [red] error [Border] for the Text Field
   final FormFieldValidator<String> validator;
 
   final OverlayVisibilityMode showClearButtonIOS;
-
-  ///Shows a [red] [Border] around the [CupertinoTextField] since the [validator] does not exist
-  final bool showErrorIOS;
 
   @override
   _CardSettingsTextState createState() => _CardSettingsTextState();
@@ -234,6 +228,12 @@ class _CardSettingsTextState extends FormFieldState<String> {
   }
 
   Container _buildCupertinoTextbox(BuildContext context) {
+    bool hasError = false;
+    if (widget.validator != null) {
+      String errorMessage = widget.validator(value);
+      hasError = (errorMessage != null);
+    }
+
     final _child = Container(
       child: CupertinoTextField(
         prefix: widget?.prefixText == null ? null : Text(widget.prefixText),
@@ -244,7 +244,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
         keyboardType: widget?.keyboardType,
         textCapitalization: widget?.textCapitalization,
         style: widget?.style ?? Theme.of(context).textTheme.subhead,
-        decoration: widget?.showErrorIOS ?? false
+        decoration: hasError
             ? BoxDecoration(
                 border: Border.all(color: Colors.red),
                 borderRadius: BorderRadius.all(

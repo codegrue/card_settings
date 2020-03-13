@@ -38,9 +38,6 @@ class CardSettingsEmail extends CardSettingsText
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
     bool showMaterialonIOS: false,
-
-    ///Shows a [red] [Border] around the [CupertinoTextField] since the [validator] does not exist
-    bool showErrorIOS: false,
   }) : super(
           key: key,
           label: label,
@@ -61,7 +58,6 @@ class CardSettingsEmail extends CardSettingsText
           autovalidate: autovalidate,
           validator: validator,
           onSaved: onSaved,
-          showErrorIOS: showErrorIOS,
           onChanged: onChanged,
           controller: controller,
           focusNode: focusNode,

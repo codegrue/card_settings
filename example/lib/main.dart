@@ -5,6 +5,7 @@ import 'results.dart';
 import 'model.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() => runApp(MyApp());
 
@@ -88,7 +89,9 @@ class _PonyExampleState extends State<PonyExample> {
           Container(
             child: Platform.isIOS
                 ? IconButton(
-                    icon: Icon(Icons.swap_calls),
+                    icon: (_showMaterialonIOS)
+                        ? FaIcon(FontAwesomeIcons.apple)
+                        : Icon(Icons.android),
                     onPressed: () {
                       setState(() {
                         _showMaterialonIOS = !_showMaterialonIOS;
@@ -690,7 +693,6 @@ class _PonyExampleState extends State<PonyExample> {
         if (value == null || value.isEmpty) return 'Name is required.';
         return null;
       },
-      showErrorIOS: _ponyModel.name == null || _ponyModel.name.isEmpty,
       onSaved: (value) => _ponyModel.name = value,
       onChanged: (value) {
         setState(() {
@@ -731,6 +733,7 @@ class _PonyExampleState extends State<PonyExample> {
       form.save();
       showResults(context, _ponyModel);
     } else {
+      showErrors(context);
       setState(() => _autoValidate = true);
     }
   }

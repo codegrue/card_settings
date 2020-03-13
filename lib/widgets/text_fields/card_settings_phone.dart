@@ -40,7 +40,6 @@ class CardSettingsPhone extends StatelessWidget
     this.onFieldSubmitted,
     this.inputFormatters,
     this.showMaterialonIOS = false,
-    this.showErrorIOS = false,
   });
 
   @override
@@ -108,9 +107,6 @@ class CardSettingsPhone extends StatelessWidget
 
   final bool showMaterialonIOS;
 
-  ///Shows a [red] [Border] around the [CupertinoTextField] since the [validator] does not exist
-  final bool showErrorIOS;
-
   @override
   Widget build(BuildContext context) {
     return CardSettingsText(
@@ -137,7 +133,6 @@ class CardSettingsPhone extends StatelessWidget
       validator: _safeValidator,
       onSaved: _safeOnSaved,
       onChanged: _safeOnChanged,
-      showErrorIOS: showErrorIOS,
       controller: controller,
       focusNode: focusNode,
       keyboardType:

@@ -47,6 +47,26 @@ void showResults(BuildContext context, PonyModel model) {
   );
 }
 
+void showErrors(BuildContext context) {
+  showDialog<String>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Form has validation errors'),
+        content: Text('Please fix all errors before submitting the form.'),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("Close"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 Widget _buildResultsRow(String name, dynamic value, {bool linebreak: false}) {
   return Column(
     children: <Widget>[

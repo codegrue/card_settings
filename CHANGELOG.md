@@ -1,5 +1,11 @@
 # Releases
 
+## [1.7.0] - 3/13/2020
+
+- **_(breaking change)_** removed `showErrorIOS` as the `validator` now works for both material and cupertino. This affects: `CardSettingsText`, `CardSettingsParagraph` , `CardSettingsEmail`, `CardSettingsDouble`, `CardSettingsCurrency`, `CardSettingsInt`, `CardSettingsPassword`, `CardSettingsPhone`
+- example app: changed s`howMaterialonIOS` swap icon to show android or apple logo
+- example app: added a dialog on save to mention there are validation errors, as the button appeard to do nothing previosly
+
 ## [1.6.1] - 2/13/2020
 
 - updated to use latest version of `flutter_cupertino_settings`
