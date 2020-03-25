@@ -128,7 +128,7 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget _buildLabelText(BuildContext context) {
-    // make long label to the second line
+    // make long label to wrap to the second line
     return Flexible(
       child: Text(
         label,
