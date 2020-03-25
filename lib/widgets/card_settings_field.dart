@@ -128,9 +128,13 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget _buildLabelText(BuildContext context) {
-    return AutoSizeText(
-      label,
-      style: _buildLabelStyle(context),
+    // make long label to the second line
+    return Flexible(
+      child: Text(
+        label,
+        softWrap: true,
+        style: _buildLabelStyle(context),
+      ),
     );
   }
 
