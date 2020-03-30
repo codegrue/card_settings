@@ -1,6 +1,6 @@
 # Releases
 
-## [1.8.0] - vNext
+## [1.8.0] - 3/30/2020
 
 - Added support for wrapping labels
 
