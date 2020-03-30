@@ -3,7 +3,6 @@
 
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
 /// This is the basic layout of a field in a CardSettings view. Typcially, it
 /// will not be used directly.

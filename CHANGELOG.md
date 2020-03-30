@@ -1,5 +1,9 @@
 # Releases
 
+## [1.8.0] - vNext
+
+- Added support for wrapping labels
+
 ## [1.7.0] - 3/13/2020
 
 - **_(breaking change)_** removed `showErrorIOS` as the `validator` now works for both material and cupertino. This affects: `CardSettingsText`, `CardSettingsParagraph` , `CardSettingsEmail`, `CardSettingsDouble`, `CardSettingsCurrency`, `CardSettingsInt`, `CardSettingsPassword`, `CardSettingsPhone`
