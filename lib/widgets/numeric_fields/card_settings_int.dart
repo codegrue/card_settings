@@ -43,7 +43,7 @@ class CardSettingsInt extends CardSettingsText {
           labelAlign: labelAlign,
           showMaterialonIOS: showMaterialonIOS,
           contentAlign: contentAlign,
-          initialValue: initialValue.toString(),
+          initialValue: initialValue?.toString(),
           unitLabel: unitLabel,
           icon: icon,
           requiredIndicator: requiredIndicator,
