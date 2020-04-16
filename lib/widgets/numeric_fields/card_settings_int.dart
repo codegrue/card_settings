@@ -13,6 +13,7 @@ class CardSettingsInt extends CardSettingsText {
     String label: 'Label',
     TextAlign labelAlign,
     TextAlign contentAlign,
+    String hintText,
     int initialValue: 0,
     Icon icon,
     Widget requiredIndicator,
@@ -38,6 +39,7 @@ class CardSettingsInt extends CardSettingsText {
   }) : super(
           key: key,
           label: label,
+          hintText: hintText,
           labelAlign: labelAlign,
           showMaterialonIOS: showMaterialonIOS,
           contentAlign: contentAlign,
