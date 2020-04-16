@@ -1,5 +1,11 @@
 # Releases
 
+## [1.8.1] - 4/16/2020
+
+- Added hintText to `CardSettingsInt`
+- Added null control for initialValue to `CardSettingsInt`
+- Updated `flutter_material_pickers` dependency
+
 ## [1.8.0] - 3/30/2020
 
 - Added support for wrapping labels
