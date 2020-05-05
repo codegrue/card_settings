@@ -3,6 +3,7 @@
 ## [1.8.2] - 5/5/2020
 
 - Updated `flutter_material_pickers` dependency, including styling changes
+- Added `hintText` for CardSettingsParagraph
 
 ## [1.8.1] - 4/16/2020
 
