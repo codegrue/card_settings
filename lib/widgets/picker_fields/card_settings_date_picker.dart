@@ -156,7 +156,11 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
                       ? Text((widget?.label ?? "") + ' *')
                       : Text(widget?.label),
                   contentWidget: Text(
-                    value == null ? '' : DateFormat.yMd().format(value),
+                    value == null 
+                    ? '' 
+                    : widget.justDate 
+                      ? DateFormat.yMd().format(value) 
+                      : DateFormat.yMd().add_jms().format(value),
                     style: widget?.style ?? Theme.of(context).textTheme.subhead,
                     textAlign: widget?.contentAlign ??
                         CardSettings.of(context).contentAlign,
@@ -178,7 +182,11 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
         content: Text(
-          value == null ? '' : DateFormat.yMd().format(value),
+          value == null 
+          ? '' 
+          : widget.justDate 
+            ? DateFormat.yMd().format(value) 
+            : DateFormat.yMd().add_jms().format(value),
           style: widget?.style ?? Theme.of(context).textTheme.subhead,
           textAlign:
               widget?.contentAlign ?? CardSettings.of(context).contentAlign,
