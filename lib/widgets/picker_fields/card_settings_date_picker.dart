@@ -111,7 +111,29 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
         initialDate: value ?? DateTime.now(),
         firstDate: _startDate,
         lastDate: _endDate,
-      ).then((_value) {
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: Theme.of(context),
+            child: child,
+          );
+        })
+      .then((_value) async {
+        if(!widget.justDate){
+          TimeOfDay selectedTime = await showTimePicker(
+            context: context,
+            initialTime: value != null ? TimeOfDay(hour: value.hour, minute: value.minute) : TimeOfDay.now(),
+            builder: (BuildContext context, Widget child) {
+              return Theme(
+                data: Theme.of(context),
+                child: child,
+            );
+          });
+          _value
+            ..add(Duration(
+            hours: selectedTime.hour,
+            minutes: selectedTime.minute,
+          ));
+        }
         if (_value != null) {
           didChange(_value);
           if (widget.onChanged != null) widget.onChanged(_value);
