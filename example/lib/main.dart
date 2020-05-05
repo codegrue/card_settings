@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Card Settings Example',
       home: PonyExample(),
-      theme: ThemeData(
+      theme: ThemeData().copyWith(
         accentColor: Colors.indigo[400], // background color of card headers
         cardColor: Colors.white, // background color of fields
         backgroundColor: Colors.indigo[100], // color outside the card
