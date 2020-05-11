@@ -118,7 +118,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
           );
         })
       .then((_value) async {
-        if(!widget.justDate){
+        if(!widget.justDate && _value != null){
           TimeOfDay selectedTime = await showTimePicker(
             context: context,
             initialTime: value != null ? TimeOfDay(hour: value.hour, minute: value.minute) : TimeOfDay.now(),
@@ -128,8 +128,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
                 child: child,
             );
           });
-          _value
-            ..add(Duration(
+          _value.add(Duration(
             hours: selectedTime.hour,
             minutes: selectedTime.minute,
           ));
