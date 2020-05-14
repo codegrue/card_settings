@@ -1,8 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'dart:io';
-
+import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -82,13 +81,10 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     } else {
       optionIndex = 0; // set to first element in the list
     }
-    if(kIsWeb)
-      _showMaterialScrollPicker(label, option);
-    else if (Platform.isIOS && !widget.showMaterialonIOS)
+    if (showCupertino(widget.showMaterialonIOS))
       _showCupertinoBottomPicker(optionIndex);
-    else 
+    else
       _showMaterialScrollPicker(label, option);
-    
   }
 
   void _showCupertinoBottomPicker(int optionIndex) {
@@ -179,41 +175,40 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
       content = options[optionIndex];
     }
 
-    if(kIsWeb)
-      return materialSettingsListPicker(content);
-    else if (Platform.isIOS && !widget.showMaterialonIOS)
+    if (showCupertino(widget.showMaterialonIOS))
       return cupertinoSettingsListPicker(content);
-    else return materialSettingsListPicker(content);
+    else
+      return materialSettingsListPicker(content);
   }
 
-  Widget cupertinoSettingsListPicker(String content){
+  Widget cupertinoSettingsListPicker(String content) {
     return Container(
       child: widget?.visible == false
-        ? null
-        : GestureDetector(
-            onTap: () {
-              _showDialog(widget?.label);
-            },
-            child: CSControl(
-              nameWidget: widget?.requiredIndicator != null
-                  ? Text((widget?.label ?? "") + ' *')
-                  : Text(widget?.label),
-              contentWidget: Text(
-                content,
-                style: Theme.of(context).textTheme.subhead.copyWith(
-                    color: (value == null)
-                        ? Theme.of(context).hintColor
-                        : Theme.of(context).textTheme.subhead.color),
-                textAlign: widget?.contentAlign ??
-                    CardSettings.of(context).contentAlign,
+          ? null
+          : GestureDetector(
+              onTap: () {
+                _showDialog(widget?.label);
+              },
+              child: CSControl(
+                nameWidget: widget?.requiredIndicator != null
+                    ? Text((widget?.label ?? "") + ' *')
+                    : Text(widget?.label),
+                contentWidget: Text(
+                  content,
+                  style: Theme.of(context).textTheme.subtitle1.copyWith(
+                      color: (value == null)
+                          ? Theme.of(context).hintColor
+                          : Theme.of(context).textTheme.subtitle1.color),
+                  textAlign: widget?.contentAlign ??
+                      CardSettings.of(context).contentAlign,
+                ),
+                style: CSWidgetStyle(icon: widget?.icon),
               ),
-              style: CSWidgetStyle(icon: widget?.icon),
             ),
-          ),
-      );
+    );
   }
 
-  Widget materialSettingsListPicker(String content){
+  Widget materialSettingsListPicker(String content) {
     return GestureDetector(
       onTap: () {
         _showDialog(widget?.label);
@@ -227,10 +222,10 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
         errorText: errorText,
         content: Text(
           content,
-          style: Theme.of(context).textTheme.subhead.copyWith(
+          style: Theme.of(context).textTheme.subtitle1.copyWith(
               color: (value == null)
                   ? Theme.of(context).hintColor
-                  : Theme.of(context).textTheme.subhead.color),
+                  : Theme.of(context).textTheme.subtitle1.color),
           textAlign:
               widget?.contentAlign ?? CardSettings.of(context).contentAlign,
         ),

@@ -1,9 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'dart:async';
-import 'dart:io';
-
+import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -80,16 +78,13 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     }
     final _endDate = widget?.lastDate ?? _startDate.add(Duration(days: 1800));
 
-    if (kIsWeb)
-      showMaterialDatePicker(_startDate, _endDate);
-    else if (Platform.isIOS && !widget.showMaterialonIOS) 
+    if (showCupertino(widget.showMaterialonIOS))
       showCupertinoDatePicker(_startDate, _endDate);
-    else 
+    else
       showMaterialDatePicker(_startDate, _endDate);
-    
   }
 
-  void showCupertinoDatePicker(DateTime _startDate, DateTime _endDate){
+  void showCupertinoDatePicker(DateTime _startDate, DateTime _endDate) {
     showCupertinoModalPopup<DateTime>(
       context: context,
       builder: (BuildContext context) {
@@ -118,7 +113,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     });
   }
 
-  void showMaterialDatePicker(DateTime _startDate, DateTime _endDate){
+  void showMaterialDatePicker(DateTime _startDate, DateTime _endDate) {
     showDatePicker(
       context: context,
       initialDate: value ?? DateTime.now(),
@@ -133,9 +128,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   }
 
   Widget _build(BuildContext context) {
-    if (kIsWeb)
-      return materialSettingsDatePicker();
-    else if (Platform.isIOS && !widget.showMaterialonIOS)
+    if (showCupertino(widget.showMaterialonIOS))
       return cupertinoSettingsDatePicker();
     else
       return materialSettingsDatePicker();
@@ -163,30 +156,31 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     );
   }
 
-  Widget cupertinoSettingsDatePicker(){
+  Widget cupertinoSettingsDatePicker() {
     return Container(
-        child: widget?.visible == false
-            ? null
-            : GestureDetector(
-                onTap: () {
-                  _showDialog();
-                },
-                child: CSControl(
-                  nameWidget: widget?.requiredIndicator != null
-                      ? Text((widget?.label ?? "") + ' *')
-                      : Text(widget?.label),
-                  contentWidget: Text(
-                    value == null ? '' : DateFormat.yMd().format(value),
-                    style: widget?.style ?? Theme.of(context).textTheme.subhead,
-                    textAlign: widget?.contentAlign ??
-                        CardSettings.of(context).contentAlign,
-                  ),
-                  style: CSWidgetStyle(icon: widget?.icon),
+      child: widget?.visible == false
+          ? null
+          : GestureDetector(
+              onTap: () {
+                _showDialog();
+              },
+              child: CSControl(
+                nameWidget: widget?.requiredIndicator != null
+                    ? Text((widget?.label ?? "") + ' *')
+                    : Text(widget?.label),
+                contentWidget: Text(
+                  value == null ? '' : DateFormat.yMd().format(value),
+                  style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
+                  textAlign: widget?.contentAlign ??
+                      CardSettings.of(context).contentAlign,
                 ),
+                style: CSWidgetStyle(icon: widget?.icon),
               ),
-      );
+            ),
+    );
   }
-  Widget materialSettingsDatePicker(){
+
+  Widget materialSettingsDatePicker() {
     return GestureDetector(
       onTap: () {
         _showDialog();
@@ -200,7 +194,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
         errorText: errorText,
         content: Text(
           value == null ? '' : DateFormat.yMd().format(value),
-          style: widget?.style ?? Theme.of(context).textTheme.subhead,
+          style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
           textAlign:
               widget?.contentAlign ?? CardSettings.of(context).contentAlign,
         ),

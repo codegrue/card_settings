@@ -1,8 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'dart:io';
-
+import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -78,39 +77,38 @@ class _CardSettingsSliderState extends FormFieldState<double> {
   CardSettingsSlider get widget => super.widget as CardSettingsSlider;
 
   Widget _build(BuildContext context) {
-    if (kIsWeb)
-      return materialSettingsSlider();
-    else if (Platform.isIOS && !widget.showMaterialonIOS)
+    if (showCupertino(widget.showMaterialonIOS))
       return cupertinoSettingsSlider();
-    else 
+    else
       return materialSettingsSlider();
   }
 
-  Widget cupertinoSettingsSlider(){
+  Widget cupertinoSettingsSlider() {
     return Container(
-        child: widget?.visible == false
-            ? null
-            : CSControl(
-                nameWidget: widget?.requiredIndicator != null
-                    ? Text((widget?.label ?? "") + ' *')
-                    : Text(widget?.label),
-                contentWidget: CupertinoSlider(
-                  value: value,
-                  divisions: widget?.divisions,
-                  min: widget?.min ?? 0,
-                  max: widget?.max ?? 1,
-                  onChangeEnd: widget?.onChangedEnd,
-                  onChangeStart: widget?.onChangedStart,
-                  onChanged: (value) {
-                    didChange(value);
-                    if (widget?.onChanged != null) widget?.onChanged(value);
-                  },
-                ),
-                style: CSWidgetStyle(icon: widget?.icon),
+      child: widget?.visible == false
+          ? null
+          : CSControl(
+              nameWidget: widget?.requiredIndicator != null
+                  ? Text((widget?.label ?? "") + ' *')
+                  : Text(widget?.label),
+              contentWidget: CupertinoSlider(
+                value: value,
+                divisions: widget?.divisions,
+                min: widget?.min ?? 0,
+                max: widget?.max ?? 1,
+                onChangeEnd: widget?.onChangedEnd,
+                onChangeStart: widget?.onChangedStart,
+                onChanged: (value) {
+                  didChange(value);
+                  if (widget?.onChanged != null) widget?.onChanged(value);
+                },
               ),
-      );
+              style: CSWidgetStyle(icon: widget?.icon),
+            ),
+    );
   }
-  Widget materialSettingsSlider(){
+
+  Widget materialSettingsSlider() {
     return CardSettingsField(
       label: widget?.label,
       labelAlign: widget?.labelAlign,

@@ -89,21 +89,7 @@ class _PonyExampleState extends State<PonyExample> {
       appBar: AppBar(
         title: Text("My Little Pony"),
         actions: <Widget>[
-          Container(
-            child: kIsWeb ? null 
-                : Platform.isIOS
-                ? IconButton(
-                    icon: (_showMaterialonIOS)
-                        ? FaIcon(FontAwesomeIcons.apple)
-                        : Icon(Icons.android),
-                    onPressed: () {
-                      setState(() {
-                        _showMaterialonIOS = !_showMaterialonIOS;
-                      });
-                    },
-                  )
-                : null,
-          ),
+          _cupertinoSwitchButton(),
           IconButton(
             icon: Icon(Icons.save),
             onPressed: _savePressed,
@@ -123,6 +109,26 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
+  Widget _cupertinoSwitchButton() {
+    // dont show this button on web
+    if (kIsWeb) return Container();
+
+    return Container(
+      child: Platform.isIOS
+          ? IconButton(
+              icon: (_showMaterialonIOS)
+                  ? FaIcon(FontAwesomeIcons.apple)
+                  : Icon(Icons.android),
+              onPressed: () {
+                setState(() {
+                  _showMaterialonIOS = !_showMaterialonIOS;
+                });
+              },
+            )
+          : null,
+    );
+  }
+
   /* CARDSETTINGS FOR EACH LAYOUT */
 
   CardSettings _buildPortraitLayout() {
@@ -138,6 +144,7 @@ class _PonyExampleState extends State<PonyExample> {
           ),
           children: <Widget>[
             _buildCardSettingsText_Name(),
+            _buildCardSettingsDateTimePicker(),
             _buildCardSettingsListPicker_Type(),
             _buildCardSettingsNumberPicker(),
             _buildCardSettingsParagraph(5),
@@ -178,7 +185,6 @@ class _PonyExampleState extends State<PonyExample> {
           children: <Widget>[
             _buildCardSettingsDatePicker(),
             _buildCardSettingsTimePicker(),
-            _buildCardSettingsDateTimePicker(),
             _buildCardSettingsCurrency(),
             _buildCardSettingsPhone(),
             _buildCardSettingsDouble_Slider(),
@@ -225,11 +231,12 @@ class _PonyExampleState extends State<PonyExample> {
             _buildCardSettingsText_Name(),
             CardFieldLayout(
               <Widget>[
-                _buildCardSettingsListPicker_Type(),
+                _buildCardSettingsDateTimePicker(),
                 _buildCardSettingsNumberPicker(labelAlign: TextAlign.right),
               ],
               flexValues: [2, 1],
             ),
+            _buildCardSettingsListPicker_Type(),
             _buildCardSettingsParagraph(3),
             _buildCardSettingsMultiselect(),
           ],
@@ -288,7 +295,6 @@ class _PonyExampleState extends State<PonyExample> {
             CardFieldLayout(<Widget>[
               _buildCardSettingsDatePicker(),
               _buildCardSettingsTimePicker(),
-              _buildCardSettingsDateTimePicker(),
             ]),
             CardFieldLayout(<Widget>[
               _buildCardSettingsCurrency(),
@@ -465,14 +471,13 @@ class _PonyExampleState extends State<PonyExample> {
       },
     );
   }
-  
-  
+
   CardSettingsDateTimePicker _buildCardSettingsDateTimePicker() {
     return CardSettingsDateTimePicker(
       showMaterialonIOS: _showMaterialonIOS,
       key: _datetimeKey,
-      icon: Icon(Icons.calendar_today),
-      label: 'DateTime',
+      icon: Icon(Icons.card_giftcard, color: Colors.green),
+      label: 'Birth',
       initialValue: _ponyModel.showDateTime,
       onSaved: (value) => _ponyModel.showDateTime =
           updateJustDate(value, _ponyModel.showDateTime),

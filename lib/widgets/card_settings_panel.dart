@@ -1,8 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'dart:io';
-
+import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
@@ -18,44 +17,16 @@ class CardSettings extends InheritedWidget {
     this.contentAlign: TextAlign.left,
     this.padding: 8.0,
     this.cardElevation: 5.0,
-    List<Widget> children,
+    List<CardSettingsSection> children,
     bool showMaterialonIOS: false,
     this.shrinkWrap = false,
   }) : super(
           key: key,
-          child: kIsWeb ? SafeArea(  // TODO: Must refactor
-                child: Container(
-                  padding: EdgeInsets.all(padding),
-                  child: Card(
-                    margin: EdgeInsets.all(0.0),
-                    elevation: cardElevation,
-                    child: ListView(
-                      children: children,
-                      shrinkWrap: shrinkWrap,
-                    ),
-                  ),
-                ),
-              ) 
-              : Platform.isIOS && !showMaterialonIOS
-                ? CupertinoSettings(
-                    items: children,
-                    shrinkWrap: shrinkWrap,
-                  )
-                : SafeArea(
-                    child: Container(
-                      padding: EdgeInsets.all(padding),
-                      child: Card(
-                        margin: EdgeInsets.all(0.0),
-                        elevation: cardElevation,
-                        child: ListView(
-                          children: children,
-                          shrinkWrap: shrinkWrap,
-                        ),
-                      ),
-                    ),
-                  ),
+          child: _buildChild(children, showMaterialonIOS, cardElevation,
+              padding, shrinkWrap, false),
         );
 
+  // constructor that wraps each section in it's own card
   CardSettings.sectioned({
     Key key,
     this.labelAlign,
@@ -70,20 +41,8 @@ class CardSettings extends InheritedWidget {
     this.shrinkWrap = false,
   }) : super(
           key: key,
-          child: kIsWeb 
-            ? ListView(
-                children: _buildSections(children, cardElevation, padding),
-                shrinkWrap: shrinkWrap,
-              )
-            : Platform.isIOS && !showMaterialonIOS
-              ? CupertinoSettings(
-                  items: _getWidgets(children),
-                  shrinkWrap: shrinkWrap,
-                )
-              : ListView(
-                  children: _buildSections(children, cardElevation, padding),
-                  shrinkWrap: shrinkWrap,
-                ),
+          child: _buildChild(children, showMaterialonIOS, cardElevation,
+              padding, shrinkWrap, true),
         );
 
   final TextAlign labelAlign;
@@ -110,10 +69,62 @@ class CardSettings extends InheritedWidget {
     return false;
   }
 
+  static Widget _buildChild(
+      List<CardSettingsSection> children,
+      bool showMaterialonIOS,
+      double cardElevation,
+      double padding,
+      bool shrinkWrap,
+      bool sectioned) {
+    return (showCupertino(showMaterialonIOS))
+        ? _buildCupertinoWrapper(children, shrinkWrap, sectioned)
+        : _buildMaterialWrapper(
+            children, padding, cardElevation, shrinkWrap, sectioned);
+  }
+
+  static Widget _buildMaterialWrapper(List<CardSettingsSection> children,
+      double padding, double cardElevation, bool shrinkWrap, bool sectioned) {
+    if (sectioned) {
+      return ListView(
+        children: _buildSections(children, cardElevation, padding),
+        shrinkWrap: shrinkWrap,
+      );
+    } else {
+      return SafeArea(
+        child: Container(
+          padding: EdgeInsets.all(padding),
+          child: Card(
+            margin: EdgeInsets.all(0.0),
+            elevation: cardElevation,
+            child: ListView(
+              children: children,
+              shrinkWrap: shrinkWrap,
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
+  static Widget _buildCupertinoWrapper(
+      List<CardSettingsSection> children, bool shrinkWrap, bool sectioned) {
+    if (sectioned) {
+      return CupertinoSettings(
+        items: _getWidgets(children),
+        shrinkWrap: shrinkWrap,
+      );
+    } else {
+      return CupertinoSettings(
+        items: children,
+        shrinkWrap: shrinkWrap,
+      );
+    }
+  }
+
   static List<Widget> _getWidgets(List<CardSettingsSection> sections) {
     List<Widget> _children = <Widget>[];
     for (var row in sections) {
-      _children.addAll(row.build());
+      _children.add(row.build(null));
     }
     return _children;
   }
@@ -122,23 +133,23 @@ class CardSettings extends InheritedWidget {
       double cardElevation, double padding) {
     List<Widget> _children = <Widget>[];
     for (var row in sections) {
-      _children.add(SafeArea(
-        child: Container(
-          padding: EdgeInsets.fromLTRB(padding, padding, padding, 0.0),
-          child: Card(
-            elevation: cardElevation,
-            child: Column(
-              children: row.build(),
+      _children.add(
+        SafeArea(
+          child: Container(
+            padding: EdgeInsets.fromLTRB(padding, padding, padding, 0.0),
+            child: Card(
+              elevation: cardElevation,
+              child: row.build(null),
             ),
           ),
         ),
-      ));
+      );
     }
     return _children;
   }
 }
 
-class CardSettingsSection {
+class CardSettingsSection extends StatelessWidget {
   CardSettingsSection({
     this.instructions,
     this.children,
@@ -151,31 +162,19 @@ class CardSettingsSection {
   final List<Widget> children;
   final bool showMaterialonIOS;
 
-  List<Widget> build() {
+  @override
+  Widget build(BuildContext context) {
     List<Widget> _children = <Widget>[];
-    if(kIsWeb) 
-      _children.addAll(materialSection());
-    else if (Platform.isIOS && !showMaterialonIOS) 
-      _children.addAll(cupertinoSection());
-    else 
-      _children.addAll(materialSection());
+    if (showCupertino(showMaterialonIOS)) {
+      if (header != null) _children.add(header);
+      if (children != null) _children.addAll(children);
+      if (instructions != null) _children.add(instructions);
+    } else {
+      if (header != null) _children.add(header);
+      if (instructions != null) _children.add(instructions);
+      if (children != null) _children.addAll(children);
+    }
 
-    return _children;
-  }
-
-  List<Widget> materialSection(){
-    List<Widget> _children = <Widget>[];
-    if (header != null) _children.add(header);
-    if (instructions != null) _children.add(instructions);
-    if (children != null) _children.addAll(children);
-    return _children;
-  }
-
-  List<Widget> cupertinoSection(){
-    List<Widget> _children = <Widget>[];
-    if (header != null) _children.add(header);
-    if (children != null) _children.addAll(children);
-    if (instructions != null) _children.add(instructions);
-    return _children;
+    return Column(children: _children);
   }
 }

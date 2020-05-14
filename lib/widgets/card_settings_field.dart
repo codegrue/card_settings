@@ -190,7 +190,9 @@ class CardSettingsField extends StatelessWidget {
             padding: EdgeInsets.only(right: 4.0),
             child: Icon(
               icon.icon,
-              color: (labelStyle == null) ? null : labelStyle.color,
+              color: (icon.color != null)
+                  ? icon.color
+                  : (labelStyle == null) ? null : labelStyle.color,
             ),
           );
   }

@@ -1,5 +1,11 @@
 # Releases
 
+## [1.9.0] - 5/X/2020
+
+- compatible with flutter web now
+- DateTimePicker (combo) added
+- Icon colors will be preserved if provided
+
 ## [1.8.2] - 5/5/2020
 
 - Updated `flutter_material_pickers` dependency, including styling changes
