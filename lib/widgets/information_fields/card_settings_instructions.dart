@@ -1,10 +1,9 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'package:flutter/foundation.dart';
+import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'dart:io';
 
 /// This is a read only section of text
 class CardSettingsInstructions extends StatelessWidget {
@@ -26,9 +25,7 @@ class CardSettingsInstructions extends StatelessWidget {
         .primaryTextTheme
         .caption
         .copyWith(color: textColor ?? Theme.of(context).accentColor);
-    if(kIsWeb)
-      return materialInstruction(context, textStyle);
-    else if (Platform.isIOS && !showMaterialonIOS) {
+    if (showCupertino(showMaterialonIOS)) {
       return Container(
         padding: EdgeInsets.only(top: 8.0, left: 8.0),
         child: Text(
@@ -37,12 +34,11 @@ class CardSettingsInstructions extends StatelessWidget {
         ),
         // color: CupertinoColors.lightBackgroundGray,
       );
-    }
-    else
+    } else
       return materialInstruction(context, textStyle);
   }
 
-  Widget materialInstruction(BuildContext context, TextStyle textStyle){
+  Widget materialInstruction(BuildContext context, TextStyle textStyle) {
     return Container(
       margin: EdgeInsets.all(0.0),
       decoration:

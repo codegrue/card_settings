@@ -1,8 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'dart:io';
-
+import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -69,14 +68,12 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
   CardSettingsSwitch get widget => super.widget as CardSettingsSwitch;
 
   Widget _build(BuildContext context) {
-    if (kIsWeb)
-      return materialSettingsSwitch();
-    else if (Platform.isIOS && !widget.showMaterialonIOS)
+    if (showCupertino(widget.showMaterialonIOS))
       return cupertinoSettingsSwitch();
     return materialSettingsSwitch();
   }
 
-  Widget materialSettingsSwitch(){
+  Widget materialSettingsSwitch() {
     return CardSettingsField(
       label: widget?.label,
       labelAlign: widget?.labelAlign,
@@ -89,7 +86,7 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
         Expanded(
           child: Text(
             value ? widget?.trueLabel : widget?.falseLabel,
-            style: Theme.of(context).textTheme.subhead,
+            style: Theme.of(context).textTheme.subtitle1,
             textAlign:
                 widget?.contentAlign ?? CardSettings.of(context).contentAlign,
           ),
@@ -111,23 +108,23 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
     );
   }
 
-  Widget cupertinoSettingsSwitch(){
+  Widget cupertinoSettingsSwitch() {
     return Container(
       child: widget?.visible == false
-      ? null
-      : CSControl(
-        nameWidget: widget?.requiredIndicator != null
-        ? Text((widget?.label ?? "") + ' *')
-        : Text(widget?.label),
-        contentWidget: CupertinoSwitch(
-          value: value,
-          onChanged: (value) {
-            didChange(value);
-            if (widget?.onChanged != null) widget?.onChanged(value);
-          },
-        ),
-        style: CSWidgetStyle(icon: widget?.icon),
-      ),
+          ? null
+          : CSControl(
+              nameWidget: widget?.requiredIndicator != null
+                  ? Text((widget?.label ?? "") + ' *')
+                  : Text(widget?.label),
+              contentWidget: CupertinoSwitch(
+                value: value,
+                onChanged: (value) {
+                  didChange(value);
+                  if (widget?.onChanged != null) widget?.onChanged(value);
+                },
+              ),
+              style: CSWidgetStyle(icon: widget?.icon),
+            ),
     );
   }
 }

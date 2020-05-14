@@ -1,8 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'dart:io';
-
+import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -74,9 +73,9 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
 
     var title = "Color for " + widget?.label;
 
-    var showCupertino = kIsWeb ? false : (Platform.isIOS && !widget.showMaterialonIOS);
-    var headerColor = (showCupertino) ? Colors.white : null;
-    var textColor = (showCupertino) ? Colors.black : null;
+    var cupertinoColors = showCupertino(widget.showMaterialonIOS);
+    var headerColor = (cupertinoColors) ? Colors.white : null;
+    var textColor = (cupertinoColors) ? Colors.black : null;
 
     switch (widget.pickerType) {
       case CardSettingsColorPickerType.colors:
@@ -131,41 +130,39 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   }
 
   Widget _build(BuildContext context) {
-    if (kIsWeb)
-      return materialSettingsColorPicker();
-    else if (Platform.isIOS && !widget.showMaterialonIOS) 
+    if (showCupertino(widget.showMaterialonIOS))
       return cupertinoSettingsColorPicker();
-    else  
+    else
       return materialSettingsColorPicker();
   }
 
-  Widget cupertinoSettingsColorPicker(){
+  Widget cupertinoSettingsColorPicker() {
     return Container(
       child: widget?.visible == false
-      ? null
-      : GestureDetector(
-        onTap: () {
-          _showDialog();
-        },
-        child: CSControl(
-          nameWidget: widget?.requiredIndicator != null
-              ? Text((widget?.label ?? "") + ' *')
-              : Text(widget?.label),
-          contentWidget: Container(
-            height: 20.0,
-            width: 100.0,
-            decoration: BoxDecoration(
-              color: value,
-              borderRadius: BorderRadius.circular(8.0),
+          ? null
+          : GestureDetector(
+              onTap: () {
+                _showDialog();
+              },
+              child: CSControl(
+                nameWidget: widget?.requiredIndicator != null
+                    ? Text((widget?.label ?? "") + ' *')
+                    : Text(widget?.label),
+                contentWidget: Container(
+                  height: 20.0,
+                  width: 100.0,
+                  decoration: BoxDecoration(
+                    color: value,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                style: CSWidgetStyle(icon: widget?.icon),
+              ),
             ),
-          ),
-          style: CSWidgetStyle(icon: widget?.icon),
-        ),
-      ),
     );
   }
 
-  Widget materialSettingsColorPicker(){
+  Widget materialSettingsColorPicker() {
     return GestureDetector(
       onTap: () {
         _showDialog();

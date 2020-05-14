@@ -89,21 +89,7 @@ class _PonyExampleState extends State<PonyExample> {
       appBar: AppBar(
         title: Text("My Little Pony"),
         actions: <Widget>[
-          Container(
-            child: kIsWeb ? null 
-                : Platform.isIOS
-                ? IconButton(
-                    icon: (_showMaterialonIOS)
-                        ? FaIcon(FontAwesomeIcons.apple)
-                        : Icon(Icons.android),
-                    onPressed: () {
-                      setState(() {
-                        _showMaterialonIOS = !_showMaterialonIOS;
-                      });
-                    },
-                  )
-                : null,
-          ),
+          _cupertinoSwitchButton(),
           IconButton(
             icon: Icon(Icons.save),
             onPressed: _savePressed,
@@ -120,6 +106,26 @@ class _PonyExampleState extends State<PonyExample> {
             ? _buildPortraitLayout()
             : _buildLandscapeLayout(),
       ),
+    );
+  }
+
+  Widget _cupertinoSwitchButton() {
+    // dont show this button on web
+    if (kIsWeb) return Container();
+
+    return Container(
+      child: Platform.isIOS
+          ? IconButton(
+              icon: (_showMaterialonIOS)
+                  ? FaIcon(FontAwesomeIcons.apple)
+                  : Icon(Icons.android),
+              onPressed: () {
+                setState(() {
+                  _showMaterialonIOS = !_showMaterialonIOS;
+                });
+              },
+            )
+          : null,
     );
   }
 
@@ -465,8 +471,7 @@ class _PonyExampleState extends State<PonyExample> {
       },
     );
   }
-  
-  
+
   CardSettingsDateTimePicker _buildCardSettingsDateTimePicker() {
     return CardSettingsDateTimePicker(
       showMaterialonIOS: _showMaterialonIOS,
