@@ -24,10 +24,11 @@ class MyApp extends StatelessWidget {
         textTheme: TextTheme(
           button:
               TextStyle(color: Colors.deepPurple[900]), // style of button text
-          subhead: TextStyle(color: Colors.grey[800]), // style of input text
+          subtitle1: TextStyle(color: Colors.grey[800]), // style of input text
         ),
         primaryTextTheme: TextTheme(
-          title: TextStyle(color: Colors.lightBlue[50]), // style for headers
+          headline6:
+              TextStyle(color: Colors.lightBlue[50]), // style for headers
         ),
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels

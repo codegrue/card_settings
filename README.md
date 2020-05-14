@@ -107,10 +107,10 @@ class MyApp extends StatelessWidget {
         buttonColor: Colors.lightBlueAccent[100], // background color of buttons
         textTheme: TextTheme(
           button: TextStyle(color: Colors.deepPurple[900]), // style of button text
-          subhead: TextStyle(color: Colors.grey[800]), // style of input text
+          subtitle1: TextStyle(color: Colors.grey[800]), // style of input text
         ),
         primaryTextTheme: TextTheme(
-          title: TextStyle(color: Colors.lightBlue[50]), // style for headers
+          headline6: TextStyle(color: Colors.lightBlue[50]), // style for headers
         ),
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
@@ -128,7 +128,7 @@ Or if you want to apply a different theme to the `CardSettings` hierarchy only, 
   Theme(
     data: Theme.of(context).copyWith(
       primaryTextTheme: TextTheme(
-        title: TextStyle(color: Colors.lightBlue[50]), // style for headers
+        headline6: TextStyle(color: Colors.lightBlue[50]), // style for headers
       ),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(color: Colors.deepPurple), // style for labels
