@@ -151,7 +151,7 @@ class _PonyExampleState extends State<PonyExample> {
             _buildCardSettingsRadioPicker_Gender(),
             _buildCardSettingsNumberPicker_Age(),
             _buildCardSettingsParagraph_Description(5),
-            _buildCardSettingsMultiselect_Hobbies(),
+            _buildCardSettingsCheckboxPicker_Hobbies(),
             _buildCardSettingsDateTimePicker_Birthday(),
           ],
         ),
@@ -243,7 +243,7 @@ class _PonyExampleState extends State<PonyExample> {
               flexValues: [2, 1],
             ),
             _buildCardSettingsParagraph_Description(3),
-            _buildCardSettingsMultiselect_Hobbies(),
+            _buildCardSettingsCheckboxPicker_Hobbies(),
             _buildCardSettingsDateTimePicker_Birthday(),
           ],
         ),
@@ -628,8 +628,8 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsMultiselect _buildCardSettingsMultiselect_Hobbies() {
-    return CardSettingsMultiselect(
+  CardSettingsCheckboxPicker _buildCardSettingsCheckboxPicker_Hobbies() {
+    return CardSettingsCheckboxPicker(
       showMaterialonIOS: _showMaterialonIOS,
       key: _hobbiesKey,
       label: 'Hobbies',

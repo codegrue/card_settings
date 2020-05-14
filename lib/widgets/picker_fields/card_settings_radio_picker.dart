@@ -38,7 +38,7 @@ class CardSettingsRadioPicker extends FormField<String> {
             validator: validator,
             autovalidate: autovalidate,
             builder: (FormFieldState<String> field) =>
-                (field as _CardSettingsListPickerState)._build(field.context));
+                (field as _CardSettingsRadioPickerState)._build(field.context));
 
   final ValueChanged<String> onChanged;
 
@@ -63,10 +63,11 @@ class CardSettingsRadioPicker extends FormField<String> {
   final bool showMaterialonIOS;
 
   @override
-  _CardSettingsListPickerState createState() => _CardSettingsListPickerState();
+  _CardSettingsRadioPickerState createState() =>
+      _CardSettingsRadioPickerState();
 }
 
-class _CardSettingsListPickerState extends FormFieldState<String> {
+class _CardSettingsRadioPickerState extends FormFieldState<String> {
   @override
   CardSettingsRadioPicker get widget => super.widget as CardSettingsRadioPicker;
 
