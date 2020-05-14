@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:card_settings/card_settings.dart';
 import 'results.dart';
@@ -87,7 +88,8 @@ class _PonyExampleState extends State<PonyExample> {
         title: Text("My Little Pony"),
         actions: <Widget>[
           Container(
-            child: Platform.isIOS
+            child: kIsWeb ? null 
+                : Platform.isIOS
                 ? IconButton(
                     icon: (_showMaterialonIOS)
                         ? FaIcon(FontAwesomeIcons.apple)

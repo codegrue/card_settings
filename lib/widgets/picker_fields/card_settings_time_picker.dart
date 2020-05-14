@@ -4,6 +4,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
@@ -64,89 +65,23 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
   CardSettingsTimePicker get widget => super.widget as CardSettingsTimePicker;
 
   void _showDialog() {
-    if (Platform.isIOS && !widget.showMaterialonIOS) {
-      showCupertinoModalPopup<DateTime>(
-        context: context,
-        builder: (BuildContext context) {
-          return _buildBottomPicker(
-            CupertinoDatePicker(
-              mode: CupertinoDatePickerMode.time,
-              initialDateTime: value == null
-                  ? DateTime.now()
-                  : DateTime(DateTime.now().year, DateTime.now().month,
-                      DateTime.now().day, value.hour, value.minute),
-              onDateTimeChanged: (DateTime newDateTime) {
-                didChange(TimeOfDay.fromDateTime(newDateTime));
-                if (widget.onChanged != null)
-                  widget.onChanged(TimeOfDay.fromDateTime(newDateTime));
-              },
-            ),
-          );
-        },
-      ).then((_value) {
-        if (_value != null) {
-          didChange(TimeOfDay.fromDateTime(_value));
-          if (widget.onChanged != null)
-            widget.onChanged(TimeOfDay.fromDateTime(_value));
-        }
-      });
-    } else {
-      showTimePicker(
-        context: context,
-        initialTime: value,
-      ).then((_value) {
-        if (_value != null) {
-          didChange(_value);
-          if (widget.onChanged != null) widget.onChanged(_value);
-        }
-      });
-    }
+
+    if (kIsWeb)
+      showMaterialPopUpTimePicker();
+    else if (Platform.isIOS && !widget.showMaterialonIOS) {
+      showCupertinoPopUpTimePicker();
+    } else 
+      showMaterialPopUpTimePicker();
+    
   }
 
   Widget _build(BuildContext context) {
-    if (Platform.isIOS && !widget.showMaterialonIOS) {
-      return Container(
-        child: widget?.visible == false
-            ? null
-            : GestureDetector(
-                onTap: () {
-                  _showDialog();
-                },
-                child: CSControl(
-                  nameWidget: widget?.requiredIndicator != null
-                      ? Text((widget?.label ?? "") + ' *')
-                      : Text(widget?.label),
-                  contentWidget: Text(
-                    value == null ? '' : value.format(context),
-                    style: widget?.style ?? Theme.of(context).textTheme.subhead,
-                    textAlign: widget?.contentAlign ??
-                        CardSettings.of(context).contentAlign,
-                  ),
-                  style: CSWidgetStyle(icon: widget?.icon),
-                ),
-              ),
-      );
-    }
-    return GestureDetector(
-      onTap: () {
-        _showDialog();
-      },
-      child: CardSettingsField(
-        label: widget?.label ?? "Time",
-        labelAlign: widget?.labelAlign,
-        visible: widget?.visible ?? true,
-        icon: widget?.icon ?? Icon(Icons.event),
-        requiredIndicator: widget?.requiredIndicator,
-        errorText: errorText,
-        content: Text(
-          value == null ? '' : value.format(context),
-          style: widget?.style ?? Theme.of(context).textTheme.subhead,
-          textAlign:
-              widget?.contentAlign ?? CardSettings.of(context).contentAlign,
-        ),
-        pickerIcon: Icons.arrow_drop_down,
-      ),
-    );
+    if (kIsWeb)
+      return materialSettingsTimePicker();
+    else if (Platform.isIOS && !widget.showMaterialonIOS)
+      return cupertinoSettingsTimePicker();
+    else 
+      return materialSettingsTimePicker();
   }
 
   Widget _buildBottomPicker(Widget picker) {
@@ -167,6 +102,92 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
             child: picker,
           ),
         ),
+      ),
+    );
+  }
+
+  void showCupertinoPopUpTimePicker(){
+    showCupertinoModalPopup<DateTime>(
+      context: context,
+      builder: (BuildContext context) {
+        return _buildBottomPicker(
+          CupertinoDatePicker(
+            mode: CupertinoDatePickerMode.time,
+            initialDateTime: value == null
+                ? DateTime.now()
+                : DateTime(DateTime.now().year, DateTime.now().month,
+                    DateTime.now().day, value.hour, value.minute),
+            onDateTimeChanged: (DateTime newDateTime) {
+              didChange(TimeOfDay.fromDateTime(newDateTime));
+              if (widget.onChanged != null)
+                widget.onChanged(TimeOfDay.fromDateTime(newDateTime));
+            },
+          ),
+        );
+      },
+    ).then((_value) {
+      if (_value != null) {
+        didChange(TimeOfDay.fromDateTime(_value));
+        if (widget.onChanged != null)
+          widget.onChanged(TimeOfDay.fromDateTime(_value));
+      }
+    });
+  }
+
+  void showMaterialPopUpTimePicker(){
+    showTimePicker(
+      context: context,
+      initialTime: value,
+    ).then((_value) {
+      if (_value != null) {
+        didChange(_value);
+        if (widget.onChanged != null) widget.onChanged(_value);
+      }
+    });
+  }
+
+  Widget cupertinoSettingsTimePicker(){
+    return Container(
+        child: widget?.visible == false
+        ? null
+        : GestureDetector(
+            onTap: () {
+              _showDialog();
+            },
+            child: CSControl(
+              nameWidget: widget?.requiredIndicator != null
+                  ? Text((widget?.label ?? "") + ' *')
+                  : Text(widget?.label),
+              contentWidget: Text(
+                value == null ? '' : value.format(context),
+                style: widget?.style ?? Theme.of(context).textTheme.subhead,
+                textAlign: widget?.contentAlign ??
+                    CardSettings.of(context).contentAlign,
+              ),
+              style: CSWidgetStyle(icon: widget?.icon),
+            ),
+          ),
+      );
+  }
+  Widget materialSettingsTimePicker(){
+    return GestureDetector(
+      onTap: () {
+        _showDialog();
+      },
+      child: CardSettingsField(
+        label: widget?.label ?? "Time",
+        labelAlign: widget?.labelAlign,
+        visible: widget?.visible ?? true,
+        icon: widget?.icon ?? Icon(Icons.event),
+        requiredIndicator: widget?.requiredIndicator,
+        errorText: errorText,
+        content: Text(
+          value == null ? '' : value.format(context),
+          style: widget?.style ?? Theme.of(context).textTheme.subhead,
+          textAlign:
+              widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+        ),
+        pickerIcon: Icons.arrow_drop_down,
       ),
     );
   }
