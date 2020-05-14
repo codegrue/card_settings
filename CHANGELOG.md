@@ -7,6 +7,7 @@
 - Icon colors will be preserved if provided
 - added DateFormat as parameter to `CardSettingsDatePicker`
 - `CardSettingsRadioPicker` added
+- `CardSettingsSelectionPicker` added
 
 ## [1.8.2] - 5/5/2020
 

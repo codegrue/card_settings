@@ -24,6 +24,7 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
   - _CardSettingsListPicker_ - Picker list of arbitrary options
   - _CardSettingsNumberPicker_ - Picker list of numbers in a given range
   - _CardSettingsRadioPicker_ - Single items picker with radio buttons
+  - _CardSettingsSelectionPicker_ - Single selection from a list with optional icons
   - _CardSettingsColorPicker_ - Picker for colors with three flavors: RGB, Material, and Block
   - _CardSettingsDatePicker_ - Date Picker
   - _CardSettingsTimePicker_ - Time Picker

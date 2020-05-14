@@ -3,6 +3,7 @@ class PonyModel {
   String name = 'Twilight Sparkle';
   String type = 'U';
   int age = 7;
+  String gender = "Female";
   String coatColor = 'D19FE4';
   String maneColor = '273873';
   bool hasSpots = false;
