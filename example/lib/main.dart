@@ -71,6 +71,7 @@ class _PonyExampleState extends State<PonyExample> {
   final GlobalKey<FormState> _weightKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _dateKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _datetimeKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _styleKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _timeKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _priceKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _phoneKey = GlobalKey<FormState>();
@@ -174,6 +175,7 @@ class _PonyExampleState extends State<PonyExample> {
           children: <Widget>[
             _buildCardSettingsDouble_Height(),
             _buildCardSettingsInt_Weight(),
+            _buildCardSettingsRadioPicker_Style(),
           ],
         ),
         CardSettingsSection(
@@ -282,6 +284,7 @@ class _PonyExampleState extends State<PonyExample> {
             CardFieldLayout(<Widget>[
               _buildCardSettingsDouble_Height(),
               _buildCardSettingsInt_Weight(),
+              _buildCardSettingsRadioPicker_Style(),
             ]),
           ],
         ),
@@ -731,6 +734,29 @@ class _PonyExampleState extends State<PonyExample> {
           _ponyModel.name = value;
         });
         _showSnackBar('Name', value);
+      },
+    );
+  }
+
+  CardSettingsRadioPicker _buildCardSettingsRadioPicker_Style() {
+    return CardSettingsRadioPicker(
+      showMaterialonIOS: _showMaterialonIOS,
+      key: _styleKey,
+      label: 'Style',
+      initialValue: _ponyModel.style,
+      hintText: 'Select One',
+      autovalidate: _autoValidate,
+      options: <String>['Majestic', 'Scrawny', 'Sleek'],
+      validator: (String value) {
+        if (value == null || value.isEmpty) return 'You must pick a style.';
+        return null;
+      },
+      onSaved: (value) => _ponyModel.type = value,
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.type = value;
+        });
+        _showSnackBar('Style', value);
       },
     );
   }

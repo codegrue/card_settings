@@ -18,6 +18,7 @@ class PonyModel {
   ];
   double height = 3.5;
   int weight = 45;
+  String style = "Majestic";
   DateTime showDateTime = DateTime(2010, 10, 10, 20, 30);
   double ticketPrice = 65.99;
   int boxOfficePhone = 8005551212;
