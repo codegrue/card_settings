@@ -40,7 +40,7 @@ class CardSettingsDateTimePicker extends FormField<DateTime> {
             validator: validator,
             autovalidate: autovalidate,
             builder: (FormFieldState<DateTime> field) =>
-                (field as _CardSettingsDatePickerState)._build(field.context));
+                (field as _CardSettingsDateTimePickerState)._build(field.context));
 
   final ValueChanged<DateTime> onChanged;
 
