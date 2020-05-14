@@ -68,6 +68,7 @@ class _PonyExampleState extends State<PonyExample> {
   final GlobalKey<FormState> _heightKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _weightKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _dateKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _datetimeKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _timeKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _priceKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _phoneKey = GlobalKey<FormState>();
@@ -176,6 +177,7 @@ class _PonyExampleState extends State<PonyExample> {
           children: <Widget>[
             _buildCardSettingsDatePicker(),
             _buildCardSettingsTimePicker(),
+            _buildCardSettingsDateTimePicker(),
             _buildCardSettingsCurrency(),
             _buildCardSettingsPhone(),
             _buildCardSettingsDouble_Slider(),
@@ -285,6 +287,7 @@ class _PonyExampleState extends State<PonyExample> {
             CardFieldLayout(<Widget>[
               _buildCardSettingsDatePicker(),
               _buildCardSettingsTimePicker(),
+              _buildCardSettingsDateTimePicker(),
             ]),
             CardFieldLayout(<Widget>[
               _buildCardSettingsCurrency(),
@@ -449,6 +452,26 @@ class _PonyExampleState extends State<PonyExample> {
       justDate: true,
       icon: Icon(Icons.calendar_today),
       label: 'Date',
+      initialValue: _ponyModel.showDateTime,
+      onSaved: (value) => _ponyModel.showDateTime =
+          updateJustDate(value, _ponyModel.showDateTime),
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.showDateTime = value;
+        });
+        _showSnackBar(
+            'Show Date', updateJustDate(value, _ponyModel.showDateTime));
+      },
+    );
+  }
+  
+  
+  CardSettingsDateTimePicker _buildCardSettingsDateTimePicker() {
+    return CardSettingsDateTimePicker(
+      showMaterialonIOS: _showMaterialonIOS,
+      key: _datetimeKey,
+      icon: Icon(Icons.calendar_today),
+      label: 'DateTime',
       initialValue: _ponyModel.showDateTime,
       onSaved: (value) => _ponyModel.showDateTime =
           updateJustDate(value, _ponyModel.showDateTime),
