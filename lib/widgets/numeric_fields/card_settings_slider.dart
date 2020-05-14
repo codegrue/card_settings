@@ -4,6 +4,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
@@ -77,8 +78,16 @@ class _CardSettingsSliderState extends FormFieldState<double> {
   CardSettingsSlider get widget => super.widget as CardSettingsSlider;
 
   Widget _build(BuildContext context) {
-    if (Platform.isIOS && !widget.showMaterialonIOS) {
-      return Container(
+    if (kIsWeb)
+      return materialSettingsSlider();
+    else if (Platform.isIOS && !widget.showMaterialonIOS)
+      return cupertinoSettingsSlider();
+    else 
+      return materialSettingsSlider();
+  }
+
+  Widget cupertinoSettingsSlider(){
+    return Container(
         child: widget?.visible == false
             ? null
             : CSControl(
@@ -100,7 +109,8 @@ class _CardSettingsSliderState extends FormFieldState<double> {
                 style: CSWidgetStyle(icon: widget?.icon),
               ),
       );
-    }
+  }
+  Widget materialSettingsSlider(){
     return CardSettingsField(
       label: widget?.label,
       labelAlign: widget?.labelAlign,

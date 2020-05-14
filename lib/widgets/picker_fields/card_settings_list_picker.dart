@@ -4,6 +4,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
@@ -81,12 +82,13 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     } else {
       optionIndex = 0; // set to first element in the list
     }
-
-    if (Platform.isIOS && !widget.showMaterialonIOS) {
-      _showCupertinoBottomPicker(optionIndex);
-    } else {
+    if(kIsWeb)
       _showMaterialScrollPicker(label, option);
-    }
+    else if (Platform.isIOS && !widget.showMaterialonIOS)
+      _showCupertinoBottomPicker(optionIndex);
+    else 
+      _showMaterialScrollPicker(label, option);
+    
   }
 
   void _showCupertinoBottomPicker(int optionIndex) {
@@ -177,32 +179,41 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
       content = options[optionIndex];
     }
 
-    if (Platform.isIOS && !widget.showMaterialonIOS) {
-      return Container(
-        child: widget?.visible == false
-            ? null
-            : GestureDetector(
-                onTap: () {
-                  _showDialog(widget?.label);
-                },
-                child: CSControl(
-                  nameWidget: widget?.requiredIndicator != null
-                      ? Text((widget?.label ?? "") + ' *')
-                      : Text(widget?.label),
-                  contentWidget: Text(
-                    content,
-                    style: Theme.of(context).textTheme.subhead.copyWith(
-                        color: (value == null)
-                            ? Theme.of(context).hintColor
-                            : Theme.of(context).textTheme.subhead.color),
-                    textAlign: widget?.contentAlign ??
-                        CardSettings.of(context).contentAlign,
-                  ),
-                  style: CSWidgetStyle(icon: widget?.icon),
-                ),
+    if(kIsWeb)
+      return materialSettingsListPicker(content);
+    else if (Platform.isIOS && !widget.showMaterialonIOS)
+      return cupertinoSettingsListPicker(content);
+    else return materialSettingsListPicker(content);
+  }
+
+  Widget cupertinoSettingsListPicker(String content){
+    return Container(
+      child: widget?.visible == false
+        ? null
+        : GestureDetector(
+            onTap: () {
+              _showDialog(widget?.label);
+            },
+            child: CSControl(
+              nameWidget: widget?.requiredIndicator != null
+                  ? Text((widget?.label ?? "") + ' *')
+                  : Text(widget?.label),
+              contentWidget: Text(
+                content,
+                style: Theme.of(context).textTheme.subhead.copyWith(
+                    color: (value == null)
+                        ? Theme.of(context).hintColor
+                        : Theme.of(context).textTheme.subhead.color),
+                textAlign: widget?.contentAlign ??
+                    CardSettings.of(context).contentAlign,
               ),
+              style: CSWidgetStyle(icon: widget?.icon),
+            ),
+          ),
       );
-    }
+  }
+
+  Widget materialSettingsListPicker(String content){
     return GestureDetector(
       onTap: () {
         _showDialog(widget?.label);

@@ -1,6 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
@@ -220,11 +221,12 @@ class _CardSettingsTextState extends FormFieldState<String> {
   }
 
   Widget _build(BuildContext context) {
-    if (Platform.isIOS && !widget.showMaterialonIOS) {
-      return _buildCupertinoTextbox(context);
-    } else {
+    if(kIsWeb)
       return _buildMaterialTextbox(context);
-    }
+    else if (Platform.isIOS && !widget.showMaterialonIOS)
+      return _buildCupertinoTextbox(context);
+    else
+      return _buildMaterialTextbox(context);
   }
 
   Container _buildCupertinoTextbox(BuildContext context) {

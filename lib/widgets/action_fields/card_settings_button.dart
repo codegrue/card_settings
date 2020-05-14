@@ -1,6 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
@@ -36,18 +37,10 @@ class CardSettingsButton extends StatelessWidget {
         Theme.of(context).textTheme.button.copyWith(color: textColor);
 
     if (visible) {
-      if (Platform.isIOS && !showMaterialonIOS) {
-        return Container(
-          child: visible == false
-              ? null
-              : CSButton(
-                  isDestructive
-                      ? CSButtonType.DESTRUCTIVE
-                      : CSButtonType.DEFAULT_CENTER,
-                  label,
-                  onPressed,
-                ),
-        );
+      if(kIsWeb)
+        return showMaterialButton(context, buttonStyle);
+      else if (Platform.isIOS && !showMaterialonIOS) {
+        return showCuppertinoButton();
         // return ListTile(
         //   title: CupertinoButton(
         //     color: backgroundColor ?? Theme.of(context).buttonColor,
@@ -58,30 +51,47 @@ class CardSettingsButton extends StatelessWidget {
         //     ),
         //   ),
         // );
-      }
-      return Container(
-        margin: EdgeInsets.only(
-            top: 4.0, bottom: bottomSpacing, left: 4.0, right: 4.0),
-        padding: EdgeInsets.all(0.0),
-        color: backgroundColor ?? Theme.of(context).buttonColor,
-        child: RawMaterialButton(
-          padding: EdgeInsets.all(0.0),
-          elevation: 0.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                label,
-                style: buttonStyle,
-              ),
-            ],
-          ),
-          fillColor: backgroundColor ?? Theme.of(context).buttonColor,
-          onPressed: onPressed,
-        ),
-      );
+      } else 
+        return showMaterialButton(context, buttonStyle);
     } else {
       return Container();
     }
+  }
+
+  Widget showMaterialButton(BuildContext context, TextStyle buttonStyle){
+    return Container(
+      margin: EdgeInsets.only(
+          top: 4.0, bottom: bottomSpacing, left: 4.0, right: 4.0),
+      padding: EdgeInsets.all(0.0),
+      color: backgroundColor ?? Theme.of(context).buttonColor,
+      child: RawMaterialButton(
+        padding: EdgeInsets.all(0.0),
+        elevation: 0.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              label,
+              style: buttonStyle,
+            ),
+          ],
+        ),
+        fillColor: backgroundColor ?? Theme.of(context).buttonColor,
+        onPressed: onPressed,
+      ),
+    );
+  }
+
+  Widget showCuppertinoButton(){
+    return Container(
+      child: visible == false
+      ? null
+      : CSButton(isDestructive
+        ? CSButtonType.DESTRUCTIVE
+        : CSButtonType.DEFAULT_CENTER,
+        label,
+        onPressed,
+      ),
+    );
   }
 }

@@ -3,6 +3,7 @@
 
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
@@ -24,15 +25,21 @@ class CardSettingsHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS && !showMaterialonIOS) {
+    if (kIsWeb)
+      return materialHeader(context);
+    else if (Platform.isIOS && !showMaterialonIOS) 
       return CSHeader(label);
-    }
+    else 
+      return materialHeader(context);
+  }
+
+  Widget materialHeader(BuildContext context){
     return Container(
       margin: EdgeInsets.all(0.0),
       decoration: BoxDecoration(
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.grey
-              : color ?? Theme.of(context).accentColor),
+        color: Theme.of(context).brightness == Brightness.dark
+        ? Colors.grey
+        : color ?? Theme.of(context).accentColor),
       height: height,
       padding: EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0),
       child: Row(

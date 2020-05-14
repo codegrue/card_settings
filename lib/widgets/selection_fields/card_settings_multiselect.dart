@@ -2,6 +2,7 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
@@ -64,11 +65,12 @@ class _CardSettingsMultiselectState extends FormFieldState<List<String>> {
   CardSettingsMultiselect get widget => super.widget as CardSettingsMultiselect;
 
   void _showDialog(String label, List<String> options) {
-    if (Platform.isIOS && !widget.showMaterialonIOS) {
-      _showCupertinoSelectPicker(options, label);
-    } else {
+    if (kIsWeb)
       _showMaterialCheckboxPicker(options, label);
-    }
+    else if (Platform.isIOS && !widget.showMaterialonIOS)
+      _showCupertinoSelectPicker(options, label);
+    else 
+      _showMaterialCheckboxPicker(options, label);
   }
 
   void _showMaterialCheckboxPicker(List<String> options, String label) {
@@ -106,28 +108,36 @@ class _CardSettingsMultiselectState extends FormFieldState<List<String>> {
   }
 
   Widget _build(BuildContext context) {
-    if (Platform.isIOS && !widget.showMaterialonIOS) {
-      return Container(
-        child: widget?.visible == false
-            ? null
-            : GestureDetector(
-                onTap: () {
-                  _showDialog(widget?.label, widget?.options);
-                },
-                child: CSControl(
-                  nameWidget: widget?.requiredIndicator != null
-                      ? Text((widget?.label ?? "") + ' *')
-                      : Text(widget?.label),
-                  contentWidget: Text(value == null || value.isEmpty
-                      ? "none selected"
-                      : value.length == 1
-                          ? "${value[0]}"
-                          : "${value[0]} & ${value.length - 1} more"),
-                  style: CSWidgetStyle(icon: widget?.icon),
-                ),
-              ),
-      );
-    }
+    if (kIsWeb)
+      return materialSettingsMultiselect();
+    else if (Platform.isIOS && !widget.showMaterialonIOS)
+      return cupertinoSettingsMultiselect();
+    else 
+      return materialSettingsMultiselect();
+  }
+  Widget cupertinoSettingsMultiselect(){
+    return Container(
+      child: widget?.visible == false
+      ? null
+      : GestureDetector(
+          onTap: () {
+            _showDialog(widget?.label, widget?.options);
+          },
+          child: CSControl(
+            nameWidget: widget?.requiredIndicator != null
+                ? Text((widget?.label ?? "") + ' *')
+                : Text(widget?.label),
+            contentWidget: Text(value == null || value.isEmpty
+                ? "none selected"
+                : value.length == 1
+                    ? "${value[0]}"
+                    : "${value[0]} & ${value.length - 1} more"),
+            style: CSWidgetStyle(icon: widget?.icon),
+          ),
+        ),
+    );
+  }
+  Widget materialSettingsMultiselect(){
     return GestureDetector(
       onTap: () {
         _showDialog(widget?.label, widget?.options);

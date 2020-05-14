@@ -4,6 +4,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
@@ -68,25 +69,14 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
   CardSettingsSwitch get widget => super.widget as CardSettingsSwitch;
 
   Widget _build(BuildContext context) {
-    if (Platform.isIOS && !widget.showMaterialonIOS) {
-      return Container(
-        child: widget?.visible == false
-            ? null
-            : CSControl(
-                nameWidget: widget?.requiredIndicator != null
-                    ? Text((widget?.label ?? "") + ' *')
-                    : Text(widget?.label),
-                contentWidget: CupertinoSwitch(
-                  value: value,
-                  onChanged: (value) {
-                    didChange(value);
-                    if (widget?.onChanged != null) widget?.onChanged(value);
-                  },
-                ),
-                style: CSWidgetStyle(icon: widget?.icon),
-              ),
-      );
-    }
+    if (kIsWeb)
+      return materialSettingsSwitch();
+    else if (Platform.isIOS && !widget.showMaterialonIOS)
+      return cupertinoSettingsSwitch();
+    return materialSettingsSwitch();
+  }
+
+  Widget materialSettingsSwitch(){
     return CardSettingsField(
       label: widget?.label,
       labelAlign: widget?.labelAlign,
@@ -118,6 +108,26 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
           ),
         ),
       ]),
+    );
+  }
+
+  Widget cupertinoSettingsSwitch(){
+    return Container(
+      child: widget?.visible == false
+      ? null
+      : CSControl(
+        nameWidget: widget?.requiredIndicator != null
+        ? Text((widget?.label ?? "") + ' *')
+        : Text(widget?.label),
+        contentWidget: CupertinoSwitch(
+          value: value,
+          onChanged: (value) {
+            didChange(value);
+            if (widget?.onChanged != null) widget?.onChanged(value);
+          },
+        ),
+        style: CSWidgetStyle(icon: widget?.icon),
+      ),
     );
   }
 }
