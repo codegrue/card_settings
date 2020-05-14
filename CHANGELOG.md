@@ -3,8 +3,9 @@
 ## [1.9.0] - 5/X/2020
 
 - compatible with flutter web now
-- DateTimePicker (combo) added
+- `CardSettingsDateTimePicker` (combo) added
 - Icon colors will be preserved if provided
+- added DateFormat as parameter to `CardSettingsDatePicker`
 
 ## [1.8.2] - 5/5/2020
 

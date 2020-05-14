@@ -24,8 +24,9 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
   - _CardSettingsListPicker_ - Picker list of arbitrary options
   - _CardSettingsNumberPicker_ - Picker list of numbers in a given range
   - _CardSettingsColorPicker_ - Picker for colors with three flavors: RGB, Material, and Block
-  - _CardSettingsDatePicker_ - Material Design Date Picker
-  - _CardSettingsTimePicker_ - Material Design Time Picker
+  - _CardSettingsDatePicker_ - Date Picker
+  - _CardSettingsTimePicker_ - Time Picker
+  - _CardSettingsDateTimePicker_ - Combo Date and Time Picker
 - **Selection**
   - _CardSettingsMultiselect_ - Select from a list of available options
 - **Informational Sections**
@@ -35,9 +36,6 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
   - _CardSettingsButton_ - Actions buttons for the form
 
 All fields support `validate`, `onChange`, `onSaved`, `autovalidate`, and `visible`.
-
-- [Warning] For the text fields on iOS using [CupertinoTextFields] the [validator] and [onSaved] do not exist, please use [showErrorIOS] to show a [red] Border around the Text Field and [onChanged] and [onFieldSubmitted] to update the value like in the example.
-- Require Indicator on iOS will show _next to the label if [requireIndicator] is not equal to null. (For Example: 'label _')
 
 The package also includes these additonal items:
 

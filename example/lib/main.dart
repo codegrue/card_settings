@@ -7,6 +7,7 @@ import 'model.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 void main() => runApp(MyApp());
 
@@ -456,9 +457,9 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettingsDatePicker(
       showMaterialonIOS: _showMaterialonIOS,
       key: _dateKey,
-      justDate: true,
       icon: Icon(Icons.calendar_today),
       label: 'Date',
+      dateFormat: DateFormat.yMMMMd(),
       initialValue: _ponyModel.showDateTime,
       onSaved: (value) => _ponyModel.showDateTime =
           updateJustDate(value, _ponyModel.showDateTime),
