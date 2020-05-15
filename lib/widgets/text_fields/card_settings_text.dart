@@ -1,12 +1,12 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 
 import '../../card_settings.dart';
@@ -221,9 +221,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
   }
 
   Widget _build(BuildContext context) {
-    if(kIsWeb)
-      return _buildMaterialTextbox(context);
-    else if (Platform.isIOS && !widget.showMaterialonIOS)
+    if (showCupertino(widget.showMaterialonIOS))
       return _buildCupertinoTextbox(context);
     else
       return _buildMaterialTextbox(context);
@@ -245,7 +243,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
         focusNode: widget?.focusNode,
         keyboardType: widget?.keyboardType,
         textCapitalization: widget?.textCapitalization,
-        style: widget?.style ?? Theme.of(context).textTheme.subhead,
+        style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
         decoration: hasError
             ? BoxDecoration(
                 border: Border.all(color: Colors.red),
@@ -401,7 +399,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
         focusNode: widget?.focusNode,
         keyboardType: widget?.keyboardType,
         textCapitalization: widget?.textCapitalization,
-        style: widget?.style ?? Theme.of(context).textTheme.subhead,
+        style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(0.0),
           border: InputBorder.none,

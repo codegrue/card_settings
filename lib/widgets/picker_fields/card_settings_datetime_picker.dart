@@ -2,8 +2,8 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:io';
 
+import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,33 +14,34 @@ import '../../card_settings.dart';
 
 /// This is the date picker field
 class CardSettingsDateTimePicker extends FormField<DateTime> {
-  CardSettingsDateTimePicker({
-    Key key,
-    bool autovalidate: false,
-    FormFieldSetter<DateTime> onSaved,
-    FormFieldValidator<DateTime> validator,
-    DateTime initialValue,
-    this.visible = true,
-    this.label = 'Label',
-    this.onChanged,
-    this.contentAlign,
-    this.icon,
-    this.labelAlign,
-    this.requiredIndicator,
-    this.firstDate,
-    this.lastDate,
-    this.style,
-    this.showMaterialonIOS = false,
-    this.dateBuilder,
-    this.timeBuilder
-  }) : super(
+  CardSettingsDateTimePicker(
+      {Key key,
+      bool autovalidate: false,
+      FormFieldSetter<DateTime> onSaved,
+      FormFieldValidator<DateTime> validator,
+      DateTime initialValue,
+      this.visible = true,
+      this.label = 'Label',
+      this.onChanged,
+      this.contentAlign,
+      this.icon,
+      this.labelAlign,
+      this.requiredIndicator,
+      this.firstDate,
+      this.lastDate,
+      this.style,
+      this.showMaterialonIOS = false,
+      this.dateBuilder,
+      this.timeBuilder})
+      : super(
             key: key,
             initialValue: initialValue ?? DateTime.now(),
             onSaved: onSaved,
             validator: validator,
             autovalidate: autovalidate,
             builder: (FormFieldState<DateTime> field) =>
-                (field as _CardSettingsDateTimePickerState)._build(field.context));
+                (field as _CardSettingsDateTimePickerState)
+                    ._build(field.context));
 
   final ValueChanged<DateTime> onChanged;
 
@@ -65,16 +66,18 @@ class CardSettingsDateTimePicker extends FormField<DateTime> {
   final bool showMaterialonIOS;
 
   final Widget Function(BuildContext, Widget) dateBuilder;
-  
+
   final Widget Function(BuildContext, Widget) timeBuilder;
-  
+
   @override
-  _CardSettingsDateTimePickerState createState() => _CardSettingsDateTimePickerState();
+  _CardSettingsDateTimePickerState createState() =>
+      _CardSettingsDateTimePickerState();
 }
 
 class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
   @override
-  CardSettingsDateTimePicker get widget => super.widget as CardSettingsDateTimePicker;
+  CardSettingsDateTimePicker get widget =>
+      super.widget as CardSettingsDateTimePicker;
 
   void _showDialog() {
     DateTime _startDate = widget?.firstDate ?? DateTime.now();
@@ -83,18 +86,15 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
     }
     final _endDate = widget?.lastDate ?? _startDate.add(Duration(days: 1800));
 
-
     // Using platform on web will result on a crash,
-    if(kIsWeb) 
-      showMaterialDateTimePopUp(_startDate, _endDate);
-    else if (Platform.isIOS && !widget.showMaterialonIOS)
+    if (showCupertino(widget.showMaterialonIOS))
       showCupertinoDateTimePopUp(_startDate, _endDate);
-    else 
+    else
       showMaterialDateTimePopUp(_startDate, _endDate);
-      
   }
 
-  Future<void> showCupertinoDateTimePopUp(DateTime _startDate, DateTime _endDate){
+  Future<void> showCupertinoDateTimePopUp(
+      DateTime _startDate, DateTime _endDate) {
     return showCupertinoModalPopup<DateTime>(
       context: context,
       builder: (BuildContext context) {
@@ -121,34 +121,35 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
     });
   }
 
-  void showMaterialDateTimePopUp(DateTime _startDate, DateTime _endDate){
+  void showMaterialDateTimePopUp(DateTime _startDate, DateTime _endDate) {
     showDatePicker(
-      context: context,
-      initialDate: value ?? DateTime.now(),
-      firstDate: _startDate,
-      lastDate: _endDate,
-      builder: (BuildContext context, Widget child){
-        // return dateBuilder ??
-        return Theme(
-          data: Theme.of(context),
-          child: child,
-        );
-      }
-    ).then((_date) async {
-      if(_date != null) {
+        context: context,
+        initialDate: value ?? DateTime.now(),
+        firstDate: _startDate,
+        lastDate: _endDate,
+        builder: (BuildContext context, Widget child) {
+          // return dateBuilder ??
+          return Theme(
+            data: Theme.of(context),
+            child: child,
+          );
+        }).then((_date) async {
+      if (_date != null) {
         await showTimePicker(
-          context: context,
-          initialTime: value != null ? TimeOfDay(hour: value.hour, minute: value.minute) : TimeOfDay.now(),
-          builder: (BuildContext context, Widget child){
-            // return timeBuilder ??
-            return Theme(
-              data: Theme.of(context),
-              child: child,
-            );
-          }
-        ).then((_time){
-          if(_time != null)
-            _date = DateTime(_date.year, _date.month, _date.day, _time.hour, _time.minute);
+            context: context,
+            initialTime: value != null
+                ? TimeOfDay(hour: value.hour, minute: value.minute)
+                : TimeOfDay.now(),
+            builder: (BuildContext context, Widget child) {
+              // return timeBuilder ??
+              return Theme(
+                data: Theme.of(context),
+                child: child,
+              );
+            }).then((_time) {
+          if (_time != null)
+            _date = DateTime(
+                _date.year, _date.month, _date.day, _time.hour, _time.minute);
         });
       }
       if (_date != null) {
@@ -159,11 +160,9 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
   }
 
   Widget _build(BuildContext context) {
-    if (kIsWeb)
-      return materialSettingsButton();
-    else if (Platform.isIOS && !widget.showMaterialonIOS)
+    if (showCupertino(widget.showMaterialonIOS))
       return cupertinoSettingsButton();
-    else 
+    else
       return materialSettingsButton();
   }
 
@@ -189,29 +188,34 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
     );
   }
 
-  Widget cupertinoSettingsButton(){
+  Widget cupertinoSettingsButton() {
     return Container(
       child: widget?.visible == false
-      ? null
-      : GestureDetector(
-          onTap: () {
-            _showDialog();
-          },
-          child: CSControl(
-            nameWidget: widget?.requiredIndicator != null
-                ? Text((widget?.label ?? "") + ' *')
-                : Text(widget?.label),
-            contentWidget: Text(
-              value == null ? '' : DateFormat.yMd().add_jms().format(value),
-              style: widget?.style ?? Theme.of(context).textTheme.subtitle1, // subhead is deprecated,
-              textAlign: widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+          ? null
+          : GestureDetector(
+              onTap: () {
+                _showDialog();
+              },
+              child: CSControl(
+                nameWidget: widget?.requiredIndicator != null
+                    ? Text((widget?.label ?? "") + ' *')
+                    : Text(widget?.label),
+                contentWidget: Text(
+                  value == null ? '' : DateFormat.yMd().add_jms().format(value),
+                  style: widget?.style ??
+                      Theme.of(context)
+                          .textTheme
+                          .subtitle1, // subhead is deprecated,
+                  textAlign: widget?.contentAlign ??
+                      CardSettings.of(context).contentAlign,
+                ),
+                style: CSWidgetStyle(icon: widget?.icon),
+              ),
             ),
-            style: CSWidgetStyle(icon: widget?.icon),
-          ),
-        ),
     );
   }
-  Widget materialSettingsButton(){
+
+  Widget materialSettingsButton() {
     return GestureDetector(
       onTap: () {
         _showDialog();
@@ -225,8 +229,10 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
         errorText: errorText,
         content: Text(
           value == null ? '' : DateFormat.yMd().add_jms().format(value),
-          style: widget?.style ?? Theme.of(context).textTheme.subtitle1, // subhead is deprecated,
-          textAlign: widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+          style: widget?.style ??
+              Theme.of(context).textTheme.subtitle1, // subhead is deprecated,
+          textAlign:
+              widget?.contentAlign ?? CardSettings.of(context).contentAlign,
         ),
         pickerIcon: Icons.arrow_drop_down,
       ),

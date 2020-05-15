@@ -11,8 +11,8 @@ import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 import '../../card_settings.dart';
 
 /// This is a list picker that allows an arbitrary list of options to be provided.
-class CardSettingsListPicker extends FormField<String> {
-  CardSettingsListPicker({
+class CardSettingsSelectionPicker extends FormField<String> {
+  CardSettingsSelectionPicker({
     Key key,
     String initialValue,
     FormFieldSetter<String> onSaved,
@@ -27,10 +27,13 @@ class CardSettingsListPicker extends FormField<String> {
     this.contentAlign,
     this.hintText,
     this.options,
+    this.icons,
     this.values,
     this.showMaterialonIOS = false,
   })  : assert(values == null || options.length == values.length,
             "If you provide 'values', they need the same number as 'options'"),
+        assert(values == null || options.length == icons.length,
+            "If you provide 'icons', they need the same number as 'options'"),
         super(
             key: key,
             initialValue: initialValue ?? null,
@@ -58,6 +61,8 @@ class CardSettingsListPicker extends FormField<String> {
 
   final List<String> values;
 
+  final List<Icon> icons;
+
   final bool visible;
 
   final bool showMaterialonIOS;
@@ -68,7 +73,8 @@ class CardSettingsListPicker extends FormField<String> {
 
 class _CardSettingsListPickerState extends FormFieldState<String> {
   @override
-  CardSettingsListPicker get widget => super.widget as CardSettingsListPicker;
+  CardSettingsSelectionPicker get widget =>
+      super.widget as CardSettingsSelectionPicker;
 
   List<String> values;
   List<String> options;
@@ -84,7 +90,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     if (showCupertino(widget.showMaterialonIOS))
       _showCupertinoBottomPicker(optionIndex);
     else
-      _showMaterialScrollPicker(label, option);
+      _showMaterialSelectionPicker(label, option);
   }
 
   void _showCupertinoBottomPicker(int optionIndex) {
@@ -119,11 +125,12 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     });
   }
 
-  void _showMaterialScrollPicker(String label, String option) {
-    showMaterialScrollPicker(
+  void _showMaterialSelectionPicker(String label, String option) {
+    showMaterialSelectionPicker(
       context: context,
       title: label,
       items: options,
+      icons: widget.icons,
       selectedItem: option,
       onChanged: (option) {
         if (option != null) {

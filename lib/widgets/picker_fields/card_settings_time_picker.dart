@@ -1,8 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'dart:io';
-
+import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -65,22 +64,16 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
   CardSettingsTimePicker get widget => super.widget as CardSettingsTimePicker;
 
   void _showDialog() {
-
-    if (kIsWeb)
-      showMaterialPopUpTimePicker();
-    else if (Platform.isIOS && !widget.showMaterialonIOS) {
+    if (showCupertino(widget.showMaterialonIOS)) {
       showCupertinoPopUpTimePicker();
-    } else 
+    } else
       showMaterialPopUpTimePicker();
-    
   }
 
   Widget _build(BuildContext context) {
-    if (kIsWeb)
-      return materialSettingsTimePicker();
-    else if (Platform.isIOS && !widget.showMaterialonIOS)
+    if (showCupertino(widget.showMaterialonIOS))
       return cupertinoSettingsTimePicker();
-    else 
+    else
       return materialSettingsTimePicker();
   }
 
@@ -106,7 +99,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
     );
   }
 
-  void showCupertinoPopUpTimePicker(){
+  void showCupertinoPopUpTimePicker() {
     showCupertinoModalPopup<DateTime>(
       context: context,
       builder: (BuildContext context) {
@@ -134,7 +127,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
     });
   }
 
-  void showMaterialPopUpTimePicker(){
+  void showMaterialPopUpTimePicker() {
     showTimePicker(
       context: context,
       initialTime: value,
@@ -146,30 +139,31 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
     });
   }
 
-  Widget cupertinoSettingsTimePicker(){
+  Widget cupertinoSettingsTimePicker() {
     return Container(
-        child: widget?.visible == false
-        ? null
-        : GestureDetector(
-            onTap: () {
-              _showDialog();
-            },
-            child: CSControl(
-              nameWidget: widget?.requiredIndicator != null
-                  ? Text((widget?.label ?? "") + ' *')
-                  : Text(widget?.label),
-              contentWidget: Text(
-                value == null ? '' : value.format(context),
-                style: widget?.style ?? Theme.of(context).textTheme.subhead,
-                textAlign: widget?.contentAlign ??
-                    CardSettings.of(context).contentAlign,
+      child: widget?.visible == false
+          ? null
+          : GestureDetector(
+              onTap: () {
+                _showDialog();
+              },
+              child: CSControl(
+                nameWidget: widget?.requiredIndicator != null
+                    ? Text((widget?.label ?? "") + ' *')
+                    : Text(widget?.label),
+                contentWidget: Text(
+                  value == null ? '' : value.format(context),
+                  style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
+                  textAlign: widget?.contentAlign ??
+                      CardSettings.of(context).contentAlign,
+                ),
+                style: CSWidgetStyle(icon: widget?.icon),
               ),
-              style: CSWidgetStyle(icon: widget?.icon),
             ),
-          ),
-      );
+    );
   }
-  Widget materialSettingsTimePicker(){
+
+  Widget materialSettingsTimePicker() {
     return GestureDetector(
       onTap: () {
         _showDialog();
@@ -183,7 +177,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
         errorText: errorText,
         content: Text(
           value == null ? '' : value.format(context),
-          style: widget?.style ?? Theme.of(context).textTheme.subhead,
+          style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
           textAlign:
               widget?.contentAlign ?? CardSettings.of(context).contentAlign,
         ),

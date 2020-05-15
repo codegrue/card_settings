@@ -23,11 +23,13 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
 - **Pickers**
   - _CardSettingsListPicker_ - Picker list of arbitrary options
   - _CardSettingsNumberPicker_ - Picker list of numbers in a given range
+  - _CardSettingsRadioPicker_ - Single items picker with radio buttons
+  - _CardSettingsSelectionPicker_ - Single selection from a list with optional icons
+  - _CardSettingsCheckboxPicker_ - Select multiples from a list of available options
   - _CardSettingsColorPicker_ - Picker for colors with three flavors: RGB, Material, and Block
-  - _CardSettingsDatePicker_ - Material Design Date Picker
-  - _CardSettingsTimePicker_ - Material Design Time Picker
-- **Selection**
-  - _CardSettingsMultiselect_ - Select from a list of available options
+  - _CardSettingsDatePicker_ - Date Picker
+  - _CardSettingsTimePicker_ - Time Picker
+  - _CardSettingsDateTimePicker_ - Combo Date and Time Picker
 - **Informational Sections**
   - _CardSettingsHeader_ - A control to put a header between form sections
   - _CardSettingsInstructions_ - Informational read-only text
@@ -35,9 +37,6 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
   - _CardSettingsButton_ - Actions buttons for the form
 
 All fields support `validate`, `onChange`, `onSaved`, `autovalidate`, and `visible`.
-
-- [Warning] For the text fields on iOS using [CupertinoTextFields] the [validator] and [onSaved] do not exist, please use [showErrorIOS] to show a [red] Border around the Text Field and [onChanged] and [onFieldSubmitted] to update the value like in the example.
-- Require Indicator on iOS will show _next to the label if [requireIndicator] is not equal to null. (For Example: 'label _')
 
 The package also includes these additonal items:
 
@@ -107,10 +106,10 @@ class MyApp extends StatelessWidget {
         buttonColor: Colors.lightBlueAccent[100], // background color of buttons
         textTheme: TextTheme(
           button: TextStyle(color: Colors.deepPurple[900]), // style of button text
-          subhead: TextStyle(color: Colors.grey[800]), // style of input text
+          subtitle1: TextStyle(color: Colors.grey[800]), // style of input text
         ),
         primaryTextTheme: TextTheme(
-          title: TextStyle(color: Colors.lightBlue[50]), // style for headers
+          headline6: TextStyle(color: Colors.lightBlue[50]), // style for headers
         ),
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
@@ -128,7 +127,7 @@ Or if you want to apply a different theme to the `CardSettings` hierarchy only, 
   Theme(
     data: Theme.of(context).copyWith(
       primaryTextTheme: TextTheme(
-        title: TextStyle(color: Colors.lightBlue[50]), // style for headers
+        headline6: TextStyle(color: Colors.lightBlue[50]), // style for headers
       ),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(color: Colors.deepPurple), // style for labels

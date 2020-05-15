@@ -1,10 +1,10 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'dart:io';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 /// This is a button widget for inclusion in the form.
@@ -37,28 +37,16 @@ class CardSettingsButton extends StatelessWidget {
         Theme.of(context).textTheme.button.copyWith(color: textColor);
 
     if (visible) {
-      if(kIsWeb)
-        return showMaterialButton(context, buttonStyle);
-      else if (Platform.isIOS && !showMaterialonIOS) {
+      if (showCupertino(showMaterialonIOS))
         return showCuppertinoButton();
-        // return ListTile(
-        //   title: CupertinoButton(
-        //     color: backgroundColor ?? Theme.of(context).buttonColor,
-        //     onPressed: onPressed,
-        //     child: Text(
-        //       label,
-        //       style: buttonStyle,
-        //     ),
-        //   ),
-        // );
-      } else 
+      else
         return showMaterialButton(context, buttonStyle);
     } else {
       return Container();
     }
   }
 
-  Widget showMaterialButton(BuildContext context, TextStyle buttonStyle){
+  Widget showMaterialButton(BuildContext context, TextStyle buttonStyle) {
     return Container(
       margin: EdgeInsets.only(
           top: 4.0, bottom: bottomSpacing, left: 4.0, right: 4.0),
@@ -82,16 +70,17 @@ class CardSettingsButton extends StatelessWidget {
     );
   }
 
-  Widget showCuppertinoButton(){
+  Widget showCuppertinoButton() {
     return Container(
       child: visible == false
-      ? null
-      : CSButton(isDestructive
-        ? CSButtonType.DESTRUCTIVE
-        : CSButtonType.DEFAULT_CENTER,
-        label,
-        onPressed,
-      ),
+          ? null
+          : CSButton(
+              isDestructive
+                  ? CSButtonType.DESTRUCTIVE
+                  : CSButtonType.DEFAULT_CENTER,
+              label,
+              onPressed,
+            ),
     );
   }
 }

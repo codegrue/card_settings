@@ -11,8 +11,8 @@ import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 import '../../card_settings.dart';
 
 /// This is a list picker that allows an arbitrary list of options to be provided.
-class CardSettingsListPicker extends FormField<String> {
-  CardSettingsListPicker({
+class CardSettingsRadioPicker extends FormField<String> {
+  CardSettingsRadioPicker({
     Key key,
     String initialValue,
     FormFieldSetter<String> onSaved,
@@ -38,7 +38,7 @@ class CardSettingsListPicker extends FormField<String> {
             validator: validator,
             autovalidate: autovalidate,
             builder: (FormFieldState<String> field) =>
-                (field as _CardSettingsListPickerState)._build(field.context));
+                (field as _CardSettingsRadioPickerState)._build(field.context));
 
   final ValueChanged<String> onChanged;
 
@@ -63,12 +63,13 @@ class CardSettingsListPicker extends FormField<String> {
   final bool showMaterialonIOS;
 
   @override
-  _CardSettingsListPickerState createState() => _CardSettingsListPickerState();
+  _CardSettingsRadioPickerState createState() =>
+      _CardSettingsRadioPickerState();
 }
 
-class _CardSettingsListPickerState extends FormFieldState<String> {
+class _CardSettingsRadioPickerState extends FormFieldState<String> {
   @override
-  CardSettingsListPicker get widget => super.widget as CardSettingsListPicker;
+  CardSettingsRadioPicker get widget => super.widget as CardSettingsRadioPicker;
 
   List<String> values;
   List<String> options;
@@ -84,7 +85,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     if (showCupertino(widget.showMaterialonIOS))
       _showCupertinoBottomPicker(optionIndex);
     else
-      _showMaterialScrollPicker(label, option);
+      _showMaterialRadioPicker(label, option);
   }
 
   void _showCupertinoBottomPicker(int optionIndex) {
@@ -119,8 +120,8 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     });
   }
 
-  void _showMaterialScrollPicker(String label, String option) {
-    showMaterialScrollPicker(
+  void _showMaterialRadioPicker(String label, String option) {
+    showMaterialRadioPicker(
       context: context,
       title: label,
       items: options,

@@ -7,6 +7,7 @@ import 'model.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,10 +26,11 @@ class MyApp extends StatelessWidget {
         textTheme: TextTheme(
           button:
               TextStyle(color: Colors.deepPurple[900]), // style of button text
-          subhead: TextStyle(color: Colors.grey[800]), // style of input text
+          subtitle1: TextStyle(color: Colors.grey[800]), // style of input text
         ),
         primaryTextTheme: TextTheme(
-          title: TextStyle(color: Colors.lightBlue[50]), // style for headers
+          headline6:
+              TextStyle(color: Colors.lightBlue[50]), // style for headers
         ),
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
@@ -59,6 +61,7 @@ class _PonyExampleState extends State<PonyExample> {
   final GlobalKey<FormState> _nameKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _typeKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _ageKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _genderKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _descriptionlKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _hobbiesKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _coatKey = GlobalKey<FormState>();
@@ -69,6 +72,7 @@ class _PonyExampleState extends State<PonyExample> {
   final GlobalKey<FormState> _weightKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _dateKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _datetimeKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _styleKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _timeKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _priceKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _phoneKey = GlobalKey<FormState>();
@@ -88,21 +92,7 @@ class _PonyExampleState extends State<PonyExample> {
       appBar: AppBar(
         title: Text("My Little Pony"),
         actions: <Widget>[
-          Container(
-            child: kIsWeb ? null 
-                : Platform.isIOS
-                ? IconButton(
-                    icon: (_showMaterialonIOS)
-                        ? FaIcon(FontAwesomeIcons.apple)
-                        : Icon(Icons.android),
-                    onPressed: () {
-                      setState(() {
-                        _showMaterialonIOS = !_showMaterialonIOS;
-                      });
-                    },
-                  )
-                : null,
-          ),
+          _cupertinoSwitchButton(),
           IconButton(
             icon: Icon(Icons.save),
             onPressed: _savePressed,
@@ -122,6 +112,26 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
+  Widget _cupertinoSwitchButton() {
+    // dont show this button on web
+    if (kIsWeb) return Container();
+
+    return Container(
+      child: Platform.isIOS
+          ? IconButton(
+              icon: (_showMaterialonIOS)
+                  ? FaIcon(FontAwesomeIcons.apple)
+                  : Icon(Icons.android),
+              onPressed: () {
+                setState(() {
+                  _showMaterialonIOS = !_showMaterialonIOS;
+                });
+              },
+            )
+          : null,
+    );
+  }
+
   /* CARDSETTINGS FOR EACH LAYOUT */
 
   CardSettings _buildPortraitLayout() {
@@ -138,9 +148,11 @@ class _PonyExampleState extends State<PonyExample> {
           children: <Widget>[
             _buildCardSettingsText_Name(),
             _buildCardSettingsListPicker_Type(),
-            _buildCardSettingsNumberPicker(),
-            _buildCardSettingsParagraph(5),
-            _buildCardSettingsMultiselect(),
+            _buildCardSettingsRadioPicker_Gender(),
+            _buildCardSettingsNumberPicker_Age(),
+            _buildCardSettingsParagraph_Description(5),
+            _buildCardSettingsCheckboxPicker_Hobbies(),
+            _buildCardSettingsDateTimePicker_Birthday(),
           ],
         ),
         CardSettingsSection(
@@ -165,6 +177,7 @@ class _PonyExampleState extends State<PonyExample> {
           children: <Widget>[
             _buildCardSettingsDouble_Height(),
             _buildCardSettingsInt_Weight(),
+            _buildCardSettingsRadioPicker_Style(),
           ],
         ),
         CardSettingsSection(
@@ -177,7 +190,6 @@ class _PonyExampleState extends State<PonyExample> {
           children: <Widget>[
             _buildCardSettingsDatePicker(),
             _buildCardSettingsTimePicker(),
-            _buildCardSettingsDateTimePicker(),
             _buildCardSettingsCurrency(),
             _buildCardSettingsPhone(),
             _buildCardSettingsDouble_Slider(),
@@ -222,15 +234,17 @@ class _PonyExampleState extends State<PonyExample> {
           ),
           children: <Widget>[
             _buildCardSettingsText_Name(),
+            _buildCardSettingsListPicker_Type(),
             CardFieldLayout(
               <Widget>[
-                _buildCardSettingsListPicker_Type(),
-                _buildCardSettingsNumberPicker(labelAlign: TextAlign.right),
+                _buildCardSettingsRadioPicker_Gender(),
+                _buildCardSettingsNumberPicker_Age(labelAlign: TextAlign.right),
               ],
               flexValues: [2, 1],
             ),
-            _buildCardSettingsParagraph(3),
-            _buildCardSettingsMultiselect(),
+            _buildCardSettingsParagraph_Description(3),
+            _buildCardSettingsCheckboxPicker_Hobbies(),
+            _buildCardSettingsDateTimePicker_Birthday(),
           ],
         ),
         CardSettingsSection(
@@ -273,6 +287,7 @@ class _PonyExampleState extends State<PonyExample> {
             CardFieldLayout(<Widget>[
               _buildCardSettingsDouble_Height(),
               _buildCardSettingsInt_Weight(),
+              _buildCardSettingsRadioPicker_Style(),
             ]),
           ],
         ),
@@ -287,7 +302,6 @@ class _PonyExampleState extends State<PonyExample> {
             CardFieldLayout(<Widget>[
               _buildCardSettingsDatePicker(),
               _buildCardSettingsTimePicker(),
-              _buildCardSettingsDateTimePicker(),
             ]),
             CardFieldLayout(<Widget>[
               _buildCardSettingsCurrency(),
@@ -321,7 +335,7 @@ class _PonyExampleState extends State<PonyExample> {
       label: 'RESET',
       isDestructive: true,
       onPressed: _resetPressed,
-      backgroundColor: Colors.redAccent,
+      backgroundColor: Colors.red,
       textColor: Colors.white,
     );
   }
@@ -330,6 +344,7 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettingsButton(
       showMaterialonIOS: _showMaterialonIOS,
       label: 'SAVE',
+      backgroundColor: Colors.green,
       onPressed: _savePressed,
     );
   }
@@ -449,9 +464,9 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettingsDatePicker(
       showMaterialonIOS: _showMaterialonIOS,
       key: _dateKey,
-      justDate: true,
       icon: Icon(Icons.calendar_today),
       label: 'Date',
+      dateFormat: DateFormat.yMMMMd(),
       initialValue: _ponyModel.showDateTime,
       onSaved: (value) => _ponyModel.showDateTime =
           updateJustDate(value, _ponyModel.showDateTime),
@@ -464,14 +479,13 @@ class _PonyExampleState extends State<PonyExample> {
       },
     );
   }
-  
-  
-  CardSettingsDateTimePicker _buildCardSettingsDateTimePicker() {
+
+  CardSettingsDateTimePicker _buildCardSettingsDateTimePicker_Birthday() {
     return CardSettingsDateTimePicker(
       showMaterialonIOS: _showMaterialonIOS,
       key: _datetimeKey,
-      icon: Icon(Icons.calendar_today),
-      label: 'DateTime',
+      icon: Icon(Icons.card_giftcard, color: Colors.yellow[700]),
+      label: 'Birth day',
       initialValue: _ponyModel.showDateTime,
       onSaved: (value) => _ponyModel.showDateTime =
           updateJustDate(value, _ponyModel.showDateTime),
@@ -614,8 +628,8 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsMultiselect _buildCardSettingsMultiselect() {
-    return CardSettingsMultiselect(
+  CardSettingsCheckboxPicker _buildCardSettingsCheckboxPicker_Hobbies() {
+    return CardSettingsCheckboxPicker(
       showMaterialonIOS: _showMaterialonIOS,
       key: _hobbiesKey,
       label: 'Hobbies',
@@ -638,7 +652,7 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsParagraph _buildCardSettingsParagraph(int lines) {
+  CardSettingsParagraph _buildCardSettingsParagraph_Description(int lines) {
     return CardSettingsParagraph(
       showMaterialonIOS: _showMaterialonIOS,
       key: _descriptionlKey,
@@ -655,7 +669,7 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsNumberPicker _buildCardSettingsNumberPicker(
+  CardSettingsNumberPicker _buildCardSettingsNumberPicker_Age(
       {TextAlign labelAlign}) {
     return CardSettingsNumberPicker(
       showMaterialonIOS: _showMaterialonIOS,
@@ -724,6 +738,57 @@ class _PonyExampleState extends State<PonyExample> {
           _ponyModel.name = value;
         });
         _showSnackBar('Name', value);
+      },
+    );
+  }
+
+  CardSettingsRadioPicker _buildCardSettingsRadioPicker_Gender() {
+    return CardSettingsRadioPicker(
+      showMaterialonIOS: _showMaterialonIOS,
+      key: _genderKey,
+      label: 'Gender',
+      initialValue: _ponyModel.gender,
+      hintText: 'Select One',
+      autovalidate: _autoValidate,
+      options: <String>['Male', 'Female'],
+      validator: (String value) {
+        if (value == null || value.isEmpty) return 'You must pick a gender.';
+        return null;
+      },
+      onSaved: (value) => _ponyModel.gender = value,
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.gender = value;
+        });
+        _showSnackBar('Gender', value);
+      },
+    );
+  }
+
+  CardSettingsSelectionPicker _buildCardSettingsRadioPicker_Style() {
+    return CardSettingsSelectionPicker(
+      showMaterialonIOS: _showMaterialonIOS,
+      key: _styleKey,
+      label: 'Style',
+      initialValue: _ponyModel.style,
+      hintText: 'Select One',
+      autovalidate: _autoValidate,
+      options: <String>['Majestic', 'Scrawny', 'Sleek'],
+      icons: <Icon>[
+        Icon(Icons.sort),
+        Icon(Icons.clear_all),
+        Icon(Icons.swap_calls),
+      ],
+      validator: (String value) {
+        if (value == null || value.isEmpty) return 'You must pick a style.';
+        return null;
+      },
+      onSaved: (value) => _ponyModel.style = value,
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.style = value;
+        });
+        _showSnackBar('Style', value);
       },
     );
   }

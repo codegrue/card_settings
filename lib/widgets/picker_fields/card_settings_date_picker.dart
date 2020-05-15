@@ -1,9 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'dart:async';
-import 'dart:io';
-
+import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +21,13 @@ class CardSettingsDatePicker extends FormField<DateTime> {
     this.visible = true,
     this.label = 'Label',
     this.onChanged,
-    this.justDate = false,
     this.contentAlign,
     this.icon,
     this.labelAlign,
     this.requiredIndicator,
     this.firstDate,
     this.lastDate,
+    this.dateFormat,
     this.style,
     this.showMaterialonIOS = false,
   }) : super(
@@ -43,8 +41,6 @@ class CardSettingsDatePicker extends FormField<DateTime> {
 
   final ValueChanged<DateTime> onChanged;
 
-  final bool justDate;
-
   final String label;
 
   final TextAlign labelAlign;
@@ -54,6 +50,8 @@ class CardSettingsDatePicker extends FormField<DateTime> {
   final DateTime firstDate;
 
   final DateTime lastDate;
+
+  final DateFormat dateFormat;
 
   final Icon icon;
 
@@ -80,16 +78,13 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     }
     final _endDate = widget?.lastDate ?? _startDate.add(Duration(days: 1800));
 
-    if (kIsWeb)
-      showMaterialDatePicker(_startDate, _endDate);
-    else if (Platform.isIOS && !widget.showMaterialonIOS) 
+    if (showCupertino(widget.showMaterialonIOS))
       showCupertinoDatePicker(_startDate, _endDate);
-    else 
+    else
       showMaterialDatePicker(_startDate, _endDate);
-    
   }
 
-  void showCupertinoDatePicker(DateTime _startDate, DateTime _endDate){
+  void showCupertinoDatePicker(DateTime _startDate, DateTime _endDate) {
     showCupertinoModalPopup<DateTime>(
       context: context,
       builder: (BuildContext context) {
@@ -99,9 +94,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
             minimumYear: _startDate.year,
             maximumDate: _endDate,
             maximumYear: _endDate.year,
-            mode: widget.justDate
-                ? CupertinoDatePickerMode.date
-                : CupertinoDatePickerMode.dateAndTime,
+            mode: CupertinoDatePickerMode.date,
             initialDateTime: value ?? DateTime.now(),
             onDateTimeChanged: (DateTime newDateTime) {
               didChange(newDateTime);
@@ -118,7 +111,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     });
   }
 
-  void showMaterialDatePicker(DateTime _startDate, DateTime _endDate){
+  void showMaterialDatePicker(DateTime _startDate, DateTime _endDate) {
     showDatePicker(
       context: context,
       initialDate: value ?? DateTime.now(),
@@ -133,12 +126,16 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   }
 
   Widget _build(BuildContext context) {
-    if (kIsWeb)
-      return materialSettingsDatePicker();
-    else if (Platform.isIOS && !widget.showMaterialonIOS)
-      return cupertinoSettingsDatePicker();
+    String formattedValue = (value == null)
+        ? ''
+        : (widget.dateFormat == null)
+            ? DateFormat.yMd().format(value)
+            : widget.dateFormat.format(value);
+
+    if (showCupertino(widget.showMaterialonIOS))
+      return cupertinoSettingsDatePicker(formattedValue);
     else
-      return materialSettingsDatePicker();
+      return materialSettingsDatePicker(formattedValue);
   }
 
   Widget _buildBottomPicker(Widget picker) {
@@ -163,44 +160,45 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     );
   }
 
-  Widget cupertinoSettingsDatePicker(){
+  Widget cupertinoSettingsDatePicker(String formattedValue) {
     return Container(
-        child: widget?.visible == false
-            ? null
-            : GestureDetector(
-                onTap: () {
-                  _showDialog();
-                },
-                child: CSControl(
-                  nameWidget: widget?.requiredIndicator != null
-                      ? Text((widget?.label ?? "") + ' *')
-                      : Text(widget?.label),
-                  contentWidget: Text(
-                    value == null ? '' : DateFormat.yMd().format(value),
-                    style: widget?.style ?? Theme.of(context).textTheme.subhead,
-                    textAlign: widget?.contentAlign ??
-                        CardSettings.of(context).contentAlign,
-                  ),
-                  style: CSWidgetStyle(icon: widget?.icon),
+      child: widget?.visible == false
+          ? null
+          : GestureDetector(
+              onTap: () {
+                _showDialog();
+              },
+              child: CSControl(
+                nameWidget: widget?.requiredIndicator != null
+                    ? Text((widget?.label ?? "") + ' *')
+                    : Text(widget?.label),
+                contentWidget: Text(
+                  formattedValue,
+                  style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
+                  textAlign: widget?.contentAlign ??
+                      CardSettings.of(context).contentAlign,
                 ),
+                style: CSWidgetStyle(icon: widget?.icon),
               ),
-      );
+            ),
+    );
   }
-  Widget materialSettingsDatePicker(){
+
+  Widget materialSettingsDatePicker(String formattedValue) {
     return GestureDetector(
       onTap: () {
         _showDialog();
       },
       child: CardSettingsField(
-        label: widget?.label ?? (widget.justDate ? "Date" : "Date Time"),
+        label: widget?.label ?? "Date",
         labelAlign: widget?.labelAlign,
         visible: widget?.visible ?? true,
         icon: widget?.icon ?? Icon(Icons.event),
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
         content: Text(
-          value == null ? '' : DateFormat.yMd().format(value),
-          style: widget?.style ?? Theme.of(context).textTheme.subhead,
+          formattedValue,
+          style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
           textAlign:
               widget?.contentAlign ?? CardSettings.of(context).contentAlign,
         ),
