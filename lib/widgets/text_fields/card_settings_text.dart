@@ -152,25 +152,13 @@ class CardSettingsText extends FormField<String>
 class _CardSettingsTextState extends FormFieldState<String> {
   TextEditingController _controller;
 
-  TextEditingController get _effectiveController =>
-      widget.controller ?? _controller;
-
   @override
   CardSettingsText get widget => super.widget as CardSettingsText;
 
   @override
   void initState() {
     super.initState();
-    if (widget.controller == null) {
-      if (widget.inputMask == null) {
-        _controller = TextEditingController(text: widget.initialValue);
-      } else {
-        _controller = MaskedTextController(
-            mask: widget.inputMask, text: widget.initialValue);
-      }
-    } else {
-      widget.controller.addListener(_handleControllerChanged);
-    }
+    _initController(widget.initialValue);
   }
 
   @override
@@ -178,16 +166,23 @@ class _CardSettingsTextState extends FormFieldState<String> {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) {
       oldWidget.controller?.removeListener(_handleControllerChanged);
-      widget.controller?.addListener(_handleControllerChanged);
-
-      if (oldWidget.controller != null && widget.controller == null)
-        _controller =
-            TextEditingController.fromValue(oldWidget.controller.value);
-      if (widget.controller != null) {
-        setValue(widget.controller.text);
-        if (oldWidget.controller == null) _controller = null;
-      }
+      _initController(oldWidget.controller.value.toString());
     }
+  }
+
+  void _initController(String initialValue) {
+    if (widget.controller == null) {
+      if (widget.inputMask == null) {
+        _controller = TextEditingController(text: initialValue);
+      } else {
+        _controller =
+            MaskedTextController(mask: widget.inputMask, text: initialValue);
+      }
+    } else {
+      _controller = widget.controller;
+    }
+
+    _controller.addListener(_handleControllerChanged);
   }
 
   @override
@@ -200,23 +195,19 @@ class _CardSettingsTextState extends FormFieldState<String> {
   void reset() {
     super.reset();
     setState(() {
-      _effectiveController.text = widget.initialValue;
+      _controller.text = widget.initialValue;
     });
   }
 
   void _handleControllerChanged() {
-    if (_effectiveController.text != value) {
-      didChange(_effectiveController.text);
+    if (_controller.text != value) {
+      didChange(_controller.text);
     }
   }
 
-  void _handleOnChanged(String _value) {
-    if (this.value != _value) {
-      didChange(_value);
-
-      if (widget.onChanged != null) {
-        widget.onChanged(_value);
-      }
+  void _handleOnChanged(String value) {
+    if (widget.onChanged != null) {
+      widget.onChanged(value);
     }
   }
 
@@ -238,7 +229,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
       child: CupertinoTextField(
         prefix: widget?.prefixText == null ? null : Text(widget.prefixText),
         suffix: widget?.unitLabel == null ? null : Text(widget.unitLabel),
-        controller: _effectiveController,
+        controller: _controller,
 
         focusNode: widget?.focusNode,
         keyboardType: widget?.keyboardType,
@@ -395,7 +386,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
       requiredIndicator: widget?.requiredIndicator,
       contentOnNewLine: widget?.contentOnNewLine ?? false,
       content: TextField(
-        controller: _effectiveController,
+        controller: _controller,
         focusNode: widget?.focusNode,
         keyboardType: widget?.keyboardType,
         textCapitalization: widget?.textCapitalization,
