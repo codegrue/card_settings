@@ -11,7 +11,7 @@ class CardSettingsParagraph extends CardSettingsText {
   CardSettingsParagraph({
     Key key,
     String label: 'Label',
-    String hintText ,
+    String hintText,
     TextAlign labelAlign,
     TextAlign contentAlign: TextAlign.left,
     String initialValue,
@@ -42,7 +42,7 @@ class CardSettingsParagraph extends CardSettingsText {
           key: key,
           label: label,
           labelAlign: labelAlign,
-          hintText : hintText,
+          hintText: hintText,
           contentAlign: contentAlign,
           showMaterialonIOS: showMaterialonIOS,
           initialValue: initialValue,

@@ -1,6 +1,6 @@
 name: card_settings
 description: A flutter package for building card based settings forms. This includes a library of pre-built form field widgets.
-version: 1.9.0
+version: 1.9.0+1
 homepage: https://github.com/codegrue/card_settings
 
 dependencies:
