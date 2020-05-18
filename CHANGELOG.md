@@ -1,6 +1,6 @@
 # Releases
 
-## [1.9.0] - 5/X/2020
+## [1.9.0] - 5/18/2020
 
 - compatible with flutter web now
 - `CardSettingsDateTimePicker` (combo) added
@@ -9,6 +9,7 @@
 - renamed `CardSettingsMultiselect` to `CardSettingsCheckboxPicker`
 - Icon colors will be preserved if provided
 - added DateFormat as parameter to `CardSettingsDatePicker`
+- made styling a closer match to the new material spec
 
 ## [1.8.2] - 5/5/2020
 
