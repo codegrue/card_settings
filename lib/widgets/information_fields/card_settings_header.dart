@@ -24,18 +24,27 @@ class CardSettingsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (showCupertino(showMaterialonIOS))
-      return CSHeader(label);
+      return cupertinoHeader(context);
     else
       return materialHeader(context);
+  }
+
+  Widget cupertinoHeader(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: CSHeader(label),
+        ),
+      ],
+    );
   }
 
   Widget materialHeader(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(0.0),
       decoration: BoxDecoration(
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.grey
-              : color ?? Theme.of(context).accentColor),
+        color: color ?? Theme.of(context).secondaryHeaderColor,
+      ),
       height: height,
       padding: EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0),
       child: Row(
@@ -43,7 +52,7 @@ class CardSettingsHeader extends StatelessWidget {
           Expanded(
             child: Text(
               label,
-              style: Theme.of(context).primaryTextTheme.headline6,
+              style: Theme.of(context).textTheme.headline6,
               textAlign: labelAlign,
             ),
           ),

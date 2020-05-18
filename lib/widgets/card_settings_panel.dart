@@ -77,7 +77,7 @@ class CardSettings extends InheritedWidget {
       bool shrinkWrap,
       bool sectioned) {
     return (showCupertino(showMaterialonIOS))
-        ? _buildCupertinoWrapper(children, shrinkWrap, sectioned)
+        ? _buildCupertinoWrapper(children, shrinkWrap)
         : _buildMaterialWrapper(
             children, padding, cardElevation, shrinkWrap, sectioned);
   }
@@ -107,26 +107,11 @@ class CardSettings extends InheritedWidget {
   }
 
   static Widget _buildCupertinoWrapper(
-      List<CardSettingsSection> children, bool shrinkWrap, bool sectioned) {
-    if (sectioned) {
-      return CupertinoSettings(
-        items: _getWidgets(children),
-        shrinkWrap: shrinkWrap,
-      );
-    } else {
-      return CupertinoSettings(
-        items: children,
-        shrinkWrap: shrinkWrap,
-      );
-    }
-  }
-
-  static List<Widget> _getWidgets(List<CardSettingsSection> sections) {
-    List<Widget> _children = <Widget>[];
-    for (var row in sections) {
-      _children.add(row.build(null));
-    }
-    return _children;
+      List<CardSettingsSection> children, bool shrinkWrap) {
+    return CupertinoSettings(
+      items: children,
+      shrinkWrap: shrinkWrap,
+    );
   }
 
   static List<Widget> _buildSections(List<CardSettingsSection> sections,

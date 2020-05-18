@@ -17,26 +17,26 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Card Settings Example',
       home: PonyExample(),
+      //theme: ThemeData.light(),
+      //theme: ThemeData.dark(),
       theme: ThemeData(
-        accentColor: Colors.indigo[400], // background color of card headers
-        cardColor: Colors.white, // background color of fields
-        backgroundColor: Colors.indigo[100], // color outside the card
-        primaryColor: Colors.teal, // color of page header
-        buttonColor: Colors.lightBlueAccent[100], // background color of buttons
+        primaryColor: Colors.teal, // app header background
+        secondaryHeaderColor: Colors.indigo[400], // card header background
+        cardColor: Colors.white, // card field background
+        backgroundColor: Colors.indigo[100], // app background color
+        buttonColor: Colors.lightBlueAccent[100], // button background color
         textTheme: TextTheme(
-          button:
-              TextStyle(color: Colors.deepPurple[900]), // style of button text
-          subtitle1: TextStyle(color: Colors.grey[800]), // style of input text
+          button: TextStyle(color: Colors.deepPurple[900]), // button text
+          subtitle1: TextStyle(color: Colors.grey[800]), // input text
+          headline6: TextStyle(color: Colors.white), // card header text
         ),
         primaryTextTheme: TextTheme(
-          headline6:
-              TextStyle(color: Colors.lightBlue[50]), // style for headers
+          headline6: TextStyle(color: Colors.lightBlue[50]), // app header text
         ),
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
         ),
       ),
-      darkTheme: ThemeData.dark(),
     );
   }
 }
