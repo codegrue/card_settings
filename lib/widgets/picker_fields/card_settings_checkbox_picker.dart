@@ -26,7 +26,7 @@ class CardSettingsCheckboxPicker extends FormField<List<String>> {
     this.labelAlign,
     this.requiredIndicator,
     this.options,
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
   }) : super(
           key: key,
           initialValue: initialValues,
@@ -66,7 +66,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
       super.widget as CardSettingsCheckboxPicker;
 
   void _showDialog(String label, List<String> options) {
-    if (showCupertino(widget.showMaterialonIOS))
+    if (showCupertino(context, widget.showMaterialonIOS))
       _showCupertinoSelectPicker(options, label);
     else
       _showMaterialCheckboxPicker(options, label);
@@ -107,7 +107,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
   }
 
   Widget _build(BuildContext context) {
-    if (showCupertino(widget.showMaterialonIOS))
+    if (showCupertino(context, widget.showMaterialonIOS))
       return cupertinoSettingsMultiselect();
     else
       return materialSettingsMultiselect();

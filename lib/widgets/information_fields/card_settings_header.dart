@@ -12,7 +12,7 @@ class CardSettingsHeader extends StatelessWidget {
     this.labelAlign: TextAlign.left,
     this.height: 44.0,
     this.color,
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
   });
 
   final String label;
@@ -23,7 +23,7 @@ class CardSettingsHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (showCupertino(showMaterialonIOS))
+    if (showCupertino(context, showMaterialonIOS))
       return cupertinoHeader(context);
     else
       return materialHeader(context);

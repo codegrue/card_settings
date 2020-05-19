@@ -28,7 +28,7 @@ class CardSettingsRadioPicker extends FormField<String> {
     this.hintText,
     this.options,
     this.values,
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
   })  : assert(values == null || options.length == values.length,
             "If you provide 'values', they need the same number as 'options'"),
         super(
@@ -82,7 +82,7 @@ class _CardSettingsRadioPickerState extends FormFieldState<String> {
     } else {
       optionIndex = 0; // set to first element in the list
     }
-    if (showCupertino(widget.showMaterialonIOS))
+    if (showCupertino(context, widget.showMaterialonIOS))
       _showCupertinoBottomPicker(optionIndex);
     else
       _showMaterialRadioPicker(label, option);
@@ -176,7 +176,7 @@ class _CardSettingsRadioPickerState extends FormFieldState<String> {
       content = options[optionIndex];
     }
 
-    if (showCupertino(widget.showMaterialonIOS))
+    if (showCupertino(context, widget.showMaterialonIOS))
       return cupertinoSettingsListPicker(content);
     else
       return materialSettingsListPicker(content);

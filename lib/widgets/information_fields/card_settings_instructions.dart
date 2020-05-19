@@ -11,7 +11,7 @@ class CardSettingsInstructions extends StatelessWidget {
     this.text: 'Instructions here...',
     this.backgroundColor,
     this.textColor,
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
   });
 
   final String text;
@@ -25,7 +25,7 @@ class CardSettingsInstructions extends StatelessWidget {
         .primaryTextTheme
         .caption
         .copyWith(color: textColor ?? Theme.of(context).accentColor);
-    if (showCupertino(showMaterialonIOS)) {
+    if (showCupertino(context, showMaterialonIOS)) {
       return Container(
         padding: EdgeInsets.only(top: 8.0, left: 8.0),
         child: Text(

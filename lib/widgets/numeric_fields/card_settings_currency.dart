@@ -38,7 +38,7 @@ class CardSettingsCurrency extends StatefulWidget {
     this.maxLengthEnforced: true,
     this.onFieldSubmitted,
     this.inputFormatters,
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
   });
 
   final String label;

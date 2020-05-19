@@ -22,7 +22,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
     this.onSaved,
     this.onChanged,
     this.visible: true,
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
   }) : assert(min < max);
 
   // Variables

@@ -4,6 +4,7 @@
 
 - refactored single card display to scroll better on web
 - defaulted shrinkWrap to true
+- `showMaterialonIOS` on fields defaults to inherit from the `CardSettings` parent
 
 ## [1.9.0] - 5/18/2020
 

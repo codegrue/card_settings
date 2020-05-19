@@ -30,7 +30,7 @@ class CardSettingsDateTimePicker extends FormField<DateTime> {
       this.firstDate,
       this.lastDate,
       this.style,
-      this.showMaterialonIOS = false,
+      this.showMaterialonIOS,
       this.dateBuilder,
       this.timeBuilder})
       : super(
@@ -87,7 +87,7 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
     final _endDate = widget?.lastDate ?? _startDate.add(Duration(days: 1800));
 
     // Using platform on web will result on a crash,
-    if (showCupertino(widget.showMaterialonIOS))
+    if (showCupertino(context, widget.showMaterialonIOS))
       showCupertinoDateTimePopUp(_startDate, _endDate);
     else
       showMaterialDateTimePopUp(_startDate, _endDate);
@@ -160,7 +160,7 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
   }
 
   Widget _build(BuildContext context) {
-    if (showCupertino(widget.showMaterialonIOS))
+    if (showCupertino(context, widget.showMaterialonIOS))
       return cupertinoSettingsButton();
     else
       return materialSettingsButton();

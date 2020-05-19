@@ -17,7 +17,7 @@ class CardSettingsButton extends StatelessWidget {
     this.textColor,
     this.bottomSpacing: 0.0,
     this.isDestructive = false,
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
   });
 
   final String label;
@@ -37,7 +37,7 @@ class CardSettingsButton extends StatelessWidget {
         Theme.of(context).textTheme.button.copyWith(color: textColor);
 
     if (visible) {
-      if (showCupertino(showMaterialonIOS))
+      if (showCupertino(context, showMaterialonIOS))
         return showCuppertinoButton();
       else
         return showMaterialButton(context, buttonStyle);

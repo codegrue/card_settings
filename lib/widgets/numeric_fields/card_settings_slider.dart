@@ -32,7 +32,7 @@ class CardSettingsSlider extends FormField<double> {
     this.min,
     this.max,
     this.divisions,
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
   }) : super(
             key: key,
             initialValue: initialValue,
@@ -77,7 +77,7 @@ class _CardSettingsSliderState extends FormFieldState<double> {
   CardSettingsSlider get widget => super.widget as CardSettingsSlider;
 
   Widget _build(BuildContext context) {
-    if (showCupertino(widget.showMaterialonIOS))
+    if (showCupertino(context, widget.showMaterialonIOS))
       return cupertinoSettingsSlider();
     else
       return materialSettingsSlider();

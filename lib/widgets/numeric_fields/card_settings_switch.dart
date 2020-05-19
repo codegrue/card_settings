@@ -27,7 +27,7 @@ class CardSettingsSwitch extends FormField<bool> {
     this.icon,
     this.contentAlign,
     this.onChanged,
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
   }) : super(
             key: key,
             initialValue: initialValue,
@@ -68,7 +68,7 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
   CardSettingsSwitch get widget => super.widget as CardSettingsSwitch;
 
   Widget _build(BuildContext context) {
-    if (showCupertino(widget.showMaterialonIOS))
+    if (showCupertino(context, widget.showMaterialonIOS))
       return cupertinoSettingsSwitch();
     return materialSettingsSwitch();
   }

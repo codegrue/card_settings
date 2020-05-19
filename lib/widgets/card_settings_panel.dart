@@ -18,7 +18,7 @@ class CardSettings extends InheritedWidget {
     this.padding: 8.0,
     this.cardElevation: 5.0,
     List<CardSettingsSection> children,
-    bool showMaterialonIOS: false,
+    this.showMaterialonIOS: false,
     this.shrinkWrap = false,
   }) : super(
           key: key,
@@ -37,7 +37,7 @@ class CardSettings extends InheritedWidget {
     this.padding: 8.0,
     this.cardElevation: 5.0,
     List<CardSettingsSection> children,
-    bool showMaterialonIOS: false,
+    this.showMaterialonIOS: false,
     this.shrinkWrap = true,
   }) : super(
           key: key,
@@ -53,6 +53,7 @@ class CardSettings extends InheritedWidget {
   final double padding;
   final double cardElevation;
   final bool shrinkWrap;
+  final bool showMaterialonIOS;
 
   static CardSettings of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<CardSettings>();
@@ -76,7 +77,7 @@ class CardSettings extends InheritedWidget {
       double padding,
       bool shrinkWrap,
       bool sectioned) {
-    return (showCupertino(showMaterialonIOS))
+    return (showCupertino(null, showMaterialonIOS))
         ? _buildCupertinoWrapper(children, shrinkWrap)
         : _buildMaterialWrapper(
             children, padding, cardElevation, shrinkWrap, sectioned);
@@ -143,7 +144,7 @@ class CardSettingsSection extends StatelessWidget {
     this.instructions,
     this.children,
     this.header,
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
   });
 
   final Widget header;
@@ -154,7 +155,7 @@ class CardSettingsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> _children = <Widget>[];
-    if (showCupertino(showMaterialonIOS)) {
+    if (showCupertino(context, showMaterialonIOS)) {
       if (header != null) _children.add(header);
       if (children != null) _children.addAll(children);
       if (instructions != null) _children.add(instructions);

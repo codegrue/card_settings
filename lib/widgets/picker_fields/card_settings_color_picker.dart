@@ -28,7 +28,7 @@ class CardSettingsColorPicker extends FormField<Color> {
     this.pickerType = CardSettingsColorPickerType.colors,
     this.requiredIndicator,
     this.label = "Label",
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
   }) : super(
             key: key,
             initialValue: initialValue ?? Colors.black,
@@ -73,7 +73,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
 
     var title = "Color for " + widget?.label;
 
-    var cupertinoColors = showCupertino(widget.showMaterialonIOS);
+    var cupertinoColors = showCupertino(context, widget.showMaterialonIOS);
     var headerColor = (cupertinoColors) ? Colors.white : null;
     var textColor = (cupertinoColors) ? Colors.black : null;
 
@@ -130,7 +130,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   }
 
   Widget _build(BuildContext context) {
-    if (showCupertino(widget.showMaterialonIOS))
+    if (showCupertino(context, widget.showMaterialonIOS))
       return cupertinoSettingsColorPicker();
     else
       return materialSettingsColorPicker();

@@ -39,7 +39,7 @@ class CardSettingsPhone extends StatelessWidget
     this.maxLengthEnforced: true,
     this.onFieldSubmitted,
     this.inputFormatters,
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
   });
 
   @override

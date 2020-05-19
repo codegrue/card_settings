@@ -140,10 +140,8 @@ class _PonyExampleState extends State<PonyExample> {
       labelWidth: 100,
       children: <CardSettingsSection>[
         CardSettingsSection(
-          showMaterialonIOS: _showMaterialonIOS,
           header: CardSettingsHeader(
             label: 'Bio',
-            showMaterialonIOS: _showMaterialonIOS,
           ),
           children: <Widget>[
             _buildCardSettingsText_Name(),
@@ -156,10 +154,8 @@ class _PonyExampleState extends State<PonyExample> {
           ],
         ),
         CardSettingsSection(
-          showMaterialonIOS: _showMaterialonIOS,
           header: CardSettingsHeader(
             label: 'Colors',
-            showMaterialonIOS: _showMaterialonIOS,
           ),
           children: <Widget>[
             _buildCardSettingsColorPicker_Coat(),
@@ -169,10 +165,8 @@ class _PonyExampleState extends State<PonyExample> {
           ],
         ),
         CardSettingsSection(
-          showMaterialonIOS: _showMaterialonIOS,
           header: CardSettingsHeader(
             label: 'Size',
-            showMaterialonIOS: _showMaterialonIOS,
           ),
           children: <Widget>[
             _buildCardSettingsDouble_Height(),
@@ -181,10 +175,8 @@ class _PonyExampleState extends State<PonyExample> {
           ],
         ),
         CardSettingsSection(
-          showMaterialonIOS: _showMaterialonIOS,
           header: CardSettingsHeader(
             label: 'First Show',
-            showMaterialonIOS: _showMaterialonIOS,
           ),
           instructions: _buildCardSettingsInstructions(),
           children: <Widget>[
@@ -196,10 +188,8 @@ class _PonyExampleState extends State<PonyExample> {
           ],
         ),
         CardSettingsSection(
-          showMaterialonIOS: _showMaterialonIOS,
           header: CardSettingsHeader(
             label: 'Security',
-            showMaterialonIOS: _showMaterialonIOS,
           ),
           children: <Widget>[
             _buildCardSettingsEmail(),
@@ -207,10 +197,8 @@ class _PonyExampleState extends State<PonyExample> {
           ],
         ),
         CardSettingsSection(
-          showMaterialonIOS: _showMaterialonIOS,
           header: CardSettingsHeader(
             label: 'Actions',
-            showMaterialonIOS: _showMaterialonIOS,
           ),
           children: <Widget>[
             _buildCardSettingsButton_Save(),
@@ -223,14 +211,11 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettings _buildLandscapeLayout() {
     return CardSettings.sectioned(
-      showMaterialonIOS: _showMaterialonIOS,
       labelPadding: 12.0,
       children: <CardSettingsSection>[
         CardSettingsSection(
-          showMaterialonIOS: _showMaterialonIOS,
           header: CardSettingsHeader(
             label: 'Bio',
-            showMaterialonIOS: _showMaterialonIOS,
           ),
           children: <Widget>[
             _buildCardSettingsText_Name(),
@@ -248,10 +233,8 @@ class _PonyExampleState extends State<PonyExample> {
           ],
         ),
         CardSettingsSection(
-          showMaterialonIOS: _showMaterialonIOS,
           header: CardSettingsHeader(
             label: 'Security',
-            showMaterialonIOS: _showMaterialonIOS,
           ),
           children: <Widget>[
             CardFieldLayout(<Widget>[
@@ -261,10 +244,8 @@ class _PonyExampleState extends State<PonyExample> {
           ],
         ),
         CardSettingsSection(
-          showMaterialonIOS: _showMaterialonIOS,
           header: CardSettingsHeader(
             label: 'Colors',
-            showMaterialonIOS: _showMaterialonIOS,
           ),
           children: <Widget>[
             CardFieldLayout(<Widget>[
@@ -278,10 +259,8 @@ class _PonyExampleState extends State<PonyExample> {
           ],
         ),
         CardSettingsSection(
-          showMaterialonIOS: _showMaterialonIOS,
           header: CardSettingsHeader(
             label: 'Size',
-            showMaterialonIOS: _showMaterialonIOS,
           ),
           children: <Widget>[
             CardFieldLayout(<Widget>[
@@ -292,10 +271,8 @@ class _PonyExampleState extends State<PonyExample> {
           ],
         ),
         CardSettingsSection(
-          showMaterialonIOS: _showMaterialonIOS,
           header: CardSettingsHeader(
             label: 'First Show',
-            showMaterialonIOS: _showMaterialonIOS,
           ),
           children: <Widget>[
             _buildCardSettingsInstructions(),
@@ -311,10 +288,8 @@ class _PonyExampleState extends State<PonyExample> {
           ],
         ),
         CardSettingsSection(
-          showMaterialonIOS: _showMaterialonIOS,
           header: CardSettingsHeader(
             label: 'Actions',
-            showMaterialonIOS: _showMaterialonIOS,
           ),
           children: <Widget>[
             CardFieldLayout(<Widget>[
@@ -331,7 +306,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsButton _buildCardSettingsButton_Reset() {
     return CardSettingsButton(
-      showMaterialonIOS: _showMaterialonIOS,
       label: 'RESET',
       isDestructive: true,
       onPressed: _resetPressed,
@@ -342,7 +316,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsButton _buildCardSettingsButton_Save() {
     return CardSettingsButton(
-      showMaterialonIOS: _showMaterialonIOS,
       label: 'SAVE',
       backgroundColor: Colors.green,
       onPressed: _savePressed,
@@ -351,7 +324,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsPassword _buildCardSettingsPassword() {
     return CardSettingsPassword(
-      showMaterialonIOS: _showMaterialonIOS,
       labelWidth: 150.0,
       key: _passwordKey,
       icon: Icon(Icons.lock),
@@ -374,7 +346,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsEmail _buildCardSettingsEmail() {
     return CardSettingsEmail(
-      showMaterialonIOS: _showMaterialonIOS,
       labelWidth: 150.0,
       key: _emailKey,
       icon: Icon(Icons.person),
@@ -398,7 +369,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsPhone _buildCardSettingsPhone() {
     return CardSettingsPhone(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _phoneKey,
       label: 'Box Office',
       initialValue: _ponyModel.boxOfficePhone,
@@ -420,7 +390,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsCurrency _buildCardSettingsCurrency() {
     return CardSettingsCurrency(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _priceKey,
       label: 'Ticket Price',
       initialValue: _ponyModel.ticketPrice,
@@ -441,7 +410,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsTimePicker _buildCardSettingsTimePicker() {
     return CardSettingsTimePicker(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _timeKey,
       icon: Icon(Icons.access_time),
       label: 'Time',
@@ -462,7 +430,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsDatePicker _buildCardSettingsDatePicker() {
     return CardSettingsDatePicker(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _dateKey,
       icon: Icon(Icons.calendar_today),
       label: 'Date',
@@ -482,7 +449,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsDateTimePicker _buildCardSettingsDateTimePicker_Birthday() {
     return CardSettingsDateTimePicker(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _datetimeKey,
       icon: Icon(Icons.card_giftcard, color: Colors.yellow[700]),
       label: 'Birth day',
@@ -501,14 +467,12 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsInstructions _buildCardSettingsInstructions() {
     return CardSettingsInstructions(
-      showMaterialonIOS: _showMaterialonIOS,
       text: 'This is when this little horse got her big break',
     );
   }
 
   CardSettingsInt _buildCardSettingsInt_Weight() {
     return CardSettingsInt(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _weightKey,
       label: 'Weight',
       unitLabel: 'lbs',
@@ -533,7 +497,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsDouble _buildCardSettingsDouble_Height() {
     return CardSettingsDouble(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _heightKey,
       label: 'Height',
       unitLabel: 'feet',
@@ -551,7 +514,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsColorPicker _buildCardSettingsColorPicker_Spot() {
     return CardSettingsColorPicker(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _spotKey,
       label: 'Spot',
       pickerType: CardSettingsColorPickerType.block,
@@ -569,7 +531,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsSwitch _buildCardSettingsSwitch_Spots() {
     return CardSettingsSwitch(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _hasSpotsKey,
       label: 'Does this horse have spots?',
       labelWidth: 240.0,
@@ -586,7 +547,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsColorPicker _buildCardSettingsColorPicker_Mane() {
     return CardSettingsColorPicker(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _maneKey,
       label: 'Mane',
       initialValue: intelligentCast<Color>(_ponyModel.maneColor),
@@ -608,7 +568,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsColorPicker _buildCardSettingsColorPicker_Coat() {
     return CardSettingsColorPicker(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _coatKey,
       label: 'Coat',
       initialValue: intelligentCast<Color>(_ponyModel.coatColor),
@@ -630,7 +589,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsCheckboxPicker _buildCardSettingsCheckboxPicker_Hobbies() {
     return CardSettingsCheckboxPicker(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _hobbiesKey,
       label: 'Hobbies',
       initialValues: _ponyModel.hobbies,
@@ -654,7 +612,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsParagraph _buildCardSettingsParagraph_Description(int lines) {
     return CardSettingsParagraph(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _descriptionlKey,
       label: 'Description',
       initialValue: _ponyModel.description,
@@ -672,7 +629,6 @@ class _PonyExampleState extends State<PonyExample> {
   CardSettingsNumberPicker _buildCardSettingsNumberPicker_Age(
       {TextAlign labelAlign}) {
     return CardSettingsNumberPicker(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _ageKey,
       label: 'Age',
       labelAlign: labelAlign,
@@ -697,7 +653,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsListPicker _buildCardSettingsListPicker_Type() {
     return CardSettingsListPicker(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _typeKey,
       label: 'Type',
       initialValue: _ponyModel.type,
@@ -721,7 +676,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsText _buildCardSettingsText_Name() {
     return CardSettingsText(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _nameKey,
       label: 'Name',
       hintText: 'something cute...',
@@ -744,7 +698,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsRadioPicker _buildCardSettingsRadioPicker_Gender() {
     return CardSettingsRadioPicker(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _genderKey,
       label: 'Gender',
       initialValue: _ponyModel.gender,
@@ -767,7 +720,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsSelectionPicker _buildCardSettingsRadioPicker_Style() {
     return CardSettingsSelectionPicker(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _styleKey,
       label: 'Style',
       initialValue: _ponyModel.style,
@@ -795,7 +747,6 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettingsSlider _buildCardSettingsDouble_Slider() {
     return CardSettingsSlider(
-      showMaterialonIOS: _showMaterialonIOS,
       key: _sliderKey,
       label: 'Rating',
       initialValue: _ponyModel.rating,

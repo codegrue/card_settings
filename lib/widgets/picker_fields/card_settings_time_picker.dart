@@ -26,7 +26,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
     this.label = 'Label',
     this.icon,
     this.style,
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
   }) : super(
           key: key,
           initialValue: initialValue ?? TimeOfDay.now(),
@@ -64,14 +64,14 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
   CardSettingsTimePicker get widget => super.widget as CardSettingsTimePicker;
 
   void _showDialog() {
-    if (showCupertino(widget.showMaterialonIOS)) {
+    if (showCupertino(context, widget.showMaterialonIOS)) {
       showCupertinoPopUpTimePicker();
     } else
       showMaterialPopUpTimePicker();
   }
 
   Widget _build(BuildContext context) {
-    if (showCupertino(widget.showMaterialonIOS))
+    if (showCupertino(context, widget.showMaterialonIOS))
       return cupertinoSettingsTimePicker();
     else
       return materialSettingsTimePicker();

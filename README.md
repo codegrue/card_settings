@@ -96,7 +96,17 @@ See the full demo example [here](https://pub.dartlang.org/packages/card_settings
 
 ### Theming
 
-The widgets support the material design theme. This example shows what global theme values to set to determine how the various elements appear.
+The style of the widgets can be either Material or Cupertino. There is a toggle on the CardSettings widget to globally change the style:
+
+```dart
+  return CardSettings(
+    showMaterialonIOS: true, // default is false
+  );
+```
+
+This also exists on each field widget, in case you want to control this more granularly.
+
+If you are using the Material design style, then the `MaterialApp` theme takes effect. This example shows what global theme values to set to determine how the various elements appear.
 
 ```dart
 class MyApp extends StatelessWidget {

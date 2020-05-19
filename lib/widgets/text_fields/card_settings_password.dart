@@ -38,7 +38,7 @@ class CardSettingsPassword extends CardSettingsText
     bool maxLengthEnforced: true,
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
-    bool showMaterialonIOS: false,
+    bool showMaterialonIOS,
   }) : super(
           key: key,
           label: label,

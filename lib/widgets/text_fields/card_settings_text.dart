@@ -49,7 +49,7 @@ class CardSettingsText extends FormField<String>
     this.prefixText,
     this.requiredIndicator,
     this.unitLabel,
-    this.showMaterialonIOS = false,
+    this.showMaterialonIOS,
     this.showClearButtonIOS = OverlayVisibilityMode.never,
   })  : //assert(initialValue == null || controller == null),
         assert(keyboardType != null),
@@ -212,7 +212,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
   }
 
   Widget _build(BuildContext context) {
-    if (showCupertino(widget.showMaterialonIOS))
+    if (showCupertino(context, widget.showMaterialonIOS))
       return _buildCupertinoTextbox(context);
     else
       return _buildMaterialTextbox(context);
