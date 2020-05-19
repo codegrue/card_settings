@@ -1,6 +1,6 @@
 # Releases
 
-## [1.9.1] - 5/XX/2020
+## [1.9.1] - 5/19/2020
 
 - refactored single card display to scroll better on web
 - defaulted shrinkWrap to true
