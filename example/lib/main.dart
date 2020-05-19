@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:card_settings/card_settings.dart';
@@ -14,12 +15,23 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Card Settings Example',
-      home: PonyExample(),
-      //theme: ThemeData.light(),
-      //theme: ThemeData.dark(),
-      theme: ThemeData(
+    return DynamicTheme(
+        defaultBrightness: Brightness.light,
+        data: (brightness) => _buildTheme(brightness),
+        themedWidgetBuilder: (context, theme) {
+          return MaterialApp(
+            title: 'Card Settings Example',
+            home: PonyExample(),
+            theme: theme,
+          );
+        });
+  }
+}
+
+ThemeData _buildTheme(Brightness brightness) {
+  switch (brightness) {
+    case Brightness.light:
+      return ThemeData(
         primaryColor: Colors.teal, // app header background
         secondaryHeaderColor: Colors.indigo[400], // card header background
         cardColor: Colors.white, // card field background
@@ -36,8 +48,13 @@ class MyApp extends StatelessWidget {
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
         ),
-      ),
-    );
+      );
+    default:
+      return ThemeData(
+        primarySwatch: Colors.teal,
+        brightness: brightness,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      );
   }
 }
 
@@ -92,6 +109,15 @@ class _PonyExampleState extends State<PonyExample> {
       appBar: AppBar(
         title: Text("My Little Pony"),
         actions: <Widget>[
+          IconButton(
+            icon: Theme.of(context).brightness == Brightness.dark
+                ? Icon(Icons.brightness_7)
+                : Icon(Icons.brightness_4),
+            onPressed: () => DynamicTheme.of(context).setBrightness(
+                Theme.of(context).brightness == Brightness.dark
+                    ? Brightness.light
+                    : Brightness.dark),
+          ),
           _cupertinoSwitchButton(),
           IconButton(
             icon: Icon(Icons.save),

@@ -10,6 +10,7 @@ dependencies:
   card_settings:
     path: ../
   font_awesome_flutter: ^8.7.0
+  dynamic_theme: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
