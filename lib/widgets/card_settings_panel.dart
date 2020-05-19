@@ -38,7 +38,7 @@ class CardSettings extends InheritedWidget {
     this.cardElevation: 5.0,
     List<CardSettingsSection> children,
     bool showMaterialonIOS: false,
-    this.shrinkWrap = false,
+    this.shrinkWrap = true,
   }) : super(
           key: key,
           child: _buildChild(children, showMaterialonIOS, cardElevation,
@@ -85,22 +85,28 @@ class CardSettings extends InheritedWidget {
   static Widget _buildMaterialWrapper(List<CardSettingsSection> children,
       double padding, double cardElevation, bool shrinkWrap, bool sectioned) {
     if (sectioned) {
-      return ListView(
-        children: _buildSections(children, cardElevation, padding),
-        shrinkWrap: shrinkWrap,
+      return SafeArea(
+        child: ListView(
+          children: _buildMaterialSections(children, cardElevation, padding),
+          shrinkWrap: shrinkWrap,
+        ),
       );
     } else {
       return SafeArea(
-        child: Container(
-          padding: EdgeInsets.all(padding),
-          child: Card(
-            margin: EdgeInsets.all(0.0),
-            elevation: cardElevation,
-            child: ListView(
-              children: children,
-              shrinkWrap: shrinkWrap,
+        child: ListView(
+          shrinkWrap: shrinkWrap,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(padding),
+              child: Card(
+                margin: EdgeInsets.all(0.0),
+                elevation: cardElevation,
+                child: Column(
+                  children: children,
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       );
     }
@@ -114,18 +120,16 @@ class CardSettings extends InheritedWidget {
     );
   }
 
-  static List<Widget> _buildSections(List<CardSettingsSection> sections,
+  static List<Widget> _buildMaterialSections(List<CardSettingsSection> sections,
       double cardElevation, double padding) {
     List<Widget> _children = <Widget>[];
     for (var row in sections) {
       _children.add(
-        SafeArea(
-          child: Container(
-            padding: EdgeInsets.fromLTRB(padding, padding, padding, 0.0),
-            child: Card(
-              elevation: cardElevation,
-              child: row.build(null),
-            ),
+        Container(
+          padding: EdgeInsets.fromLTRB(padding, padding, padding, 0.0),
+          child: Card(
+            elevation: cardElevation,
+            child: row.build(null),
           ),
         ),
       );
