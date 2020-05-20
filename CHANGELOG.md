@@ -1,5 +1,9 @@
 # Releases
 
+## [1.9.2] - 5/20/2020
+
+- updated `flutter_material_pickers` package to fix C`ardSettingsSelectionPicker` index bug
+
 ## [1.9.1] - 5/19/2020
 
 - refactored single card display to scroll better on web
