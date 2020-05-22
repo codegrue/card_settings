@@ -1,6 +1,19 @@
 # Card Settings
 
 [![Pub Package](https://img.shields.io/pub/v/card_settings.svg)](https://pub.dartlang.org/packages/card_settings)
+![GitHub repo size](https://img.shields.io/github/repo-size/codegrue/card_settings)
+[![GitHub forks](https://img.shields.io/github/forks/codegrue/card_settings)](https://github.com/codegrue/card_settings/network/members)
+[![GitHub stars](https://img.shields.io/github/stars/codegrue/card_settings)](https://github.com/codegrue/card_settings/stargazers)
+
+[![Open Issues](https://img.shields.io/github/issues/codegrue/card_settings)](https://github.com/codegrue/card_settings/issues)
+[![Closed Issues](https://img.shields.io/github/issues-closed/codegrue/card_settings)](https://github.com/codegrue/card_settings/issues?q=is%3Aissue+is%3Aclosed)
+
+[![CodeFactor](https://img.shields.io/codefactor/grade/github/codegrue/card_settings)](https://www.codefactor.io/repository/github/codegrue/card_settings)
+[![Lcense](https://img.shields.io/github/license/codegrue/card_settings)](https://github.com/codegrue/card_settings/blob/master/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/codegrue/card_settings/pulls)
+[![Contributors](https://img.shields.io/github/contributors/codegrue/card_settings)](https://github.com/codegrue/card_settings/graphs/contributors)
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-yellow.svg)](https://www.buymeacoffee.com/CodeGrue)
 
 A flutter package for building card based settings forms. This includes a library of pre-built form field widgets. The style is a bit like a cross between
 the cupertino settings screen and material design; The idea is it should be usable and intutive on both iOS and Android.
