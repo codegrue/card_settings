@@ -1,8 +1,8 @@
-on: push
-name: Test, Build and Release apk
+on: [push, pull_request]
+name: Test Package
 jobs:
-  build:
-    name: Build APK
+  test:
+    name: Test Package
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -11,12 +11,16 @@ jobs:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.17.0"
-      - run: flutter pub get
-      - run: flutter test
-      - run: flutter build apk --debug --split-per-abi
-      - name: Create a Release APK
-        uses: ncipollo/release-action@v1
+          channel: "beta" # or: 'dev' or 'beta'
+      - name: Install flutter dependencies
+        run: flutter pub get
+      - name: Install packages dependencies
+        run: flutter packages get
+      - name: Run tests
+        run: flutter test
+      - name: Run tests coverage
+        run: flutter test --coverage
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v1.0.1
         with:
-          artifacts: "build/app/outputs/apk/debug/*.apk"
-          token: ${{ secrets.TOKEN }}
+          github-token: ${{ secrets.TOKEN }}
