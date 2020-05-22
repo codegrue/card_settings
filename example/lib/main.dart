@@ -197,7 +197,7 @@ class _PonyExampleState extends State<PonyExample> {
           children: <Widget>[
             _buildCardSettingsDouble_Height(),
             _buildCardSettingsInt_Weight(),
-            _buildCardSettingsRadioPicker_Style(),
+            _buildCardSettingsSelectionPicker_Style(),
           ],
         ),
         CardSettingsSection(
@@ -292,7 +292,7 @@ class _PonyExampleState extends State<PonyExample> {
             CardFieldLayout(<Widget>[
               _buildCardSettingsDouble_Height(),
               _buildCardSettingsInt_Weight(),
-              _buildCardSettingsRadioPicker_Style(),
+              _buildCardSettingsSelectionPicker_Style(),
             ]),
           ],
         ),
@@ -744,7 +744,7 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  CardSettingsSelectionPicker _buildCardSettingsRadioPicker_Style() {
+  CardSettingsSelectionPicker _buildCardSettingsSelectionPicker_Style() {
     return CardSettingsSelectionPicker(
       key: _styleKey,
       label: 'Style',

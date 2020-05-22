@@ -1,5 +1,9 @@
 # Releases
 
+## [next] - xxx
+
+- fixed assert bug in `CardSettingsSelectionPicker` when providing values
+
 ## [1.9.2] - 5/20/2020
 
 - updated `flutter_material_pickers` package to fix C`ardSettingsSelectionPicker` index bug
