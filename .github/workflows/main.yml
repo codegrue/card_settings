@@ -1,5 +1,5 @@
 on: [push, pull_request]
-name: Test Package
+name: Run tests on the package
 jobs:
   test:
     name: Test Package
