@@ -1,9 +1,11 @@
 # Releases
 
-## [1.9.3] - 5/22/2020
+## [1.9.3] - 5/23/2020
 
-- fixed assert bug in `CardSettingsSelectionPicker` when providing values
+- fixed assert bug in `CardSettingsSelectionPicker` when providing values and no icons
 - added CI to the project (Github Actions)
+- increased unit tests for code coverage
+- added more badges to the readme
 
 ## [1.9.2] - 5/20/2020
 

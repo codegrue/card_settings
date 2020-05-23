@@ -3,20 +3,28 @@ import 'package:card_settings/widgets/card_settings_panel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-bool showCupertino(BuildContext context, bool showMaterialonIOS) {
+bool showCupertino(
+  BuildContext context,
+  bool showMaterialonIOS, {
+  bool mockIOS = false,
+}) {
   // don't show on web
   if (kIsWeb) return false;
 
-  // if not specified, set showMaterialOnIOS to parent CardSettings value
-  if (showMaterialonIOS == null) {
-    if (context != null)
-      showMaterialonIOS = CardSettings.of(context).showMaterialonIOS;
-    else
+  // if we are on iOS then determine if we want material
+  if (mockIOS || Platform.isIOS) {
+    // if showMaterialonIOS not specified calculate it
+    if (showMaterialonIOS == null) {
+      // default to cupertino
       showMaterialonIOS = false;
-  }
 
-  // is we are on iOS and don't want material, show it
-  if (Platform.isIOS && !showMaterialonIOS) return true;
+      if (context != null)
+        // set showMaterialOnIOS to parent CardSettings value
+        showMaterialonIOS = CardSettings.of(context).showMaterialonIOS;
+    }
+
+    return !showMaterialonIOS;
+  }
 
   // material by default
   return false;

@@ -6,6 +6,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/codegrue/card_settings)
 
 [![CodeFactor](https://img.shields.io/codefactor/grade/github/codegrue/card_settings)](https://www.codefactor.io/repository/github/codegrue/card_settings)
+[![Coverage Status](https://coveralls.io/repos/github/codegrue/card_settings/badge.svg?branch=master)](https://coveralls.io/github/codegrue/card_settings?branch=master)
 [![Open Bugs](https://img.shields.io/github/issues-raw/codegrue/card_settings/bug?label=bugs&color=orange)](https://github.com/codegrue/card_settings/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
 [![Enhancement Requests](https://img.shields.io/github/issues-raw/codegrue/card_settings/enhancement?label=enhancements)](https://github.com/codegrue/card_settings/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement+)
 [![Closed Issues](https://img.shields.io/github/issues-closed-raw/codegrue/card_settings?color=lightgrey)](https://github.com/codegrue/card_settings/issues?q=is%3Aissue+is%3Aclosed)
