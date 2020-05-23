@@ -1,8 +1,8 @@
 on: [push, pull_request]
-name: Run tests on the package
+name: Test Package
 jobs:
   test:
-    name: Test Package
+    name: Run tests on the package
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -23,4 +23,4 @@ jobs:
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@v1.0.1
         with:
-          repo_token: ${{ secrets.TOKEN }}
+          github-token: ${{ secrets.TOKEN }}
