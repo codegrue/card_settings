@@ -3,31 +3,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('DecimalTextInputFormatter handles decimal truncation', () {
-    var oldValue = TextEditingValue(
-      text: "12,345.67",
-    );
-    var newValue = TextEditingValue(
-      text: "12,345.678",
-    );
+  group('DecimalTextInputFormatter', () {
+    test('handles decimal truncation', () {
+      var oldValue = TextEditingValue(
+        text: "12,345.67",
+      );
+      var newValue = TextEditingValue(
+        text: "12,345.678",
+      );
 
-    var formatter = DecimalTextInputFormatter(decimalDigits: 2);
-    var result = formatter.formatEditUpdate(oldValue, newValue);
+      var formatter = DecimalTextInputFormatter(decimalDigits: 2);
+      var result = formatter.formatEditUpdate(oldValue, newValue);
 
-    expect(result.text, "12,345.67");
-  });
+      expect(result.text, "12,345.67");
+    });
 
-  test('DecimalTextInputFormatter adds leading zero', () {
-    var oldValue = TextEditingValue(
-      text: "",
-    );
-    var newValue = TextEditingValue(
-      text: ".",
-    );
+    test('adds leading zero', () {
+      var oldValue = TextEditingValue(
+        text: "",
+      );
+      var newValue = TextEditingValue(
+        text: ".",
+      );
 
-    var formatter = DecimalTextInputFormatter(decimalDigits: 2);
-    var result = formatter.formatEditUpdate(oldValue, newValue);
+      var formatter = DecimalTextInputFormatter(decimalDigits: 2);
+      var result = formatter.formatEditUpdate(oldValue, newValue);
 
-    expect(result.text, "0.");
+      expect(result.text, "0.");
+    });
   });
 }
