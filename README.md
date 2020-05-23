@@ -16,8 +16,7 @@
 [![Contributors](https://img.shields.io/github/contributors/codegrue/card_settings)](https://github.com/codegrue/card_settings/graphs/contributors)
 [![License](https://img.shields.io/github/license/codegrue/card_settings?color=brightgreen)](https://github.com/codegrue/card_settings/blob/master/LICENSE)
 
-A flutter package for building card based settings forms. This includes a library of pre-built form field widgets. The style is a bit like a cross between
-the cupertino settings screen and material design; The idea is it should be usable and intutive on both iOS and Android.
+A flutter package for building settings forms. This includes a library of pre-built form field widgets. It supports both Material and Cupertino style.
 
 ![Screenshot](https://github.com/codegrue/card_settings/blob/master/images/example.png)
 
