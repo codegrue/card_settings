@@ -24,31 +24,31 @@ the cupertino settings screen and material design; The idea is it should be usab
 This package consists of a CardSettings layout wrapper and a series of form field options including:
 
 - **Text Fields**
-  - _CardSettingsText_ - Basic text field
-  - _CardSettingsParagraph_ - Multiline text field with a counter
-  - _CardSettingsEmail_ - A text field pre-configured for email input
-  - _CardSettingsPassword_ - A text field pre-configured for passwords
-  - _CardSettingsPhone_ - A masked phone entry field (US style currently)
+  - `CardSettingsText` - Basic text field
+  - `CardSettingsParagraph` - Multiline text field with a counter
+  - `CardSettingsEmail` - A text field pre-configured for email input
+  - `CardSettingsPassword` - A text field pre-configured for passwords
+  - `CardSettingsPhone` - A masked phone entry field (US style currently)
 - **Numeric Fields**
-  - _CardSettingsDouble_ - Field for double precision numbers
-  - _CardSettingsInt_ - Field for integer numbers
-  - _CardSettingsCurrency_ - Field for currency entry
-  - _CardSettingsSwitch_ - Field for boolean state
+  - `CardSettingsDouble` - Field for double precision numbers
+  - `CardSettingsInt` - Field for integer numbers
+  - `CardSettingsCurrency` - Field for currency entry
+  - `CardSettingsSwitch` - Field for boolean state
 - **Pickers**
-  - _CardSettingsListPicker_ - Picker list of arbitrary options
-  - _CardSettingsNumberPicker_ - Picker list of numbers in a given range
-  - _CardSettingsRadioPicker_ - Single items picker with radio buttons
-  - _CardSettingsSelectionPicker_ - Single selection from a list with optional icons
-  - _CardSettingsCheckboxPicker_ - Select multiples from a list of available options
-  - _CardSettingsColorPicker_ - Picker for colors with three flavors: RGB, Material, and Block
-  - _CardSettingsDatePicker_ - Date Picker
-  - _CardSettingsTimePicker_ - Time Picker
-  - _CardSettingsDateTimePicker_ - Combo Date and Time Picker
+  - `CardSettingsListPicker` - Picker list of arbitrary options
+  - `CardSettingsNumberPicker` - Picker list of numbers in a given range
+  - `CardSettingsRadioPicker` - Single items picker with radio buttons
+  - `CardSettingsSelectionPicker` - Single selection from a list with optional icons
+  - `CardSettingsCheckboxPicker` - Select multiples from a list of available options
+  - `CardSettingsColorPicker` - Picker for colors with three flavors: RGB, Material, and Block
+  - `CardSettingsDatePicker` - Date Picker
+  - `CardSettingsTimePicker` - Time Picker
+  - `CardSettingsDateTimePicker` - Combo Date and Time Picker
 - **Informational Sections**
-  - _CardSettingsHeader_ - A control to put a header between form sections
-  - _CardSettingsInstructions_ - Informational read-only text
+  - `CardSettingsHeader` - A control to put a header between form sections
+  - `CardSettingsInstructions` - Informational read-only text
 - **Actions**
-  - _CardSettingsButton_ - Actions buttons for the form
+  - `CardSettingsButton` - Actions buttons for the form
 
 All fields support `validate`, `onChange`, `onSaved`, `autovalidate`, and `visible`.
 
@@ -172,7 +172,7 @@ Or if you want to apply a different theme to the `CardSettings` hierarchy only, 
   )
 ```
 
-Please see https://pub.dev/packages/flutter_material_pickers#-readme-tab- for information on how to theme the dialog popups.
+Please see <https://pub.dev/packages/flutter_material_pickers#-readme-tab-> for information on how to theme the dialog popups.
 
 ### Global Properties
 
