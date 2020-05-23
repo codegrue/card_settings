@@ -1,6 +1,5 @@
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_material_pickers/dialogs/selection_picker_dialog.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
