@@ -23,7 +23,9 @@ class CardSettingsFilePicker extends FormField<Uint8List> {
     Uint8List initialValue,
     this.visible = true,
     this.label = 'Label',
-    this.unattachConfirmation = 'Unattach video?',
+    this.unattachDialogTitle = 'Unattach video?',
+    this.unattachDialogCancel = 'Cancel',
+    this.unattachDialogConfirm = 'Unattach',
     this.onChanged,
     this.contentAlign,
     this.icon,
@@ -46,7 +48,11 @@ class CardSettingsFilePicker extends FormField<Uint8List> {
 
   final String label;
 
-  final String unattachConfirmation;
+  final String unattachDialogTitle;
+
+  final String unattachDialogConfirm;
+
+  final String unattachDialogCancel;
 
   final TextAlign labelAlign;
 
@@ -87,8 +93,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
   }
 
   Widget _build(BuildContext context) {
-    String formattedValue =
-        (value == null) ? '' : formatBytes(value.length, 2);
+    String formattedValue = (value == null) ? '' : formatBytes(value.length, 2);
 
     if (showCupertino(context, widget.showMaterialonIOS))
       return cupertinoSettingsDatePicker(formattedValue);
@@ -96,22 +101,22 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
       return materialSettingsDatePicker(formattedValue);
   }
 
-  onTap() {
+  void onTap() {
     if (value == null) {
       _showDialog();
     } else {
-      showPlatformDialog(
+      showPlatformDialog<void>(
         context: context,
         builder: (context) => PlatformAlertDialog(
-          title: Text(widget.unattachConfirmation),
+          title: Text(widget.unattachDialogTitle),
           actions: [
             PlatformDialogAction(
-              child: PlatformText("cancel".tr()),
+              child: PlatformText(widget.unattachDialogCancel),
               onPressed: () => Navigator.of(context).pop(),
             ),
             PlatformDialogAction(
-              child: PlatformText("unattach".tr()),
-              cupertino: (_) =>
+              child: PlatformText(widget.unattachDialogConfirm),
+              cupertino: (_, __) =>
                   CupertinoDialogActionData(isDestructiveAction: true),
               onPressed: () {
                 didChange(null);
@@ -172,6 +177,8 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
     if (bytes <= 0) return "0 B";
     const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     var i = (log(bytes) / log(1024)).floor();
-    return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) + ' ' + suffixes[i];
+    return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) +
+        ' ' +
+        suffixes[i];
   }
 }
