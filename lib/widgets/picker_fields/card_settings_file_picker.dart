@@ -194,14 +194,22 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
         icon: widget?.icon ?? Icon(Icons.attach_file),
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
-        content: Text(
-          formattedValue,
-          style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
-          textAlign:
-              widget?.contentAlign ?? CardSettings.of(context).contentAlign,
-        ),
+        content: _buildFieldContent(formattedValue),
         pickerIcon: value == null ? Icons.attach_file : Icons.clear,
       ),
     );
+  }
+
+  Widget _buildFieldContent(String formattedValue) {
+    if (widget.fileType == FileTypeCross.image && value != null) {
+      return Image.memory(value);
+    } else {
+      return Text(
+        formattedValue,
+        style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
+        textAlign:
+            widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+      );
+    }
   }
 }

@@ -1,7 +1,13 @@
 // example viewmodel for the form
 import 'dart:typed_data';
 
+import 'package:flutter/services.dart';
+
 class PonyModel {
+  PonyModel() {
+    loadMedia();
+  }
+
   String name = 'Twilight Sparkle';
   String type = 'U';
   int age = 7;
@@ -32,6 +38,12 @@ class PonyModel {
   Uint8List video = Uint8List(1024 * 1024 * 1024);
   Uint8List audio = Uint8List(1024 * 4);
   Uint8List customFile = Uint8List(4);
+
+  void loadMedia() async {
+    photo = (await rootBundle.load('assets/twilight_sparkle.png'))
+        .buffer
+        .asUint8List();
+  }
 }
 
 const List<String> allHobbies = <String>[
