@@ -43,6 +43,7 @@ This package consists of a CardSettings layout wrapper and a series of form fiel
   - `CardSettingsDatePicker` - Date Picker
   - `CardSettingsTimePicker` - Time Picker
   - `CardSettingsDateTimePicker` - Combo Date and Time Picker
+  - `CardSettingsFilePicker` - Upload a file from the device
 - **Informational Sections**
   - `CardSettingsHeader` - A control to put a header between form sections
   - `CardSettingsInstructions` - Informational read-only text

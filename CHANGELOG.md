@@ -1,5 +1,9 @@
 # Releases
 
+## [1.9.4] - Release TBD
+
+- added `CardSettingsFilePicker` (thanks CoolONEOfficial)
+
 ## [1.9.3] - 5/23/2020
 
 - fixed assert bug in `CardSettingsSelectionPicker` when providing values and no icons

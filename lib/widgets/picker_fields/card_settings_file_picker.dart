@@ -107,9 +107,9 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
         : CardSettingsFilePicker.formatBytes(value.length, 2);
 
     if (showCupertino(context, widget.showMaterialonIOS))
-      return cupertinoSettingsDatePicker(formattedValue);
+      return _buildCupertinoFilePicker(formattedValue);
     else
-      return materialSettingsDatePicker(formattedValue);
+      return _buildMaterialFilePicker(formattedValue);
   }
 
   void onTap() {
@@ -147,7 +147,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
     }
   }
 
-  Widget cupertinoSettingsDatePicker(String formattedValue) {
+  Widget _buildCupertinoFilePicker(String formattedValue) {
     return Container(
       child: widget?.visible == false
           ? null
@@ -169,7 +169,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
     );
   }
 
-  Widget materialSettingsDatePicker(String formattedValue) {
+  Widget _buildMaterialFilePicker(String formattedValue) {
     return GestureDetector(
       onTap: onTap,
       child: CardSettingsField(
