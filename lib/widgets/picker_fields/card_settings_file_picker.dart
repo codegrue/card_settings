@@ -10,6 +10,7 @@ import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -94,11 +95,19 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
       fileExtension: widget.fileExtension,
       type: widget.fileType,
     );
-    filePicker.pick().then((value) => setState(() {
-          final _file = filePicker.toUint8List();
-          didChange(_file);
-          if (widget.onChanged != null) widget.onChanged(_file);
-        }));
+    filePicker
+        .pick()
+        .then((value) => setState(() {
+              final _file = filePicker.toUint8List();
+              didChange(_file);
+              if (widget.onChanged != null) widget.onChanged(_file);
+            }))
+        .catchError((dynamic error) {
+      if (error.runtimeType is PlatformException) return; // user clicked twice
+      if (error.runtimeType is NoSuchMethodError)
+        return; // user canceled upload
+      throw error;
+    });
   }
 
   Widget _build(BuildContext context) {
@@ -116,35 +125,41 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
     if (value == null) {
       _showDialog();
     } else {
-      showPlatformDialog<void>(
-        context: context,
-        builder: (context) => PlatformAlertDialog(
-          title: Text(
-            widget.unattachDialogTitle,
-            style: isMaterial(context)
-                ? Theme.of(context).textTheme.headline6.copyWith(
-                    color: Theme.of(context).textTheme.headline1.color)
-                : null,
-          ),
-          actions: [
-            PlatformDialogAction(
-              child: PlatformText(widget.unattachDialogCancel),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            PlatformDialogAction(
-              child: PlatformText(widget.unattachDialogConfirm),
-              cupertino: (_, __) =>
-                  CupertinoDialogActionData(isDestructiveAction: true),
-              onPressed: () {
-                didChange(null);
-                if (widget.onChanged != null) widget.onChanged(null);
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-        ),
-      );
+      _showUnattachDialog();
     }
+  }
+
+  void _showUnattachDialog() async {
+    return showPlatformDialog<void>(
+      context: context,
+      builder: (context) => PlatformAlertDialog(
+        title: Text(
+          widget.unattachDialogTitle,
+          style: isMaterial(context)
+              ? Theme.of(context)
+                  .textTheme
+                  .headline6
+                  .copyWith(color: Theme.of(context).textTheme.headline1.color)
+              : null,
+        ),
+        actions: [
+          PlatformDialogAction(
+            child: PlatformText(widget.unattachDialogCancel),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          PlatformDialogAction(
+            child: PlatformText(widget.unattachDialogConfirm),
+            cupertino: (_, __) =>
+                CupertinoDialogActionData(isDestructiveAction: true),
+            onPressed: () {
+              didChange(null);
+              if (widget.onChanged != null) widget.onChanged(null);
+              Navigator.of(context).pop();
+            },
+          )
+        ],
+      ),
+    );
   }
 
   Widget _buildCupertinoFilePicker(String formattedValue) {
