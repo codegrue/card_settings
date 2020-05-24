@@ -17,6 +17,7 @@ export 'widgets/numeric_fields/card_settings_int.dart';
 export 'widgets/numeric_fields/card_settings_switch.dart';
 export 'widgets/picker_fields/card_settings_color_picker.dart';
 export 'widgets/picker_fields/card_settings_date_picker.dart';
+export 'widgets/picker_fields/card_settings_file_picker.dart';
 export 'widgets/picker_fields/card_settings_list_picker.dart';
 export 'widgets/picker_fields/card_settings_radio_picker.dart';
 export 'widgets/picker_fields/card_settings_selection_picker.dart';

@@ -1,4 +1,6 @@
 // example viewmodel for the form
+import 'dart:typed_data';
+
 class PonyModel {
   String name = 'Twilight Sparkle';
   String type = 'U';
@@ -26,6 +28,10 @@ class PonyModel {
   String email = 'me@nowhere.org';
   String password = 'secret1';
   double rating = 0.0;
+  Uint8List photo = Uint8List(1024 * 1024 * 15);
+  Uint8List video = Uint8List(1024 * 1024 * 1024);
+  Uint8List audio = Uint8List(1024 * 4);
+  Uint8List customFile = Uint8List(4);
 }
 
 const List<String> allHobbies = <String>[

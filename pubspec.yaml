@@ -12,7 +12,9 @@ dependencies:
   cupertino_icons: ^0.1.3
   flutter_cupertino_settings: ^0.3.0
   flutter_material_pickers: ^1.5.2
-
+  flutter_platform_widgets: ^0.50.0
+  file_picker_cross: ^2.0.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
