@@ -74,6 +74,15 @@ class CardSettingsFilePicker extends FormField<Uint8List> {
 
   @override
   _CardSettingsFilePickerState createState() => _CardSettingsFilePickerState();
+
+  static String formatBytes(int bytes, int decimals) {
+    if (bytes <= 0) return "0 B";
+    const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+    var i = (log(bytes) / log(1024)).floor();
+    return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) +
+        ' ' +
+        suffixes[i];
+  }
 }
 
 class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
@@ -93,7 +102,9 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
   }
 
   Widget _build(BuildContext context) {
-    String formattedValue = (value == null) ? '' : formatBytes(value.length, 2);
+    String formattedValue = (value == null)
+        ? ''
+        : CardSettingsFilePicker.formatBytes(value.length, 2);
 
     if (showCupertino(context, widget.showMaterialonIOS))
       return cupertinoSettingsDatePicker(formattedValue);
@@ -108,7 +119,13 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
       showPlatformDialog<void>(
         context: context,
         builder: (context) => PlatformAlertDialog(
-          title: Text(widget.unattachDialogTitle),
+          title: Text(
+            widget.unattachDialogTitle,
+            style: isMaterial(context)
+                ? Theme.of(context).textTheme.headline6.copyWith(
+                    color: Theme.of(context).textTheme.headline1.color)
+                : null,
+          ),
           actions: [
             PlatformDialogAction(
               child: PlatformText(widget.unattachDialogCancel),
@@ -171,14 +188,5 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
         pickerIcon: value == null ? Icons.attach_file : Icons.clear,
       ),
     );
-  }
-
-  String formatBytes(int bytes, int decimals) {
-    if (bytes <= 0) return "0 B";
-    const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-    var i = (log(bytes) / log(1024)).floor();
-    return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) +
-        ' ' +
-        suffixes[i];
   }
 }

@@ -9,6 +9,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:file_picker_cross/file_picker_cross.dart';
 
 void main() => runApp(MyApp());
 
@@ -88,6 +89,10 @@ class _PonyExampleState extends State<PonyExample> {
   final GlobalKey<FormState> _heightKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _weightKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _dateKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _photoKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _videoKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _audioKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _customFileKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _datetimeKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _styleKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _timeKey = GlobalKey<FormState>();
@@ -207,6 +212,10 @@ class _PonyExampleState extends State<PonyExample> {
           instructions: _buildCardSettingsInstructions(),
           children: <Widget>[
             _buildCardSettingsDatePicker(),
+            _buildCardSettingsPhotoPicker(),
+            _buildCardSettingsVideoPicker(),
+            _buildCardSettingsMusicPicker(),
+            _buildCardSettingsFileCustomPicker(),
             _buildCardSettingsTimePicker(),
             _buildCardSettingsCurrency(),
             _buildCardSettingsPhone(),
@@ -304,6 +313,10 @@ class _PonyExampleState extends State<PonyExample> {
             _buildCardSettingsInstructions(),
             CardFieldLayout(<Widget>[
               _buildCardSettingsDatePicker(),
+              _buildCardSettingsPhotoPicker(),
+              _buildCardSettingsVideoPicker(),
+              _buildCardSettingsMusicPicker(),
+              _buildCardSettingsFileCustomPicker(),
               _buildCardSettingsTimePicker(),
             ]),
             CardFieldLayout(<Widget>[
@@ -469,6 +482,71 @@ class _PonyExampleState extends State<PonyExample> {
         });
         _showSnackBar(
             'Show Date', updateJustDate(value, _ponyModel.showDateTime));
+      },
+    );
+  }
+
+  CardSettingsFilePicker _buildCardSettingsPhotoPicker() {
+    return CardSettingsFilePicker(
+      key: _photoKey,
+      icon: Icon(Icons.photo),
+      label: 'Photo',
+      fileType: FileTypeCross.image,
+      initialValue: _ponyModel.photo,
+      onSaved: (value) => _ponyModel.photo = value,
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.photo = value;
+        });
+      },
+    );
+  }
+
+  CardSettingsFilePicker _buildCardSettingsVideoPicker() {
+    return CardSettingsFilePicker(
+      key: _videoKey,
+      icon: Icon(Icons.video_library),
+      label: 'Video',
+      fileType: FileTypeCross.video,
+      initialValue: _ponyModel.video,
+      onSaved: (value) => _ponyModel.video = value,
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.video = value;
+        });
+      },
+    );
+  }
+
+  CardSettingsFilePicker _buildCardSettingsMusicPicker() {
+    return CardSettingsFilePicker(
+      key: _audioKey,
+      icon: Icon(Icons.music_note),
+      label: 'Audio',
+      fileType: FileTypeCross.audio,
+      initialValue: _ponyModel.audio,
+      onSaved: (value) => _ponyModel.audio = value,
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.audio = value;
+        });
+      },
+    );
+  }
+
+  CardSettingsFilePicker _buildCardSettingsFileCustomPicker() {
+    return CardSettingsFilePicker(
+      key: _customFileKey,
+      icon: Icon(Icons.insert_drive_file),
+      label: 'Custom file',
+      fileType: FileTypeCross.custom,
+      fileExtension: '.jpg,.mp4',
+      initialValue: _ponyModel.customFile,
+      onSaved: (value) => _ponyModel.customFile = value,
+      onChanged: (value) {
+        setState(() {
+          _ponyModel.customFile = value;
+        });
       },
     );
   }
