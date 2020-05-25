@@ -10,8 +10,8 @@ import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
+import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// This is the file picker field
@@ -90,26 +90,6 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
   @override
   CardSettingsFilePicker get widget => super.widget as CardSettingsFilePicker;
 
-  void _showDialog() {
-    FilePickerCross filePicker = FilePickerCross(
-      fileExtension: widget.fileExtension,
-      type: widget.fileType,
-    );
-    filePicker
-        .pick()
-        .then((value) => setState(() {
-              final _file = filePicker.toUint8List();
-              didChange(_file);
-              if (widget.onChanged != null) widget.onChanged(_file);
-            }))
-        .catchError((dynamic error) {
-      if (error.runtimeType is PlatformException) return; // user clicked twice
-      if (error.runtimeType is NoSuchMethodError)
-        return; // user canceled upload
-      throw error;
-    });
-  }
-
   Widget _build(BuildContext context) {
     String formattedValue = (value == null)
         ? ''
@@ -123,7 +103,12 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
 
   void onTap() {
     if (value == null) {
-      _showDialog();
+      showMaterialFilePicker(
+        onChanged: (file) => setState(() {
+          didChange(file);
+          if (widget.onChanged != null) widget.onChanged(file);
+        }),
+      );
     } else {
       _showUnattachDialog();
     }
