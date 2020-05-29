@@ -739,6 +739,7 @@ class _PonyExampleState extends State<PonyExample> {
       initialValue: _ponyModel.age,
       min: 1,
       max: 30,
+      stepInterval: 1,
       validator: (value) {
         if (value == null) return 'Age is required.';
         if (value > 20) return 'No grown-ups allwed!';

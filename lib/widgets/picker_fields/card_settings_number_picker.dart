@@ -17,6 +17,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
     this.requiredIndicator,
     @required this.min,
     @required this.max,
+    this.stepInterval: 1,
     this.autovalidate: false,
     this.validator,
     this.onSaved,
@@ -34,6 +35,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
   final int initialValue;
   final int min;
   final int max;
+  final int stepInterval;
   final bool autovalidate;
   final bool visible;
   final bool showMaterialonIOS;
@@ -55,8 +57,10 @@ class CardSettingsNumberPicker extends StatelessWidget {
       initialValue: initialValue?.toString(),
       icon: icon,
       requiredIndicator: requiredIndicator,
-      options:
-          List<String>.generate(max - min + 1, (i) => (i + min).toString()),
+      options: List<String>.generate(
+        (max - min) ~/ stepInterval + 1,
+        (i) => (i * stepInterval + min).toString(),
+      ),
       autovalidate: autovalidate,
       validator: _safeValidator,
       onSaved: _safeOnSaved,
