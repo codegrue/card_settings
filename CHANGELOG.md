@@ -3,6 +3,7 @@
 ## [1.9.4] - Release TBD
 
 - added `CardSettingsFilePicker` (thanks CoolONEOfficial)
+- Upgraded flutter_cupertino_settings to address compatibility bug with the beta branch
 
 ## [1.9.3] - 5/23/2020
 

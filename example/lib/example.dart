@@ -20,7 +20,13 @@ class PonyExample extends StatefulWidget {
 }
 
 class _PonyExampleState extends State<PonyExample> {
-  final _ponyModel = PonyModel();
+  PonyModel _ponyModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _ponyModel = PonyModel();
+  }
 
   // once the form submits, this is flipped to true, and fields can then go into autovalidate mode.
   bool _autoValidate = false;
