@@ -12,7 +12,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// This is the file picker field
 class CardSettingsFilePicker extends FormField<Uint8List> {
@@ -24,7 +23,7 @@ class CardSettingsFilePicker extends FormField<Uint8List> {
     Uint8List initialValue,
     this.visible = true,
     this.label = 'Label',
-    this.unattachDialogTitle = 'Unattach video?',
+    String unattachDialogTitle,
     this.unattachDialogCancel = 'Cancel',
     this.unattachDialogConfirm = 'Unattach',
     this.onChanged,
@@ -36,7 +35,8 @@ class CardSettingsFilePicker extends FormField<Uint8List> {
     this.showMaterialonIOS,
     this.fileType,
     this.fileExtension,
-  }) : super(
+  })  : unattachDialogTitle = unattachDialogTitle ?? 'Unattach ' + label + "?",
+        super(
             key: key,
             initialValue: initialValue,
             onSaved: onSaved,
@@ -115,36 +115,96 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
   }
 
   void _showUnattachDialog() async {
-    return showPlatformDialog<void>(
-      context: context,
-      builder: (context) => PlatformAlertDialog(
-        title: Text(
-          widget.unattachDialogTitle,
-          style: isMaterial(context)
-              ? Theme.of(context)
+    var theme = Theme.of(context);
+    var showIOS = (theme.platform == TargetPlatform.iOS ||
+        theme.platform == TargetPlatform.macOS);
+
+    if (!showIOS) {
+      return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              widget.unattachDialogTitle,
+              style: Theme.of(context)
                   .textTheme
                   .headline6
-                  .copyWith(color: Theme.of(context).textTheme.headline1.color)
-              : null,
-        ),
-        actions: [
-          PlatformDialogAction(
-            child: PlatformText(widget.unattachDialogCancel),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          PlatformDialogAction(
-            child: PlatformText(widget.unattachDialogConfirm),
-            cupertino: (_, __) =>
-                CupertinoDialogActionData(isDestructiveAction: true),
-            onPressed: () {
-              didChange(null);
-              if (widget.onChanged != null) widget.onChanged(null);
-              Navigator.of(context).pop();
-            },
-          )
-        ],
-      ),
-    );
+                  .copyWith(color: Theme.of(context).textTheme.headline1.color),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text(
+                  widget.unattachDialogCancel,
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              FlatButton(
+                child: Text(widget.unattachDialogConfirm),
+                onPressed: () {
+                  didChange(null);
+                  if (widget.onChanged != null) widget.onChanged(null);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      return showCupertinoDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: Text(widget.unattachDialogTitle),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                child: Text(widget.unattachDialogCancel),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              CupertinoDialogAction(
+                child: Text(widget.unattachDialogConfirm),
+                onPressed: () {
+                  didChange(null);
+                  if (widget.onChanged != null) widget.onChanged(null);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    // return showPlatformDialog<void>(
+    //   context: context,
+    //   builder: (context) => PlatformAlertDialog(
+    //     title: Text(
+    //       widget.unattachDialogTitle,
+    //       style: isMaterial(context)
+    //           ? Theme.of(context)
+    //               .textTheme
+    //               .headline6
+    //               .copyWith(color: Theme.of(context).textTheme.headline1.color)
+    //           : null,
+    //     ),
+    //     actions: [
+    //       PlatformDialogAction(
+    //         child: PlatformText(widget.unattachDialogCancel),
+    //         onPressed: () => Navigator.of(context).pop(),
+    //       ),
+    //       PlatformDialogAction(
+    //         child: PlatformText(widget.unattachDialogConfirm),
+    //         cupertino: (_, __) =>
+    //             CupertinoDialogActionData(isDestructiveAction: true),
+    //         onPressed: () {
+    //           didChange(null);
+    //           if (widget.onChanged != null) widget.onChanged(null);
+    //           Navigator.of(context).pop();
+    //         },
+    //       )
+    //     ],
+    //   ),
+    // );
   }
 
   Widget _buildCupertinoFilePicker(String formattedValue) {

@@ -200,9 +200,10 @@ class CardSettingsField extends StatelessWidget {
   Widget _buildRightDecoration() {
     return (pickerIcon != null || unitLabel != null)
         ? Container(
+            padding: EdgeInsets.only(left: 10),
             alignment: Alignment.centerRight,
             child: (pickerIcon != null)
-                ? Icon(pickerIcon)
+                ? Icon(pickerIcon, size: 20)
                 : Text(
                     unitLabel,
                     style: TextStyle(fontStyle: FontStyle.italic),

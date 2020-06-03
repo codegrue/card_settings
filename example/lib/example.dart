@@ -130,6 +130,7 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettings.sectioned(
       showMaterialonIOS: _showMaterialonIOS,
       labelWidth: 100,
+      contentAlign: TextAlign.right,
       children: <CardSettingsSection>[
         CardSettingsSection(
           header: CardSettingsHeader(
@@ -540,7 +541,7 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettingsInt(
       key: _weightKey,
       label: 'Weight',
-      unitLabel: 'lbs',
+      unitLabel: '(lbs)',
       initialValue: _ponyModel.weight,
       autovalidate: _autoValidate,
       validator: (value) {
@@ -564,7 +565,7 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettingsDouble(
       key: _heightKey,
       label: 'Height',
-      unitLabel: 'feet',
+      unitLabel: '(ft)',
       decimalDigits: 2,
       initialValue: _ponyModel.height,
       onSaved: (value) => _ponyModel.height = value,
@@ -597,7 +598,7 @@ class _PonyExampleState extends State<PonyExample> {
   CardSettingsSwitch _buildCardSettingsSwitch_Spots() {
     return CardSettingsSwitch(
       key: _hasSpotsKey,
-      label: 'Does this horse have spots?',
+      label: 'Has spots?',
       labelWidth: 240.0,
       initialValue: _ponyModel.hasSpots,
       onSaved: (value) => _ponyModel.hasSpots = value,
