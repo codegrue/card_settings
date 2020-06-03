@@ -51,7 +51,7 @@ class CardSettingsParagraph extends CardSettingsText {
           icon: icon,
           requiredIndicator: requiredIndicator,
           numberOfLines: numberOfLines,
-          showCounter: showCounter,
+          showCounter: (enabled == true) ? showCounter : false,
           visible: visible,
           enabled: enabled,
           autofocus: autofocus,

@@ -17,6 +17,7 @@ class CardSettingsSwitch extends FormField<bool> {
     FormFieldSetter<bool> onSaved,
     FormFieldValidator<bool> validator,
     bool initialValue = false,
+    this.enabled = true,
     this.trueLabel = "Yes",
     this.falseLabel = "No",
     this.visible = true,
@@ -38,6 +39,9 @@ class CardSettingsSwitch extends FormField<bool> {
                 (field as _CardSettingsSwitchState)._build(field.context));
 
   final String label;
+
+  @override
+  final bool enabled;
 
   final TextAlign labelAlign;
 
@@ -86,7 +90,7 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
         Expanded(
           child: Text(
             value ? widget?.trueLabel : widget?.falseLabel,
-            style: Theme.of(context).textTheme.subtitle1,
+            style: contentStyle(context, value, widget.enabled),
             textAlign:
                 widget?.contentAlign ?? CardSettings.of(context).contentAlign,
           ),
@@ -96,10 +100,12 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
           height: 20.0,
           child: Switch(
             value: value,
-            onChanged: (value) {
-              didChange(value);
-              if (widget?.onChanged != null) widget?.onChanged(value);
-            },
+            onChanged: (widget.enabled)
+                ? (value) {
+                    didChange(value);
+                    if (widget?.onChanged != null) widget?.onChanged(value);
+                  }
+                : null, // to disable, we need to not provide an onChanged function
           ),
         ),
       ]),
@@ -116,10 +122,12 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
                   : Text(widget?.label),
               contentWidget: CupertinoSwitch(
                 value: value,
-                onChanged: (value) {
-                  didChange(value);
-                  if (widget?.onChanged != null) widget?.onChanged(value);
-                },
+                onChanged: (widget.enabled)
+                    ? (value) {
+                        didChange(value);
+                        if (widget?.onChanged != null) widget?.onChanged(value);
+                      }
+                    : null, // to disable, we need to not provide an onChanged function
               ),
               style: CSWidgetStyle(icon: widget?.icon),
             ),

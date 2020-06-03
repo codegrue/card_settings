@@ -19,7 +19,7 @@ class CardSettingsText extends FormField<String>
     Key key,
     String initialValue,
     bool autovalidate: false,
-    bool enabled: true,
+    this.enabled = true,
     this.onSaved,
     this.validator,
     this.onChanged,
@@ -84,6 +84,9 @@ class CardSettingsText extends FormField<String>
   final TextCapitalization textCapitalization;
 
   final TextStyle style;
+
+  @override
+  final bool enabled;
 
   final bool maxLengthEnforced;
 
@@ -230,11 +233,10 @@ class _CardSettingsTextState extends FormFieldState<String> {
         prefix: widget?.prefixText == null ? null : Text(widget.prefixText),
         suffix: widget?.unitLabel == null ? null : Text(widget.unitLabel),
         controller: _controller,
-
         focusNode: widget?.focusNode,
         keyboardType: widget?.keyboardType,
         textCapitalization: widget?.textCapitalization,
-        style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
+        style: contentStyle(context, value, widget.enabled),
         decoration: hasError
             ? BoxDecoration(
                 border: Border.all(color: Colors.red),
@@ -390,7 +392,9 @@ class _CardSettingsTextState extends FormFieldState<String> {
         focusNode: widget?.focusNode,
         keyboardType: widget?.keyboardType,
         textCapitalization: widget?.textCapitalization,
-        style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
+        enabled: widget.enabled,
+        readOnly: !widget.enabled,
+        style: contentStyle(context, value, widget.enabled),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(0.0),
           border: InputBorder.none,
@@ -416,7 +420,6 @@ class _CardSettingsTextState extends FormFieldState<String> {
               // if we don't want the counter, use this maxLength instead
               LengthLimitingTextInputFormatter(widget?.maxLength)
             ],
-        enabled: widget?.enabled,
       ),
     );
   }

@@ -29,3 +29,13 @@ bool showCupertino(
   // material by default
   return false;
 }
+
+TextStyle contentStyle(BuildContext context, dynamic value, bool enabled) {
+  var style = Theme.of(context).textTheme.subtitle1.copyWith(
+      color: (value == null)
+          ? Theme.of(context).hintColor
+          : Theme.of(context).textTheme.subtitle1.color);
+  if (!enabled) style = style.copyWith(color: Colors.grey);
+
+  return style;
+}

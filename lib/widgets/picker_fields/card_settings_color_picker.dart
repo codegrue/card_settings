@@ -20,6 +20,7 @@ class CardSettingsColorPicker extends FormField<Color> {
     FormFieldSetter<Color> onSaved,
     FormFieldValidator<Color> validator,
     Color initialValue = Colors.green,
+    this.enabled = true,
     this.onChanged,
     this.visible = true,
     this.contentAlign,
@@ -50,6 +51,9 @@ class CardSettingsColorPicker extends FormField<Color> {
   final Widget requiredIndicator;
 
   final String label;
+
+  @override
+  final bool enabled;
 
   final bool visible;
 
@@ -142,7 +146,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
           ? null
           : GestureDetector(
               onTap: () {
-                _showDialog();
+                if (widget.enabled) _showDialog();
               },
               child: CSControl(
                 nameWidget: widget?.requiredIndicator != null
@@ -165,7 +169,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   Widget materialSettingsColorPicker() {
     return GestureDetector(
       onTap: () {
-        _showDialog();
+        if (widget.enabled) _showDialog();
       },
       child: CardSettingsField(
         label: widget?.label,

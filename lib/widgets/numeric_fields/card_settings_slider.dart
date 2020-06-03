@@ -17,6 +17,7 @@ class CardSettingsSlider extends FormField<double> {
     FormFieldSetter<double> onSaved,
     FormFieldValidator<double> validator,
     double initialValue = 0.0,
+    this.enabled = true,
     this.trueLabel = "Yes",
     this.falseLabel = "No",
     this.visible = true,
@@ -51,6 +52,9 @@ class CardSettingsSlider extends FormField<double> {
   final TextAlign contentAlign;
 
   final Icon icon;
+
+  @override
+  final bool enabled;
 
   final Widget requiredIndicator;
 
@@ -98,10 +102,12 @@ class _CardSettingsSliderState extends FormFieldState<double> {
                 max: widget?.max ?? 1,
                 onChangeEnd: widget?.onChangedEnd,
                 onChangeStart: widget?.onChangedStart,
-                onChanged: (value) {
-                  didChange(value);
-                  if (widget?.onChanged != null) widget?.onChanged(value);
-                },
+                onChanged: (widget.enabled)
+                    ? (value) {
+                        didChange(value);
+                        if (widget?.onChanged != null) widget?.onChanged(value);
+                      }
+                    : null, // to disable, we need to not provide an onChanged function
               ),
               style: CSWidgetStyle(icon: widget?.icon),
             ),
@@ -135,10 +141,13 @@ class _CardSettingsSliderState extends FormFieldState<double> {
                   max: widget?.max ?? 1,
                   onChangeEnd: widget?.onChangedEnd,
                   onChangeStart: widget?.onChangedStart,
-                  onChanged: (value) {
-                    didChange(value);
-                    if (widget?.onChanged != null) widget?.onChanged(value);
-                  },
+                  onChanged: (widget.enabled)
+                      ? (value) {
+                          didChange(value);
+                          if (widget?.onChanged != null)
+                            widget?.onChanged(value);
+                        }
+                      : null, // to disable, we need to not provide an onChanged function
                 ),
               ),
             ),

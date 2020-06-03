@@ -18,6 +18,7 @@ class CardSettingsListPicker extends FormField<String> {
     FormFieldSetter<String> onSaved,
     FormFieldValidator<String> validator,
     bool autovalidate: false,
+    this.enabled = true,
     this.label = 'Label',
     this.visible = true,
     this.onChanged,
@@ -43,6 +44,9 @@ class CardSettingsListPicker extends FormField<String> {
   final ValueChanged<String> onChanged;
 
   final String label;
+
+  @override
+  final bool enabled;
 
   final TextAlign labelAlign;
 
@@ -187,7 +191,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
           ? null
           : GestureDetector(
               onTap: () {
-                _showDialog(widget?.label);
+                if (widget.enabled) _showDialog(widget?.label);
               },
               child: CSControl(
                 nameWidget: widget?.requiredIndicator != null
@@ -195,10 +199,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
                     : Text(widget?.label),
                 contentWidget: Text(
                   content,
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
-                      color: (value == null)
-                          ? Theme.of(context).hintColor
-                          : Theme.of(context).textTheme.subtitle1.color),
+                  style: contentStyle(context, value, widget.enabled),
                   textAlign: widget?.contentAlign ??
                       CardSettings.of(context).contentAlign,
                 ),
@@ -211,7 +212,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   Widget materialSettingsListPicker(String content) {
     return GestureDetector(
       onTap: () {
-        _showDialog(widget?.label);
+        if (widget.enabled) _showDialog(widget?.label);
       },
       child: CardSettingsField(
         label: widget?.label,
@@ -222,14 +223,11 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
         errorText: errorText,
         content: Text(
           content,
-          style: Theme.of(context).textTheme.subtitle1.copyWith(
-              color: (value == null)
-                  ? Theme.of(context).hintColor
-                  : Theme.of(context).textTheme.subtitle1.color),
+          style: contentStyle(context, value, widget.enabled),
           textAlign:
               widget?.contentAlign ?? CardSettings.of(context).contentAlign,
         ),
-        pickerIcon: Icons.arrow_drop_down,
+        pickerIcon: (widget.enabled) ? Icons.arrow_drop_down : null,
       ),
     );
   }

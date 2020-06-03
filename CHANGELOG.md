@@ -1,5 +1,9 @@
 # Releases
 
+## [1.9.5] - TBD
+
+- fixed `enabled` behavior for all controls
+
 ## [1.9.4] - 6/3/2020
 
 - added `CardSettingsFilePicker` (thanks CoolONEOfficial)

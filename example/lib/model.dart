@@ -33,7 +33,7 @@ class PonyModel {
   int boxOfficePhone = 8005551212;
   String email = 'me@nowhere.org';
   String password = 'secret1';
-  double rating = 0.0;
+  double rating = 0.25;
   Uint8List photo = Uint8List(1024 * 1024 * 15);
   Uint8List video = Uint8List(1024 * 1024 * 15);
   Uint8List audio = Uint8List(1024 * 4);

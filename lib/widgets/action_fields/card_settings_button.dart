@@ -15,6 +15,7 @@ class CardSettingsButton extends StatelessWidget {
     this.visible: true,
     this.backgroundColor,
     this.textColor,
+    this.enabled = true,
     this.bottomSpacing: 0.0,
     this.isDestructive = false,
     this.showMaterialonIOS,
@@ -27,6 +28,7 @@ class CardSettingsButton extends StatelessWidget {
   final Color textColor;
   final double bottomSpacing;
   final bool showMaterialonIOS;
+  final bool enabled;
 
   // Events
   final VoidCallback onPressed;
@@ -47,11 +49,14 @@ class CardSettingsButton extends StatelessWidget {
   }
 
   Widget showMaterialButton(BuildContext context, TextStyle buttonStyle) {
+    var fillColor = backgroundColor ?? Theme.of(context).buttonColor;
+    if (!enabled) fillColor = Colors.grey;
+
     return Container(
       margin: EdgeInsets.only(
           top: 4.0, bottom: bottomSpacing, left: 4.0, right: 4.0),
       padding: EdgeInsets.all(0.0),
-      color: backgroundColor ?? Theme.of(context).buttonColor,
+      color: fillColor,
       child: RawMaterialButton(
         padding: EdgeInsets.all(0.0),
         elevation: 0.0,
@@ -64,8 +69,10 @@ class CardSettingsButton extends StatelessWidget {
             ),
           ],
         ),
-        fillColor: backgroundColor ?? Theme.of(context).buttonColor,
-        onPressed: onPressed,
+        fillColor: fillColor,
+        onPressed: (enabled)
+            ? onPressed
+            : null, // to disable, we need to not provide an onPressed function
       ),
     );
   }
@@ -79,7 +86,9 @@ class CardSettingsButton extends StatelessWidget {
                   ? CSButtonType.DESTRUCTIVE
                   : CSButtonType.DEFAULT_CENTER,
               label,
-              onPressed,
+              (enabled)
+                  ? onPressed
+                  : null, // to disable, we need to not provide an onPressed function
             ),
     );
   }

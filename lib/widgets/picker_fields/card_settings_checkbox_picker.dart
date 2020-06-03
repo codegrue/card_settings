@@ -18,6 +18,7 @@ class CardSettingsCheckboxPicker extends FormField<List<String>> {
     FormFieldSetter<List<String>> onSaved,
     FormFieldValidator<List<String>> validator,
     bool autovalidate: false,
+    this.enabled = true,
     this.onChanged,
     this.label = 'Select',
     this.visible = true,
@@ -38,6 +39,9 @@ class CardSettingsCheckboxPicker extends FormField<List<String>> {
         );
 
   final String label;
+
+  @override
+  final bool enabled;
 
   final TextAlign labelAlign;
 
@@ -119,17 +123,20 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
           ? null
           : GestureDetector(
               onTap: () {
-                _showDialog(widget?.label, widget?.options);
+                if (widget.enabled) _showDialog(widget?.label, widget?.options);
               },
               child: CSControl(
                 nameWidget: widget?.requiredIndicator != null
                     ? Text((widget?.label ?? "") + ' *')
                     : Text(widget?.label),
-                contentWidget: Text(value == null || value.isEmpty
-                    ? "none selected"
-                    : value.length == 1
-                        ? "${value[0]}"
-                        : "${value[0]} & ${value.length - 1} more"),
+                contentWidget: Text(
+                  value == null || value.isEmpty
+                      ? "none selected"
+                      : value.length == 1
+                          ? "${value[0]}"
+                          : "${value[0]} & ${value.length - 1} more",
+                  style: contentStyle(context, value, widget.enabled),
+                ),
                 style: CSWidgetStyle(icon: widget?.icon),
               ),
             ),
@@ -139,7 +146,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
   Widget materialSettingsMultiselect() {
     return GestureDetector(
       onTap: () {
-        _showDialog(widget?.label, widget?.options);
+        if (widget.enabled) _showDialog(widget?.label, widget?.options);
       },
       child: CardSettingsField(
         label: widget?.label,
@@ -155,11 +162,13 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
           runSpacing: 0.0,
           children: value
               .map(
-                (s) => Chip(label: Text(s)),
+                (s) => Chip(
+                    label: Text(s,
+                        style: contentStyle(context, value, widget.enabled))),
               )
               .toList(),
         ),
-        pickerIcon: Icons.arrow_drop_down,
+        pickerIcon: (widget.enabled) ? Icons.arrow_drop_down : null,
       ),
     );
   }

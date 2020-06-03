@@ -20,6 +20,7 @@ class CardSettingsDateTimePicker extends FormField<DateTime> {
       FormFieldSetter<DateTime> onSaved,
       FormFieldValidator<DateTime> validator,
       DateTime initialValue,
+      this.enabled = true,
       this.visible = true,
       this.label = 'Label',
       this.onChanged,
@@ -54,6 +55,9 @@ class CardSettingsDateTimePicker extends FormField<DateTime> {
   final DateTime firstDate;
 
   final DateTime lastDate;
+
+  @override
+  final bool enabled;
 
   final Icon icon;
 
@@ -194,7 +198,7 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
           ? null
           : GestureDetector(
               onTap: () {
-                _showDialog();
+                if (widget.enabled) _showDialog();
               },
               child: CSControl(
                 nameWidget: widget?.requiredIndicator != null
@@ -202,10 +206,7 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
                     : Text(widget?.label),
                 contentWidget: Text(
                   value == null ? '' : DateFormat.yMd().add_jms().format(value),
-                  style: widget?.style ??
-                      Theme.of(context)
-                          .textTheme
-                          .subtitle1, // subhead is deprecated,
+                  style: contentStyle(context, value, widget.enabled),
                   textAlign: widget?.contentAlign ??
                       CardSettings.of(context).contentAlign,
                 ),
@@ -218,7 +219,7 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
   Widget materialSettingsButton() {
     return GestureDetector(
       onTap: () {
-        _showDialog();
+        if (widget.enabled) _showDialog();
       },
       child: CardSettingsField(
         label: widget?.label ?? "Date Time",
@@ -229,12 +230,11 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
         errorText: errorText,
         content: Text(
           value == null ? '' : DateFormat.yMd().add_jms().format(value),
-          style: widget?.style ??
-              Theme.of(context).textTheme.subtitle1, // subhead is deprecated,
+          style: contentStyle(context, value, widget.enabled),
           textAlign:
               widget?.contentAlign ?? CardSettings.of(context).contentAlign,
         ),
-        pickerIcon: Icons.arrow_drop_down,
+        pickerIcon: (widget.enabled) ? Icons.arrow_drop_down : null,
       ),
     );
   }

@@ -18,6 +18,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
     @required this.min,
     @required this.max,
     this.autovalidate: false,
+    this.enabled: true,
     this.validator,
     this.onSaved,
     this.onChanged,
@@ -37,6 +38,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
   final bool autovalidate;
   final bool visible;
   final bool showMaterialonIOS;
+  final bool enabled;
 
   // Events
   final FormFieldValidator<int> validator;
@@ -52,6 +54,7 @@ class CardSettingsNumberPicker extends StatelessWidget {
       labelAlign: labelAlign,
       contentAlign: contentAlign,
       visible: visible,
+      enabled: enabled,
       initialValue: initialValue?.toString(),
       icon: icon,
       requiredIndicator: requiredIndicator,

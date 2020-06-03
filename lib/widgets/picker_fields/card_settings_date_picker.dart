@@ -18,6 +18,7 @@ class CardSettingsDatePicker extends FormField<DateTime> {
     FormFieldSetter<DateTime> onSaved,
     FormFieldValidator<DateTime> validator,
     DateTime initialValue,
+    this.enabled = true,
     this.visible = true,
     this.label = 'Label',
     this.onChanged,
@@ -46,6 +47,9 @@ class CardSettingsDatePicker extends FormField<DateTime> {
   final TextAlign labelAlign;
 
   final TextAlign contentAlign;
+
+  @override
+  final bool enabled;
 
   final DateTime firstDate;
 
@@ -166,7 +170,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
           ? null
           : GestureDetector(
               onTap: () {
-                _showDialog();
+                if (widget.enabled) _showDialog();
               },
               child: CSControl(
                 nameWidget: widget?.requiredIndicator != null
@@ -174,7 +178,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
                     : Text(widget?.label),
                 contentWidget: Text(
                   formattedValue,
-                  style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
+                  style: contentStyle(context, value, widget.enabled),
                   textAlign: widget?.contentAlign ??
                       CardSettings.of(context).contentAlign,
                 ),
@@ -187,7 +191,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   Widget materialSettingsDatePicker(String formattedValue) {
     return GestureDetector(
       onTap: () {
-        _showDialog();
+        if (widget.enabled) _showDialog();
       },
       child: CardSettingsField(
         label: widget?.label ?? "Date",
@@ -198,11 +202,11 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
         errorText: errorText,
         content: Text(
           formattedValue,
-          style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
+          style: contentStyle(context, value, widget.enabled),
           textAlign:
               widget?.contentAlign ?? CardSettings.of(context).contentAlign,
         ),
-        pickerIcon: Icons.arrow_drop_down,
+        pickerIcon: (widget.enabled) ? Icons.arrow_drop_down : null,
       ),
     );
   }

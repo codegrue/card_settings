@@ -23,6 +23,7 @@ class CardSettingsFilePicker extends FormField<Uint8List> {
     Uint8List initialValue,
     this.visible = true,
     this.label = 'Label',
+    this.enabled = true,
     String unattachDialogTitle,
     this.unattachDialogCancel = 'Cancel',
     this.unattachDialogConfirm = 'Unattach',
@@ -60,6 +61,9 @@ class CardSettingsFilePicker extends FormField<Uint8List> {
   final TextAlign contentAlign;
 
   final Icon icon;
+
+  @override
+  final bool enabled;
 
   final Widget requiredIndicator;
 
@@ -174,37 +178,6 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
         },
       );
     }
-
-    // return showPlatformDialog<void>(
-    //   context: context,
-    //   builder: (context) => PlatformAlertDialog(
-    //     title: Text(
-    //       widget.unattachDialogTitle,
-    //       style: isMaterial(context)
-    //           ? Theme.of(context)
-    //               .textTheme
-    //               .headline6
-    //               .copyWith(color: Theme.of(context).textTheme.headline1.color)
-    //           : null,
-    //     ),
-    //     actions: [
-    //       PlatformDialogAction(
-    //         child: PlatformText(widget.unattachDialogCancel),
-    //         onPressed: () => Navigator.of(context).pop(),
-    //       ),
-    //       PlatformDialogAction(
-    //         child: PlatformText(widget.unattachDialogConfirm),
-    //         cupertino: (_, __) =>
-    //             CupertinoDialogActionData(isDestructiveAction: true),
-    //         onPressed: () {
-    //           didChange(null);
-    //           if (widget.onChanged != null) widget.onChanged(null);
-    //           Navigator.of(context).pop();
-    //         },
-    //       )
-    //     ],
-    //   ),
-    // );
   }
 
   Widget _buildCupertinoFilePicker(String formattedValue) {
@@ -212,14 +185,16 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
       child: widget?.visible == false
           ? null
           : GestureDetector(
-              onTap: onTap,
+              onTap: () {
+                if (widget.enabled) onTap;
+              },
               child: CSControl(
                 nameWidget: widget?.requiredIndicator != null
                     ? Text((widget?.label ?? "") + ' *')
                     : Text(widget?.label),
                 contentWidget: Text(
                   formattedValue,
-                  style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
+                  style: contentStyle(context, value, widget.enabled),
                   textAlign: widget?.contentAlign ??
                       CardSettings.of(context).contentAlign,
                 ),
@@ -231,7 +206,9 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
 
   Widget _buildMaterialFilePicker(String formattedValue) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        if (widget.enabled) onTap;
+      },
       child: CardSettingsField(
         label: widget?.label ?? "File",
         labelAlign: widget?.labelAlign,
@@ -240,7 +217,9 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
         content: _buildFieldContent(formattedValue),
-        pickerIcon: value == null ? Icons.attach_file : Icons.clear,
+        pickerIcon: (widget.enabled)
+            ? (value == null) ? Icons.attach_file : Icons.clear
+            : null,
       ),
     );
   }
@@ -251,7 +230,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
     } else {
       return Text(
         formattedValue,
-        style: widget?.style ?? Theme.of(context).textTheme.subtitle1,
+        style: contentStyle(context, value, widget.enabled),
         textAlign:
             widget?.contentAlign ?? CardSettings.of(context).contentAlign,
       );
