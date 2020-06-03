@@ -1,10 +1,11 @@
 # Releases
 
-## [1.9.4] - Release TBD
+## [1.9.4] - 6/3/2020
 
 - added `CardSettingsFilePicker` (thanks CoolONEOfficial)
 - Upgraded `flutter_cupertino_settings` to address compatibility bug with the beta branch
 - Removed dependency on `flutter_platform_widgets`
+- Fixed overflow calculation for wide label fields
 
 ## [1.9.3] - 5/23/2020
 

@@ -51,9 +51,7 @@ class CardSettingsField extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 _buildLabelBlock(context),
-                Expanded(
-                  child: _buildInlineContent(context),
-                ),
+                _buildInlineContent(context),
                 _buildRightDecoration()
               ],
             ),
@@ -67,7 +65,9 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget _buildInlineContent(BuildContext context) {
-    return contentOnNewLine ? Text('') : _buildDecoratedContent(context);
+    return contentOnNewLine
+        ? Container()
+        : Expanded(child: _buildDecoratedContent(context));
   }
 
   Widget _buildNewRowContent(BuildContext context) {
@@ -102,9 +102,11 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget _buildLabelBlock(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return Container(
       width: (contentOnNewLine)
-          ? 260.0 //TODO: remove hard coded width
+          ? size.width - 90
           : labelWidth ?? CardSettings.of(context).labelWidth ?? 120.0,
       padding:
           EdgeInsets.only(right: CardSettings.of(context).labelPadding ?? 6.0),

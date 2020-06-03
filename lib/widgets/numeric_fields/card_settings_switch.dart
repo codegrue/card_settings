@@ -93,15 +93,13 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
         ),
         Container(
           padding: EdgeInsets.all(0.0),
-          child: Container(
-            height: 20.0,
-            child: Switch(
-              value: value,
-              onChanged: (value) {
-                didChange(value);
-                if (widget?.onChanged != null) widget?.onChanged(value);
-              },
-            ),
+          height: 20.0,
+          child: Switch(
+            value: value,
+            onChanged: (value) {
+              didChange(value);
+              if (widget?.onChanged != null) widget?.onChanged(value);
+            },
           ),
         ),
       ]),
