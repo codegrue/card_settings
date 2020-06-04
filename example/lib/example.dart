@@ -208,6 +208,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettings _buildLandscapeLayout() {
     return CardSettings.sectioned(
+      showMaterialonIOS: _showMaterialonIOS,
       labelPadding: 12.0,
       children: <CardSettingsSection>[
         CardSettingsSection(
@@ -276,8 +277,12 @@ class _PonyExampleState extends State<PonyExample> {
             CardFieldLayout(<Widget>[
               _buildCardSettingsDatePicker(),
               _buildCardSettingsPhotoPicker(),
+            ]),
+            CardFieldLayout(<Widget>[
               _buildCardSettingsVideoPicker(),
               _buildCardSettingsMusicPicker(),
+            ]),
+            CardFieldLayout(<Widget>[
               _buildCardSettingsFileCustomPicker(),
               _buildCardSettingsTimePicker(),
             ]),
@@ -699,7 +704,8 @@ class _PonyExampleState extends State<PonyExample> {
       labelAlign: labelAlign,
       initialValue: _ponyModel.age,
       min: 1,
-      max: 30,
+      max: 17,
+      stepInterval: 2,
       validator: (value) {
         if (value == null) return 'Age is required.';
         if (value > 20) return 'No grown-ups allwed!';

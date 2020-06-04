@@ -1,5 +1,9 @@
 # Releases
 
+## [1.9.6] - TBD
+
+- add step interval support to number picker (thanks CoolONEOfficial)
+
 ## [1.9.5] - 6/4/2020
 
 - fixed `enabled` behavior for all controls
