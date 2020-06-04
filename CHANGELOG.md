@@ -1,6 +1,6 @@
 # Releases
 
-## [1.9.5] - TBD
+## [1.9.5] - 6/4/2020
 
 - fixed `enabled` behavior for all controls
 
