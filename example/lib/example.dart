@@ -40,8 +40,9 @@ class ExampleFormState extends State<ExampleForm> {
     _ponyModel = PonyModel();
   }
 
-  bool _autoValidate = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool _autoValidate = false;
 
   // keys for fields
   // this is desirable because the fields may change order, in this example
@@ -86,6 +87,7 @@ class ExampleFormState extends State<ExampleForm> {
   }
 
   void resetPressed() {
+    setState(() => _ponyModel = PonyModel());
     _formKey.currentState.reset();
   }
 

@@ -3,6 +3,9 @@
 ## [1.9.6] - TBD
 
 - add step interval support to number picker (thanks CoolONEOfficial)
+- fixed gesture click on `CardSettingsFilePicker`
+- constrined `CardSettingsFilePicker` photo size
+- reorganized example to be more readable
 
 ## [1.9.5] - 6/4/2020
 

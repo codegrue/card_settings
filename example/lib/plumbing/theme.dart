@@ -44,6 +44,13 @@ ThemeData _buildTheme(Brightness brightness) {
           labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
         ),
       );
+    case Brightness.dark:
+      return ThemeData(
+        primarySwatch: Colors.teal,
+        brightness: brightness,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        backgroundColor: Colors.black,
+      );
     default:
       return ThemeData(
         primarySwatch: Colors.teal,

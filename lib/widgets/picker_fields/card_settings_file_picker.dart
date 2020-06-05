@@ -186,18 +186,13 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
           ? null
           : GestureDetector(
               onTap: () {
-                if (widget.enabled) onTap;
+                if (widget.enabled) onTap();
               },
               child: CSControl(
                 nameWidget: widget?.requiredIndicator != null
                     ? Text((widget?.label ?? "") + ' *')
                     : Text(widget?.label),
-                contentWidget: Text(
-                  formattedValue,
-                  style: contentStyle(context, value, widget.enabled),
-                  textAlign: widget?.contentAlign ??
-                      CardSettings.of(context).contentAlign,
-                ),
+                contentWidget: _buildFieldContent(formattedValue),
                 style: CSWidgetStyle(icon: widget?.icon),
               ),
             ),
@@ -207,7 +202,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
   Widget _buildMaterialFilePicker(String formattedValue) {
     return GestureDetector(
       onTap: () {
-        if (widget.enabled) onTap;
+        if (widget.enabled) onTap();
       },
       child: CardSettingsField(
         label: widget?.label ?? "File",
@@ -226,7 +221,15 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
 
   Widget _buildFieldContent(String formattedValue) {
     if (widget.fileType == FileTypeCross.image && value != null) {
-      return Image.memory(value);
+      return ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: 500.0, maxHeight: 300.0),
+          child: Container(
+            padding: showCupertino(context, widget.showMaterialonIOS)
+                ? EdgeInsets.symmetric(vertical: 10.0)
+                : null,
+            alignment: Alignment.centerRight,
+            child: Image.memory(value),
+          ));
     } else {
       return Text(
         formattedValue,
