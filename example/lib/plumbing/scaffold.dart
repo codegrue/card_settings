@@ -18,7 +18,7 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
   bool _showMaterialonIOS = true;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<ExampleFormState> _formStateKey =
+  final GlobalKey<ExampleFormState> _formWidgetKey =
       GlobalKey<ExampleFormState>();
 
   @override
@@ -26,7 +26,7 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
     var orientation = MediaQuery.of(context).orientation;
 
     final form = ExampleForm(orientation, _showMaterialonIOS, _scaffoldKey,
-        key: _formStateKey, onValueChanged: showSnackBar);
+        key: _formWidgetKey, onValueChanged: showSnackBar);
 
     return Scaffold(
       key: _scaffoldKey,
@@ -46,12 +46,16 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
           _cupertinoSwitchButton(),
           IconButton(
             icon: Icon(Icons.save),
-            onPressed: null, //_formStateKey.currentState.savePressed,
+            onPressed: (_formWidgetKey.currentState == null)
+                ? null
+                : _formWidgetKey.currentState.savePressed,
           ),
         ],
         leading: IconButton(
           icon: Icon(Icons.refresh),
-          onPressed: null, //_formStateKey.currentState.resetPressed,
+          onPressed: (_formWidgetKey.currentState == null)
+              ? null
+              : _formWidgetKey.currentState.resetPressed,
         ),
       ),
       body: form,
