@@ -1,25 +1,37 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:card_settings/card_settings.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:file_picker_cross/file_picker_cross.dart';
 
-import 'results.dart';
-import 'model.dart';
+import 'plumbing/results.dart';
+import 'plumbing/model.dart';
 
-class PonyExample extends StatefulWidget {
+typedef LabelledValueChanged<T, U> = void Function(T label, U value);
+
+class ExampleForm extends StatefulWidget {
+  const ExampleForm(
+    this.orientation,
+    this.showMaterialonIOS,
+    this.scaffoldKey, {
+    this.onValueChanged,
+    Key key,
+  }) : super(key: key);
+
+  final Orientation orientation;
+  final bool showMaterialonIOS;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+
+  final LabelledValueChanged<String, dynamic> onValueChanged;
+
   @override
-  _PonyExampleState createState() => _PonyExampleState();
+  ExampleFormState createState() => ExampleFormState();
 }
 
-class _PonyExampleState extends State<PonyExample> {
+class ExampleFormState extends State<ExampleForm> {
   PonyModel _ponyModel;
 
   @override
@@ -28,15 +40,13 @@ class _PonyExampleState extends State<PonyExample> {
     _ponyModel = PonyModel();
   }
 
-  // once the form submits, this is flipped to true, and fields can then go into autovalidate mode.
   bool _autoValidate = false;
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  // control state only works if the field order never changes.
-  // to support orientation changes, we assign a unique key to each field
-  // if you only have one orientation, the _formKey is sufficient
+  // keys for fields
+  // this is desirable because the fields may change order, in this example
+  // when the screen is rotated, and this will preserve what state is
+  // attached to what field.
   final GlobalKey<FormState> _nameKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _typeKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _ageKey = GlobalKey<FormState>();
@@ -63,72 +73,35 @@ class _PonyExampleState extends State<PonyExample> {
   final GlobalKey<FormState> _passwordKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _sliderKey = GlobalKey<FormState>();
 
-  bool _showMaterialonIOS = true;
+  Future savePressed() async {
+    final form = _formKey.currentState;
+
+    if (form.validate()) {
+      form.save();
+      showResults(context, _ponyModel);
+    } else {
+      showErrors(context);
+      setState(() => _autoValidate = true);
+    }
+  }
+
+  void resetPressed() {
+    _formKey.currentState.reset();
+  }
 
   @override
   Widget build(BuildContext context) {
-    var orientation = MediaQuery.of(context).orientation;
-
-    return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        title: Text("My Little Pony"),
-        actions: <Widget>[
-          IconButton(
-            icon: Theme.of(context).brightness == Brightness.dark
-                ? Icon(Icons.brightness_7)
-                : Icon(Icons.brightness_4),
-            onPressed: () => DynamicTheme.of(context).setBrightness(
-                Theme.of(context).brightness == Brightness.dark
-                    ? Brightness.light
-                    : Brightness.dark),
-          ),
-          _cupertinoSwitchButton(),
-          IconButton(
-            icon: Icon(Icons.save),
-            onPressed: _savePressed,
-          ),
-        ],
-        leading: IconButton(
-          icon: Icon(Icons.refresh),
-          onPressed: _resetPressed,
-        ),
-      ),
-      body: Form(
-        key: _formKey,
-        child: (orientation == Orientation.portrait)
-            ? _buildPortraitLayout()
-            : _buildLandscapeLayout(),
-      ),
+    return Form(
+      key: _formKey,
+      child: (widget.orientation == Orientation.portrait)
+          ? _buildPortraitLayout()
+          : _buildLandscapeLayout(),
     );
   }
-
-  Widget _cupertinoSwitchButton() {
-    // dont show this button on web
-    if (kIsWeb) return Container();
-
-    return Container(
-      child: Platform.isIOS
-          ? IconButton(
-              icon: (_showMaterialonIOS)
-                  ? FaIcon(FontAwesomeIcons.apple)
-                  : Icon(Icons.android),
-              onPressed: () {
-                setState(() {
-                  _showMaterialonIOS = !_showMaterialonIOS;
-                });
-              },
-            )
-          : null,
-    );
-  }
-
-  /* CARDSETTINGS FOR EACH LAYOUT */
 
   CardSettings _buildPortraitLayout() {
     return CardSettings.sectioned(
-      showMaterialonIOS: _showMaterialonIOS,
+      showMaterialonIOS: widget.showMaterialonIOS,
       labelWidth: 100,
       contentAlign: TextAlign.right,
       children: <CardSettingsSection>[
@@ -208,7 +181,7 @@ class _PonyExampleState extends State<PonyExample> {
 
   CardSettings _buildLandscapeLayout() {
     return CardSettings.sectioned(
-      showMaterialonIOS: _showMaterialonIOS,
+      showMaterialonIOS: widget.showMaterialonIOS,
       labelPadding: 12.0,
       children: <CardSettingsSection>[
         CardSettingsSection(
@@ -308,13 +281,11 @@ class _PonyExampleState extends State<PonyExample> {
     );
   }
 
-  /* BUILDERS FOR EACH FIELD */
-
   CardSettingsButton _buildCardSettingsButton_Reset() {
     return CardSettingsButton(
       label: 'RESET',
       isDestructive: true,
-      onPressed: _resetPressed,
+      onPressed: resetPressed,
       backgroundColor: Colors.red,
       textColor: Colors.white,
     );
@@ -324,7 +295,7 @@ class _PonyExampleState extends State<PonyExample> {
     return CardSettingsButton(
       label: 'SAVE',
       backgroundColor: Colors.green,
-      onPressed: _savePressed,
+      onPressed: savePressed,
     );
   }
 
@@ -345,7 +316,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.password = value;
         });
-        _showSnackBar('Password', value);
+        widget.onValueChanged('Password', value);
       },
     );
   }
@@ -368,7 +339,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.email = value;
         });
-        _showSnackBar('Email', value);
+        widget.onValueChanged('Email', value);
       },
     );
   }
@@ -389,7 +360,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.boxOfficePhone = value;
         });
-        _showSnackBar('Box Office', value);
+        widget.onValueChanged('Box Office', value);
       },
     );
   }
@@ -409,7 +380,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.ticketPrice = value;
         });
-        _showSnackBar('Ticket Price', value);
+        widget.onValueChanged('Ticket Price', value);
       },
     );
   }
@@ -429,7 +400,7 @@ class _PonyExampleState extends State<PonyExample> {
           _ponyModel.showDateTime =
               updateJustTime(value, _ponyModel.showDateTime);
         });
-        _showSnackBar('Show Time', value);
+        widget.onValueChanged('Show Time', value);
       },
     );
   }
@@ -447,7 +418,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.showDateTime = value;
         });
-        _showSnackBar(
+        widget.onValueChanged(
             'Show Date', updateJustDate(value, _ponyModel.showDateTime));
       },
     );
@@ -530,7 +501,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.showDateTime = value;
         });
-        _showSnackBar(
+        widget.onValueChanged(
             'Show Date', updateJustDate(value, _ponyModel.showDateTime));
       },
     );
@@ -561,7 +532,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.weight = value;
         });
-        _showSnackBar('Weight', value);
+        widget.onValueChanged('Weight', value);
       },
     );
   }
@@ -578,7 +549,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.height = value;
         });
-        _showSnackBar('Height', value);
+        widget.onValueChanged('Height', value);
       },
     );
   }
@@ -595,7 +566,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.type = colorToString(value);
         });
-        _showSnackBar('Spot', value);
+        widget.onValueChanged('Spot', value);
       },
     );
   }
@@ -610,7 +581,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.hasSpots = value;
         });
-        _showSnackBar('Has Spots?', value);
+        widget.onValueChanged('Has Spots?', value);
       },
     );
   }
@@ -631,7 +602,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.maneColor = colorToString(value);
         });
-        _showSnackBar('Mane', value);
+        widget.onValueChanged('Mane', value);
       },
     );
   }
@@ -652,7 +623,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.coatColor = colorToString(value);
         });
-        _showSnackBar('Coat', value);
+        widget.onValueChanged('Coat', value);
       },
     );
   }
@@ -675,7 +646,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.hobbies = value;
         });
-        _showSnackBar('Hobbies', value);
+        widget.onValueChanged('Hobbies', value);
       },
     );
   }
@@ -691,7 +662,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.description = value;
         });
-        _showSnackBar('Description', value);
+        widget.onValueChanged('Description', value);
       },
     );
   }
@@ -717,7 +688,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.age = value;
         });
-        _showSnackBar('Age', value);
+        widget.onValueChanged('Age', value);
       },
     );
   }
@@ -740,7 +711,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.type = value;
         });
-        _showSnackBar('Type', value);
+        widget.onValueChanged('Type', value);
       },
     );
   }
@@ -762,7 +733,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.name = value;
         });
-        _showSnackBar('Name', value);
+        widget.onValueChanged('Name', value);
       },
     );
   }
@@ -784,7 +755,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.gender = value;
         });
-        _showSnackBar('Gender', value);
+        widget.onValueChanged('Gender', value);
       },
     );
   }
@@ -811,7 +782,7 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.style = value;
         });
-        _showSnackBar('Style', value);
+        widget.onValueChanged('Style', value);
       },
     );
   }
@@ -831,36 +802,8 @@ class _PonyExampleState extends State<PonyExample> {
         setState(() {
           _ponyModel.rating = value;
         });
-        _showSnackBar('Rating', value);
+        widget.onValueChanged('Rating', value);
       },
-    );
-  }
-
-  /* EVENT HANDLERS */
-
-  Future _savePressed() async {
-    final form = _formKey.currentState;
-
-    if (form.validate()) {
-      form.save();
-      showResults(context, _ponyModel);
-    } else {
-      showErrors(context);
-      setState(() => _autoValidate = true);
-    }
-  }
-
-  void _resetPressed() {
-    _formKey.currentState.reset();
-  }
-
-  void _showSnackBar(String label, dynamic value) {
-    _scaffoldKey.currentState.removeCurrentSnackBar();
-    _scaffoldKey.currentState.showSnackBar(
-      SnackBar(
-        duration: Duration(seconds: 1),
-        content: Text(label + ' = ' + value.toString()),
-      ),
     );
   }
 }
