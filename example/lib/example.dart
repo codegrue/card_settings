@@ -34,10 +34,21 @@ class ExampleForm extends StatefulWidget {
 class ExampleFormState extends State<ExampleForm> {
   PonyModel _ponyModel;
 
+  bool loaded = false;
+
   @override
   void initState() {
     super.initState();
+
+    initModel();
+  }
+
+  void initModel() async {
     _ponyModel = PonyModel();
+
+    await _ponyModel.loadMedia();
+
+    setState(() => loaded = true);
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -87,18 +98,25 @@ class ExampleFormState extends State<ExampleForm> {
   }
 
   void resetPressed() {
-    setState(() => _ponyModel = PonyModel());
+    setState(() => loaded = false);
+
+    initModel();
+
     _formKey.currentState.reset();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: (widget.orientation == Orientation.portrait)
-          ? _buildPortraitLayout()
-          : _buildLandscapeLayout(),
-    );
+    if (loaded) {
+      return Form(
+        key: _formKey,
+        child: (widget.orientation == Orientation.portrait)
+            ? _buildPortraitLayout()
+            : _buildLandscapeLayout(),
+      );
+    } else {
+      return Center(child: CircularProgressIndicator());
+    }
   }
 
   CardSettings _buildPortraitLayout() {

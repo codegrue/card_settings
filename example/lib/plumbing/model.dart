@@ -4,10 +4,6 @@ import 'dart:typed_data';
 import 'package:flutter/services.dart';
 
 class PonyModel {
-  PonyModel() {
-    loadMedia();
-  }
-
   String name = 'Twilight Sparkle';
   String type = 'U';
   int age = 7;
@@ -34,7 +30,7 @@ class PonyModel {
   String email = 'me@nowhere.org';
   String password = 'secret1';
   double rating = 0.25;
-  Uint8List photo = Uint8List(1024 * 1024 * 15);
+  Uint8List photo;
   Uint8List video = Uint8List(1024 * 1024 * 15);
   Uint8List audio = Uint8List(1024 * 4);
   Uint8List customFile = Uint8List(4);

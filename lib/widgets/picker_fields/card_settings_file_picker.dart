@@ -29,6 +29,8 @@ class CardSettingsFilePicker extends FormField<Uint8List> {
     this.unattachDialogConfirm = 'Unattach',
     this.onChanged,
     this.contentAlign,
+    this.maxThumbnailWidth = 300,
+    this.maxThumbnailHeight = 300,
     this.icon,
     this.labelAlign,
     this.requiredIndicator,
@@ -61,6 +63,10 @@ class CardSettingsFilePicker extends FormField<Uint8List> {
   final TextAlign contentAlign;
 
   final Icon icon;
+
+  final double maxThumbnailWidth;
+
+  final double maxThumbnailHeight;
 
   @override
   final bool enabled;
@@ -222,7 +228,9 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
   Widget _buildFieldContent(String formattedValue) {
     if (widget.fileType == FileTypeCross.image && value != null) {
       return ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 500.0, maxHeight: 300.0),
+          constraints: BoxConstraints(
+              maxWidth: widget.maxThumbnailWidth,
+              maxHeight: widget.maxThumbnailHeight),
           child: Container(
             padding: showCupertino(context, widget.showMaterialonIOS)
                 ? EdgeInsets.symmetric(vertical: 10.0)
