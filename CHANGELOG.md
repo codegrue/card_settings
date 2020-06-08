@@ -1,11 +1,12 @@
 # Releases
 
-## [1.9.6] - TBD
+## [1.9.6] - 6/5/2020
 
 - add step interval support to number picker (thanks CoolONEOfficial)
 - fixed gesture click on `CardSettingsFilePicker`
 - constrined `CardSettingsFilePicker` photo size
 - reorganized example to be more readable
+- removed hard coded "Color for" from `CardSettingsColorPicker` title to allow localization
 
 ## [1.9.5] - 6/4/2020
 

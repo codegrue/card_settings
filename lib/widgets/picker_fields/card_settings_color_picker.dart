@@ -75,7 +75,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   void _showDialog() {
     pickerColor = value;
 
-    var title = "Color for " + widget?.label;
+    var title = widget.label;
 
     var cupertinoColors = showCupertino(context, widget.showMaterialonIOS);
     var headerColor = (cupertinoColors) ? Colors.white : null;
