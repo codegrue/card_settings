@@ -1,6 +1,6 @@
 # Releases
 
-## [1.9.6] - 6/5/2020
+## [1.9.6] - 6/8/2020
 
 - add step interval support to number picker (thanks CoolONEOfficial)
 - fixed gesture click on `CardSettingsFilePicker`
