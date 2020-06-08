@@ -1,5 +1,9 @@
 # Releases
 
+## [1.9.7] - TBD
+
+- ensure all widgets have the `labelWidth` property
+
 ## [1.9.6] - 6/8/2020
 
 - add step interval support to number picker (thanks CoolONEOfficial)

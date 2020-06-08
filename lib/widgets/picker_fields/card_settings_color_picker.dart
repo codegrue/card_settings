@@ -9,11 +9,13 @@ import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
 import '../../card_settings.dart';
+import '../../models/common_card_field_attributes.dart';
 
 enum CardSettingsColorPickerType { colors, material, block }
 
 /// This is the color picker field
-class CardSettingsColorPicker extends FormField<Color> {
+class CardSettingsColorPicker extends FormField<Color>
+    implements CommonCardFieldAttributes {
   CardSettingsColorPicker({
     Key key,
     bool autovalidate: false,
@@ -26,6 +28,7 @@ class CardSettingsColorPicker extends FormField<Color> {
     this.contentAlign,
     this.icon,
     this.labelAlign,
+    this.labelWidth,
     this.pickerType = CardSettingsColorPickerType.colors,
     this.requiredIndicator,
     this.label = "Label",
@@ -41,15 +44,22 @@ class CardSettingsColorPicker extends FormField<Color> {
 
   final ValueChanged<Color> onChanged;
 
+  @override
   final TextAlign labelAlign;
 
+  @override
+  final double labelWidth;
+
   /// here for consistency, but does nothing.
+  @override
   final TextAlign contentAlign;
 
+  @override
   final Icon icon;
 
   final Widget requiredIndicator;
 
+  @override
   final String label;
 
   @override
@@ -174,6 +184,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
       child: CardSettingsField(
         label: widget?.label,
         labelAlign: widget?.labelAlign,
+        labelWidth: widget?.labelWidth,
         visible: widget?.visible,
         icon: widget?.icon,
         requiredIndicator: widget?.requiredIndicator,

@@ -54,10 +54,8 @@ class CardSettingsPhone extends StatelessWidget
   @override
   final TextAlign contentAlign;
 
-  @override
   final String hintText;
 
-  @override
   final String prefixText;
 
   final int initialValue;

@@ -9,9 +9,11 @@ import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
 import '../../card_settings.dart';
+import '../../models/common_card_field_attributes.dart';
 
 /// This is a selection widget that allows an arbitrary list of options to be provided.
-class CardSettingsCheckboxPicker extends FormField<List<String>> {
+class CardSettingsCheckboxPicker extends FormField<List<String>>
+    implements CommonCardFieldAttributes {
   CardSettingsCheckboxPicker({
     Key key,
     List<String> initialValues,
@@ -25,6 +27,7 @@ class CardSettingsCheckboxPicker extends FormField<List<String>> {
     this.contentAlign,
     this.icon,
     this.labelAlign,
+    this.labelWidth,
     this.requiredIndicator,
     this.options,
     this.showMaterialonIOS,
@@ -38,15 +41,22 @@ class CardSettingsCheckboxPicker extends FormField<List<String>> {
               (field as _CardSettingsCheckboxPickerState)._build(field.context),
         );
 
+  @override
   final String label;
 
   @override
   final bool enabled;
 
+  @override
   final TextAlign labelAlign;
 
+  @override
+  final double labelWidth;
+
+  @override
   final TextAlign contentAlign;
 
+  @override
   final Icon icon;
 
   final Widget requiredIndicator;
@@ -151,6 +161,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
       child: CardSettingsField(
         label: widget?.label,
         labelAlign: widget?.labelAlign,
+        labelWidth: widget?.labelWidth,
         visible: widget?.visible,
         icon: widget?.icon,
         requiredIndicator: widget?.requiredIndicator,

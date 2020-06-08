@@ -5,13 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../card_settings.dart';
+import '../../models/common_card_field_attributes.dart';
 
 /// This is a password field. It obscures the entered text.
-class CardSettingsInt extends CardSettingsText {
+class CardSettingsInt extends CardSettingsText
+    implements CommonCardFieldAttributes {
   CardSettingsInt({
     Key key,
     String label: 'Label',
     TextAlign labelAlign,
+    double labelWidth,
     TextAlign contentAlign,
     String hintText,
     int initialValue: 0,
@@ -41,6 +44,7 @@ class CardSettingsInt extends CardSettingsText {
           label: label,
           hintText: hintText,
           labelAlign: labelAlign,
+          labelWidth: labelWidth,
           showMaterialonIOS: showMaterialonIOS,
           contentAlign: contentAlign,
           initialValue: initialValue?.toString(),

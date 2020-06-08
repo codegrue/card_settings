@@ -13,8 +13,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
+import '../../models/common_card_field_attributes.dart';
+
 /// This is the file picker field
-class CardSettingsFilePicker extends FormField<Uint8List> {
+class CardSettingsFilePicker extends FormField<Uint8List>
+    implements CommonCardFieldAttributes {
   CardSettingsFilePicker({
     Key key,
     bool autovalidate: false,
@@ -33,6 +36,7 @@ class CardSettingsFilePicker extends FormField<Uint8List> {
     this.maxThumbnailHeight = 300,
     this.icon,
     this.labelAlign,
+    this.labelWidth,
     this.requiredIndicator,
     this.style,
     this.showMaterialonIOS,
@@ -50,6 +54,7 @@ class CardSettingsFilePicker extends FormField<Uint8List> {
 
   final ValueChanged<Uint8List> onChanged;
 
+  @override
   final String label;
 
   final String unattachDialogTitle;
@@ -58,10 +63,16 @@ class CardSettingsFilePicker extends FormField<Uint8List> {
 
   final String unattachDialogCancel;
 
+  @override
   final TextAlign labelAlign;
 
+  @override
+  final double labelWidth;
+
+  @override
   final TextAlign contentAlign;
 
+  @override
   final Icon icon;
 
   final double maxThumbnailWidth;
@@ -213,6 +224,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
       child: CardSettingsField(
         label: widget?.label ?? "File",
         labelAlign: widget?.labelAlign,
+        labelWidth: widget?.labelWidth,
         visible: widget?.visible ?? true,
         icon: widget?.icon ?? Icon(Icons.attach_file),
         requiredIndicator: widget?.requiredIndicator,

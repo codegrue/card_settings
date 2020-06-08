@@ -122,8 +122,8 @@ class ExampleFormState extends State<ExampleForm> {
   CardSettings _buildPortraitLayout() {
     return CardSettings.sectioned(
       showMaterialonIOS: widget.showMaterialonIOS,
-      labelWidth: 100,
-      contentAlign: TextAlign.right,
+      labelWidth: 300,
+      //contentAlign: TextAlign.right,
       children: <CardSettingsSection>[
         CardSettingsSection(
           header: CardSettingsHeader(
@@ -321,7 +321,6 @@ class ExampleFormState extends State<ExampleForm> {
 
   CardSettingsPassword _buildCardSettingsPassword() {
     return CardSettingsPassword(
-      labelWidth: 150.0,
       key: _passwordKey,
       icon: Icon(Icons.lock),
       initialValue: _ponyModel.password,
@@ -343,7 +342,6 @@ class ExampleFormState extends State<ExampleForm> {
 
   CardSettingsEmail _buildCardSettingsEmail() {
     return CardSettingsEmail(
-      labelWidth: 150.0,
       key: _emailKey,
       icon: Icon(Icons.person),
       initialValue: _ponyModel.email,

@@ -8,9 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 import '../../card_settings.dart';
+import '../../models/common_card_field_attributes.dart';
 
 /// This field allows a time to be selected.
-class CardSettingsTimePicker extends FormField<TimeOfDay> {
+class CardSettingsTimePicker extends FormField<TimeOfDay>
+    implements CommonCardFieldAttributes {
   CardSettingsTimePicker({
     Key key,
     FormFieldSetter<TimeOfDay> onSaved,
@@ -23,6 +25,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
     this.contentAlign,
     this.requiredIndicator,
     this.labelAlign,
+    this.labelWidth,
     this.label = 'Label',
     this.icon,
     this.style,
@@ -39,10 +42,13 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
 
   final ValueChanged<TimeOfDay> onChanged;
 
+  @override
   final TextAlign labelAlign;
 
+  @override
   final TextAlign contentAlign;
 
+  @override
   final Icon icon;
 
   @override
@@ -52,7 +58,11 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
 
   final bool visible;
 
+  @override
   final String label;
+
+  @override
+  final double labelWidth;
 
   final TextStyle style;
 
@@ -174,6 +184,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
       child: CardSettingsField(
         label: widget?.label ?? "Time",
         labelAlign: widget?.labelAlign,
+        labelWidth: widget?.labelWidth,
         visible: widget?.visible ?? true,
         icon: widget?.icon ?? Icon(Icons.event),
         requiredIndicator: widget?.requiredIndicator,

@@ -108,10 +108,8 @@ class CardSettingsText extends FormField<String>
 
   final String unitLabel;
 
-  @override
   final String prefixText;
 
-  @override
   final String hintText;
 
   @override
@@ -381,7 +379,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
     return CardSettingsField(
       label: widget.label,
       labelAlign: widget?.labelAlign,
-      labelWidth: widget.labelWidth,
+      labelWidth: widget?.labelWidth,
       visible: widget?.visible,
       unitLabel: widget?.unitLabel,
       icon: widget?.icon,
