@@ -6,11 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 import '../../card_settings.dart';
-import '../../models/common_card_field_attributes.dart';
+import '../../interfaces/common_field_attributes.dart';
 
 /// This is a currency field.
 class CardSettingsCurrency extends StatefulWidget
-    implements CommonCardFieldAttributes {
+    implements CommonFieldAttributes {
   CardSettingsCurrency({
     Key key,
     this.label: 'Label',
@@ -61,6 +61,7 @@ class CardSettingsCurrency extends StatefulWidget
   @override
   final Icon icon;
 
+  @override
   final Widget requiredIndicator;
 
   final String currencySymbol;
@@ -73,6 +74,7 @@ class CardSettingsCurrency extends StatefulWidget
 
   final int maxLength;
 
+  @override
   final bool visible;
 
   final bool enabled;
@@ -83,12 +85,16 @@ class CardSettingsCurrency extends StatefulWidget
 
   final bool autocorrect;
 
+  @override
   final bool autovalidate;
 
+  @override
   final FormFieldValidator<double> validator;
 
+  @override
   final FormFieldSetter<double> onSaved;
 
+  @override
   final ValueChanged<double> onChanged;
 
   final TextEditingController controller;
@@ -105,6 +111,7 @@ class CardSettingsCurrency extends StatefulWidget
 
   final List<TextInputFormatter> inputFormatters;
 
+  @override
   final bool showMaterialonIOS;
 
   @override

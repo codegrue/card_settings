@@ -9,11 +9,11 @@ import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:intl/intl.dart';
 
 import '../../card_settings.dart';
-import '../../models/common_card_field_attributes.dart';
+import '../../interfaces/common_field_attributes.dart';
 
 /// This is the date picker field
 class CardSettingsDatePicker extends FormField<DateTime>
-    implements CommonCardFieldAttributes {
+    implements CommonFieldAttributes {
   CardSettingsDatePicker({
     Key key,
     bool autovalidate: false,
@@ -43,6 +43,7 @@ class CardSettingsDatePicker extends FormField<DateTime>
             builder: (FormFieldState<DateTime> field) =>
                 (field as _CardSettingsDatePickerState)._build(field.context));
 
+  @override
   final ValueChanged<DateTime> onChanged;
 
   @override
@@ -69,12 +70,15 @@ class CardSettingsDatePicker extends FormField<DateTime>
   @override
   final Icon icon;
 
+  @override
   final Widget requiredIndicator;
 
+  @override
   final bool visible;
 
   final TextStyle style;
 
+  @override
   final bool showMaterialonIOS;
 
   @override

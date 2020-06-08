@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../card_settings.dart';
-import '../../models/common_card_field_attributes.dart';
+import '../../interfaces/common_field_attributes.dart';
+import '../../interfaces/text_field_attributes.dart';
 
 /// This is a phone number field. It's designed for US numbers
 class CardSettingsPhone extends StatelessWidget
-    implements CommonCardFieldAttributes {
+    implements CommonFieldAttributes, TextFieldAttributes {
   CardSettingsPhone({
     Key key,
     this.label: 'Label',
@@ -54,6 +55,7 @@ class CardSettingsPhone extends StatelessWidget
   @override
   final TextAlign contentAlign;
 
+  @override
   final String hintText;
 
   final String prefixText;
@@ -69,8 +71,10 @@ class CardSettingsPhone extends StatelessWidget
   @override
   final Icon icon;
 
+  @override
   final Widget requiredIndicator;
 
+  @override
   final bool visible;
 
   final bool enabled;
@@ -81,12 +85,16 @@ class CardSettingsPhone extends StatelessWidget
 
   final bool autocorrect;
 
+  @override
   final bool autovalidate;
 
+  @override
   final FormFieldValidator<int> validator;
 
+  @override
   final FormFieldSetter<int> onSaved;
 
+  @override
   final ValueChanged<int> onChanged;
 
   final TextEditingController controller;
@@ -103,6 +111,7 @@ class CardSettingsPhone extends StatelessWidget
 
   final List<TextInputFormatter> inputFormatters;
 
+  @override
   final bool showMaterialonIOS;
 
   @override

@@ -4,11 +4,11 @@
 import 'package:flutter/material.dart';
 
 import '../../card_settings.dart';
-import '../../models/common_card_field_attributes.dart';
+import '../../interfaces/common_field_attributes.dart';
 
 /// This is a list picker that allows for a range of numbers to be speficied as pptions.
 class CardSettingsNumberPicker extends StatelessWidget
-    implements CommonCardFieldAttributes {
+    implements CommonFieldAttributes {
   CardSettingsNumberPicker({
     Key key,
     this.label: 'Label',
@@ -39,21 +39,28 @@ class CardSettingsNumberPicker extends StatelessWidget
   final TextAlign contentAlign;
   @override
   final Icon icon;
+  @override
   final Widget requiredIndicator;
   final int initialValue;
   final int min;
   final int max;
   final int stepInterval;
+  @override
   final bool autovalidate;
+  @override
   final bool visible;
+  @override
   final bool showMaterialonIOS;
   final bool enabled;
   @override
   final double labelWidth;
 
   // Events
+  @override
   final FormFieldValidator<int> validator;
+  @override
   final FormFieldSetter<int> onSaved;
+  @override
   final ValueChanged<int> onChanged;
 
   @override

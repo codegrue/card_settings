@@ -9,13 +9,13 @@ import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
 import '../../card_settings.dart';
-import '../../models/common_card_field_attributes.dart';
+import '../../interfaces/common_field_attributes.dart';
 
 enum CardSettingsColorPickerType { colors, material, block }
 
 /// This is the color picker field
 class CardSettingsColorPicker extends FormField<Color>
-    implements CommonCardFieldAttributes {
+    implements CommonFieldAttributes {
   CardSettingsColorPicker({
     Key key,
     bool autovalidate: false,
@@ -42,6 +42,7 @@ class CardSettingsColorPicker extends FormField<Color>
             builder: (FormFieldState<Color> field) =>
                 (field as _CardSettingsColorPickerState)._build(field.context));
 
+  @override
   final ValueChanged<Color> onChanged;
 
   @override
@@ -57,6 +58,7 @@ class CardSettingsColorPicker extends FormField<Color>
   @override
   final Icon icon;
 
+  @override
   final Widget requiredIndicator;
 
   @override
@@ -65,8 +67,10 @@ class CardSettingsColorPicker extends FormField<Color>
   @override
   final bool enabled;
 
+  @override
   final bool visible;
 
+  @override
   final bool showMaterialonIOS;
 
   final CardSettingsColorPickerType pickerType;

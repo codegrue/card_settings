@@ -9,11 +9,11 @@ import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
 import '../../card_settings.dart';
-import '../../models/common_card_field_attributes.dart';
+import '../../interfaces/common_field_attributes.dart';
 
 /// This is a list picker that allows an arbitrary list of options to be provided.
 class CardSettingsListPicker extends FormField<String>
-    implements CommonCardFieldAttributes {
+    implements CommonFieldAttributes {
   CardSettingsListPicker({
     Key key,
     String initialValue,
@@ -44,6 +44,7 @@ class CardSettingsListPicker extends FormField<String>
             builder: (FormFieldState<String> field) =>
                 (field as _CardSettingsListPickerState)._build(field.context));
 
+  @override
   final ValueChanged<String> onChanged;
 
   @override
@@ -66,14 +67,17 @@ class CardSettingsListPicker extends FormField<String>
   @override
   final Icon icon;
 
+  @override
   final Widget requiredIndicator;
 
   final List<String> options;
 
   final List<String> values;
 
+  @override
   final bool visible;
 
+  @override
   final bool showMaterialonIOS;
 
   @override

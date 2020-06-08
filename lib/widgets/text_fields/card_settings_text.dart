@@ -10,11 +10,12 @@ import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../card_settings.dart';
-import '../../models/common_card_field_attributes.dart';
+import '../../interfaces/common_field_attributes.dart';
+import '../../interfaces/text_field_attributes.dart';
 
 /// This is a standard one line text entry  It's based on the [TextFormField] widget.
 class CardSettingsText extends FormField<String>
-    implements CommonCardFieldAttributes {
+    implements CommonFieldAttributes, TextFieldAttributes {
   CardSettingsText({
     Key key,
     String initialValue,
@@ -71,6 +72,7 @@ class CardSettingsText extends FormField<String>
               (field as _CardSettingsTextState)._build(field.context),
         );
 
+  @override
   final ValueChanged<String> onChanged;
 
   final TextEditingController controller;
@@ -110,11 +112,13 @@ class CardSettingsText extends FormField<String>
 
   final String prefixText;
 
+  @override
   final String hintText;
 
   @override
   final Icon icon;
 
+  @override
   final Widget requiredIndicator;
 
   final bool contentOnNewLine;
@@ -125,6 +129,7 @@ class CardSettingsText extends FormField<String>
 
   final bool showCounter;
 
+  @override
   final bool visible;
 
   final bool autofocus;
@@ -133,6 +138,7 @@ class CardSettingsText extends FormField<String>
 
   final bool autocorrect;
 
+  @override
   final bool showMaterialonIOS;
 
   ///Since the CupertinoTextField does not support onSaved, please use [onChanged] or [onFieldSubmitted] instead

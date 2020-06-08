@@ -122,8 +122,8 @@ class ExampleFormState extends State<ExampleForm> {
   CardSettings _buildPortraitLayout() {
     return CardSettings.sectioned(
       showMaterialonIOS: widget.showMaterialonIOS,
-      labelWidth: 300,
-      //contentAlign: TextAlign.right,
+      labelWidth: 150,
+      contentAlign: TextAlign.right,
       children: <CardSettingsSection>[
         CardSettingsSection(
           header: CardSettingsHeader(

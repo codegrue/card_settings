@@ -8,11 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 import '../../card_settings.dart';
-import '../../models/common_card_field_attributes.dart';
+import '../../interfaces/common_field_attributes.dart';
 
 /// This is a field that allows a boolean to be set via a switch widget.
 class CardSettingsSwitch extends FormField<bool>
-    implements CommonCardFieldAttributes {
+    implements CommonFieldAttributes {
   CardSettingsSwitch({
     Key key,
     bool autovalidate: false,
@@ -58,16 +58,20 @@ class CardSettingsSwitch extends FormField<bool>
   @override
   final Icon icon;
 
+  @override
   final Widget requiredIndicator;
 
   final String trueLabel;
 
   final String falseLabel;
 
+  @override
   final ValueChanged<bool> onChanged;
 
+  @override
   final bool visible;
 
+  @override
   final bool showMaterialonIOS;
 
   @override

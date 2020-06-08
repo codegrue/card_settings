@@ -13,11 +13,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
-import '../../models/common_card_field_attributes.dart';
+import '../../interfaces/common_field_attributes.dart';
 
 /// This is the file picker field
 class CardSettingsFilePicker extends FormField<Uint8List>
-    implements CommonCardFieldAttributes {
+    implements CommonFieldAttributes {
   CardSettingsFilePicker({
     Key key,
     bool autovalidate: false,
@@ -52,6 +52,7 @@ class CardSettingsFilePicker extends FormField<Uint8List>
             builder: (FormFieldState<Uint8List> field) =>
                 (field as _CardSettingsFilePickerState)._build(field.context));
 
+  @override
   final ValueChanged<Uint8List> onChanged;
 
   @override
@@ -82,12 +83,15 @@ class CardSettingsFilePicker extends FormField<Uint8List>
   @override
   final bool enabled;
 
+  @override
   final Widget requiredIndicator;
 
+  @override
   final bool visible;
 
   final TextStyle style;
 
+  @override
   final bool showMaterialonIOS;
 
   final FileTypeCross fileType;
@@ -238,6 +242,9 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
   }
 
   Widget _buildFieldContent(String formattedValue) {
+    var contentAlign =
+        widget?.contentAlign ?? CardSettings.of(context).contentAlign;
+
     if (widget.fileType == FileTypeCross.image && value != null) {
       return ConstrainedBox(
           constraints: BoxConstraints(
@@ -247,15 +254,16 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
             padding: showCupertino(context, widget.showMaterialonIOS)
                 ? EdgeInsets.symmetric(vertical: 10.0)
                 : null,
-            alignment: Alignment.centerRight,
+            alignment: (contentAlign == TextAlign.right)
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
             child: Image.memory(value),
           ));
     } else {
       return Text(
         formattedValue,
         style: contentStyle(context, value, widget.enabled),
-        textAlign:
-            widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+        textAlign: contentAlign,
       );
     }
   }
