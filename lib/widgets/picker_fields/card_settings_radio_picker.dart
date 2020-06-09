@@ -13,7 +13,7 @@ import '../../interfaces/common_field_attributes.dart';
 
 /// This is a list picker that allows an arbitrary list of options to be provided.
 class CardSettingsRadioPicker extends FormField<String>
-    implements CommonFieldAttributes {
+    implements ICommonFieldProperties {
   CardSettingsRadioPicker({
     Key key,
     String initialValue,

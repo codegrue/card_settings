@@ -10,7 +10,7 @@ import '../../interfaces/common_field_attributes.dart';
 
 /// This is a password field. It obscures the entered text.
 class CardSettingsDouble extends CardSettingsText
-    implements CommonFieldAttributes {
+    implements ICommonFieldProperties {
   CardSettingsDouble({
     Key key,
     String label: 'Label',

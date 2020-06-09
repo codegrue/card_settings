@@ -13,7 +13,7 @@ import '../../interfaces/common_field_attributes.dart';
 
 /// This is a list picker that allows an arbitrary list of options to be provided.
 class CardSettingsSelectionPicker extends FormField<String>
-    implements CommonFieldAttributes {
+    implements ICommonFieldProperties {
   CardSettingsSelectionPicker({
     Key key,
     String initialValue,

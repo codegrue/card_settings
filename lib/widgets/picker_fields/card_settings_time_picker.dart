@@ -12,7 +12,7 @@ import '../../interfaces/common_field_attributes.dart';
 
 /// This field allows a time to be selected.
 class CardSettingsTimePicker extends FormField<TimeOfDay>
-    implements CommonFieldAttributes {
+    implements ICommonFieldProperties {
   CardSettingsTimePicker({
     Key key,
     FormFieldSetter<TimeOfDay> onSaved,

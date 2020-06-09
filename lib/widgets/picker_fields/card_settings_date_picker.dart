@@ -13,7 +13,7 @@ import '../../interfaces/common_field_attributes.dart';
 
 /// This is the date picker field
 class CardSettingsDatePicker extends FormField<DateTime>
-    implements CommonFieldAttributes {
+    implements ICommonFieldProperties {
   CardSettingsDatePicker({
     Key key,
     bool autovalidate: false,

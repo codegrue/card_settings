@@ -15,7 +15,7 @@ enum CardSettingsColorPickerType { colors, material, block }
 
 /// This is the color picker field
 class CardSettingsColorPicker extends FormField<Color>
-    implements CommonFieldAttributes {
+    implements ICommonFieldProperties {
   CardSettingsColorPicker({
     Key key,
     bool autovalidate: false,

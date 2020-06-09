@@ -10,7 +10,7 @@ import '../../interfaces/text_field_attributes.dart';
 
 /// This is a password field. It obscures the entered text.
 class CardSettingsParagraph extends CardSettingsText
-    implements CommonFieldAttributes, TextFieldAttributes {
+    implements ICommonFieldProperties, ITextFieldProperties {
   CardSettingsParagraph({
     Key key,
     String label: 'Label',

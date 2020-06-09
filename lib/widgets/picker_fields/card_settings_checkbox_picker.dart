@@ -13,7 +13,7 @@ import '../../interfaces/common_field_attributes.dart';
 
 /// This is a selection widget that allows an arbitrary list of options to be provided.
 class CardSettingsCheckboxPicker extends FormField<List<String>>
-    implements CommonFieldAttributes {
+    implements ICommonFieldProperties {
   CardSettingsCheckboxPicker({
     Key key,
     List<String> initialValues,

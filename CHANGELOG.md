@@ -1,6 +1,6 @@
 # Releases
 
-## [1.9.7] - TBD
+## [1.9.7] - 6/9/2020
 
 - ensure all widgets have the `labelWidth` property
 - fixed bug with photos not honoring the alignment property

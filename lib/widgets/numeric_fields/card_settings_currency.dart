@@ -10,7 +10,7 @@ import '../../interfaces/common_field_attributes.dart';
 
 /// This is a currency field.
 class CardSettingsCurrency extends StatefulWidget
-    implements CommonFieldAttributes {
+    implements ICommonFieldProperties {
   CardSettingsCurrency({
     Key key,
     this.label: 'Label',

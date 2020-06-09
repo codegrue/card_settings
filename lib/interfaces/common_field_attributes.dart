@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-abstract class CommonFieldAttributes {
+// Interface to ensure that all widgets implement this minimum
+// set of properties
+abstract class ICommonFieldProperties {
   final String label = null;
   final double labelWidth = null;
   final TextAlign labelAlign = null;

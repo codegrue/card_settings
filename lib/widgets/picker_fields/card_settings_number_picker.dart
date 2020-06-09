@@ -8,7 +8,7 @@ import '../../interfaces/common_field_attributes.dart';
 
 /// This is a list picker that allows for a range of numbers to be speficied as pptions.
 class CardSettingsNumberPicker extends StatelessWidget
-    implements CommonFieldAttributes {
+    implements ICommonFieldProperties {
   CardSettingsNumberPicker({
     Key key,
     this.label: 'Label',

@@ -15,7 +15,7 @@ import '../../interfaces/text_field_attributes.dart';
 
 /// This is a standard one line text entry  It's based on the [TextFormField] widget.
 class CardSettingsText extends FormField<String>
-    implements CommonFieldAttributes, TextFieldAttributes {
+    implements ICommonFieldProperties, ITextFieldProperties {
   CardSettingsText({
     Key key,
     String initialValue,

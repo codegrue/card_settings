@@ -12,7 +12,7 @@ import '../../interfaces/common_field_attributes.dart';
 
 /// This is a field that allows a boolean to be set via a switch widget.
 class CardSettingsSwitch extends FormField<bool>
-    implements CommonFieldAttributes {
+    implements ICommonFieldProperties {
   CardSettingsSwitch({
     Key key,
     bool autovalidate: false,

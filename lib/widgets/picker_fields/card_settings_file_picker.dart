@@ -17,7 +17,7 @@ import '../../interfaces/common_field_attributes.dart';
 
 /// This is the file picker field
 class CardSettingsFilePicker extends FormField<Uint8List>
-    implements CommonFieldAttributes {
+    implements ICommonFieldProperties {
   CardSettingsFilePicker({
     Key key,
     bool autovalidate: false,

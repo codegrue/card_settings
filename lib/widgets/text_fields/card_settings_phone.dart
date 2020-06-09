@@ -10,7 +10,7 @@ import '../../interfaces/text_field_attributes.dart';
 
 /// This is a phone number field. It's designed for US numbers
 class CardSettingsPhone extends StatelessWidget
-    implements CommonFieldAttributes, TextFieldAttributes {
+    implements ICommonFieldProperties, ITextFieldProperties {
   CardSettingsPhone({
     Key key,
     this.label: 'Label',
