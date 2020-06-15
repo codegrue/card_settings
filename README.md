@@ -73,25 +73,31 @@ All fields in this package are compatible with the standard Flutter Form widget.
       body: Form(
         key: _formKey,
         child: CardSettings(
-          children: <Widget>[
-            CardSettingsHeader(label: 'Favorite Book'),
-            CardSettingsText(
-              label: 'Title',
-              initialValue: title,
-              validator: (value) {
-                if (value == null || value.isEmpty) return 'Title is required.';
-              },
-              onSaved: (value) => title = value,
+          children: <CardSettingsSection>[
+            CardSettingsSection(
+              header: CardSettingsHeader(
+                label: 'Favorite Book',
+              ),
+              children: <Widget>[
+                CardSettingsText(
+                  label: 'Title',
+                  initialValue: title,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) return 'Title is required.';
+                  },
+                  onSaved: (value) => title = value,
+                ),
+                CardSettingsText(
+                  label: 'URL',
+                  initialValue: url,
+                  validator: (value) {
+                    if (!value.startsWith('http:')) return 'Must be a valid website.';
+                  },
+                  onSaved: (value) => url = value,
+                ),
+              ],
             ),
-            CardSettingsText(
-              label: 'URL',
-              initialValue: url,
-              validator: (value) {
-                if (!value.startsWith('http:')) return 'Must be a valid website.';
-              },
-              onSaved: (value) => url = value,
-            ),
-          ],
+          ),
         ),
       ),
     );
