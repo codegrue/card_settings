@@ -1,5 +1,10 @@
 # Releases
 
+## [1.9.8] - TBD
+
+- updated readme short example
+- created custom long example page to reference the important example file
+
 ## [1.9.7] - 6/9/2020
 
 - ensure all widgets have the `labelWidth` property
