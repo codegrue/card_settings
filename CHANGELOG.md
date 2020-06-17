@@ -6,6 +6,8 @@
 - created custom long example page to reference the important example file
 - fixel label widths on Cupertino (thanks esskar)
 - added support for text input action and a input action focus node (thanks esskar)
+- added custom font to example
+- changed photo thumbnail default size to 180x180
 
 ## [1.9.7] - 6/9/2020
 
