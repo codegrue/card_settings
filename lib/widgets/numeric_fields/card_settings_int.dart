@@ -33,6 +33,8 @@ class CardSettingsInt extends CardSettingsText
     ValueChanged<int> onChanged,
     TextEditingController controller,
     FocusNode focusNode,
+    TextInputAction inputAction,
+    FocusNode inputActionNode,
     TextInputType keyboardType,
     TextStyle style,
     bool maxLengthEnforced: true,
@@ -72,6 +74,8 @@ class CardSettingsInt extends CardSettingsText
           },
           controller: controller,
           focusNode: focusNode,
+          inputAction: inputAction,
+          inputActionNode: inputActionNode,
           keyboardType:
               keyboardType ?? TextInputType.numberWithOptions(decimal: false),
           style: style,

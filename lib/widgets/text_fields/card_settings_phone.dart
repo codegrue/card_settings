@@ -35,6 +35,8 @@ class CardSettingsPhone extends StatelessWidget
     this.onChanged,
     this.controller,
     this.focusNode,
+    this.inputAction,
+    this.inputActionNode,
     this.keyboardType,
     this.style,
     this.maxLengthEnforced: true,
@@ -101,9 +103,13 @@ class CardSettingsPhone extends StatelessWidget
 
   final FocusNode focusNode;
 
+  final FocusNode inputActionNode;
+
   final TextInputType keyboardType;
 
   final TextStyle style;
+
+  final TextInputAction inputAction;
 
   final bool maxLengthEnforced;
 
@@ -142,12 +148,14 @@ class CardSettingsPhone extends StatelessWidget
       onChanged: _safeOnChanged,
       controller: controller,
       focusNode: focusNode,
+      inputActionNode: inputActionNode,
       keyboardType:
           keyboardType ?? TextInputType.numberWithOptions(decimal: false),
       style: style,
       maxLengthEnforced: maxLengthEnforced,
       onFieldSubmitted: onFieldSubmitted,
       inputFormatters: inputFormatters,
+      inputAction: inputAction,
     );
   }
 

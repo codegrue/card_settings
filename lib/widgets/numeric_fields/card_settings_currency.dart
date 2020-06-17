@@ -36,6 +36,8 @@ class CardSettingsCurrency extends StatefulWidget
     this.onChanged,
     this.controller,
     this.focusNode,
+    this.inputAction,
+    this.inputActionNode,
     this.keyboardType,
     this.style,
     this.maxLengthEnforced: true,
@@ -101,6 +103,10 @@ class CardSettingsCurrency extends StatefulWidget
 
   final FocusNode focusNode;
 
+  final TextInputAction inputAction;
+
+  final FocusNode inputActionNode;
+
   final TextInputType keyboardType;
 
   final TextStyle style;
@@ -159,6 +165,8 @@ class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
       onChanged: _safeOnChanged,
       controller: widget.controller ?? _moneyController,
       focusNode: widget.focusNode,
+      inputAction: widget.inputAction,
+      inputActionNode: widget.inputActionNode,
       keyboardType: widget.keyboardType ??
           TextInputType.numberWithOptions(decimal: false),
       style: widget.style,
