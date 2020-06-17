@@ -215,9 +215,14 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
                 _showDialog(widget?.label);
               },
               child: CSControl(
-                nameWidget: widget?.requiredIndicator != null
-                    ? Text((widget?.label ?? "") + ' *')
-                    : Text(widget?.label),
+                nameWidget: Container(
+                  width: widget?.labelWidth ??
+                      CardSettings.of(context).labelWidth ??
+                      120.0,
+                  child: widget?.requiredIndicator != null
+                      ? Text((widget?.label ?? "") + ' *')
+                      : Text(widget?.label),
+                ),
                 contentWidget: Text(
                   content,
                   style: Theme.of(context).textTheme.subtitle1.copyWith(

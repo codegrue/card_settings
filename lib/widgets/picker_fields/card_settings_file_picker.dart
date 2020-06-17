@@ -210,9 +210,14 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
                 if (widget.enabled) onTap();
               },
               child: CSControl(
-                nameWidget: widget?.requiredIndicator != null
-                    ? Text((widget?.label ?? "") + ' *')
-                    : Text(widget?.label),
+                nameWidget: Container(
+                  width: widget?.labelWidth ??
+                      CardSettings.of(context).labelWidth ??
+                      120.0,
+                  child: widget?.requiredIndicator != null
+                      ? Text((widget?.label ?? "") + ' *')
+                      : Text(widget?.label),
+                ),
                 contentWidget: _buildFieldContent(formattedValue),
                 style: CSWidgetStyle(icon: widget?.icon),
               ),
@@ -248,15 +253,17 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
     if (widget.fileType == FileTypeCross.image && value != null) {
       return ConstrainedBox(
           constraints: BoxConstraints(
-              maxWidth: widget.maxThumbnailWidth,
-              maxHeight: widget.maxThumbnailHeight),
+            maxWidth: widget.maxThumbnailWidth,
+            maxHeight: widget.maxThumbnailHeight,
+            minHeight: 30,
+          ),
           child: Container(
             padding: showCupertino(context, widget.showMaterialonIOS)
                 ? EdgeInsets.symmetric(vertical: 10.0)
                 : null,
             alignment: (contentAlign == TextAlign.right)
-                ? Alignment.centerRight
-                : Alignment.centerLeft,
+                ? Alignment.topRight
+                : Alignment.topLeft,
             child: Image.memory(value),
           ));
     } else {

@@ -165,9 +165,14 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
                 if (widget.enabled) _showDialog();
               },
               child: CSControl(
-                nameWidget: widget?.requiredIndicator != null
-                    ? Text((widget?.label ?? "") + ' *')
-                    : Text(widget?.label),
+                nameWidget: Container(
+                  width: widget?.labelWidth ??
+                      CardSettings.of(context).labelWidth ??
+                      120.0,
+                  child: widget?.requiredIndicator != null
+                      ? Text((widget?.label ?? "") + ' *')
+                      : Text(widget?.label),
+                ),
                 contentWidget: Text(
                   value == null ? '' : value.format(context),
                   style: contentStyle(context, value, widget.enabled),
