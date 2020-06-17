@@ -5,11 +5,16 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('CardSettingsText', () {
     Widget widgetTree;
+    var key = GlobalKey();
     var label = "MeInput";
     var initialValue = "Hello World";
     var icon = Icons.home;
     var requiredIndicator = "#";
     var hintText = "Show me the world!";
+    var focusNode = FocusNode();
+    var inputActionNode = FocusNode();
+    var inputAction = TextInputAction.next;
+
 
     setUpAll(() async {
       widgetTree = MaterialApp(
@@ -18,12 +23,17 @@ void main() {
             CardSettingsSection(
               children: [
                 CardSettingsText(
+                  key: key,
                   label: label,
                   initialValue: initialValue,
                   icon: Icon(icon),
                   requiredIndicator: Text(requiredIndicator),
                   hintText: hintText,
-                )
+                  focusNode: focusNode,
+                  inputAction: inputAction,
+                  inputActionNode: inputActionNode,
+                ),
+                CardSettingsText(focusNode: inputActionNode)
               ],
             ),
           ],
@@ -52,7 +62,7 @@ void main() {
       await tester.pumpWidget(widgetTree);
 
       // act
-      await tester.enterText(find.byType(TextField), newText);
+      await tester.enterText(find.byKey(key), newText);
 
       // assert
       final valueFinder = find.text(newText);
@@ -65,11 +75,51 @@ void main() {
       await tester.pumpWidget(widgetTree);
 
       // act
-      await tester.enterText(find.byType(TextField), newText);
+      await tester.enterText(find.byKey(key), newText);
 
       // assert
       final hintFinder = find.text(hintText);
       expect(hintFinder, findsOneWidget);
+    });
+
+    testWidgets('focusNode is focused', (WidgetTester tester) async {
+
+      // arrange
+      await tester.pumpWidget(widgetTree);
+
+      // act
+      await tester.showKeyboard(find.byKey(key));
+
+      // assert
+      expect(focusNode.hasFocus, isTrue);
+    });
+
+    testWidgets('input action unfocuses focusNode', (WidgetTester tester) async {
+
+      // arrange
+      await tester.pumpWidget(widgetTree);
+
+      // act
+      await tester.showKeyboard(find.byKey(key));
+      await tester.testTextInput.receiveAction(inputAction);
+      await tester.pump();
+
+      // assert
+      expect(focusNode.hasFocus, isFalse);
+    });
+
+    testWidgets('input action focuses inputActionNode', (WidgetTester tester) async {
+
+      // arrange
+      await tester.pumpWidget(widgetTree);
+
+      // act
+      await tester.showKeyboard(find.byKey(key));
+      await tester.testTextInput.receiveAction(inputAction);
+      await tester.pump();
+
+      // assert
+      expect(inputActionNode.hasFocus, isTrue);
     });
   });
 }
