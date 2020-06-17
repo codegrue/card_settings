@@ -163,9 +163,14 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
                 if (widget.enabled) _showDialog();
               },
               child: CSControl(
-                nameWidget: widget?.requiredIndicator != null
-                    ? Text((widget?.label ?? "") + ' *')
-                    : Text(widget?.label),
+                nameWidget: Container(
+                  width: widget?.labelWidth ??
+                      CardSettings.of(context).labelWidth ??
+                      120.0,
+                  child: widget?.requiredIndicator != null
+                      ? Text((widget?.label ?? "") + ' *')
+                      : Text(widget?.label),
+                ),
                 contentWidget: Container(
                   height: 20.0,
                   width: 100.0,

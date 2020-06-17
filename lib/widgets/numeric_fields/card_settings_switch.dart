@@ -128,9 +128,14 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
       child: widget?.visible == false
           ? null
           : CSControl(
-              nameWidget: widget?.requiredIndicator != null
-                  ? Text((widget?.label ?? "") + ' *')
-                  : Text(widget?.label),
+              nameWidget: Container(
+                width: widget?.labelWidth ??
+                    CardSettings.of(context).labelWidth ??
+                    120.0,
+                child: widget?.requiredIndicator != null
+                    ? Text((widget?.label ?? "") + ' *')
+                    : Text(widget?.label),
+              ),
               contentWidget: CupertinoSwitch(
                 value: value,
                 onChanged: (widget.enabled)

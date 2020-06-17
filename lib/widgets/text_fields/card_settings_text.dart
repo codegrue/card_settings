@@ -344,9 +344,14 @@ class _CardSettingsTextState extends FormFieldState<String> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     CSControl(
-                      nameWidget: widget?.requiredIndicator != null
-                          ? Text((widget?.label ?? "") + ' *')
-                          : Text(widget?.label),
+                      nameWidget: Container(
+                        width: widget?.labelWidth ??
+                            CardSettings.of(context).labelWidth ??
+                            120.0,
+                        child: widget?.requiredIndicator != null
+                            ? Text((widget?.label ?? "") + ' *')
+                            : Text(widget?.label),
+                      ),
                       contentWidget: Expanded(
                         child: Container(
                           padding: EdgeInsets.only(left: 10.0),
