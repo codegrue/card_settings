@@ -33,6 +33,8 @@ class CardSettingsText extends FormField<String>
     this.onFieldSubmitted,
     this.style,
     this.focusNode,
+    this.inputAction,
+    this.inputActionNode,
     this.label = 'Label',
     this.contentOnNewLine = false,
     this.maxLength = 20,
@@ -80,6 +82,10 @@ class CardSettingsText extends FormField<String>
   final String inputMask;
 
   final FocusNode focusNode;
+
+  final TextInputAction inputAction;
+
+  final FocusNode inputActionNode;
 
   final TextInputType keyboardType;
 
@@ -218,6 +224,19 @@ class _CardSettingsTextState extends FormFieldState<String> {
     }
   }
 
+  void _onFieldSubmitted(String value) {
+    if (this.widget?.focusNode != null) 
+      this.widget.focusNode.unfocus();
+
+    if (this.widget?.inputActionNode != null) {
+      this.widget.inputActionNode.requestFocus();
+      return;
+    }
+
+    if (this.widget?.onFieldSubmitted != null)
+      this.widget.onFieldSubmitted(value);
+  }
+
   Widget _build(BuildContext context) {
     if (showCupertino(context, widget.showMaterialonIOS))
       return _buildCupertinoTextbox(context);
@@ -238,6 +257,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
         suffix: widget?.unitLabel == null ? null : Text(widget.unitLabel),
         controller: _controller,
         focusNode: widget?.focusNode,
+        textInputAction: widget?.inputAction,
         keyboardType: widget?.keyboardType,
         textCapitalization: widget?.textCapitalization,
         style: contentStyle(context, value, widget.enabled),
@@ -287,7 +307,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
             ? widget?.maxLength
             : null, // if we want counter use default behavior
         onChanged: _handleOnChanged,
-        onSubmitted: widget?.onFieldSubmitted,
+        onSubmitted: _onFieldSubmitted,
         inputFormatters: widget?.inputFormatters ??
             [
               // if we don't want the counter, use this maxLength instead
@@ -395,6 +415,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
         controller: _controller,
         focusNode: widget?.focusNode,
         keyboardType: widget?.keyboardType,
+        textInputAction: widget?.inputAction,
         textCapitalization: widget?.textCapitalization,
         enabled: widget.enabled,
         readOnly: !widget.enabled,
@@ -418,7 +439,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
             ? widget?.maxLength
             : null, // if we want counter use default behavior
         onChanged: _handleOnChanged,
-        onSubmitted: widget?.onFieldSubmitted,
+        onSubmitted: _onFieldSubmitted,
         inputFormatters: widget?.inputFormatters ??
             [
               // if we don't want the counter, use this maxLength instead

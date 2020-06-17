@@ -85,6 +85,9 @@ class ExampleFormState extends State<ExampleForm> {
   final GlobalKey<FormState> _passwordKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _sliderKey = GlobalKey<FormState>();
 
+  final FocusNode _nameNode = FocusNode();
+  final FocusNode _descriptionNode = FocusNode();
+
   Future savePressed() async {
     final form = _formKey.currentState;
 
@@ -675,6 +678,7 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Description',
       initialValue: _ponyModel.description,
       numberOfLines: lines,
+      focusNode: _descriptionNode,
       onSaved: (value) => _ponyModel.description = value,
       onChanged: (value) {
         setState(() {
@@ -742,6 +746,9 @@ class ExampleFormState extends State<ExampleForm> {
       initialValue: _ponyModel.name,
       requiredIndicator: Text('*', style: TextStyle(color: Colors.red)),
       autovalidate: _autoValidate,
+      focusNode: _nameNode,
+      inputAction: TextInputAction.next,
+      inputActionNode: _descriptionNode,
       validator: (value) {
         if (value == null || value.isEmpty) return 'Name is required.';
         return null;
