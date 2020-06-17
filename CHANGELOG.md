@@ -4,6 +4,8 @@
 
 - updated readme short example
 - created custom long example page to reference the important example file
+- fixel label widths on Cupertino (thanks esskar)
+- added support for text input action and a input action focus node (thanks esskar)
 
 ## [1.9.7] - 6/9/2020
 

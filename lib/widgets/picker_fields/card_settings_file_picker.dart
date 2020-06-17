@@ -253,15 +253,17 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
     if (widget.fileType == FileTypeCross.image && value != null) {
       return ConstrainedBox(
           constraints: BoxConstraints(
-              maxWidth: widget.maxThumbnailWidth,
-              maxHeight: widget.maxThumbnailHeight),
+            maxWidth: widget.maxThumbnailWidth,
+            maxHeight: widget.maxThumbnailHeight,
+            minHeight: 30,
+          ),
           child: Container(
             padding: showCupertino(context, widget.showMaterialonIOS)
                 ? EdgeInsets.symmetric(vertical: 10.0)
                 : null,
             alignment: (contentAlign == TextAlign.right)
-                ? Alignment.centerRight
-                : Alignment.centerLeft,
+                ? Alignment.topRight
+                : Alignment.topLeft,
             child: Image.memory(value),
           ));
     } else {

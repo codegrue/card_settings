@@ -85,6 +85,20 @@ class ExampleFormState extends State<ExampleForm> {
   final GlobalKey<FormState> _passwordKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _sliderKey = GlobalKey<FormState>();
 
+  @override
+  Widget build(BuildContext context) {
+    if (loaded) {
+      return Form(
+        key: _formKey,
+        child: (widget.orientation == Orientation.portrait)
+            ? _buildPortraitLayout()
+            : _buildLandscapeLayout(),
+      );
+    } else {
+      return Center(child: CircularProgressIndicator());
+    }
+  }
+
   Future savePressed() async {
     final form = _formKey.currentState;
 
@@ -103,20 +117,6 @@ class ExampleFormState extends State<ExampleForm> {
     initModel();
 
     _formKey.currentState.reset();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (loaded) {
-      return Form(
-        key: _formKey,
-        child: (widget.orientation == Orientation.portrait)
-            ? _buildPortraitLayout()
-            : _buildLandscapeLayout(),
-      );
-    } else {
-      return Center(child: CircularProgressIndicator());
-    }
   }
 
   CardSettings _buildPortraitLayout() {
