@@ -372,8 +372,6 @@ class ExampleFormState extends State<ExampleForm> {
       initialValue: _ponyModel.boxOfficePhone,
       autovalidate: _autoValidate,
       validator: (value) {
-        if (value != null && value.toString().length != 10)
-          return 'Incomplete number';
         return null;
       },
       onSaved: (value) => _ponyModel.boxOfficePhone = value,

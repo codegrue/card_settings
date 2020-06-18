@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 
 import '../../card_settings.dart';
 import '../../interfaces/common_field_attributes.dart';
@@ -66,8 +67,6 @@ class CardSettingsPhone extends StatelessWidget
 
   final bool contentOnNewLine;
 
-  final String inputMask = '(000) 000-0000';
-
   final int maxLength;
 
   @override
@@ -128,9 +127,8 @@ class CardSettingsPhone extends StatelessWidget
       labelWidth: labelWidth,
       labelAlign: labelAlign,
       contentAlign: contentAlign,
-      initialValue: initialValue.toString(),
+      initialValue: formatAsPhoneNumber(initialValue.toString()),
       contentOnNewLine: contentOnNewLine,
-      inputMask: inputMask,
       maxLength: maxLength,
       hintText: hintText,
       prefixText: prefixText,
@@ -154,23 +152,28 @@ class CardSettingsPhone extends StatelessWidget
       style: style,
       maxLengthEnforced: maxLengthEnforced,
       onFieldSubmitted: onFieldSubmitted,
-      inputFormatters: inputFormatters,
+      inputFormatters: [
+        PhoneInputFormatter(),
+      ],
       inputAction: inputAction,
     );
   }
 
   String _safeValidator(String value) {
     if (validator == null) return null;
-    return validator(intelligentCast<int>(value));
+    var numbers = toNumericString(value);
+    return validator(intelligentCast<int>(numbers));
   }
 
   void _safeOnSaved(String value) {
     if (onSaved == null) return;
-    onSaved(intelligentCast<int>(value));
+    var numbers = toNumericString(value);
+    onSaved(intelligentCast<int>(numbers));
   }
 
   void _safeOnChanged(String value) {
     if (onChanged == null) return;
-    onChanged(intelligentCast<int>(value));
+    var numbers = toNumericString(value);
+    onChanged(intelligentCast<int>(numbers));
   }
 }
