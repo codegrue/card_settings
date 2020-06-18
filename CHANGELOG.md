@@ -9,6 +9,7 @@
 - added custom font to example
 - changed photo thumbnail default size to 180x180
 - changed CardSettingsDouble to display localized numbers
+- changed CardSettingsPhone to format number in user's locale
 
 ## [1.9.7] - 6/9/2020
 
