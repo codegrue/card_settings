@@ -564,6 +564,7 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Height',
       unitLabel: '(ft)',
       decimalDigits: 2,
+      locale: Locale('fr'), // force french mode to simulate localization
       initialValue: _ponyModel.height,
       onSaved: (value) => _ponyModel.height = value,
       onChanged: (value) {
