@@ -157,9 +157,9 @@ class CardSettingsDouble extends StatelessWidget
       obscureText: obscureText,
       autocorrect: autocorrect,
       autovalidate: autovalidate,
-      validator: _safeValidator,
-      onSaved: _safeOnSaved,
-      onChanged: _safeOnChanged,
+      validator: (val) => _safeValidator(val, formatter),
+      onSaved: (val) => _safeOnSaved(val, formatter),
+      onChanged: (val) => _safeOnChanged(val, formatter),
       controller: controller,
       focusNode: focusNode,
       inputAction: inputAction,
@@ -173,24 +173,25 @@ class CardSettingsDouble extends StatelessWidget
         ThousandsFormatter(
             formatter: formatter, allowFraction: (decimalDigits > 0)),
         LengthLimitingTextInputFormatter(maxLength),
-        // WhitelistingTextInputFormatter(RegExp("[0-9]+.?[0-9]*")),
-        // DecimalTextInputFormatter(decimalDigits: decimalDigits)
       ],
     );
   }
 
-  String _safeValidator(String value) {
+  String _safeValidator(String value, NumberFormat formatter) {
     if (validator == null) return null;
-    return validator(intelligentCast<double>(value));
+    var number = formatter.parse(value);
+    return validator(intelligentCast<double>(number));
   }
 
-  void _safeOnSaved(String value) {
+  void _safeOnSaved(String value, NumberFormat formatter) {
     if (onSaved == null) return;
-    onSaved(intelligentCast<double>(value));
+    var number = formatter.parse(value);
+    onSaved(intelligentCast<double>(number));
   }
 
-  void _safeOnChanged(String value) {
+  void _safeOnChanged(String value, NumberFormat formatter) {
     if (onChanged == null) return;
-    onChanged(intelligentCast<double>(value));
+    var number = formatter.parse(value);
+    onChanged(intelligentCast<double>(number));
   }
 }
