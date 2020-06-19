@@ -26,7 +26,7 @@ class PonyModel {
   String style = "Majestic";
   DateTime showDateTime = DateTime(2010, 10, 10, 20, 30);
   double ticketPrice = 65.99;
-  int boxOfficePhone = 8005551212;
+  int boxOfficePhone = 18005551212;
   String email = 'me@nowhere.org';
   String password = 'secret1';
   double rating = 0.25;

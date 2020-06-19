@@ -1,5 +1,6 @@
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'scaffold.dart';
 
@@ -43,6 +44,7 @@ ThemeData _buildTheme(Brightness brightness) {
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
         ),
+        fontFamily: GoogleFonts.getFont('Paprika').fontFamily,
       );
     case Brightness.dark:
       return ThemeData(
@@ -50,6 +52,8 @@ ThemeData _buildTheme(Brightness brightness) {
         brightness: brightness,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         backgroundColor: Colors.black,
+        textTheme: GoogleFonts.paprikaTextTheme(TextTheme()),
+        fontFamily: GoogleFonts.getFont('Paprika').fontFamily,
       );
     default:
       return ThemeData(

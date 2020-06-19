@@ -88,6 +88,20 @@ class ExampleFormState extends State<ExampleForm> {
   final FocusNode _nameNode = FocusNode();
   final FocusNode _descriptionNode = FocusNode();
 
+  @override
+  Widget build(BuildContext context) {
+    if (loaded) {
+      return Form(
+        key: _formKey,
+        child: (widget.orientation == Orientation.portrait)
+            ? _buildPortraitLayout()
+            : _buildLandscapeLayout(),
+      );
+    } else {
+      return Center(child: CircularProgressIndicator());
+    }
+  }
+
   Future savePressed() async {
     final form = _formKey.currentState;
 
@@ -106,20 +120,6 @@ class ExampleFormState extends State<ExampleForm> {
     initModel();
 
     _formKey.currentState.reset();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (loaded) {
-      return Form(
-        key: _formKey,
-        child: (widget.orientation == Orientation.portrait)
-            ? _buildPortraitLayout()
-            : _buildLandscapeLayout(),
-      );
-    } else {
-      return Center(child: CircularProgressIndicator());
-    }
   }
 
   CardSettings _buildPortraitLayout() {
@@ -372,8 +372,6 @@ class ExampleFormState extends State<ExampleForm> {
       initialValue: _ponyModel.boxOfficePhone,
       autovalidate: _autoValidate,
       validator: (value) {
-        if (value != null && value.toString().length != 10)
-          return 'Incomplete number';
         return null;
       },
       onSaved: (value) => _ponyModel.boxOfficePhone = value,
@@ -564,6 +562,7 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Height',
       unitLabel: '(ft)',
       decimalDigits: 2,
+      locale: Locale('fr'), // force french mode to simulate localization
       initialValue: _ponyModel.height,
       onSaved: (value) => _ponyModel.height = value,
       onChanged: (value) {

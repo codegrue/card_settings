@@ -13,6 +13,8 @@ dependencies:
   flutter_cupertino_settings: ^0.3.1
   flutter_material_pickers: ^1.5.3
   file_picker_cross: ^2.0.0
+  pattern_formatter: ^1.0.2 # used for localized doubles
+  flutter_multi_formatter: ^1.1.6 # used for localized phone numbers
 
 dev_dependencies:
   flutter_test:
