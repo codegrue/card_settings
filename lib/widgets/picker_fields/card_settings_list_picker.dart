@@ -236,6 +236,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
       },
       child: CardSettingsField(
         label: widget?.label,
+        enabled: widget?.enabled,
         labelAlign: widget?.labelAlign,
         labelWidth: widget?.labelWidth,
         visible: widget?.visible,

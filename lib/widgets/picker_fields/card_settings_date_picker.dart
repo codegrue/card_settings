@@ -217,6 +217,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
         label: widget?.label ?? "Date",
         labelAlign: widget?.labelAlign,
         labelWidth: widget?.labelWidth,
+        enabled: widget?.enabled,
         visible: widget?.visible ?? true,
         icon: widget?.icon ?? Icon(Icons.event),
         requiredIndicator: widget?.requiredIndicator,

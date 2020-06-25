@@ -233,6 +233,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
       },
       child: CardSettingsField(
         label: widget?.label ?? "File",
+        enabled: widget?.enabled,
         labelAlign: widget?.labelAlign,
         labelWidth: widget?.labelWidth,
         visible: widget?.visible ?? true,

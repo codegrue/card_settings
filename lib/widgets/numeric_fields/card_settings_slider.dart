@@ -112,8 +112,14 @@ class _CardSettingsSliderState extends FormFieldState<double> {
                     CardSettings.of(context).labelWidth ??
                     120.0,
                 child: widget?.requiredIndicator != null
-                    ? Text((widget?.label ?? "") + ' *', style: ls,)
-                    : Text(widget?.label, style: ls,),
+                    ? Text(
+                        (widget?.label ?? "") + ' *',
+                        style: ls,
+                      )
+                    : Text(
+                        widget?.label,
+                        style: ls,
+                      ),
               ),
               contentWidget: CupertinoSlider(
                 value: value,
@@ -140,6 +146,7 @@ class _CardSettingsSliderState extends FormFieldState<double> {
       labelAlign: widget?.labelAlign,
       labelWidth: widget?.labelWidth,
       visible: widget?.visible,
+      enabled: widget?.enabled,
       icon: widget?.icon,
       requiredIndicator: widget?.requiredIndicator,
       errorText: errorText,
