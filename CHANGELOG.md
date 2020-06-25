@@ -1,6 +1,6 @@
 # Releases
 
-## [1.9.8] - TBD
+## [1.9.8] - 6/19/2020
 
 - updated readme short example
 - created custom long example page to reference the important example file

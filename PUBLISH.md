@@ -2,9 +2,10 @@
 
 Steps to publish to pub.dartlang.org:
 
-- Run unit tests: "flutter test"
-- Verify no documentation issues: "dartdoc --no-auto-include-dependencies"
-  - Safe to delete the "doc" directory after this to remove project clutter
-- Verify no code issues: "flutter analyze"
-- Do a dry run: "pub publish --dry-run"
-- Publish: "pub publish"
+- Verify no documentation issues: `dartdoc --no-auto-include-dependencies`
+- Verify packages are all up to date: `flutter pub outdated`
+- Verify no code issues: `flutter analyze`
+- Run unit tests: `flutter test`
+- Do a dry run: `pub publish --dry-run`
+- Publish: `pub publish`
+- Apply tag to git: `git tag v1.x.x` then `git push origin --tags`
