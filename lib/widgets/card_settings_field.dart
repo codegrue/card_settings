@@ -176,7 +176,7 @@ class CardSettingsField extends StatelessWidget {
   TextStyle _buildLabelStyle(BuildContext context) {
     TextStyle labelStyle = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16.0,
+      fontSize: 16.0 * MediaQuery.of(context).textScaleFactor,
     );
 
     return labelStyle.merge(Theme.of(context).inputDecorationTheme.labelStyle);

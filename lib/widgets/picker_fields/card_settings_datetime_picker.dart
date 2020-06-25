@@ -117,6 +117,7 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
       context: context,
       builder: (BuildContext context) {
         return _buildBottomPicker(
+          context,
           CupertinoDatePicker(
             minimumDate: _startDate,
             minimumYear: _startDate.year,
@@ -184,15 +185,15 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
       return materialSettingsButton();
   }
 
-  Widget _buildBottomPicker(Widget picker) {
+  Widget _buildBottomPicker(BuildContext context, Widget picker) {
     return Container(
       height: kPickerSheetHeight,
       padding: const EdgeInsets.only(top: 6.0),
       color: CupertinoColors.white,
       child: DefaultTextStyle(
-        style: const TextStyle(
+        style: TextStyle(
           color: CupertinoColors.black,
-          fontSize: 22.0,
+          fontSize: 22.0 * MediaQuery.of(context).textScaleFactor,
         ),
         child: GestureDetector(
           // Blocks taps from propagating to the modal sheet and popping.
