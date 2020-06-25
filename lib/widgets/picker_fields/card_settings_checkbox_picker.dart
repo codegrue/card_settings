@@ -132,6 +132,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
   }
 
   Widget cupertinoSettingsMultiselect() {
+    final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
           ? null
@@ -145,8 +146,8 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
                       CardSettings.of(context).labelWidth ??
                       120.0,
                   child: widget?.requiredIndicator != null
-                      ? Text((widget?.label ?? "") + ' *')
-                      : Text(widget?.label),
+                      ? Text((widget?.label ?? "") + ' *', style: ls,)
+                      : Text(widget?.label, style: ls,),
                 ),
                 contentWidget: Text(
                   value == null || value.isEmpty

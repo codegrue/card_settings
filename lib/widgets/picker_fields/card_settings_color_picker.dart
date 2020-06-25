@@ -155,6 +155,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   }
 
   Widget cupertinoSettingsColorPicker() {
+    final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
           ? null
@@ -168,8 +169,8 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
                       CardSettings.of(context).labelWidth ??
                       120.0,
                   child: widget?.requiredIndicator != null
-                      ? Text((widget?.label ?? "") + ' *')
-                      : Text(widget?.label),
+                      ? Text((widget?.label ?? "") + ' *', style: ls,)
+                      : Text(widget?.label, style: ls,),
                 ),
                 contentWidget: Container(
                   height: 20.0,

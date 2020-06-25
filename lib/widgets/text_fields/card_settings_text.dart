@@ -225,8 +225,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
   }
 
   void _onFieldSubmitted(String value) {
-    if (this.widget?.focusNode != null) 
-      this.widget.focusNode.unfocus();
+    if (this.widget?.focusNode != null) this.widget.focusNode.unfocus();
 
     if (this.widget?.inputActionNode != null) {
       this.widget.inputActionNode.requestFocus();
@@ -251,10 +250,11 @@ class _CardSettingsTextState extends FormFieldState<String> {
       hasError = (errorMessage != null);
     }
 
+    final ls = labelStyle(context, widget?.enabled ?? true);
     final _child = Container(
       child: CupertinoTextField(
-        prefix: widget?.prefixText == null ? null : Text(widget.prefixText),
-        suffix: widget?.unitLabel == null ? null : Text(widget.unitLabel),
+        prefix: widget?.prefixText == null ? null : Text(widget.prefixText, style: ls,),
+        suffix: widget?.unitLabel == null ? null : Text(widget.unitLabel, style: ls,),
         controller: _controller,
         focusNode: widget?.focusNode,
         textInputAction: widget?.inputAction,
@@ -325,8 +325,11 @@ class _CardSettingsTextState extends FormFieldState<String> {
                   children: <Widget>[
                     CSControl(
                       nameWidget: widget?.requiredIndicator != null
-                          ? Text((widget?.label ?? "") + ' *')
-                          : Text(widget?.label),
+                          ? Text(
+                              (widget?.label ?? "") + ' *',
+                              style: ls,
+                            )
+                          : Text(widget?.label, style: ls),
                       contentWidget: Container(),
                       style: CSWidgetStyle(icon: widget?.icon),
                     ),
@@ -369,8 +372,8 @@ class _CardSettingsTextState extends FormFieldState<String> {
                             CardSettings.of(context).labelWidth ??
                             120.0,
                         child: widget?.requiredIndicator != null
-                            ? Text((widget?.label ?? "") + ' *')
-                            : Text(widget?.label),
+                            ? Text((widget?.label ?? "") + ' *', style: ls)
+                            : Text(widget?.label, style: ls),
                       ),
                       contentWidget: Expanded(
                         child: Container(
@@ -416,6 +419,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
       icon: widget?.icon,
       requiredIndicator: widget?.requiredIndicator,
       contentOnNewLine: widget?.contentOnNewLine ?? false,
+      enabled: widget.enabled,
       content: TextField(
         controller: _controller,
         focusNode: widget?.focusNode,

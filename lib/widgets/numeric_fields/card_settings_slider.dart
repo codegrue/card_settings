@@ -102,6 +102,7 @@ class _CardSettingsSliderState extends FormFieldState<double> {
   }
 
   Widget cupertinoSettingsSlider() {
+    final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
           ? null
@@ -111,8 +112,8 @@ class _CardSettingsSliderState extends FormFieldState<double> {
                     CardSettings.of(context).labelWidth ??
                     120.0,
                 child: widget?.requiredIndicator != null
-                    ? Text((widget?.label ?? "") + ' *')
-                    : Text(widget?.label),
+                    ? Text((widget?.label ?? "") + ' *', style: ls,)
+                    : Text(widget?.label, style: ls,),
               ),
               contentWidget: CupertinoSlider(
                 value: value,

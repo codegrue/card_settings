@@ -19,6 +19,7 @@ class CardSettingsField extends StatelessWidget {
     this.visible: true,
     this.labelAlign,
     this.requiredIndicator,
+    this.enabled = true,
   });
 
   final String label;
@@ -32,6 +33,7 @@ class CardSettingsField extends StatelessWidget {
   final TextAlign labelAlign;
   final Icon icon;
   final Widget requiredIndicator;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -176,10 +178,15 @@ class CardSettingsField extends StatelessWidget {
   TextStyle _buildLabelStyle(BuildContext context) {
     TextStyle labelStyle = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16.0,
+      fontSize: 16.0 * MediaQuery.of(context).textScaleFactor,
     );
 
-    return labelStyle.merge(Theme.of(context).inputDecorationTheme.labelStyle);
+    labelStyle =
+        labelStyle.merge(Theme.of(context).inputDecorationTheme.labelStyle);
+    if (!enabled)
+      labelStyle = labelStyle.copyWith(color: Theme.of(context).disabledColor);
+
+    return labelStyle;
   }
 
   Widget _buildLeftIcon(BuildContext context) {

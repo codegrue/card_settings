@@ -202,6 +202,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
   }
 
   Widget _buildCupertinoFilePicker(String formattedValue) {
+    final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
           ? null
@@ -215,8 +216,8 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
                       CardSettings.of(context).labelWidth ??
                       120.0,
                   child: widget?.requiredIndicator != null
-                      ? Text((widget?.label ?? "") + ' *')
-                      : Text(widget?.label),
+                      ? Text((widget?.label ?? "") + ' *', style: ls,)
+                      : Text(widget?.label, style: ls),
                 ),
                 contentWidget: _buildFieldContent(formattedValue),
                 style: CSWidgetStyle(icon: widget?.icon),
