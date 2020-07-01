@@ -1,5 +1,9 @@
 # Releases
 
+## [1.9.9] - TBD
+
+- changed label style for disabled fields (thanks esskar)
+
 ## [1.9.8] - 6/19/2020
 
 - updated readme short example

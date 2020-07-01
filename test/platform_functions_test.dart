@@ -51,29 +51,78 @@ void main() {
 
       expect(result, true);
     });
+  });
 
-    // testWidgets(
-    //     'on iOS, returns showMaterialonIOS of CardSettings if showMaterialonIOS not provided',
-    //     (WidgetTester tester) async {
-    //   await tester.pumpWidget(
-    //     Builder(
-    //       builder: (BuildContext context) {
-    //         bool showMaterialonIOS; //null
-    //         bool isIOS = true;
-    //         var result =
-    //             showCupertino(context, showMaterialonIOS, mockIOS: isIOS);
+  group('labelStyle', () {
+    test('enabled uses textTheme.subtitle1 color', () {
+      // Arrange
+      bool enabled = true;
+      var context = MockContext();
 
-    //         expect(result, true);
+      // Act
+      var result = labelStyle(context, enabled);
 
-    //         // The builder function must return a widget.
-    //         return Placeholder();
-    //       },
-    //     ),
-    //   );
-    // });
+      // Assert
+      var expectedColor = Theme.of(context).textTheme.subtitle1.color;
+      expect(result.color, expectedColor);
+    });
 
-// mock CardSettings.of(context).showMaterialonIOS
-// mock platform.ios
+    test('disabled uses disabledColor', () {
+      // Arrange
+      bool enabled = false;
+      var context = MockContext();
+
+      // Act
+      var result = labelStyle(context, enabled);
+
+      // Assert
+      var expectedColor = Theme.of(context).disabledColor;
+      expect(result.color, expectedColor);
+    });
+  });
+
+  group('contentStyle', () {
+    test('enabled uses textTheme.subtitle1 color if value is present', () {
+      // Arrange
+      bool enabled = true;
+      String value = "Some text";
+      var context = MockContext();
+
+      // Act
+      var result = contentStyle(context, value, enabled);
+
+      // Assert
+      var expectedColor = Theme.of(context).textTheme.subtitle1.color;
+      expect(result.color, expectedColor);
+    });
+
+    test('enabled uses textTheme.hintColor if value not present', () {
+      // Arrange
+      bool enabled = true;
+      String value; // null
+      var context = MockContext();
+
+      // Act
+      var result = contentStyle(context, value, enabled);
+
+      // Assert
+      var expectedColor = Theme.of(context).hintColor;
+      expect(result.color, expectedColor);
+    });
+
+    test('disabled uses disabledColor', () {
+      // Arrange
+      bool enabled = false;
+      String value = "Some text";
+      var context = MockContext();
+
+      // Act
+      var result = contentStyle(context, value, enabled);
+
+      // Assert
+      var expectedColor = Theme.of(context).disabledColor;
+      expect(result.color, expectedColor);
+    });
   });
 }
 
