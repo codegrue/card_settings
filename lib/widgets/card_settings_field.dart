@@ -104,29 +104,38 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget _buildLabelBlock(BuildContext context) {
-    return Expanded(
-      child: Container(
-        width: (contentOnNewLine)
-            ? null
-            : labelWidth ?? CardSettings.of(context).labelWidth ?? 120.0,
-        padding: EdgeInsets.only(
-            right: CardSettings.of(context).labelPadding ?? 6.0),
-        child: Row(
-          children: <Widget>[
-            _buildLeftIcon(context),
-            _buildLabelSpacer(context),
-            Expanded(
-              child: Row(
-                children: <Widget>[
-                  _buildLabelText(context),
-                  _buildlabelRequiredIndicator(context),
-                ],
-              ),
+    var padding =
+        EdgeInsets.only(right: CardSettings.of(context).labelPadding ?? 6.0);
+
+    return (contentOnNewLine)
+        ? Expanded(
+            child: Container(
+              padding: padding,
+              child: _buildLabelRow(context),
             ),
-            _buildLabelSuffix(context),
-          ],
+          )
+        : Container(
+            width: labelWidth ?? CardSettings.of(context).labelWidth ?? 120.0,
+            padding: padding,
+            child: _buildLabelRow(context),
+          );
+  }
+
+  Row _buildLabelRow(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        _buildLeftIcon(context),
+        _buildLabelSpacer(context),
+        Expanded(
+          child: Row(
+            children: <Widget>[
+              _buildLabelText(context),
+              _buildlabelRequiredIndicator(context),
+            ],
+          ),
         ),
-      ),
+        _buildLabelSuffix(context),
+      ],
     );
   }
 
