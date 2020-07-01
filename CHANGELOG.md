@@ -3,6 +3,7 @@
 ## [1.9.9] - TBD
 
 - changed label style for disabled fields (thanks esskar)
+- added `cardless` option to flatten the material wrapper to just a Container
 
 ## [1.9.8] - 6/19/2020
 

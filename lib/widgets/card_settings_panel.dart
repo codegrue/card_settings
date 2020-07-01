@@ -20,10 +20,11 @@ class CardSettings extends InheritedWidget {
     List<CardSettingsSection> children,
     this.showMaterialonIOS: false,
     this.shrinkWrap = false,
+    this.cardless = false,
   }) : super(
           key: key,
           child: _buildChild(children, showMaterialonIOS, cardElevation,
-              padding, shrinkWrap, false),
+              padding, shrinkWrap, false, cardless),
         );
 
   // constructor that wraps each section in it's own card
@@ -39,10 +40,11 @@ class CardSettings extends InheritedWidget {
     List<CardSettingsSection> children,
     this.showMaterialonIOS: false,
     this.shrinkWrap = true,
+    this.cardless = false,
   }) : super(
           key: key,
           child: _buildChild(children, showMaterialonIOS, cardElevation,
-              padding, shrinkWrap, true),
+              padding, shrinkWrap, true, cardless),
         );
 
   final TextAlign labelAlign;
@@ -54,6 +56,7 @@ class CardSettings extends InheritedWidget {
   final double cardElevation;
   final bool shrinkWrap;
   final bool showMaterialonIOS;
+  final bool cardless;
 
   static CardSettings of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<CardSettings>();
@@ -71,24 +74,32 @@ class CardSettings extends InheritedWidget {
   }
 
   static Widget _buildChild(
-      List<CardSettingsSection> children,
-      bool showMaterialonIOS,
-      double cardElevation,
-      double padding,
-      bool shrinkWrap,
-      bool sectioned) {
+    List<CardSettingsSection> children,
+    bool showMaterialonIOS,
+    double cardElevation,
+    double padding,
+    bool shrinkWrap,
+    bool sectioned,
+    bool cardless,
+  ) {
     return (showCupertino(null, showMaterialonIOS))
         ? _buildCupertinoWrapper(children, shrinkWrap)
         : _buildMaterialWrapper(
-            children, padding, cardElevation, shrinkWrap, sectioned);
+            children, padding, cardElevation, shrinkWrap, sectioned, cardless);
   }
 
-  static Widget _buildMaterialWrapper(List<CardSettingsSection> children,
-      double padding, double cardElevation, bool shrinkWrap, bool sectioned) {
+  static Widget _buildMaterialWrapper(
+      List<CardSettingsSection> children,
+      double padding,
+      double cardElevation,
+      bool shrinkWrap,
+      bool sectioned,
+      bool cardless) {
     if (sectioned) {
       return SafeArea(
         child: ListView(
-          children: _buildMaterialSections(children, cardElevation, padding),
+          children: _buildMaterialSections(
+              children, cardElevation, padding, cardless),
           shrinkWrap: shrinkWrap,
         ),
       );
@@ -99,13 +110,20 @@ class CardSettings extends InheritedWidget {
           children: <Widget>[
             Container(
               padding: EdgeInsets.all(padding),
-              child: Card(
-                margin: EdgeInsets.all(0.0),
-                elevation: cardElevation,
-                child: Column(
-                  children: children,
-                ),
-              ),
+              child: (cardless)
+                  ? Container(
+                      margin: EdgeInsets.all(0.0),
+                      child: Column(
+                        children: children,
+                      ),
+                    )
+                  : Card(
+                      margin: EdgeInsets.all(0.0),
+                      elevation: cardElevation,
+                      child: Column(
+                        children: children,
+                      ),
+                    ),
             ),
           ],
         ),
@@ -122,16 +140,20 @@ class CardSettings extends InheritedWidget {
   }
 
   static List<Widget> _buildMaterialSections(List<CardSettingsSection> sections,
-      double cardElevation, double padding) {
+      double cardElevation, double padding, bool cardless) {
     List<Widget> _children = <Widget>[];
     for (var row in sections) {
       _children.add(
         Container(
           padding: EdgeInsets.fromLTRB(padding, padding, padding, 0.0),
-          child: Card(
-            elevation: cardElevation,
-            child: row.build(null),
-          ),
+          child: (cardless)
+              ? Container(
+                  child: row.build(null),
+                )
+              : Card(
+                  elevation: cardElevation,
+                  child: row.build(null),
+                ),
         ),
       );
     }

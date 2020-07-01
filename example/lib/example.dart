@@ -127,6 +127,7 @@ class ExampleFormState extends State<ExampleForm> {
       showMaterialonIOS: widget.showMaterialonIOS,
       labelWidth: 150,
       contentAlign: TextAlign.right,
+      cardless: true,
       children: <CardSettingsSection>[
         CardSettingsSection(
           header: CardSettingsHeader(

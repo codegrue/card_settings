@@ -180,6 +180,24 @@ Or if you want to apply a different theme to the `CardSettings` hierarchy only, 
 
 Please see <https://pub.dev/packages/flutter_material_pickers#-readme-tab-> for information on how to theme the dialog popups.
 
+### Card Style
+
+By default, in Material mode, the content is inside a Card or Cards (if sectioned).
+
+![Carded](https://github.com/codegrue/card_settings/blob/master/images/carded_example.png)
+
+If you would rather just have a flat style with no border, set `cardless` to false.
+
+![Cardless](https://github.com/codegrue/card_settings/blob/master/images/cardless_example.png)
+
+```dart
+  return CardSettings(
+    cardless: true; // default is false
+  );
+```
+
+This has no effect in Cupertino mode, as that doesn't have a card to begin with.
+
 ### Global Properties
 
 The `CardSettings` widget implements a few global settings that all child fields can inherit. Currently it supports only label customization.
