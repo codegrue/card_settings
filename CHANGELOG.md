@@ -1,5 +1,9 @@
 # Releases
 
+## [1.9.9+hotfix.1] - 2020-07-01
+
+- fixed content alignment issue
+
 ## [1.9.9] - 2020-07-01
 
 - changed label style for disabled fields (thanks esskar)
