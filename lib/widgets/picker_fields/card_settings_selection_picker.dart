@@ -207,6 +207,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   }
 
   Widget cupertinoSettingsListPicker(String content) {
+    final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
           ? null
@@ -220,8 +221,8 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
                       CardSettings.of(context).labelWidth ??
                       120.0,
                   child: widget?.requiredIndicator != null
-                      ? Text((widget?.label ?? "") + ' *')
-                      : Text(widget?.label),
+                      ? Text((widget?.label ?? "") + ' *', style: ls,)
+                      : Text(widget?.label, style: ls,),
                 ),
                 contentWidget: Text(
                   content,
@@ -253,6 +254,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
         label: widget?.label,
         labelAlign: widget?.labelAlign,
         labelWidth: widget?.labelWidth,
+        enabled: widget?.enabled,
         visible: widget?.visible,
         icon: widget?.icon,
         requiredIndicator: widget?.requiredIndicator,

@@ -207,6 +207,7 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
   }
 
   Widget cupertinoSettingsButton() {
+    final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
           ? null
@@ -220,8 +221,8 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
                       CardSettings.of(context).labelWidth ??
                       120.0,
                   child: widget?.requiredIndicator != null
-                      ? Text((widget?.label ?? "") + ' *')
-                      : Text(widget?.label),
+                      ? Text((widget?.label ?? "") + ' *', style: ls,)
+                      : Text(widget?.label, style: ls,),
                 ),
                 contentWidget: Text(
                   value == null ? '' : DateFormat.yMd().add_jms().format(value),
@@ -245,6 +246,7 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
         labelAlign: widget?.labelAlign,
         labelWidth: widget?.labelWidth,
         visible: widget?.visible ?? true,
+        enabled: widget?.enabled,
         icon: widget?.icon ?? Icon(Icons.event),
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,

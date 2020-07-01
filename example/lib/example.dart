@@ -140,6 +140,7 @@ class ExampleFormState extends State<ExampleForm> {
             _buildCardSettingsParagraph_Description(5),
             _buildCardSettingsCheckboxPicker_Hobbies(),
             _buildCardSettingsDateTimePicker_Birthday(),
+            _buildCardSettingsText_Disabled()
           ],
         ),
         CardSettingsSection(
@@ -759,6 +760,14 @@ class ExampleFormState extends State<ExampleForm> {
         });
         widget.onValueChanged('Name', value);
       },
+    );
+  }
+
+  CardSettingsText _buildCardSettingsText_Disabled() {
+    return CardSettingsText(
+      label: 'Disabled',
+      hintText: 'something disabled...',
+      enabled: false,
     );
   }
 
