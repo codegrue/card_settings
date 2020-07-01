@@ -1,13 +1,13 @@
 # Releases
 
-## [1.9.9] - TBD
+## [1.9.9] - 2020-07-01
 
 - changed label style for disabled fields (thanks esskar)
 - added `cardless` option to flatten the material wrapper to just a Container
 - added border clipping to card contents by default
 - fixed overflow error on some fields when width of card is very slim
 
-## [1.9.8] - 6/19/2020
+## [1.9.8] - 2020-06-19
 
 - updated readme short example
 - created custom long example page to reference the important example file
@@ -18,13 +18,13 @@
 - changed CardSettingsDouble to display localized numbers
 - changed CardSettingsPhone to format number in user's locale
 
-## [1.9.7] - 6/9/2020
+## [1.9.7] - 2020-06-09
 
 - ensure all widgets have the `labelWidth` property
 - fixed bug with photos not honoring the alignment property
 - extended interfaces to enforce API consistency
 
-## [1.9.6] - 6/8/2020
+## [1.9.6] - 2020-06-08
 
 - add step interval support to number picker (thanks CoolONEOfficial)
 - fixed gesture click on `CardSettingsFilePicker`
@@ -32,35 +32,35 @@
 - reorganized example to be more readable
 - removed hard coded "Color for" from `CardSettingsColorPicker` title to allow localization
 
-## [1.9.5] - 6/4/2020
+## [1.9.5] - 2020-06-04
 
 - fixed `enabled` behavior for all controls
 
-## [1.9.4] - 6/3/2020
+## [1.9.4] - 2020-06-03
 
 - added `CardSettingsFilePicker` (thanks CoolONEOfficial)
 - Upgraded `flutter_cupertino_settings` to address compatibility bug with the beta branch
 - Removed dependency on `flutter_platform_widgets`
 - Fixed overflow calculation for wide label fields
 
-## [1.9.3] - 5/23/2020
+## [1.9.3] - 2020-05-23
 
 - fixed assert bug in `CardSettingsSelectionPicker` when providing values and no icons
 - added CI to the project (Github Actions)
 - increased unit tests for code coverage
 - added more badges to the readme
 
-## [1.9.2] - 5/20/2020
+## [1.9.2] - 2020-05-20
 
 - updated `flutter_material_pickers` package to fix C`ardSettingsSelectionPicker` index bug
 
-## [1.9.1] - 5/19/2020
+## [1.9.1] - 2020-05-19
 
 - refactored single card display to scroll better on web
 - defaulted shrinkWrap to true
 - `showMaterialonIOS` on fields defaults to inherit from the `CardSettings` parent
 
-## [1.9.0] - 5/18/2020
+## [1.9.0] - 2020-05-18
 
 - compatible with flutter web now
 - `CardSettingsDateTimePicker` (combo) added
