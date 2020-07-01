@@ -4,6 +4,7 @@
 
 - changed label style for disabled fields (thanks esskar)
 - added `cardless` option to flatten the material wrapper to just a Container
+- added border clipping to card contents by default
 
 ## [1.9.8] - 6/19/2020
 

@@ -119,6 +119,8 @@ class CardSettings extends InheritedWidget {
                     )
                   : Card(
                       margin: EdgeInsets.all(0.0),
+                      clipBehavior:
+                          Clip.antiAlias, // todo, observe theme if set
                       elevation: cardElevation,
                       child: Column(
                         children: children,
@@ -151,6 +153,7 @@ class CardSettings extends InheritedWidget {
                   child: row.build(null),
                 )
               : Card(
+                  clipBehavior: Clip.antiAlias, // todo, observe theme if set
                   elevation: cardElevation,
                   child: row.build(null),
                 ),

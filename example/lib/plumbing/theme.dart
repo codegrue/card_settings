@@ -26,7 +26,16 @@ class ExampleTheme extends StatelessWidget {
 
 ThemeData _buildTheme(Brightness brightness) {
   switch (brightness) {
-    case Brightness.light:
+    case Brightness.dark:
+      return ThemeData(
+        primarySwatch: Colors.teal,
+        brightness: brightness,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        backgroundColor: Colors.black,
+        textTheme: GoogleFonts.paprikaTextTheme(TextTheme()),
+        fontFamily: GoogleFonts.getFont('Paprika').fontFamily,
+      );
+    default:
       return ThemeData(
         primaryColor: Colors.teal, // app header background
         secondaryHeaderColor: Colors.indigo[400], // card header background
@@ -45,21 +54,12 @@ ThemeData _buildTheme(Brightness brightness) {
           labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
         ),
         fontFamily: GoogleFonts.getFont('Paprika').fontFamily,
-      );
-    case Brightness.dark:
-      return ThemeData(
-        primarySwatch: Colors.teal,
-        brightness: brightness,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        backgroundColor: Colors.black,
-        textTheme: GoogleFonts.paprikaTextTheme(TextTheme()),
-        fontFamily: GoogleFonts.getFont('Paprika').fontFamily,
-      );
-    default:
-      return ThemeData(
-        primarySwatch: Colors.teal,
-        brightness: brightness,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        // cardTheme: CardTheme(
+        //   shape: RoundedRectangleBorder(
+        //     side: BorderSide(width: 2, color: Colors.orange),
+        //     borderRadius: BorderRadius.circular(20),
+        //   ),
+        // ),
       );
   }
 }

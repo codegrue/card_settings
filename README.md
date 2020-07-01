@@ -198,6 +198,19 @@ If you would rather just have a flat style with no border, set `cardless` to fal
 
 This has no effect in Cupertino mode, as that doesn't have a card to begin with.
 
+You can also change the actual card styleing through the theme for example:
+
+![Custom](https://github.com/codegrue/card_settings/blob/master/images/custom_border_example.png)
+
+```dart
+  cardTheme: CardTheme(
+    shape: RoundedRectangleBorder(
+      side: BorderSide(width: 2, color: Colors.orange),
+      borderRadius: BorderRadius.circular(20),
+    ),
+  ),
+```
+
 ### Global Properties
 
 The `CardSettings` widget implements a few global settings that all child fields can inherit. Currently it supports only label customization.
