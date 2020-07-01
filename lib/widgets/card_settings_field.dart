@@ -104,28 +104,28 @@ class CardSettingsField extends StatelessWidget {
   }
 
   Widget _buildLabelBlock(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-
-    return Container(
-      width: (contentOnNewLine)
-          ? size.width - 90
-          : labelWidth ?? CardSettings.of(context).labelWidth ?? 120.0,
-      padding:
-          EdgeInsets.only(right: CardSettings.of(context).labelPadding ?? 6.0),
-      child: Row(
-        children: <Widget>[
-          _buildLeftIcon(context),
-          _buildLabelSpacer(context),
-          Expanded(
-            child: Row(
-              children: <Widget>[
-                _buildLabelText(context),
-                _buildlabelRequiredIndicator(context),
-              ],
+    return Expanded(
+      child: Container(
+        width: (contentOnNewLine)
+            ? null
+            : labelWidth ?? CardSettings.of(context).labelWidth ?? 120.0,
+        padding: EdgeInsets.only(
+            right: CardSettings.of(context).labelPadding ?? 6.0),
+        child: Row(
+          children: <Widget>[
+            _buildLeftIcon(context),
+            _buildLabelSpacer(context),
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  _buildLabelText(context),
+                  _buildlabelRequiredIndicator(context),
+                ],
+              ),
             ),
-          ),
-          _buildLabelSuffix(context),
-        ],
+            _buildLabelSuffix(context),
+          ],
+        ),
       ),
     );
   }

@@ -23,8 +23,15 @@ class CardSettings extends InheritedWidget {
     this.cardless = false,
   }) : super(
           key: key,
-          child: _buildChild(children, showMaterialonIOS, cardElevation,
-              padding, shrinkWrap, false, cardless),
+          child: CardSettingsContent(
+            children: children,
+            showMaterialonIOS: showMaterialonIOS,
+            cardElevation: cardElevation,
+            padding: padding,
+            shrinkWrap: shrinkWrap,
+            sectioned: false,
+            cardless: cardless,
+          ),
         );
 
   // constructor that wraps each section in it's own card
@@ -43,8 +50,15 @@ class CardSettings extends InheritedWidget {
     this.cardless = false,
   }) : super(
           key: key,
-          child: _buildChild(children, showMaterialonIOS, cardElevation,
-              padding, shrinkWrap, true, cardless),
+          child: CardSettingsContent(
+            children: children,
+            showMaterialonIOS: showMaterialonIOS,
+            cardElevation: cardElevation,
+            padding: padding,
+            shrinkWrap: shrinkWrap,
+            sectioned: true,
+            cardless: cardless,
+          ),
         );
 
   final TextAlign labelAlign;
@@ -72,34 +86,47 @@ class CardSettings extends InheritedWidget {
     if (contentAlign != old.contentAlign) return true;
     return false;
   }
+}
 
-  static Widget _buildChild(
-    List<CardSettingsSection> children,
-    bool showMaterialonIOS,
-    double cardElevation,
-    double padding,
-    bool shrinkWrap,
-    bool sectioned,
-    bool cardless,
-  ) {
+class CardSettingsContent extends StatelessWidget {
+  const CardSettingsContent({
+    Key key,
+    @required this.children,
+    @required this.showMaterialonIOS,
+    @required this.cardElevation,
+    @required this.padding,
+    @required this.shrinkWrap,
+    @required this.sectioned,
+    @required this.cardless,
+  }) : super(key: key);
+
+  final List<CardSettingsSection> children;
+  final bool showMaterialonIOS;
+  final double cardElevation;
+  final double padding;
+  final bool shrinkWrap;
+  final bool sectioned;
+  final bool cardless;
+
+  @override
+  Widget build(BuildContext context) {
     return (showCupertino(null, showMaterialonIOS))
-        ? _buildCupertinoWrapper(children, shrinkWrap)
-        : _buildMaterialWrapper(
-            children, padding, cardElevation, shrinkWrap, sectioned, cardless);
+        ? _buildCupertinoWrapper()
+        : _buildMaterialWrapper(context);
   }
 
-  static Widget _buildMaterialWrapper(
-      List<CardSettingsSection> children,
-      double padding,
-      double cardElevation,
-      bool shrinkWrap,
-      bool sectioned,
-      bool cardless) {
+  Widget _buildCupertinoWrapper() {
+    return CupertinoSettings(
+      items: children,
+      shrinkWrap: shrinkWrap,
+    );
+  }
+
+  Widget _buildMaterialWrapper(BuildContext context) {
     if (sectioned) {
       return SafeArea(
         child: ListView(
-          children: _buildMaterialSections(
-              children, cardElevation, padding, cardless),
+          children: _buildMaterialSections(context),
           shrinkWrap: shrinkWrap,
         ),
       );
@@ -119,8 +146,8 @@ class CardSettings extends InheritedWidget {
                     )
                   : Card(
                       margin: EdgeInsets.all(0.0),
-                      clipBehavior:
-                          Clip.antiAlias, // todo, observe theme if set
+                      clipBehavior: Theme.of(context).cardTheme.clipBehavior ??
+                          Clip.antiAlias,
                       elevation: cardElevation,
                       child: Column(
                         children: children,
@@ -133,18 +160,9 @@ class CardSettings extends InheritedWidget {
     }
   }
 
-  static Widget _buildCupertinoWrapper(
-      List<CardSettingsSection> children, bool shrinkWrap) {
-    return CupertinoSettings(
-      items: children,
-      shrinkWrap: shrinkWrap,
-    );
-  }
-
-  static List<Widget> _buildMaterialSections(List<CardSettingsSection> sections,
-      double cardElevation, double padding, bool cardless) {
+  List<Widget> _buildMaterialSections(BuildContext context) {
     List<Widget> _children = <Widget>[];
-    for (var row in sections) {
+    for (var row in children) {
       _children.add(
         Container(
           padding: EdgeInsets.fromLTRB(padding, padding, padding, 0.0),
@@ -153,7 +171,8 @@ class CardSettings extends InheritedWidget {
                   child: row.build(null),
                 )
               : Card(
-                  clipBehavior: Clip.antiAlias, // todo, observe theme if set
+                  clipBehavior: Theme.of(context).cardTheme.clipBehavior ??
+                      Clip.antiAlias,
                   elevation: cardElevation,
                   child: row.build(null),
                 ),
