@@ -39,12 +39,6 @@ class CardSettingsField extends StatelessWidget {
   Widget build(BuildContext context) {
     if (visible) {
       return Container(
-        decoration: BoxDecoration(
-          border: Border(
-            bottom:
-                BorderSide(width: 1.0, color: Theme.of(context).dividerColor),
-          ),
-        ),
         padding: EdgeInsets.all(14.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
-import '../../interfaces/common_field_attributes.dart';
+import '../../interfaces/common_field_properties.dart';
 
 /// This is the file picker field
 class CardSettingsFilePicker extends FormField<Uint8List>
@@ -216,7 +216,10 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
                       CardSettings.of(context).labelWidth ??
                       120.0,
                   child: widget?.requiredIndicator != null
-                      ? Text((widget?.label ?? "") + ' *', style: ls,)
+                      ? Text(
+                          (widget?.label ?? "") + ' *',
+                          style: ls,
+                        )
                       : Text(widget?.label, style: ls),
                 ),
                 contentWidget: _buildFieldContent(formattedValue),

@@ -10,8 +10,8 @@ import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../card_settings.dart';
-import '../../interfaces/common_field_attributes.dart';
-import '../../interfaces/text_field_attributes.dart';
+import '../../interfaces/common_field_properties.dart';
+import '../../interfaces/text_field_properties.dart';
 
 /// This is a standard one line text entry  It's based on the [TextFormField] widget.
 class CardSettingsText extends FormField<String>
@@ -253,8 +253,18 @@ class _CardSettingsTextState extends FormFieldState<String> {
     final ls = labelStyle(context, widget?.enabled ?? true);
     final _child = Container(
       child: CupertinoTextField(
-        prefix: widget?.prefixText == null ? null : Text(widget.prefixText, style: ls,),
-        suffix: widget?.unitLabel == null ? null : Text(widget.unitLabel, style: ls,),
+        prefix: widget?.prefixText == null
+            ? null
+            : Text(
+                widget.prefixText,
+                style: ls,
+              ),
+        suffix: widget?.unitLabel == null
+            ? null
+            : Text(
+                widget.unitLabel,
+                style: ls,
+              ),
         controller: _controller,
         focusNode: widget?.focusNode,
         textInputAction: widget?.inputAction,

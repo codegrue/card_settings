@@ -9,7 +9,7 @@ import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:intl/intl.dart';
 
 import '../../card_settings.dart';
-import '../../interfaces/common_field_attributes.dart';
+import '../../interfaces/common_field_properties.dart';
 
 /// This is the date picker field
 class CardSettingsDatePicker extends FormField<DateTime>
@@ -193,8 +193,14 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
                       CardSettings.of(context).labelWidth ??
                       120.0,
                   child: widget?.requiredIndicator != null
-                      ? Text((widget?.label ?? "") + ' *', style: ls,)
-                      : Text(widget?.label, style: ls,),
+                      ? Text(
+                          (widget?.label ?? "") + ' *',
+                          style: ls,
+                        )
+                      : Text(
+                          widget?.label,
+                          style: ls,
+                        ),
                 ),
                 contentWidget: Text(
                   formattedValue,

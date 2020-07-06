@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 import '../../card_settings.dart';
-import '../../interfaces/common_field_attributes.dart';
+import '../../interfaces/common_field_properties.dart';
 
 /// This field allows a time to be selected.
 class CardSettingsTimePicker extends FormField<TimeOfDay>
@@ -171,8 +171,14 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
                       CardSettings.of(context).labelWidth ??
                       120.0,
                   child: widget?.requiredIndicator != null
-                      ? Text((widget?.label ?? "") + ' *', style: ls,)
-                      : Text(widget?.label, style: ls,),
+                      ? Text(
+                          (widget?.label ?? "") + ' *',
+                          style: ls,
+                        )
+                      : Text(
+                          widget?.label,
+                          style: ls,
+                        ),
                 ),
                 contentWidget: Text(
                   value == null ? '' : value.format(context),

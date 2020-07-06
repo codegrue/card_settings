@@ -128,6 +128,7 @@ class ExampleFormState extends State<ExampleForm> {
       labelWidth: 150,
       contentAlign: TextAlign.right,
       cardless: false,
+      divider: Divider(color: Colors.blue),
       children: <CardSettingsSection>[
         CardSettingsSection(
           header: CardSettingsHeader(
@@ -148,6 +149,7 @@ class ExampleFormState extends State<ExampleForm> {
           header: CardSettingsHeader(
             label: 'Colors',
           ),
+          divider: Divider(color: Colors.purple),
           children: <Widget>[
             _buildCardSettingsColorPicker_Coat(),
             _buildCardSettingsColorPicker_Mane(),

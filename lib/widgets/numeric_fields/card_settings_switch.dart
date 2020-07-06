@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 import '../../card_settings.dart';
-import '../../interfaces/common_field_attributes.dart';
+import '../../interfaces/common_field_properties.dart';
 
 /// This is a field that allows a boolean to be set via a switch widget.
 class CardSettingsSwitch extends FormField<bool>

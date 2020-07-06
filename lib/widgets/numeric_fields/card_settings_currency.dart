@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 import '../../card_settings.dart';
-import '../../interfaces/common_field_attributes.dart';
+import '../../interfaces/common_field_properties.dart';
 
 /// This is a currency field.
 class CardSettingsCurrency extends StatefulWidget

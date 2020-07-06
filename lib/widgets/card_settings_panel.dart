@@ -21,6 +21,7 @@ class CardSettings extends InheritedWidget {
     this.showMaterialonIOS: false,
     this.shrinkWrap = false,
     this.cardless = false,
+    this.divider,
   }) : super(
           key: key,
           child: CardSettingsContent(
@@ -48,6 +49,7 @@ class CardSettings extends InheritedWidget {
     this.showMaterialonIOS: false,
     this.shrinkWrap = true,
     this.cardless = false,
+    this.divider,
   }) : super(
           key: key,
           child: CardSettingsContent(
@@ -71,6 +73,7 @@ class CardSettings extends InheritedWidget {
   final bool shrinkWrap;
   final bool showMaterialonIOS;
   final bool cardless;
+  final Divider divider;
 
   static CardSettings of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<CardSettings>();
@@ -131,30 +134,23 @@ class CardSettingsContent extends StatelessWidget {
         ),
       );
     } else {
+      var childList = ListView(children: children);
+
       return SafeArea(
-        child: ListView(
-          shrinkWrap: shrinkWrap,
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(padding),
-              child: (cardless)
-                  ? Container(
-                      margin: EdgeInsets.all(0.0),
-                      child: Column(
-                        children: children,
-                      ),
-                    )
-                  : Card(
-                      margin: EdgeInsets.all(0.0),
-                      clipBehavior: Theme.of(context).cardTheme.clipBehavior ??
-                          Clip.antiAlias,
-                      elevation: cardElevation,
-                      child: Column(
-                        children: children,
-                      ),
-                    ),
-            ),
-          ],
+        child: Container(
+          padding: EdgeInsets.all(padding),
+          child: (cardless)
+              ? Container(
+                  margin: EdgeInsets.all(0.0),
+                  child: childList,
+                )
+              : Card(
+                  margin: EdgeInsets.all(0.0),
+                  clipBehavior: Theme.of(context).cardTheme.clipBehavior ??
+                      Clip.antiAlias,
+                  elevation: cardElevation,
+                  child: childList,
+                ),
         ),
       );
     }
@@ -168,13 +164,13 @@ class CardSettingsContent extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(padding, padding, padding, 0.0),
           child: (cardless)
               ? Container(
-                  child: row.build(null),
+                  child: row.build(context),
                 )
               : Card(
                   clipBehavior: Theme.of(context).cardTheme.clipBehavior ??
                       Clip.antiAlias,
                   elevation: cardElevation,
-                  child: row.build(null),
+                  child: row.build(context),
                 ),
         ),
       );
@@ -189,15 +185,24 @@ class CardSettingsSection extends StatelessWidget {
     this.children,
     this.header,
     this.showMaterialonIOS,
+    this.divider,
   });
 
   final Widget header;
   final Widget instructions;
   final List<Widget> children;
   final bool showMaterialonIOS;
+  final Divider divider;
 
   @override
   Widget build(BuildContext context) {
+    var _divider = divider ??
+        CardSettings.of(context).divider ??
+        Divider(
+          thickness: 1.0,
+          color: Theme.of(context).dividerColor,
+        );
+
     List<Widget> _children = <Widget>[];
     if (showCupertino(context, showMaterialonIOS)) {
       if (header != null) _children.add(header);
@@ -206,9 +211,19 @@ class CardSettingsSection extends StatelessWidget {
     } else {
       if (header != null) _children.add(header);
       if (instructions != null) _children.add(instructions);
-      if (children != null) _children.addAll(children);
+
+      if (children != null) {
+        for (var child in children) {
+          _children.add(child);
+          if (child != children.last) _children.add(_divider);
+        }
+      }
     }
 
-    return Column(children: _children);
+    //return Column(children: _children);
+
+    return Column(
+      children: _children,
+    );
   }
 }

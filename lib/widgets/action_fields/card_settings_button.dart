@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
+import '../../Interfaces/common_row_properties.dart';
+
 /// This is a button widget for inclusion in the form.
-class CardSettingsButton extends StatelessWidget {
+class CardSettingsButton extends StatelessWidget
+    implements ICommonRowProperties {
   CardSettingsButton({
     this.label: 'Label',
     @required this.onPressed,
@@ -22,13 +25,16 @@ class CardSettingsButton extends StatelessWidget {
   });
 
   final String label;
-  final bool visible;
+
   final bool isDestructive;
   final Color backgroundColor;
   final Color textColor;
   final double bottomSpacing;
-  final bool showMaterialonIOS;
   final bool enabled;
+  @override
+  final bool showMaterialonIOS;
+  @override
+  final bool visible;
 
   // Events
   final VoidCallback onPressed;

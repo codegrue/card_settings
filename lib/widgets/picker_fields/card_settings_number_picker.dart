@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 
 import '../../card_settings.dart';
-import '../../interfaces/common_field_attributes.dart';
+import '../../interfaces/common_field_properties.dart';
 
 /// This is a list picker that allows for a range of numbers to be speficied as pptions.
 class CardSettingsNumberPicker extends StatelessWidget

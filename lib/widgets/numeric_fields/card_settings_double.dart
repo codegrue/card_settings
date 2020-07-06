@@ -7,8 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 
 import '../../card_settings.dart';
-import '../../interfaces/common_field_attributes.dart';
-import '../../interfaces/text_field_attributes.dart';
+import '../../interfaces/common_field_properties.dart';
+import '../../interfaces/text_field_properties.dart';
 
 /// This is a phone number field. It's designed for US numbers
 class CardSettingsDouble extends StatelessWidget
