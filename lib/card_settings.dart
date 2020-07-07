@@ -7,6 +7,7 @@ library card_settings;
 export 'helpers/converter_functions.dart';
 export 'widgets/action_fields/card_settings_button.dart';
 export 'widgets/card_field_layout.dart';
+export 'widgets/card_settings_widget.dart';
 export 'widgets/card_settings_field.dart';
 export 'widgets/card_settings_panel.dart';
 export 'widgets/information_fields/card_settings_header.dart';

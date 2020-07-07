@@ -1,10 +1,15 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
+import 'package:card_settings/card_settings.dart';
 import 'package:card_settings/helpers/platform_functions.dart';
+import 'package:card_settings/widgets/card_settings_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
+
+import 'information_fields/card_settings_header.dart';
+import 'information_fields/card_settings_instructions.dart';
 
 /// This is the card wrapper that all the field controls are placed into
 class CardSettings extends InheritedWidget {
@@ -188,9 +193,9 @@ class CardSettingsSection extends StatelessWidget {
     this.divider,
   });
 
-  final Widget header;
-  final Widget instructions;
-  final List<Widget> children;
+  final CardSettingsHeader header;
+  final CardSettingsInstructions instructions;
+  final List<CardSettingsWidget> children;
   final bool showMaterialonIOS;
   final Divider divider;
 
@@ -213,9 +218,16 @@ class CardSettingsSection extends StatelessWidget {
       if (instructions != null) _children.add(instructions);
 
       if (children != null) {
-        for (var child in children) {
+        var visibleChildren = children.where((c) => c.visible);
+        for (var child in visibleChildren) {
           _children.add(child);
-          if (child != children.last) _children.add(_divider);
+
+          var addDivider = true;
+          if (child is CardSettingsButton)
+            addDivider = false; // don't put divider between buttons
+          if (child == visibleChildren.last)
+            addDivider = false; // don't put a divider after the last item
+          if (addDivider) _children.add(_divider);
         }
       }
     }

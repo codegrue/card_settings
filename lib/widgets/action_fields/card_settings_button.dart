@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
-import '../../Interfaces/common_row_properties.dart';
+import '../../interfaces/minimum_field_properties.dart';
 
 /// This is a button widget for inclusion in the form.
 class CardSettingsButton extends StatelessWidget
-    implements ICommonRowProperties {
+    implements IMinimumFieldSettings {
   CardSettingsButton({
     this.label: 'Label',
     @required this.onPressed,

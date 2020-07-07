@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'common_row_properties.dart';
+import 'minimum_field_properties.dart';
 
 // Interface to ensure that all widgets implement this minimum
 // set of properties
-abstract class ICommonFieldProperties extends ICommonRowProperties {
+abstract class ICommonFieldProperties extends IMinimumFieldSettings {
   final String label = null;
   final double labelWidth = null;
   final TextAlign labelAlign = null;
@@ -16,9 +16,4 @@ abstract class ICommonFieldProperties extends ICommonRowProperties {
   final Function onSaved = null;
   final Function validator = null;
   final bool autovalidate = null;
-
-  @override
-  final bool showMaterialonIOS = null;
-  @override
-  final bool visible = null;
 }

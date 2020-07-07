@@ -5,21 +5,27 @@ import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
+import '../card_settings_widget.dart';
+
 /// This is a header to distinguish sections of the form.
-class CardSettingsHeader extends StatelessWidget {
+class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
   CardSettingsHeader({
     this.label: 'Label',
     this.labelAlign: TextAlign.left,
     this.height: 44.0,
     this.color,
     this.showMaterialonIOS,
+    this.visible,
   });
 
   final String label;
   final TextAlign labelAlign;
   final double height;
   final Color color;
+  @override
   final bool showMaterialonIOS;
+  @override
+  final bool visible;
 
   @override
   Widget build(BuildContext context) {

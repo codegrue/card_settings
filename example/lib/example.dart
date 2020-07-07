@@ -128,13 +128,12 @@ class ExampleFormState extends State<ExampleForm> {
       labelWidth: 150,
       contentAlign: TextAlign.right,
       cardless: false,
-      divider: Divider(color: Colors.blue),
       children: <CardSettingsSection>[
         CardSettingsSection(
           header: CardSettingsHeader(
             label: 'Bio',
           ),
-          children: <Widget>[
+          children: <CardSettingsWidget>[
             _buildCardSettingsText_Name(),
             _buildCardSettingsListPicker_Type(),
             _buildCardSettingsRadioPicker_Gender(),
@@ -149,8 +148,8 @@ class ExampleFormState extends State<ExampleForm> {
           header: CardSettingsHeader(
             label: 'Colors',
           ),
-          divider: Divider(color: Colors.purple),
-          children: <Widget>[
+          divider: Divider(thickness: 1.0, color: Colors.purple),
+          children: <CardSettingsWidget>[
             _buildCardSettingsColorPicker_Coat(),
             _buildCardSettingsColorPicker_Mane(),
             _buildCardSettingsSwitch_Spots(),
@@ -161,7 +160,7 @@ class ExampleFormState extends State<ExampleForm> {
           header: CardSettingsHeader(
             label: 'Size',
           ),
-          children: <Widget>[
+          children: <CardSettingsWidget>[
             _buildCardSettingsDouble_Height(),
             _buildCardSettingsInt_Weight(),
             _buildCardSettingsSelectionPicker_Style(),
@@ -172,7 +171,7 @@ class ExampleFormState extends State<ExampleForm> {
             label: 'First Show',
           ),
           instructions: _buildCardSettingsInstructions(),
-          children: <Widget>[
+          children: <CardSettingsWidget>[
             _buildCardSettingsDatePicker(),
             _buildCardSettingsPhotoPicker(),
             _buildCardSettingsVideoPicker(),
@@ -188,7 +187,7 @@ class ExampleFormState extends State<ExampleForm> {
           header: CardSettingsHeader(
             label: 'Security',
           ),
-          children: <Widget>[
+          children: <CardSettingsWidget>[
             _buildCardSettingsEmail(),
             _buildCardSettingsPassword(),
           ],
@@ -197,7 +196,7 @@ class ExampleFormState extends State<ExampleForm> {
           header: CardSettingsHeader(
             label: 'Actions',
           ),
-          children: <Widget>[
+          children: <CardSettingsWidget>[
             _buildCardSettingsButton_Save(),
             _buildCardSettingsButton_Reset(),
           ],
@@ -215,11 +214,11 @@ class ExampleFormState extends State<ExampleForm> {
           header: CardSettingsHeader(
             label: 'Bio',
           ),
-          children: <Widget>[
+          children: <CardSettingsWidget>[
             _buildCardSettingsText_Name(),
             _buildCardSettingsListPicker_Type(),
             CardFieldLayout(
-              <Widget>[
+              <CardSettingsWidget>[
                 _buildCardSettingsRadioPicker_Gender(),
                 _buildCardSettingsNumberPicker_Age(labelAlign: TextAlign.right),
               ],
@@ -234,8 +233,8 @@ class ExampleFormState extends State<ExampleForm> {
           header: CardSettingsHeader(
             label: 'Security',
           ),
-          children: <Widget>[
-            CardFieldLayout(<Widget>[
+          children: <CardSettingsWidget>[
+            CardFieldLayout(<CardSettingsWidget>[
               _buildCardSettingsEmail(),
               _buildCardSettingsPassword(),
             ]),
@@ -245,12 +244,12 @@ class ExampleFormState extends State<ExampleForm> {
           header: CardSettingsHeader(
             label: 'Colors',
           ),
-          children: <Widget>[
-            CardFieldLayout(<Widget>[
+          children: <CardSettingsWidget>[
+            CardFieldLayout(<CardSettingsWidget>[
               _buildCardSettingsColorPicker_Coat(),
               _buildCardSettingsColorPicker_Mane(),
             ]),
-            CardFieldLayout(<Widget>[
+            CardFieldLayout(<CardSettingsWidget>[
               _buildCardSettingsSwitch_Spots(),
               _buildCardSettingsColorPicker_Spot(),
             ]),
@@ -260,8 +259,8 @@ class ExampleFormState extends State<ExampleForm> {
           header: CardSettingsHeader(
             label: 'Size',
           ),
-          children: <Widget>[
-            CardFieldLayout(<Widget>[
+          children: <CardSettingsWidget>[
+            CardFieldLayout(<CardSettingsWidget>[
               _buildCardSettingsDouble_Height(),
               _buildCardSettingsInt_Weight(),
               _buildCardSettingsSelectionPicker_Style(),
@@ -272,21 +271,21 @@ class ExampleFormState extends State<ExampleForm> {
           header: CardSettingsHeader(
             label: 'First Show',
           ),
-          children: <Widget>[
-            _buildCardSettingsInstructions(),
-            CardFieldLayout(<Widget>[
+          instructions: _buildCardSettingsInstructions(),
+          children: <CardSettingsWidget>[
+            CardFieldLayout(<CardSettingsWidget>[
               _buildCardSettingsDatePicker(),
               _buildCardSettingsPhotoPicker(),
             ]),
-            CardFieldLayout(<Widget>[
+            CardFieldLayout(<CardSettingsWidget>[
               _buildCardSettingsVideoPicker(),
               _buildCardSettingsMusicPicker(),
             ]),
-            CardFieldLayout(<Widget>[
+            CardFieldLayout(<CardSettingsWidget>[
               _buildCardSettingsFileCustomPicker(),
               _buildCardSettingsTimePicker(),
             ]),
-            CardFieldLayout(<Widget>[
+            CardFieldLayout(<CardSettingsWidget>[
               _buildCardSettingsCurrency(),
               _buildCardSettingsPhone(),
             ]),
@@ -297,8 +296,8 @@ class ExampleFormState extends State<ExampleForm> {
           header: CardSettingsHeader(
             label: 'Actions',
           ),
-          children: <Widget>[
-            CardFieldLayout(<Widget>[
+          children: <CardSettingsWidget>[
+            CardFieldLayout(<CardSettingsWidget>[
               _buildCardSettingsButton_Save(),
               _buildCardSettingsButton_Reset(),
             ]),
@@ -315,6 +314,7 @@ class ExampleFormState extends State<ExampleForm> {
       onPressed: resetPressed,
       backgroundColor: Colors.red,
       textColor: Colors.white,
+      bottomSpacing: 4.0,
     );
   }
 
@@ -330,6 +330,7 @@ class ExampleFormState extends State<ExampleForm> {
     return CardSettingsPassword(
       key: _passwordKey,
       icon: Icon(Icons.lock),
+      labelWidth: 200,
       initialValue: _ponyModel.password,
       autovalidate: _autoValidate,
       validator: (value) {

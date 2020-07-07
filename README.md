@@ -78,7 +78,7 @@ All fields in this package are compatible with the standard Flutter Form widget.
               header: CardSettingsHeader(
                 label: 'Favorite Book',
               ),
-              children: <Widget>[
+              children: <CardSettingsWidget>[
                 CardSettingsText(
                   label: 'Title',
                   initialValue: title,

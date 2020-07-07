@@ -4,9 +4,14 @@
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter/material.dart';
 
+import '../interfaces/common_field_properties.dart';
+
+const unimplemented = "implement in the wrapper widget";
+
 /// This is the basic layout of a field in a CardSettings view. Typcially, it
 /// will not be used directly.
-class CardSettingsField extends StatelessWidget {
+class CardSettingsField extends StatelessWidget
+    implements ICommonFieldProperties {
   CardSettingsField({
     this.label: 'Label',
     this.content,
@@ -22,18 +27,37 @@ class CardSettingsField extends StatelessWidget {
     this.enabled = true,
   });
 
+  @override
   final String label;
   final String unitLabel;
   final Widget content;
   final IconData pickerIcon;
+  @override
   final double labelWidth;
   final bool contentOnNewLine;
   final String errorText;
+  @override
   final bool visible;
+  @override
   final TextAlign labelAlign;
+  @override
   final Icon icon;
+  @override
   final Widget requiredIndicator;
   final bool enabled;
+
+  @override
+  TextAlign get contentAlign => throw UnimplementedError(unimplemented);
+  @override
+  bool get showMaterialonIOS => throw UnimplementedError(unimplemented);
+  @override
+  bool get autovalidate => throw UnimplementedError(unimplemented);
+  @override
+  Function get onChanged => throw UnimplementedError(unimplemented);
+  @override
+  Function get onSaved => throw UnimplementedError(unimplemented);
+  @override
+  Function get validator => throw UnimplementedError(unimplemented);
 
   @override
   Widget build(BuildContext context) {

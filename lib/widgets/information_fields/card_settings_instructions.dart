@@ -5,19 +5,26 @@ import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../card_settings_widget.dart';
+
 /// This is a read only section of text
-class CardSettingsInstructions extends StatelessWidget {
+class CardSettingsInstructions extends StatelessWidget
+    implements CardSettingsWidget {
   CardSettingsInstructions({
     this.text: 'Instructions here...',
     this.backgroundColor,
     this.textColor,
     this.showMaterialonIOS,
+    this.visible,
   });
 
   final String text;
   final Color backgroundColor;
   final Color textColor;
+  @override
   final bool showMaterialonIOS;
+  @override
+  final bool visible;
 
   @override
   Widget build(BuildContext context) {

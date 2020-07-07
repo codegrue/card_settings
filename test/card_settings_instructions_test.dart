@@ -13,12 +13,10 @@ void main() {
         home: CardSettings(
           children: [
             CardSettingsSection(
-              children: [
-                CardSettingsInstructions(
-                  text: instructions,
-                  textColor: color,
-                )
-              ],
+              instructions: CardSettingsInstructions(
+                text: instructions,
+                textColor: color,
+              ),
             ),
           ],
         ),

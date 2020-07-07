@@ -1,9 +1,11 @@
 # Releases
 
-## [1.9.10] - TBD
+## [1.10.0] - TBD
 
 - created a `divider` property on CardSettings and CardSettingsSections
 - removed the divider appearing from the last item in a section
+- ensure that widgets are of type `CardSettingsWidget` rather than just `Widget`
+- improved the number of interfaces to force consistency
 
 ## [1.9.9+hotfix.1] - 2020-07-01
 

@@ -12,11 +12,9 @@ void main() {
         home: CardSettings(
           children: [
             CardSettingsSection(
-              children: [
-                CardSettingsHeader(
-                  label: label,
-                )
-              ],
+              header: CardSettingsHeader(
+                label: label,
+              ),
             ),
           ],
         ),
