@@ -52,16 +52,17 @@ void main() {
       await tester.pumpWidget(widgetTree);
 
       // act
-      await tester.tap(find.byType(CardSettingsField));
+      await tester.tap(find.text(option1)); // tap field
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text(option2));
+      await tester.tap(find.text(option2)); // tap item in dialog
       await tester.pumpAndSettle();
 
       await tester.tap(find.text("OK"));
       await tester.pumpAndSettle();
 
       // assert
+      expect(find.text(option1), findsNothing);
       expect(find.text(option2), findsOneWidget);
       expect(find.text(option3), findsNothing);
     });
