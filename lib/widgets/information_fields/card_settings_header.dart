@@ -15,7 +15,7 @@ class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
     this.height: 44.0,
     this.color,
     this.showMaterialonIOS,
-    this.visible,
+    this.visible = true,
   });
 
   final String label;
@@ -29,6 +29,8 @@ class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!visible) return Container();
+
     if (showCupertino(context, showMaterialonIOS))
       return cupertinoHeader(context);
     else

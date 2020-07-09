@@ -1,6 +1,10 @@
 # Releases
 
-## [1.10.0] - TBD
+## [1.10.1] - 2020-07-09
+
+- fixed Heading and Instructions not hiding with visible = false
+
+## [1.10.0] - 2020-07-07
 
 - created a `divider` property on CardSettings and CardSettingsSections
 - removed the divider appearing from the last item in a section

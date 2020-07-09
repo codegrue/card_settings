@@ -15,7 +15,7 @@ class CardSettingsInstructions extends StatelessWidget
     this.backgroundColor,
     this.textColor,
     this.showMaterialonIOS,
-    this.visible,
+    this.visible = true,
   });
 
   final String text;
@@ -28,6 +28,8 @@ class CardSettingsInstructions extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    if (!visible) return Container();
+
     TextStyle textStyle = Theme.of(context)
         .primaryTextTheme
         .caption
