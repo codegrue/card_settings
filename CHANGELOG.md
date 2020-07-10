@@ -1,5 +1,12 @@
 # Releases
 
+## [1.11.1] - 2020-07-11
+
+- added `scrollable` property to turn off built in scrolling (Material only).
+- changed card `padding` proptety to EdgeInsetsGeometry to allow full control
+- added `margin` proptety to `CardSettings`
+- refactored card building to merge common code
+
 ## [1.11.0] - 2020-07-10
 
 - allow `CardSettingsHeader` to be completely customized through a `child` property.

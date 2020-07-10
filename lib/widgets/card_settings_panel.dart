@@ -20,13 +20,15 @@ class CardSettings extends InheritedWidget {
     this.labelPadding,
     this.labelSuffix,
     this.contentAlign: TextAlign.left,
-    this.padding: 8.0,
-    this.cardElevation: 5.0,
+    this.padding: const EdgeInsets.all(0.0),
+    this.margin: const EdgeInsets.all(8.0),
+    this.cardElevation,
     List<CardSettingsSection> children,
     this.showMaterialonIOS: false,
     this.shrinkWrap = false,
     this.cardless = false,
     this.divider,
+    this.scrollable = true,
   }) : super(
           key: key,
           child: CardSettingsContent(
@@ -34,9 +36,11 @@ class CardSettings extends InheritedWidget {
             showMaterialonIOS: showMaterialonIOS,
             cardElevation: cardElevation,
             padding: padding,
+            margin: margin,
             shrinkWrap: shrinkWrap,
             sectioned: false,
             cardless: cardless,
+            scrollable: scrollable,
           ),
         );
 
@@ -48,13 +52,15 @@ class CardSettings extends InheritedWidget {
     this.labelPadding,
     this.labelSuffix,
     this.contentAlign: TextAlign.left,
-    this.padding: 8.0,
-    this.cardElevation: 5.0,
+    this.padding: const EdgeInsets.all(0.0),
+    this.margin: const EdgeInsets.fromLTRB(8, 8, 8, 0.0),
+    this.cardElevation,
     List<CardSettingsSection> children,
     this.showMaterialonIOS: false,
     this.shrinkWrap = true,
     this.cardless = false,
     this.divider,
+    this.scrollable = true,
   }) : super(
           key: key,
           child: CardSettingsContent(
@@ -62,9 +68,11 @@ class CardSettings extends InheritedWidget {
             showMaterialonIOS: showMaterialonIOS,
             cardElevation: cardElevation,
             padding: padding,
+            margin: margin,
             shrinkWrap: shrinkWrap,
             sectioned: true,
             cardless: cardless,
+            scrollable: scrollable,
           ),
         );
 
@@ -73,12 +81,14 @@ class CardSettings extends InheritedWidget {
   final double labelPadding;
   final String labelSuffix;
   final TextAlign contentAlign;
-  final double padding;
+  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry margin;
   final double cardElevation;
   final bool shrinkWrap;
   final bool showMaterialonIOS;
   final bool cardless;
   final Divider divider;
+  final bool scrollable;
 
   static CardSettings of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<CardSettings>();
@@ -103,18 +113,22 @@ class CardSettingsContent extends StatelessWidget {
     @required this.showMaterialonIOS,
     @required this.cardElevation,
     @required this.padding,
+    @required this.margin,
     @required this.shrinkWrap,
     @required this.sectioned,
     @required this.cardless,
+    @required this.scrollable,
   }) : super(key: key);
 
   final List<CardSettingsSection> children;
   final bool showMaterialonIOS;
   final double cardElevation;
-  final double padding;
+  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry margin;
   final bool shrinkWrap;
   final bool sectioned;
   final bool cardless;
+  final bool scrollable;
 
   @override
   Widget build(BuildContext context) {
@@ -131,56 +145,52 @@ class CardSettingsContent extends StatelessWidget {
   }
 
   Widget _buildMaterialWrapper(BuildContext context) {
-    if (sectioned) {
-      return SafeArea(
-        child: ListView(
-          children: _buildMaterialSections(context),
-          shrinkWrap: shrinkWrap,
-        ),
-      );
-    } else {
-      var childList = ListView(children: children);
+    var cards = (sectioned)
+        ? Column(
+            children: _buildMaterialSections(context),
+          )
+        : _buildMaterialCardWrapper(
+            context,
+            content: Column(children: children),
+          );
 
-      return SafeArea(
-        child: Container(
-          padding: EdgeInsets.all(padding),
-          child: (cardless)
-              ? Container(
-                  margin: EdgeInsets.all(0.0),
-                  child: childList,
-                )
-              : Card(
-                  margin: EdgeInsets.all(0.0),
-                  clipBehavior: Theme.of(context).cardTheme.clipBehavior ??
-                      Clip.antiAlias,
-                  elevation: cardElevation,
-                  child: childList,
-                ),
-        ),
-      );
-    }
+    var wrapper = (scrollable) ? SingleChildScrollView(child: cards) : cards;
+
+    return SafeArea(child: wrapper);
   }
 
   List<Widget> _buildMaterialSections(BuildContext context) {
     List<Widget> _children = <Widget>[];
-    for (var row in children) {
+
+    // build a separate card for each section
+    for (var section in children) {
       _children.add(
-        Container(
-          padding: EdgeInsets.fromLTRB(padding, padding, padding, 0.0),
-          child: (cardless)
-              ? Container(
-                  child: row.build(context),
-                )
-              : Card(
-                  clipBehavior: Theme.of(context).cardTheme.clipBehavior ??
-                      Clip.antiAlias,
-                  elevation: cardElevation,
-                  child: row.build(context),
-                ),
+        _buildMaterialCardWrapper(
+          context,
+          content: section.build(context),
         ),
       );
     }
     return _children;
+  }
+
+  Widget _buildMaterialCardWrapper(BuildContext context, {Widget content}) {
+    return (cardless)
+        ? Container(
+            margin: margin,
+            padding: padding,
+            child: content,
+          )
+        : Card(
+            margin: margin,
+            clipBehavior:
+                Theme.of(context).cardTheme.clipBehavior ?? Clip.antiAlias,
+            elevation: cardElevation,
+            child: Padding(
+              padding: padding,
+              child: content,
+            ),
+          );
   }
 }
 
