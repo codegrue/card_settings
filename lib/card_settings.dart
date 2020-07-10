@@ -33,6 +33,7 @@ export 'widgets/text_fields/card_settings_password.dart';
 export 'widgets/text_fields/card_settings_phone.dart';
 export 'widgets/text_fields/card_settings_text.dart';
 export 'widgets/numeric_fields/card_settings_slider.dart';
+export 'widgets/card_settings_widget.dart';
 
 const double kPickerSheetHeight = 216.0;
 const double kPickerItemHeight = 32.0;

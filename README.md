@@ -241,6 +241,25 @@ The `labelAlign` and `contentAlign` properties are also available on each field,
   )
 ```
 
+### Headers
+
+`CardSettingsHeader` provides properties to set the color, height, and label alignment. However, if you wish to completely override the default header style and replace it with something custom, you can use the `child` property to pass in your own widget tree:
+
+```dart
+header: CardSettingsHeader(
+  child: Container(
+    height: 80,
+    child: Row(
+      children: [
+        Expanded(child: Divider(color: Colors.purple, thickness: 5)),
+        Text('Custom Header', style: TextStyle(fontSize: 20)),
+        Expanded(child: Divider(color: Colors.purple, thickness: 5)),
+      ],
+    ),
+  ),
+),
+```
+
 ### Dynamic Visibility
 
 Each field implements a `visible` property that you can use to control the visibility based on the value of other fields. In this example, the switch field controls the visibility of the text field:
@@ -337,6 +356,16 @@ CardSettings(
 ### Custom Fields
 
 The `CardSettingsField` is the basis of all other fields and can be used to build unique fields outside of this library. Its purpose is to govern layout with consistent decorations. The best way to make a custom field is to inherit from `FormField<T>`, which will manage the state of your field. The cleanest example of this is the `CardSettingsSwitch` widget. All you have to do is provide your custom widgets in the `content` property.
+
+### Custom Widgets
+
+If you wish to provide a custom widget that is _not_ a field type layout, you need to implement the `CardSettingsWidget` interface as so:
+
+```dart
+class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
+  ...
+}
+```
 
 ## Screenshots
 

@@ -1,5 +1,10 @@
 # Releases
 
+## [1.11.0] - 2020-07-10
+
+- allow `CardSettingsHeader` to be completely customized through a `child` property.
+- exposed `CardSettingsWidget` externally to use in building custom widgets
+
 ## [1.10.1] - 2020-07-09
 
 - fixed Heading and Instructions not hiding with visible = false

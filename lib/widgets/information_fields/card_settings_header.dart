@@ -16,6 +16,7 @@ class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
     this.color,
     this.showMaterialonIOS,
     this.visible = true,
+    this.child,
   });
 
   final String label;
@@ -26,10 +27,12 @@ class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
   final bool showMaterialonIOS;
   @override
   final bool visible;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
     if (!visible) return Container();
+    if (child != null) return child;
 
     if (showCupertino(context, showMaterialonIOS))
       return cupertinoHeader(context);
