@@ -30,6 +30,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay>
     this.icon,
     this.style,
     this.showMaterialonIOS,
+    this.fieldPadding,
   }) : super(
           key: key,
           initialValue: initialValue ?? TimeOfDay.now(),
@@ -71,6 +72,9 @@ class CardSettingsTimePicker extends FormField<TimeOfDay>
 
   @override
   final bool showMaterialonIOS;
+
+  @override
+  final EdgeInsetsGeometry fieldPadding;
 
   @override
   _CardSettingsTimePickerState createState() => _CardSettingsTimePickerState();
@@ -206,6 +210,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
         icon: widget?.icon ?? Icon(Icons.event),
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
+        fieldPadding: widget.fieldPadding,
         content: Text(
           value == null ? '' : value.format(context),
           style: contentStyle(context, value, widget.enabled),

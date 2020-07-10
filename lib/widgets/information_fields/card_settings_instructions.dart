@@ -5,6 +5,7 @@ import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../card_settings_panel.dart';
 import '../card_settings_widget.dart';
 
 /// This is a read only section of text
@@ -16,6 +17,7 @@ class CardSettingsInstructions extends StatelessWidget
     this.textColor,
     this.showMaterialonIOS,
     this.visible = true,
+    this.fieldPadding,
   });
 
   final String text;
@@ -25,6 +27,7 @@ class CardSettingsInstructions extends StatelessWidget
   final bool showMaterialonIOS;
   @override
   final bool visible;
+  final EdgeInsetsGeometry fieldPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +51,15 @@ class CardSettingsInstructions extends StatelessWidget
   }
 
   Widget materialInstruction(BuildContext context, TextStyle textStyle) {
+    EdgeInsetsGeometry _fieldPadding = (fieldPadding ??
+        CardSettings.of(context).fieldPadding ??
+        EdgeInsets.all(14.0));
+
     return Container(
       margin: EdgeInsets.all(0.0),
       decoration:
           BoxDecoration(color: backgroundColor ?? Theme.of(context).cardColor),
-      padding: EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0),
+      padding: _fieldPadding,
       child: Row(
         children: <Widget>[
           Text(

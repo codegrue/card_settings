@@ -40,6 +40,7 @@ class CardSettingsFilePicker extends FormField<Uint8List>
     this.requiredIndicator,
     this.style,
     this.showMaterialonIOS,
+    this.fieldPadding,
     this.fileType,
     this.fileExtension,
   })  : unattachDialogTitle = unattachDialogTitle ?? 'Unattach ' + label + "?",
@@ -97,6 +98,9 @@ class CardSettingsFilePicker extends FormField<Uint8List>
   final FileTypeCross fileType;
 
   final String fileExtension;
+
+  @override
+  final EdgeInsetsGeometry fieldPadding;
 
   @override
   _CardSettingsFilePickerState createState() => _CardSettingsFilePickerState();
@@ -243,6 +247,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
         icon: widget?.icon ?? Icon(Icons.attach_file),
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
+        fieldPadding: widget.fieldPadding,
         content: _buildFieldContent(formattedValue),
         pickerIcon: (widget.enabled)
             ? (value == null) ? Icons.attach_file : Icons.clear

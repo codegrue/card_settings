@@ -29,6 +29,7 @@ class CardSettings extends InheritedWidget {
     this.cardless = false,
     this.divider,
     this.scrollable = true,
+    this.fieldPadding,
   }) : super(
           key: key,
           child: CardSettingsContent(
@@ -61,6 +62,7 @@ class CardSettings extends InheritedWidget {
     this.cardless = false,
     this.divider,
     this.scrollable = true,
+    this.fieldPadding,
   }) : super(
           key: key,
           child: CardSettingsContent(
@@ -89,6 +91,7 @@ class CardSettings extends InheritedWidget {
   final bool cardless;
   final Divider divider;
   final bool scrollable;
+  final EdgeInsetsGeometry fieldPadding;
 
   static CardSettings of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<CardSettings>();

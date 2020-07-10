@@ -22,9 +22,10 @@ class CardSettingsField extends StatelessWidget
     this.unitLabel,
     this.errorText,
     this.visible: true,
-    this.labelAlign,
-    this.requiredIndicator,
+    @required this.labelAlign,
+    @required this.requiredIndicator,
     this.enabled = true,
+    @required this.fieldPadding,
   });
 
   @override
@@ -45,6 +46,8 @@ class CardSettingsField extends StatelessWidget
   @override
   final Widget requiredIndicator;
   final bool enabled;
+  @override
+  final EdgeInsetsGeometry fieldPadding;
 
   @override
   TextAlign get contentAlign => throw UnimplementedError(unimplemented);
@@ -61,9 +64,13 @@ class CardSettingsField extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    EdgeInsetsGeometry _fieldPadding = (fieldPadding ??
+        CardSettings.of(context).fieldPadding ??
+        EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0));
+
     if (visible) {
       return Container(
-        padding: EdgeInsets.all(14.0),
+        padding: _fieldPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

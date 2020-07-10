@@ -34,6 +34,7 @@ class CardSettingsDatePicker extends FormField<DateTime>
     this.dateFormat,
     this.style,
     this.showMaterialonIOS,
+    this.fieldPadding,
   }) : super(
             key: key,
             initialValue: initialValue ?? DateTime.now(),
@@ -80,6 +81,9 @@ class CardSettingsDatePicker extends FormField<DateTime>
 
   @override
   final bool showMaterialonIOS;
+
+  @override
+  final EdgeInsetsGeometry fieldPadding;
 
   @override
   _CardSettingsDatePickerState createState() => _CardSettingsDatePickerState();
@@ -228,6 +232,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
         icon: widget?.icon ?? Icon(Icons.event),
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
+        fieldPadding: widget.fieldPadding,
         content: Text(
           formattedValue,
           style: contentStyle(context, value, widget.enabled),

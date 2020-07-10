@@ -28,6 +28,7 @@ class CardSettingsNumberPicker extends StatelessWidget
     this.onChanged,
     this.visible: true,
     this.showMaterialonIOS,
+    this.fieldPadding,
   }) : assert(min < max);
 
   // Variables
@@ -54,6 +55,8 @@ class CardSettingsNumberPicker extends StatelessWidget
   final bool enabled;
   @override
   final double labelWidth;
+  @override
+  final EdgeInsetsGeometry fieldPadding;
 
   // Events
   @override
@@ -69,6 +72,7 @@ class CardSettingsNumberPicker extends StatelessWidget
       key: key,
       label: this.label,
       showMaterialonIOS: showMaterialonIOS,
+      fieldPadding: fieldPadding,
       labelAlign: labelAlign,
       labelWidth: labelWidth,
       contentAlign: contentAlign,

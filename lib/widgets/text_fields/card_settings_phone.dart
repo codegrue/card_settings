@@ -44,6 +44,7 @@ class CardSettingsPhone extends StatelessWidget
     this.onFieldSubmitted,
     this.inputFormatters,
     this.showMaterialonIOS,
+    this.fieldPadding,
   });
 
   @override
@@ -117,6 +118,9 @@ class CardSettingsPhone extends StatelessWidget
   final List<TextInputFormatter> inputFormatters;
 
   @override
+  final EdgeInsetsGeometry fieldPadding;
+
+  @override
   final bool showMaterialonIOS;
 
   @override
@@ -146,6 +150,7 @@ class CardSettingsPhone extends StatelessWidget
       onChanged: _safeOnChanged,
       controller: controller,
       focusNode: focusNode,
+      fieldPadding: fieldPadding,
       inputActionNode: inputActionNode,
       keyboardType:
           keyboardType ?? TextInputType.numberWithOptions(decimal: false),

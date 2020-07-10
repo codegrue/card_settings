@@ -33,6 +33,7 @@ class CardSettingsRadioPicker extends FormField<String>
     this.options,
     this.values,
     this.showMaterialonIOS,
+    this.fieldPadding,
   })  : assert(values == null || options.length == values.length,
             "If you provide 'values', they need the same number as 'options'"),
         super(
@@ -79,6 +80,9 @@ class CardSettingsRadioPicker extends FormField<String>
 
   @override
   final bool showMaterialonIOS;
+
+  @override
+  final EdgeInsetsGeometry fieldPadding;
 
   @override
   _CardSettingsRadioPickerState createState() =>
@@ -250,6 +254,7 @@ class _CardSettingsRadioPickerState extends FormFieldState<String> {
         icon: widget?.icon,
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
+        fieldPadding: widget.fieldPadding,
         content: Text(
           content,
           style: contentStyle(context, value, widget.enabled),

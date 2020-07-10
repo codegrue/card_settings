@@ -34,6 +34,7 @@ class CardSettingsSelectionPicker extends FormField<String>
     this.icons,
     this.values,
     this.showMaterialonIOS,
+    this.fieldPadding,
   })  : assert(values == null || options.length == values.length,
             "If you provide 'values', they need the same number as 'options'"),
         assert(icons == null || options.length == icons.length,
@@ -84,6 +85,9 @@ class CardSettingsSelectionPicker extends FormField<String>
 
   @override
   final bool showMaterialonIOS;
+
+  @override
+  final EdgeInsetsGeometry fieldPadding;
 
   @override
   _CardSettingsListPickerState createState() => _CardSettingsListPickerState();
@@ -265,6 +269,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
         icon: widget?.icon,
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
+        fieldPadding: widget.fieldPadding,
         content: Text(
           content,
           style: style,

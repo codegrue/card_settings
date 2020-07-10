@@ -43,6 +43,7 @@ class CardSettingsParagraph extends CardSettingsText
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
     bool showMaterialonIOS,
+    EdgeInsetsGeometry fieldPadding,
   }) : super(
           key: key,
           label: label,
@@ -50,6 +51,7 @@ class CardSettingsParagraph extends CardSettingsText
           hintText: hintText,
           contentAlign: contentAlign,
           showMaterialonIOS: showMaterialonIOS,
+          fieldPadding: fieldPadding,
           initialValue: initialValue,
           contentOnNewLine: contentOnNewLine,
           maxLength: maxLength,

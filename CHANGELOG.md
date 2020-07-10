@@ -5,6 +5,7 @@
 - added `scrollable` property to turn off built in scrolling (Material only).
 - changed card `padding` proptety to EdgeInsetsGeometry to allow full control
 - added `margin` proptety to `CardSettings`
+- added `fieldPadding` to all controls
 - refactored card building to merge common code
 
 ## [1.11.0] - 2020-07-10

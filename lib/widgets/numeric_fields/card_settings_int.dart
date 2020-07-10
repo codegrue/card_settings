@@ -41,6 +41,7 @@ class CardSettingsInt extends CardSettingsText
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
     bool showMaterialonIOS,
+    EdgeInsetsGeometry fieldPadding,
   }) : super(
           key: key,
           label: label,
@@ -60,6 +61,7 @@ class CardSettingsInt extends CardSettingsText
           obscureText: obscureText,
           autocorrect: autocorrect,
           autovalidate: autovalidate,
+          fieldPadding: fieldPadding,
           validator: (value) {
             if (validator == null) return null;
             return validator(intelligentCast<int>(value));

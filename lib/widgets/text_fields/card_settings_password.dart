@@ -42,6 +42,7 @@ class CardSettingsPassword extends CardSettingsText
     ValueChanged<String> onFieldSubmitted,
     List<TextInputFormatter> inputFormatters,
     bool showMaterialonIOS,
+    EdgeInsetsGeometry fieldPadding,
   }) : super(
           key: key,
           label: label,
@@ -49,6 +50,7 @@ class CardSettingsPassword extends CardSettingsText
           labelAlign: labelAlign,
           hintText: hintText,
           showMaterialonIOS: showMaterialonIOS,
+          fieldPadding: fieldPadding,
           contentAlign: contentAlign,
           contentOnNewLine: contentOnNewLine,
           initialValue: initialValue,

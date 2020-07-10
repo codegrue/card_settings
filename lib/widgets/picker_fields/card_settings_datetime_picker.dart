@@ -16,28 +16,29 @@ import '../../interfaces/common_field_properties.dart';
 /// This is the date picker field
 class CardSettingsDateTimePicker extends FormField<DateTime>
     implements ICommonFieldProperties {
-  CardSettingsDateTimePicker(
-      {Key key,
-      bool autovalidate: false,
-      FormFieldSetter<DateTime> onSaved,
-      FormFieldValidator<DateTime> validator,
-      DateTime initialValue,
-      this.enabled = true,
-      this.visible = true,
-      this.label = 'Label',
-      this.onChanged,
-      this.contentAlign,
-      this.icon,
-      this.labelAlign,
-      this.labelWidth,
-      this.requiredIndicator,
-      this.firstDate,
-      this.lastDate,
-      this.style,
-      this.showMaterialonIOS,
-      this.dateBuilder,
-      this.timeBuilder})
-      : super(
+  CardSettingsDateTimePicker({
+    Key key,
+    bool autovalidate: false,
+    FormFieldSetter<DateTime> onSaved,
+    FormFieldValidator<DateTime> validator,
+    DateTime initialValue,
+    this.enabled = true,
+    this.visible = true,
+    this.label = 'Label',
+    this.onChanged,
+    this.contentAlign,
+    this.icon,
+    this.labelAlign,
+    this.labelWidth,
+    this.requiredIndicator,
+    this.firstDate,
+    this.lastDate,
+    this.style,
+    this.showMaterialonIOS,
+    this.fieldPadding,
+    this.dateBuilder,
+    this.timeBuilder,
+  }) : super(
             key: key,
             initialValue: initialValue ?? DateTime.now(),
             onSaved: onSaved,
@@ -82,6 +83,9 @@ class CardSettingsDateTimePicker extends FormField<DateTime>
 
   @override
   final bool showMaterialonIOS;
+
+  @override
+  final EdgeInsetsGeometry fieldPadding;
 
   final Widget Function(BuildContext, Widget) dateBuilder;
 
@@ -256,6 +260,7 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
         icon: widget?.icon ?? Icon(Icons.event),
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
+        fieldPadding: widget.fieldPadding,
         content: Text(
           value == null ? '' : DateFormat.yMd().add_jms().format(value),
           style: contentStyle(context, value, widget.enabled),

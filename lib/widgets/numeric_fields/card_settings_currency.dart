@@ -44,6 +44,7 @@ class CardSettingsCurrency extends StatefulWidget
     this.onFieldSubmitted,
     this.inputFormatters,
     this.showMaterialonIOS,
+    this.fieldPadding,
   });
 
   @override
@@ -121,6 +122,9 @@ class CardSettingsCurrency extends StatefulWidget
   final bool showMaterialonIOS;
 
   @override
+  final EdgeInsetsGeometry fieldPadding;
+
+  @override
   CardSettingsCurrencyState createState() {
     return CardSettingsCurrencyState();
   }
@@ -144,6 +148,7 @@ class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
   Widget build(BuildContext context) {
     return CardSettingsText(
       showMaterialonIOS: widget?.showMaterialonIOS,
+      fieldPadding: widget.fieldPadding,
       label: widget.label,
       labelAlign: widget.labelAlign,
       labelWidth: widget?.labelWidth,

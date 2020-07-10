@@ -49,6 +49,7 @@ class CardSettingsDouble extends StatelessWidget
     this.inputFormatters,
     this.showMaterialonIOS,
     this.locale,
+    this.fieldPadding,
   });
 
   @override
@@ -131,6 +132,9 @@ class CardSettingsDouble extends StatelessWidget
   final bool showMaterialonIOS;
 
   @override
+  final EdgeInsetsGeometry fieldPadding;
+
+  @override
   Widget build(BuildContext context) {
     var myLocale = locale ?? Localizations.localeOf(context);
 
@@ -144,6 +148,7 @@ class CardSettingsDouble extends StatelessWidget
       label: label,
       hintText: hintText,
       showMaterialonIOS: showMaterialonIOS,
+      fieldPadding: fieldPadding,
       labelAlign: labelAlign,
       labelWidth: labelWidth,
       contentAlign: contentAlign,

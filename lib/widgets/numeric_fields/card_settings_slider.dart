@@ -36,6 +36,7 @@ class CardSettingsSlider extends FormField<double>
     this.max,
     this.divisions,
     this.showMaterialonIOS,
+    this.fieldPadding,
   }) : super(
             key: key,
             initialValue: initialValue,
@@ -81,6 +82,9 @@ class CardSettingsSlider extends FormField<double>
 
   @override
   final bool showMaterialonIOS;
+
+  @override
+  final EdgeInsetsGeometry fieldPadding;
 
   final int divisions;
 
@@ -150,6 +154,7 @@ class _CardSettingsSliderState extends FormFieldState<double> {
       icon: widget?.icon,
       requiredIndicator: widget?.requiredIndicator,
       errorText: errorText,
+      fieldPadding: widget.fieldPadding,
       content: Row(children: <Widget>[
         Expanded(
           child: Container(

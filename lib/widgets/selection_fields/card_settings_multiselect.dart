@@ -23,6 +23,7 @@ class CardSettingsMultiselect extends CardSettingsCheckboxPicker {
     Widget requiredIndicator,
     List<String> options,
     bool showMaterialonIOS = false,
+    EdgeInsetsGeometry fieldPadding,
   }) : super(
           key: key,
           initialValues: initialValues,
@@ -38,5 +39,6 @@ class CardSettingsMultiselect extends CardSettingsCheckboxPicker {
           requiredIndicator: requiredIndicator,
           options: options,
           showMaterialonIOS: showMaterialonIOS,
+          fieldPadding: fieldPadding,
         );
 }

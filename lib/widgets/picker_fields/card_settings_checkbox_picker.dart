@@ -31,6 +31,7 @@ class CardSettingsCheckboxPicker extends FormField<List<String>>
     this.requiredIndicator,
     this.options,
     this.showMaterialonIOS,
+    this.fieldPadding,
   }) : super(
           key: key,
           initialValue: initialValues,
@@ -72,6 +73,9 @@ class CardSettingsCheckboxPicker extends FormField<List<String>>
 
   @override
   final bool showMaterialonIOS;
+
+  @override
+  final EdgeInsetsGeometry fieldPadding;
 
   @override
   _CardSettingsCheckboxPickerState createState() =>
@@ -184,6 +188,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
         contentOnNewLine: true,
+        fieldPadding: widget.fieldPadding,
         content: Wrap(
           alignment: WrapAlignment.start,
           spacing: 4.0,

@@ -9,6 +9,7 @@ abstract class ICommonFieldProperties extends IMinimumFieldSettings {
   final double labelWidth = null;
   final TextAlign labelAlign = null;
   final TextAlign contentAlign = null;
+  final EdgeInsetsGeometry fieldPadding = null;
   final Icon icon = null;
   final Widget requiredIndicator = null;
 

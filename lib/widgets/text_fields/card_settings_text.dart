@@ -54,6 +54,7 @@ class CardSettingsText extends FormField<String>
     this.unitLabel,
     this.showMaterialonIOS,
     this.showClearButtonIOS = OverlayVisibilityMode.never,
+    this.fieldPadding,
   })  : //assert(initialValue == null || controller == null),
         assert(keyboardType != null),
         assert(autofocus != null),
@@ -146,6 +147,9 @@ class CardSettingsText extends FormField<String>
 
   @override
   final bool showMaterialonIOS;
+
+  @override
+  final EdgeInsetsGeometry fieldPadding;
 
   ///Since the CupertinoTextField does not support onSaved, please use [onChanged] or [onFieldSubmitted] instead
   @override
@@ -430,6 +434,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
       requiredIndicator: widget?.requiredIndicator,
       contentOnNewLine: widget?.contentOnNewLine ?? false,
       enabled: widget.enabled,
+      fieldPadding: widget.fieldPadding,
       content: TextField(
         controller: _controller,
         focusNode: widget?.focusNode,

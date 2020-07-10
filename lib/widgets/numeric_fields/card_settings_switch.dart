@@ -31,6 +31,7 @@ class CardSettingsSwitch extends FormField<bool>
     this.contentAlign,
     this.onChanged,
     this.showMaterialonIOS,
+    this.fieldPadding,
   }) : super(
             key: key,
             initialValue: initialValue,
@@ -75,6 +76,9 @@ class CardSettingsSwitch extends FormField<bool>
   final bool showMaterialonIOS;
 
   @override
+  final EdgeInsetsGeometry fieldPadding;
+
+  @override
   _CardSettingsSwitchState createState() => _CardSettingsSwitchState();
 }
 
@@ -98,6 +102,7 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
       icon: widget?.icon,
       requiredIndicator: widget?.requiredIndicator,
       errorText: errorText,
+      fieldPadding: widget.fieldPadding,
       content: Row(children: <Widget>[
         Expanded(
           child: Text(

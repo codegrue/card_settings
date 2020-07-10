@@ -5,6 +5,7 @@ import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
+import '../card_settings_panel.dart';
 import '../card_settings_widget.dart';
 
 /// This is a header to distinguish sections of the form.
@@ -17,6 +18,7 @@ class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
     this.showMaterialonIOS,
     this.visible = true,
     this.child,
+    this.fieldPadding,
   });
 
   final String label;
@@ -28,6 +30,7 @@ class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
   @override
   final bool visible;
   final Widget child;
+  final EdgeInsetsGeometry fieldPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +54,17 @@ class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
   }
 
   Widget materialHeader(BuildContext context) {
+    EdgeInsetsGeometry _fieldPadding = (fieldPadding ??
+        CardSettings.of(context).fieldPadding ??
+        EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0));
+
     return Container(
       margin: EdgeInsets.all(0.0),
       decoration: BoxDecoration(
         color: color ?? Theme.of(context).secondaryHeaderColor,
       ),
       height: height,
-      padding: EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0),
+      padding: _fieldPadding,
       child: Row(
         children: <Widget>[
           Expanded(

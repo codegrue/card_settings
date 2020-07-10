@@ -33,6 +33,7 @@ class CardSettingsColorPicker extends FormField<Color>
     this.requiredIndicator,
     this.label = "Label",
     this.showMaterialonIOS,
+    this.fieldPadding,
   }) : super(
             key: key,
             initialValue: initialValue ?? Colors.black,
@@ -72,6 +73,9 @@ class CardSettingsColorPicker extends FormField<Color>
 
   @override
   final bool showMaterialonIOS;
+
+  @override
+  final EdgeInsetsGeometry fieldPadding;
 
   final CardSettingsColorPickerType pickerType;
 
@@ -206,6 +210,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
         icon: widget?.icon,
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
+        fieldPadding: widget.fieldPadding,
         content: Container(
           height: 20.0,
           decoration: BoxDecoration(
