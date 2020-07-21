@@ -6,7 +6,6 @@ import 'dart:typed_data';
 
 import 'package:card_settings/card_settings.dart';
 import 'package:card_settings/helpers/platform_functions.dart';
-import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -95,7 +94,7 @@ class CardSettingsFilePicker extends FormField<Uint8List>
   @override
   final bool showMaterialonIOS;
 
-  final FileTypeCross fileType;
+  final FileType fileType;
 
   final String fileExtension;
 
@@ -260,7 +259,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
     var contentAlign =
         widget?.contentAlign ?? CardSettings.of(context).contentAlign;
 
-    if (widget.fileType == FileTypeCross.image && value != null) {
+    if (widget.fileType == FileType.image && value != null) {
       return ConstrainedBox(
           constraints: BoxConstraints(
             maxWidth: widget.maxThumbnailWidth,

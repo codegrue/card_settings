@@ -8,4 +8,5 @@ Steps to publish to pub.dartlang.org:
 - Run unit tests: `flutter test`
 - Do a dry run: `pub publish --dry-run`
 - Publish: `pub publish`
+- Verify at: <https://pub.dev/packages/card_settings>
 - Apply tag to git: `git tag v1.x.x` then `git push origin --tags`

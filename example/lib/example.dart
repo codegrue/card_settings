@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
-import 'package:file_picker_cross/file_picker_cross.dart';
+import 'package:file_picker/file_picker.dart';
 
 import 'plumbing/results.dart';
 import 'plumbing/model.dart';
@@ -453,7 +453,7 @@ class ExampleFormState extends State<ExampleForm> {
       key: _photoKey,
       icon: Icon(Icons.photo),
       label: 'Photo',
-      fileType: FileTypeCross.image,
+      fileType: FileType.image,
       initialValue: _ponyModel.photo,
       onSaved: (value) => _ponyModel.photo = value,
       onChanged: (value) {
@@ -469,7 +469,7 @@ class ExampleFormState extends State<ExampleForm> {
       key: _videoKey,
       icon: Icon(Icons.video_library),
       label: 'Video',
-      fileType: FileTypeCross.video,
+      fileType: FileType.video,
       initialValue: _ponyModel.video,
       onSaved: (value) => _ponyModel.video = value,
       onChanged: (value) {
@@ -485,7 +485,7 @@ class ExampleFormState extends State<ExampleForm> {
       key: _audioKey,
       icon: Icon(Icons.music_note),
       label: 'Audio',
-      fileType: FileTypeCross.audio,
+      fileType: FileType.audio,
       initialValue: _ponyModel.audio,
       onSaved: (value) => _ponyModel.audio = value,
       onChanged: (value) {
@@ -501,7 +501,7 @@ class ExampleFormState extends State<ExampleForm> {
       key: _customFileKey,
       icon: Icon(Icons.insert_drive_file),
       label: 'Custom file',
-      fileType: FileTypeCross.custom,
+      fileType: FileType.custom,
       fileExtension: '.jpg,.mp4',
       initialValue: _ponyModel.customFile,
       onSaved: (value) => _ponyModel.customFile = value,

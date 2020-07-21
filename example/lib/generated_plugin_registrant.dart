@@ -5,12 +5,14 @@
 // ignore: unused_import
 import 'dart:ui';
 
+import 'package:file_picker_web/file_picker_web.dart';
 import 'package:shared_preferences_web/shared_preferences_web.dart';
 
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 // ignore: public_member_api_docs
 void registerPlugins(PluginRegistry registry) {
+  FilePicker.registerWith(registry.registrarFor(FilePicker));
   SharedPreferencesPlugin.registerWith(registry.registrarFor(SharedPreferencesPlugin));
   registry.registerMessageHandler();
 }

@@ -388,13 +388,6 @@ This widget set relies on these external third-party components:
 
 Please see the [Changelog](https://github.com/codegrue/card_settings/blob/master/CHANGELOG.md) page to know what's recently changed.
 
-## Authors
-
-- Jeff Jorczak <jeff@jorczak.com>
-- Rody Davis Jr <rody.davis.jr@gmail.com>
-
-**NOTE: We would like a third author for redundency. Please contect us if interested.**
-
 ## Contributions
 
 If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/codegrue/card_settings/issues).

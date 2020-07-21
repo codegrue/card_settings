@@ -33,16 +33,17 @@ bool showCupertino(
 TextStyle labelStyle(BuildContext context, bool enabled) {
   var theme = Theme.of(context);
   var style = theme.textTheme.subtitle1;
-  if (!enabled) style = style.copyWith(color: theme.disabledColor ?? Colors.grey);
+  if (!enabled)
+    style = style.copyWith(color: theme.disabledColor ?? Colors.grey);
   return style;
 }
 
 TextStyle contentStyle(BuildContext context, dynamic value, bool enabled) {
   var theme = Theme.of(context);
   var style = theme.textTheme.subtitle1.copyWith(
-      color: (value == null)
-          ? theme.hintColor
-          : theme.textTheme.subtitle1.color);
-  if (!enabled) style = style.copyWith(color: theme.disabledColor ?? Colors.grey);
+      color:
+          (value == null) ? theme.hintColor : theme.textTheme.subtitle1.color);
+  if (!enabled)
+    style = style.copyWith(color: theme.disabledColor ?? Colors.grey);
   return style;
 }

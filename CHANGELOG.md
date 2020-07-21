@@ -1,5 +1,9 @@
 # Releases
 
+## [1.12.0] - 2020-07-21
+
+- updated material pickers to adopt the more compatible file_picker
+
 ## [1.11.1] - 2020-07-11
 
 - added `scrollable` property to turn off built in scrolling (Material only).
