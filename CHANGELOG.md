@@ -3,6 +3,7 @@
 ## [1.12.1] - 2020-08-03
 
 - allowed phone numbers to be null
+- fixed bug in currencies with separator characters
 
 ## [1.12.0] - 2020-07-21
 

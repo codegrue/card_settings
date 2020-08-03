@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:intl/intl.dart';
 
 import '../../card_settings.dart';
 import '../../interfaces/common_field_properties.dart';
@@ -45,6 +46,7 @@ class CardSettingsCurrency extends StatefulWidget
     this.inputFormatters,
     this.showMaterialonIOS,
     this.fieldPadding,
+    this.locale,
   });
 
   @override
@@ -118,6 +120,8 @@ class CardSettingsCurrency extends StatefulWidget
 
   final List<TextInputFormatter> inputFormatters;
 
+  final Locale locale;
+
   @override
   final bool showMaterialonIOS;
 
@@ -146,6 +150,12 @@ class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = widget.locale ?? Localizations.localeOf(context);
+
+    var pattern = "#,###.##";
+
+    var formatter = NumberFormat(pattern, myLocale.languageCode);
+
     return CardSettingsText(
       showMaterialonIOS: widget?.showMaterialonIOS,
       fieldPadding: widget.fieldPadding,
@@ -165,9 +175,9 @@ class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
       obscureText: widget.obscureText,
       autocorrect: widget.autocorrect,
       autovalidate: widget.autovalidate,
-      validator: _safeValidator,
-      onSaved: _safeOnSaved,
-      onChanged: _safeOnChanged,
+      validator: (val) => _safeValidator(val, formatter),
+      onSaved: (val) => _safeOnSaved(val, formatter),
+      onChanged: (val) => _safeOnChanged(val, formatter),
       controller: widget.controller ?? _moneyController,
       focusNode: widget.focusNode,
       inputAction: widget.inputAction,
@@ -181,21 +191,26 @@ class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
     );
   }
 
-  String _safeValidator(String value) {
+  String _safeValidator(String value, NumberFormat formatter) {
     if (widget.validator == null) return null;
-    return widget.validator(intelligentCast<double>(value));
+    var number = formatter.parse(value);
+    return widget.validator(intelligentCast<double>(number));
   }
 
-  void _safeOnSaved(String value) {
+  void _safeOnSaved(String value, NumberFormat formatter) {
     if (widget.onSaved == null) return;
-    widget.onSaved(intelligentCast<double>(value));
+    var number = formatter.parse(value);
+    widget.onSaved(intelligentCast<double>(number));
   }
 
-  void _safeOnChanged(String value) {
+  void _safeOnChanged(String value, NumberFormat formatter) {
     if (widget.onChanged == null) return;
-    if (_moneyController != null)
+
+    if (_moneyController != null) {
       widget.onChanged(_moneyController.numberValue);
-    else
-      widget.onChanged(intelligentCast<double>(value));
+    } else {
+      var number = formatter.parse(value);
+      widget.onChanged(intelligentCast<double>(number));
+    }
   }
 }
