@@ -1,5 +1,9 @@
 # Releases
 
+## [1.12.1] - 2020-08-03
+
+- allowed phone numbers to be null
+
 ## [1.12.0] - 2020-07-21
 
 - updated material pickers to adopt the more compatible file_picker
