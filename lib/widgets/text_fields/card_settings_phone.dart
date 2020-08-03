@@ -131,7 +131,7 @@ class CardSettingsPhone extends StatelessWidget
       labelWidth: labelWidth,
       labelAlign: labelAlign,
       contentAlign: contentAlign,
-      initialValue: formatAsPhoneNumber(initialValue.toString()),
+      initialValue: initialValue!=null ? formatAsPhoneNumber(initialValue.toString()): "",
       contentOnNewLine: contentOnNewLine,
       maxLength: maxLength,
       hintText: hintText,
