@@ -1,5 +1,9 @@
 # Releases
 
+## [1.12.2] - 2020-08-31
+
+- updated dependencies
+
 ## [1.12.1] - 2020-08-03
 
 - allowed phone numbers to be null

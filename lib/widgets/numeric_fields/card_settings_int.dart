@@ -85,7 +85,7 @@ class CardSettingsInt extends CardSettingsText
           onFieldSubmitted: onFieldSubmitted,
           inputFormatters: [
             LengthLimitingTextInputFormatter(maxLength),
-            WhitelistingTextInputFormatter(RegExp("[0-9]+")),
+            FilteringTextInputFormatter.allow(RegExp("[0-9]+")),
           ],
         );
 }
