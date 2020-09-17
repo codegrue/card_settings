@@ -46,15 +46,15 @@ class CardSettingsButton extends StatelessWidget
 
     if (visible) {
       if (showCupertino(context, showMaterialonIOS))
-        return showCuppertinoButton();
+        return _showCuppertinoButton();
       else
-        return showMaterialButton(context, buttonStyle);
+        return _showMaterialButton(context, buttonStyle);
     } else {
       return Container();
     }
   }
 
-  Widget showMaterialButton(BuildContext context, TextStyle buttonStyle) {
+  Widget _showMaterialButton(BuildContext context, TextStyle buttonStyle) {
     var fillColor = backgroundColor ?? Theme.of(context).buttonColor;
     if (!enabled) fillColor = Colors.grey;
 
@@ -83,7 +83,7 @@ class CardSettingsButton extends StatelessWidget
     );
   }
 
-  Widget showCuppertinoButton() {
+  Widget _showCuppertinoButton() {
     return Container(
       child: visible == false
           ? null

@@ -35,5 +35,8 @@ export 'widgets/text_fields/card_settings_text.dart';
 export 'widgets/numeric_fields/card_settings_slider.dart';
 export 'widgets/card_settings_widget.dart';
 
-const double kPickerSheetHeight = 216.0;
-const double kPickerItemHeight = 32.0;
+/// this is the default height for the cupertino scroll wheel
+const double kCupertinoPickerSheetHeight = 216.0;
+
+/// this is the default height for a single item in cupertino picker
+const double kCupertinoPickerItemHeight = 32.0;

@@ -155,14 +155,14 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
             : widget.dateFormat.format(value);
 
     if (showCupertino(context, widget.showMaterialonIOS))
-      return cupertinoSettingsDatePicker(formattedValue);
+      return _cupertinoSettingsDatePicker(formattedValue);
     else
-      return materialSettingsDatePicker(formattedValue);
+      return _materialSettingsDatePicker(formattedValue);
   }
 
   Widget _buildBottomPicker(Widget picker) {
     return Container(
-      height: kPickerSheetHeight,
+      height: kCupertinoPickerSheetHeight,
       padding: const EdgeInsets.only(top: 6.0),
       color: CupertinoColors.white,
       child: DefaultTextStyle(
@@ -182,7 +182,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     );
   }
 
-  Widget cupertinoSettingsDatePicker(String formattedValue) {
+  Widget _cupertinoSettingsDatePicker(String formattedValue) {
     final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
@@ -218,7 +218,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     );
   }
 
-  Widget materialSettingsDatePicker(String formattedValue) {
+  Widget _materialSettingsDatePicker(String formattedValue) {
     return GestureDetector(
       onTap: () {
         if (widget.enabled) _showDialog();

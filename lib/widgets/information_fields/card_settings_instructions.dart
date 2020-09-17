@@ -47,10 +47,10 @@ class CardSettingsInstructions extends StatelessWidget
         // color: CupertinoColors.lightBackgroundGray,
       );
     } else
-      return materialInstruction(context, textStyle);
+      return _materialInstruction(context, textStyle);
   }
 
-  Widget materialInstruction(BuildContext context, TextStyle textStyle) {
+  Widget _materialInstruction(BuildContext context, TextStyle textStyle) {
     EdgeInsetsGeometry _fieldPadding = (fieldPadding ??
         CardSettings.of(context).fieldPadding ??
         EdgeInsets.all(14.0));

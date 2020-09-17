@@ -8,7 +8,7 @@ dependencies:
     sdk: flutter
   flutter_masked_text: ^0.8.0
   intl: ^0.16.0
-  meta: ^1.1.8
+  meta: ^1.2.3
   flutter_cupertino_settings: ^0.3.1
   flutter_material_pickers: ^1.7.4
   pattern_formatter: ^1.0.2 # used for localized doubles

@@ -38,12 +38,12 @@ class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
     if (child != null) return child;
 
     if (showCupertino(context, showMaterialonIOS))
-      return cupertinoHeader(context);
+      return _cupertinoHeader(context);
     else
-      return materialHeader(context);
+      return _materialHeader(context);
   }
 
-  Widget cupertinoHeader(BuildContext context) {
+  Widget _cupertinoHeader(BuildContext context) {
     return Row(
       children: <Widget>[
         Expanded(
@@ -53,7 +53,7 @@ class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
     );
   }
 
-  Widget materialHeader(BuildContext context) {
+  Widget _materialHeader(BuildContext context) {
     EdgeInsetsGeometry _fieldPadding = (fieldPadding ??
         CardSettings.of(context).fieldPadding ??
         EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0));

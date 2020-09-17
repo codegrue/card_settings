@@ -100,12 +100,12 @@ class _CardSettingsSliderState extends FormFieldState<double> {
 
   Widget _build(BuildContext context) {
     if (showCupertino(context, widget.showMaterialonIOS))
-      return cupertinoSettingsSlider();
+      return _cupertinoSettingsSlider();
     else
-      return materialSettingsSlider();
+      return _materialSettingsSlider();
   }
 
-  Widget cupertinoSettingsSlider() {
+  Widget _cupertinoSettingsSlider() {
     final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
@@ -144,7 +144,7 @@ class _CardSettingsSliderState extends FormFieldState<double> {
     );
   }
 
-  Widget materialSettingsSlider() {
+  Widget _materialSettingsSlider() {
     return CardSettingsField(
       label: widget?.label,
       labelAlign: widget?.labelAlign,
@@ -163,7 +163,7 @@ class _CardSettingsSliderState extends FormFieldState<double> {
               height: 20.0,
               child: SliderTheme(
                 data: SliderThemeData(
-                  trackShape: CustomTrackShape(),
+                  trackShape: _CustomTrackShape(),
                 ),
                 child: Slider(
                   activeColor: Theme.of(context).primaryColor,
@@ -191,7 +191,7 @@ class _CardSettingsSliderState extends FormFieldState<double> {
 }
 
 // https://github.com/flutter/flutter/issues/37057
-class CustomTrackShape extends RoundedRectSliderTrackShape {
+class _CustomTrackShape extends RoundedRectSliderTrackShape {
   @override
   Rect getPreferredRect({
     @required RenderBox parentBox,

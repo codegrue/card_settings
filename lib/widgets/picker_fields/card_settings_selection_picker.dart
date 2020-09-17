@@ -124,7 +124,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
         return _buildCupertinoBottomPicker(
           CupertinoPicker(
             scrollController: scrollController,
-            itemExtent: kPickerItemHeight,
+            itemExtent: kCupertinoPickerItemHeight,
             backgroundColor: CupertinoColors.white,
             onSelectedItemChanged: (int index) {
               didChange(values[index]);
@@ -167,7 +167,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
 
   Widget _buildCupertinoBottomPicker(Widget picker) {
     return Container(
-      height: kPickerSheetHeight,
+      height: kCupertinoPickerSheetHeight,
       padding: const EdgeInsets.only(top: 6.0),
       color: CupertinoColors.white,
       child: DefaultTextStyle(
@@ -205,12 +205,12 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     }
 
     if (showCupertino(context, widget.showMaterialonIOS))
-      return cupertinoSettingsListPicker(content);
+      return _cupertinoSettingsListPicker(content);
     else
-      return materialSettingsListPicker(content);
+      return _materialSettingsListPicker(content);
   }
 
-  Widget cupertinoSettingsListPicker(String content) {
+  Widget _cupertinoSettingsListPicker(String content) {
     final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
@@ -249,7 +249,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     );
   }
 
-  Widget materialSettingsListPicker(String content) {
+  Widget _materialSettingsListPicker(String content) {
     var style = Theme.of(context).textTheme.subtitle1.copyWith(
         color: (value == null)
             ? Theme.of(context).hintColor

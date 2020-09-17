@@ -86,21 +86,21 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
 
   void _showDialog() {
     if (showCupertino(context, widget.showMaterialonIOS)) {
-      showCupertinoPopUpTimePicker();
+      _showCupertinoPopUpTimePicker();
     } else
-      showMaterialPopUpTimePicker();
+      _showMaterialPopUpTimePicker();
   }
 
   Widget _build(BuildContext context) {
     if (showCupertino(context, widget.showMaterialonIOS))
-      return cupertinoSettingsTimePicker();
+      return _cupertinoSettingsTimePicker();
     else
-      return materialSettingsTimePicker();
+      return _materialSettingsTimePicker();
   }
 
   Widget _buildBottomPicker(Widget picker) {
     return Container(
-      height: kPickerSheetHeight,
+      height: kCupertinoPickerSheetHeight,
       padding: const EdgeInsets.only(top: 6.0),
       color: CupertinoColors.white,
       child: DefaultTextStyle(
@@ -120,7 +120,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
     );
   }
 
-  void showCupertinoPopUpTimePicker() {
+  void _showCupertinoPopUpTimePicker() {
     showCupertinoModalPopup<DateTime>(
       context: context,
       builder: (BuildContext context) {
@@ -148,7 +148,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
     });
   }
 
-  void showMaterialPopUpTimePicker() {
+  void _showMaterialPopUpTimePicker() {
     showTimePicker(
       context: context,
       initialTime: value,
@@ -160,7 +160,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
     });
   }
 
-  Widget cupertinoSettingsTimePicker() {
+  Widget _cupertinoSettingsTimePicker() {
     final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
@@ -196,7 +196,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
     );
   }
 
-  Widget materialSettingsTimePicker() {
+  Widget _materialSettingsTimePicker() {
     return GestureDetector(
       onTap: () {
         if (widget.enabled) _showDialog();

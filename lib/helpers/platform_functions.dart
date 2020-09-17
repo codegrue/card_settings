@@ -3,6 +3,9 @@ import 'package:card_settings/widgets/card_settings_panel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+/// this centralizes code to determine if we want to display the cupertino
+/// version or the material version, since this can be determined by
+/// several settings throughout the package
 bool showCupertino(
   BuildContext context,
   bool showMaterialonIOS, {
@@ -30,6 +33,7 @@ bool showCupertino(
   return false;
 }
 
+/// This centralizes the style calculations for field labels, used by almost all widgets in this package
 TextStyle labelStyle(BuildContext context, bool enabled) {
   var theme = Theme.of(context);
   var style = theme.textTheme.subtitle1;
@@ -38,6 +42,7 @@ TextStyle labelStyle(BuildContext context, bool enabled) {
   return style;
 }
 
+/// This centralizes the style calculations for content, used by almost all widgets in this package
 TextStyle contentStyle(BuildContext context, dynamic value, bool enabled) {
   var theme = Theme.of(context);
   var style = theme.textTheme.subtitle1.copyWith(

@@ -129,12 +129,12 @@ class CardSettingsCurrency extends StatefulWidget
   final EdgeInsetsGeometry fieldPadding;
 
   @override
-  CardSettingsCurrencyState createState() {
-    return CardSettingsCurrencyState();
+  _CardSettingsCurrencyState createState() {
+    return _CardSettingsCurrencyState();
   }
 }
 
-class CardSettingsCurrencyState extends State<CardSettingsCurrency> {
+class _CardSettingsCurrencyState extends State<CardSettingsCurrency> {
   MoneyMaskedTextController _moneyController;
 
   @override

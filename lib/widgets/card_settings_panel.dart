@@ -32,7 +32,7 @@ class CardSettings extends InheritedWidget {
     this.fieldPadding,
   }) : super(
           key: key,
-          child: CardSettingsContent(
+          child: _CardSettingsContent(
             children: children,
             showMaterialonIOS: showMaterialonIOS,
             cardElevation: cardElevation,
@@ -65,7 +65,7 @@ class CardSettings extends InheritedWidget {
     this.fieldPadding,
   }) : super(
           key: key,
-          child: CardSettingsContent(
+          child: _CardSettingsContent(
             children: children,
             showMaterialonIOS: showMaterialonIOS,
             cardElevation: cardElevation,
@@ -109,8 +109,10 @@ class CardSettings extends InheritedWidget {
   }
 }
 
-class CardSettingsContent extends StatelessWidget {
-  const CardSettingsContent({
+/// This provides some common properties for the content
+/// area of a card settings form
+class _CardSettingsContent extends StatelessWidget {
+  const _CardSettingsContent({
     Key key,
     @required this.children,
     @required this.showMaterialonIOS,
@@ -197,6 +199,7 @@ class CardSettingsContent extends StatelessWidget {
   }
 }
 
+/// This visually wraps a logical grouping of form widgets
 class CardSettingsSection extends StatelessWidget {
   CardSettingsSection({
     this.instructions,

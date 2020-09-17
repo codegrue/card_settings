@@ -6,6 +6,7 @@
 - fixed overflow error with file image thumbnails on smaller screens in iOS mode
 - fixed overflow error on datetimepicker on smaller iOS Screens
 - removed seconds from datetimepicker display
+- commented public API
 
 ## [1.12.2] - 2020-08-31
 

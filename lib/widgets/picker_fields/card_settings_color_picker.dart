@@ -11,6 +11,7 @@ import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 import '../../card_settings.dart';
 import '../../interfaces/common_field_properties.dart';
 
+/// This allows selection of which variant of the color picker you would like to use
 enum CardSettingsColorPickerType { colors, material, block }
 
 /// This is the color picker field
@@ -153,12 +154,12 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
 
   Widget _build(BuildContext context) {
     if (showCupertino(context, widget.showMaterialonIOS))
-      return cupertinoSettingsColorPicker();
+      return _cupertinoSettingsColorPicker();
     else
-      return materialSettingsColorPicker();
+      return _materialSettingsColorPicker();
   }
 
-  Widget cupertinoSettingsColorPicker() {
+  Widget _cupertinoSettingsColorPicker() {
     final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
@@ -196,7 +197,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
     );
   }
 
-  Widget materialSettingsColorPicker() {
+  Widget _materialSettingsColorPicker() {
     return GestureDetector(
       onTap: () {
         if (widget.enabled) _showDialog();

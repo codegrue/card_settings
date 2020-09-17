@@ -110,17 +110,17 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
 
     // Using platform on web will result on a crash,
     if (showCupertino(context, widget.showMaterialonIOS))
-      showCupertinoDateTimePopUp(_startDate, _endDate);
+      _showCupertinoDateTimePopUp(_startDate, _endDate);
     else
-      showMaterialDateTimePopUp(_startDate, _endDate);
+      _showMaterialDateTimePopUp(_startDate, _endDate);
   }
 
-  Future<void> showCupertinoDateTimePopUp(
+  Future<void> _showCupertinoDateTimePopUp(
       DateTime _startDate, DateTime _endDate) {
     return showCupertinoModalPopup<DateTime>(
       context: context,
       builder: (BuildContext context) {
-        return _buildBottomPicker(
+        return _buildCupertinoBottomPicker(
           CupertinoDatePicker(
             minimumDate: _startDate,
             minimumYear: _startDate.year,
@@ -143,7 +143,7 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
     });
   }
 
-  void showMaterialDateTimePopUp(DateTime _startDate, DateTime _endDate) {
+  void _showMaterialDateTimePopUp(DateTime _startDate, DateTime _endDate) {
     showDatePicker(
         context: context,
         initialDate: value ?? DateTime.now(),
@@ -183,14 +183,14 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
 
   Widget _build(BuildContext context) {
     if (showCupertino(context, widget.showMaterialonIOS))
-      return cupertinoSettingsButton();
+      return _cupertinoSettingsButton();
     else
-      return materialSettingsButton();
+      return _materialSettingsButton();
   }
 
-  Widget _buildBottomPicker(Widget picker) {
+  Widget _buildCupertinoBottomPicker(Widget picker) {
     return Container(
-      height: kPickerSheetHeight,
+      height: kCupertinoPickerSheetHeight,
       padding: const EdgeInsets.only(top: 6.0),
       color: CupertinoColors.white,
       child: DefaultTextStyle(
@@ -210,7 +210,7 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
     );
   }
 
-  Widget cupertinoSettingsButton() {
+  Widget _cupertinoSettingsButton() {
     final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
@@ -251,7 +251,7 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
     );
   }
 
-  Widget materialSettingsButton() {
+  Widget _materialSettingsButton() {
     return GestureDetector(
       onTap: () {
         if (widget.enabled) _showDialog();

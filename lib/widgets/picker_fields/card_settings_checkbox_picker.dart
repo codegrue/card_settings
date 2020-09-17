@@ -113,7 +113,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
     Navigator.push<List<String>>(
       context,
       MaterialPageRoute(
-        builder: (context) => FullScreenSelect(
+        builder: (context) => _FullScreenSelect(
           initialItems: value,
           options: options,
           label: label,
@@ -130,12 +130,12 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
 
   Widget _build(BuildContext context) {
     if (showCupertino(context, widget.showMaterialonIOS))
-      return cupertinoSettingsMultiselect();
+      return _cupertinoSettingsMultiselect();
     else
-      return materialSettingsMultiselect();
+      return _materialSettingsMultiselect();
   }
 
-  Widget cupertinoSettingsMultiselect() {
+  Widget _cupertinoSettingsMultiselect() {
     final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
@@ -173,7 +173,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
     );
   }
 
-  Widget materialSettingsMultiselect() {
+  Widget _materialSettingsMultiselect() {
     return GestureDetector(
       onTap: () {
         if (widget.enabled) _showDialog(widget?.label, widget?.options);
@@ -207,8 +207,8 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
   }
 }
 
-class FullScreenSelect extends StatefulWidget {
-  FullScreenSelect({this.label, this.initialItems, this.options});
+class _FullScreenSelect extends StatefulWidget {
+  _FullScreenSelect({this.label, this.initialItems, this.options});
 
   final List<String> initialItems;
   final List<String> options;
@@ -217,7 +217,7 @@ class FullScreenSelect extends StatefulWidget {
   _FullScreenSelectState createState() => _FullScreenSelectState();
 }
 
-class _FullScreenSelectState extends State<FullScreenSelect> {
+class _FullScreenSelectState extends State<_FullScreenSelect> {
   List<String> _selected = [];
 
   @override

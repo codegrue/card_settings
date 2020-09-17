@@ -88,11 +88,11 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
 
   Widget _build(BuildContext context) {
     if (showCupertino(context, widget.showMaterialonIOS))
-      return cupertinoSettingsSwitch();
-    return materialSettingsSwitch();
+      return _cupertinoSettingsSwitch();
+    return _materialSettingsSwitch();
   }
 
-  Widget materialSettingsSwitch() {
+  Widget _materialSettingsSwitch() {
     return CardSettingsField(
       label: widget?.label,
       labelAlign: widget?.labelAlign,
@@ -129,7 +129,7 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
     );
   }
 
-  Widget cupertinoSettingsSwitch() {
+  Widget _cupertinoSettingsSwitch() {
     final ls = labelStyle(context, widget?.enabled ?? true);
     return Container(
       child: widget?.visible == false
