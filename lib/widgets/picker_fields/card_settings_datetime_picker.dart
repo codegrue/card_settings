@@ -234,11 +234,16 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
                           style: ls,
                         ),
                 ),
-                contentWidget: Text(
-                  value == null ? '' : DateFormat.yMd().add_jms().format(value),
-                  style: contentStyle(context, value, widget.enabled),
-                  textAlign: widget?.contentAlign ??
-                      CardSettings.of(context).contentAlign,
+                contentWidget: Flexible(
+                  child: Text(
+                    value == null
+                        ? ''
+                        : DateFormat.yMd().add_jm().format(value),
+                    style: contentStyle(context, value, widget.enabled),
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: widget?.contentAlign ??
+                        CardSettings.of(context).contentAlign,
+                  ),
                 ),
                 style: CSWidgetStyle(icon: widget?.icon),
               ),
@@ -261,11 +266,14 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
         fieldPadding: widget.fieldPadding,
-        content: Text(
-          value == null ? '' : DateFormat.yMd().add_jms().format(value),
-          style: contentStyle(context, value, widget.enabled),
-          textAlign:
-              widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+        content: Flexible(
+          child: Text(
+            value == null ? '' : DateFormat.yMd().add_jm().format(value),
+            style: contentStyle(context, value, widget.enabled),
+            overflow: TextOverflow.ellipsis,
+            textAlign:
+                widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+          ),
         ),
         pickerIcon: (widget.enabled) ? Icons.arrow_drop_down : null,
       ),

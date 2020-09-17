@@ -259,17 +259,18 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
     var contentAlign =
         widget?.contentAlign ?? CardSettings.of(context).contentAlign;
 
+    var paddingAmt =
+        showCupertino(context, widget.showMaterialonIOS) ? 10.0 : 0.0;
+
     if (widget.fileType == FileType.image && value != null) {
       return ConstrainedBox(
           constraints: BoxConstraints(
-            maxWidth: widget.maxThumbnailWidth,
+            maxWidth: widget.maxThumbnailWidth - paddingAmt,
             maxHeight: widget.maxThumbnailHeight,
             minHeight: 30,
           ),
           child: Container(
-            padding: showCupertino(context, widget.showMaterialonIOS)
-                ? EdgeInsets.symmetric(vertical: 10.0)
-                : null,
+            padding: EdgeInsets.symmetric(vertical: paddingAmt),
             alignment: (contentAlign == TextAlign.right)
                 ? Alignment.topRight
                 : Alignment.topLeft,

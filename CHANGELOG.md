@@ -1,5 +1,12 @@
 # Releases
 
+## [1.13.0] - 2020-09-16
+
+- removed dependency on `cupertino_icons`
+- fixed overflow error with file image thumbnails on smaller screens in iOS mode
+- fixed overflow error on datetimepicker on smaller iOS Screens
+- removed seconds from datetimepicker display
+
 ## [1.12.2] - 2020-08-31
 
 - updated dependencies
