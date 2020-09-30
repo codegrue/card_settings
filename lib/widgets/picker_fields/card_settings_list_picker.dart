@@ -19,7 +19,8 @@ class CardSettingsListPicker extends FormField<String>
     String initialValue,
     FormFieldSetter<String> onSaved,
     FormFieldValidator<String> validator,
-    bool autovalidate: false,
+    // bool autovalidate: false,
+    AutovalidateMode autovalidateMode : AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.label = 'Label',
     this.visible = true,
@@ -41,7 +42,8 @@ class CardSettingsListPicker extends FormField<String>
             initialValue: initialValue ?? null,
             onSaved: onSaved,
             validator: validator,
-            autovalidate: autovalidate,
+            //autovalidate: autovalidate,
+            autovalidateMode: autovalidateMode,
             builder: (FormFieldState<String> field) =>
                 (field as _CardSettingsListPickerState)._build(field.context));
 

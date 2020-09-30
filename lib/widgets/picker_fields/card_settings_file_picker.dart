@@ -19,7 +19,8 @@ class CardSettingsFilePicker extends FormField<Uint8List>
     implements ICommonFieldProperties {
   CardSettingsFilePicker({
     Key key,
-    bool autovalidate: false,
+    // bool autovalidate: false,
+    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     FormFieldSetter<Uint8List> onSaved,
     FormFieldValidator<Uint8List> validator,
     Uint8List initialValue,
@@ -48,7 +49,8 @@ class CardSettingsFilePicker extends FormField<Uint8List>
             initialValue: initialValue,
             onSaved: onSaved,
             validator: validator,
-            autovalidate: autovalidate,
+            // autovalidate: autovalidate,
+            autovalidateMode: autovalidateMode,
             builder: (FormFieldState<Uint8List> field) =>
                 (field as _CardSettingsFilePickerState)._build(field.context));
 
@@ -249,7 +251,9 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
         fieldPadding: widget.fieldPadding,
         content: _buildFieldContent(formattedValue),
         pickerIcon: (widget.enabled)
-            ? (value == null) ? Icons.attach_file : Icons.clear
+            ? (value == null)
+                ? Icons.attach_file
+                : Icons.clear
             : null,
       ),
     );

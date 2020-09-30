@@ -19,7 +19,8 @@ class CardSettingsCheckboxPicker extends FormField<List<String>>
     List<String> initialValues,
     FormFieldSetter<List<String>> onSaved,
     FormFieldValidator<List<String>> validator,
-    bool autovalidate: false,
+    // bool autovalidate: false,
+    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.onChanged,
     this.label = 'Select',
@@ -37,7 +38,8 @@ class CardSettingsCheckboxPicker extends FormField<List<String>>
           initialValue: initialValues,
           onSaved: onSaved,
           validator: validator,
-          autovalidate: autovalidate,
+          // autovalidate: autovalidate,
+          autovalidateMode: autovalidateMode,
           builder: (FormFieldState<List<String>> field) =>
               (field as _CardSettingsCheckboxPickerState)._build(field.context),
         );

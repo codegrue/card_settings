@@ -53,7 +53,7 @@ class ExampleFormState extends State<ExampleForm> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  bool _autoValidate = false;
+  AutovalidateMode _autoValidateMode = AutovalidateMode.onUserInteraction;
 
   // keys for fields
   // this is desirable because the fields may change order, in this example
@@ -110,7 +110,7 @@ class ExampleFormState extends State<ExampleForm> {
       showResults(context, _ponyModel);
     } else {
       showErrors(context);
-      setState(() => _autoValidate = true);
+      setState(() => _autoValidateMode = AutovalidateMode.onUserInteraction);
     }
   }
 
@@ -332,7 +332,7 @@ class ExampleFormState extends State<ExampleForm> {
       icon: Icon(Icons.lock),
       labelWidth: 200,
       initialValue: _ponyModel.password,
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidateMode,
       validator: (value) {
         if (value == null) return 'Password is required.';
         if (value.length <= 6) return 'Must be more than 6 characters.';
@@ -353,7 +353,7 @@ class ExampleFormState extends State<ExampleForm> {
       key: _emailKey,
       icon: Icon(Icons.person),
       initialValue: _ponyModel.email,
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidateMode,
       validator: (value) {
         if (value == null || value.isEmpty) return 'Email is required.';
         if (!value.contains('@'))
@@ -375,7 +375,7 @@ class ExampleFormState extends State<ExampleForm> {
       key: _phoneKey,
       label: 'Box Office',
       initialValue: _ponyModel.boxOfficePhone,
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidateMode,
       validator: (value) {
         return null;
       },
@@ -394,7 +394,7 @@ class ExampleFormState extends State<ExampleForm> {
       key: _priceKey,
       label: 'Ticket Price',
       initialValue: _ponyModel.ticketPrice,
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidateMode,
       validator: (value) {
         if (value != null && value > 100) return 'No scalpers allowed!';
         return null;
@@ -543,7 +543,7 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Weight',
       unitLabel: '(lbs)',
       initialValue: _ponyModel.weight,
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidateMode,
       validator: (value) {
         if (value != null) {
           if (value > 70) return 'You won\'t fly at the weight.';
@@ -616,7 +616,7 @@ class ExampleFormState extends State<ExampleForm> {
       key: _maneKey,
       label: 'Mane',
       initialValue: intelligentCast<Color>(_ponyModel.maneColor),
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidateMode,
       pickerType: CardSettingsColorPickerType.material,
       validator: (value) {
         if (value.computeLuminance() > .7) return 'This color is too light.';
@@ -637,7 +637,7 @@ class ExampleFormState extends State<ExampleForm> {
       key: _coatKey,
       label: 'Coat',
       initialValue: intelligentCast<Color>(_ponyModel.coatColor),
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidateMode,
       validator: (value) {
         if (value.computeLuminance() < .3)
           return 'This color is not cheery enough.';
@@ -659,7 +659,7 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Hobbies',
       initialValues: _ponyModel.hobbies,
       options: allHobbies,
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidateMode,
       validator: (List<String> value) {
         if (value == null || value.isEmpty)
           return 'You must pick at least one hobby.';
@@ -725,7 +725,7 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Type',
       initialValue: _ponyModel.type,
       hintText: 'Select One',
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidateMode,
       options: <String>['Earth', 'Unicorn', 'Pegasi', 'Alicorn'],
       values: <String>['E', 'U', 'P', 'A'],
       validator: (String value) {
@@ -749,7 +749,7 @@ class ExampleFormState extends State<ExampleForm> {
       hintText: 'something cute...',
       initialValue: _ponyModel.name,
       requiredIndicator: Text('*', style: TextStyle(color: Colors.red)),
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidateMode,
       focusNode: _nameNode,
       inputAction: TextInputAction.next,
       inputActionNode: _descriptionNode,
@@ -781,7 +781,7 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Gender',
       initialValue: _ponyModel.gender,
       hintText: 'Select One',
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidateMode,
       options: <String>['Male', 'Female'],
       validator: (String value) {
         if (value == null || value.isEmpty) return 'You must pick a gender.';
@@ -803,7 +803,7 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Style',
       initialValue: _ponyModel.style,
       hintText: 'Select One',
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidateMode,
       options: <String>['Majestic', 'Scrawny', 'Sleek'],
       icons: <Icon>[
         Icon(Icons.sort),
@@ -829,7 +829,7 @@ class ExampleFormState extends State<ExampleForm> {
       key: _sliderKey,
       label: 'Rating',
       initialValue: _ponyModel.rating,
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidateMode,
       validator: (double value) {
         if (value == null) return 'You must pick a rating.';
         return null;

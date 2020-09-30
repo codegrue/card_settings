@@ -15,7 +15,8 @@ class CardSettingsSwitch extends FormField<bool>
     implements ICommonFieldProperties {
   CardSettingsSwitch({
     Key key,
-    bool autovalidate: false,
+    // bool autovalidate: false,
+    AutovalidateMode autovalidateMode : AutovalidateMode.onUserInteraction,
     FormFieldSetter<bool> onSaved,
     FormFieldValidator<bool> validator,
     bool initialValue = false,
@@ -37,7 +38,8 @@ class CardSettingsSwitch extends FormField<bool>
             initialValue: initialValue,
             onSaved: onSaved,
             validator: validator,
-            autovalidate: autovalidate,
+            // autovalidate: autovalidate,
+            autovalidateMode: autovalidateMode,
             builder: (FormFieldState<bool> field) =>
                 (field as _CardSettingsSwitchState)._build(field.context));
 

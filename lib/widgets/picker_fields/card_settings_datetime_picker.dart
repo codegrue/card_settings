@@ -18,7 +18,8 @@ class CardSettingsDateTimePicker extends FormField<DateTime>
     implements ICommonFieldProperties {
   CardSettingsDateTimePicker({
     Key key,
-    bool autovalidate: false,
+    // bool autovalidate: false,
+    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     FormFieldSetter<DateTime> onSaved,
     FormFieldValidator<DateTime> validator,
     DateTime initialValue,
@@ -43,7 +44,8 @@ class CardSettingsDateTimePicker extends FormField<DateTime>
             initialValue: initialValue ?? DateTime.now(),
             onSaved: onSaved,
             validator: validator,
-            autovalidate: autovalidate,
+            // autovalidate: autovalidate,
+            autovalidateMode: autovalidateMode,
             builder: (FormFieldState<DateTime> field) =>
                 (field as _CardSettingsDateTimePickerState)
                     ._build(field.context));

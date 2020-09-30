@@ -31,7 +31,8 @@ class CardSettingsCurrency extends StatefulWidget
     this.autofocus: false,
     this.obscureText: false,
     this.autocorrect: false,
-    this.autovalidate: false,
+    //this.autovalidate: false,
+    this.autovalidateMode: AutovalidateMode.onUserInteraction,
     this.validator,
     this.onSaved,
     this.onChanged,
@@ -90,8 +91,11 @@ class CardSettingsCurrency extends StatefulWidget
 
   final bool autocorrect;
 
-  @override
+/*   @override
   final bool autovalidate;
+ */
+  @override
+  final AutovalidateMode autovalidateMode;
 
   @override
   final FormFieldValidator<double> validator;
@@ -174,7 +178,8 @@ class _CardSettingsCurrencyState extends State<CardSettingsCurrency> {
       autofocus: widget.autofocus,
       obscureText: widget.obscureText,
       autocorrect: widget.autocorrect,
-      autovalidate: widget.autovalidate,
+      // autovalidate: widget.autovalidate,
+      autovalidateMode: widget.autovalidateMode,
       validator: (val) => _safeValidator(val, formatter),
       onSaved: (val) => _safeOnSaved(val, formatter),
       onChanged: (val) => _safeOnChanged(val, formatter),
