@@ -54,7 +54,9 @@ class CardSettingsField extends StatelessWidget
   @override
   bool get showMaterialonIOS => throw UnimplementedError(unimplemented);
   @override
-  bool get autovalidate => throw UnimplementedError(unimplemented);
+  AutovalidateMode get autovalidateMode => throw UnimplementedError();
+  /* @override
+  bool get autovalidate => throw UnimplementedError(unimplemented); */
   @override
   Function get onChanged => throw UnimplementedError(unimplemented);
   @override
@@ -235,7 +237,9 @@ class CardSettingsField extends StatelessWidget
               icon.icon,
               color: (icon.color != null)
                   ? icon.color
-                  : (labelStyle == null) ? null : labelStyle.color,
+                  : (labelStyle == null)
+                      ? null
+                      : labelStyle.color,
             ),
           );
   }

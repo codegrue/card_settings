@@ -20,6 +20,7 @@ class CardSettingsText extends FormField<String>
     Key key,
     String initialValue,
     bool autovalidate: false,
+    AutovalidateMode autovalidateMode : AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.onSaved,
     this.validator,
@@ -55,12 +56,13 @@ class CardSettingsText extends FormField<String>
     this.showMaterialonIOS,
     this.showClearButtonIOS = OverlayVisibilityMode.never,
     this.fieldPadding,
+    
   })  : //assert(initialValue == null || controller == null),
         assert(keyboardType != null),
         assert(autofocus != null),
         assert(obscureText != null),
         assert(autocorrect != null),
-        assert(autovalidate != null),
+        assert(autovalidateMode != null),
         assert(textCapitalization != null),
         assert(maxLengthEnforced != null),
         assert(maxLength == null || maxLength > 0),
@@ -70,7 +72,8 @@ class CardSettingsText extends FormField<String>
           initialValue: initialValue,
           onSaved: onSaved,
           validator: validator,
-          autovalidate: autovalidate,
+          //autovalidate: autovalidate,
+          autovalidateMode: autovalidateMode,
           builder: (FormFieldState<String> field) =>
               (field as _CardSettingsTextState)._build(field.context),
         );

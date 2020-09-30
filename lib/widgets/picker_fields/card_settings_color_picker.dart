@@ -19,10 +19,11 @@ class CardSettingsColorPicker extends FormField<Color>
     implements ICommonFieldProperties {
   CardSettingsColorPicker({
     Key key,
-    bool autovalidate: false,
+    // bool autovalidate: false,
     FormFieldSetter<Color> onSaved,
     FormFieldValidator<Color> validator,
     Color initialValue = Colors.green,
+    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.onChanged,
     this.visible = true,
@@ -40,7 +41,8 @@ class CardSettingsColorPicker extends FormField<Color>
             initialValue: initialValue ?? Colors.black,
             onSaved: onSaved,
             validator: validator,
-            autovalidate: autovalidate,
+            // autovalidate: autovalidate,
+            autovalidateMode: autovalidateMode,
             builder: (FormFieldState<Color> field) =>
                 (field as _CardSettingsColorPickerState)._build(field.context));
 

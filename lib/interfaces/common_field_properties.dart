@@ -16,5 +16,6 @@ abstract class ICommonFieldProperties extends IMinimumFieldSettings {
   final Function onChanged = null;
   final Function onSaved = null;
   final Function validator = null;
-  final bool autovalidate = null;
+  //final bool autovalidate = null;
+  final AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction;
 }

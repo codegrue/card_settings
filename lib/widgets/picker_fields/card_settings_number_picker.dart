@@ -21,7 +21,8 @@ class CardSettingsNumberPicker extends StatelessWidget
     @required this.min,
     @required this.max,
     this.stepInterval: 1,
-    this.autovalidate: false,
+    // this.autovalidate: false,
+    this.autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled: true,
     this.validator,
     this.onSaved,
@@ -46,8 +47,10 @@ class CardSettingsNumberPicker extends StatelessWidget
   final int min;
   final int max;
   final int stepInterval;
+/*   @override
+  final bool autovalidate; */
   @override
-  final bool autovalidate;
+  final AutovalidateMode autovalidateMode;
   @override
   final bool visible;
   @override
@@ -85,7 +88,8 @@ class CardSettingsNumberPicker extends StatelessWidget
         (max - min) ~/ stepInterval + 1,
         (i) => (i * stepInterval + min).toString(),
       ),
-      autovalidate: autovalidate,
+      // autovalidate: autovalidate,
+      autovalidateMode: autovalidateMode,
       validator: _safeValidator,
       onSaved: _safeOnSaved,
       onChanged: _safeOnChanged,

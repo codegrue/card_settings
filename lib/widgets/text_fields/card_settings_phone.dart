@@ -30,7 +30,8 @@ class CardSettingsPhone extends StatelessWidget
     this.autofocus: false,
     this.obscureText: false,
     this.autocorrect: false,
-    this.autovalidate: false,
+    // this.autovalidate: false,
+    this.autovalidateMode: AutovalidateMode.onUserInteraction,
     this.validator,
     this.onSaved,
     this.onChanged,
@@ -86,9 +87,12 @@ class CardSettingsPhone extends StatelessWidget
   final bool obscureText;
 
   final bool autocorrect;
-
+/* 
   @override
   final bool autovalidate;
+ */
+  @override
+  final AutovalidateMode autovalidateMode;
 
   @override
   final FormFieldValidator<int> validator;
@@ -146,7 +150,8 @@ class CardSettingsPhone extends StatelessWidget
       showMaterialonIOS: showMaterialonIOS,
       obscureText: obscureText,
       autocorrect: autocorrect,
-      autovalidate: autovalidate,
+      //autovalidate: autovalidate,
+      autovalidateMode: autovalidateMode,
       validator: _safeValidator,
       onSaved: _safeOnSaved,
       onChanged: _safeOnChanged,

@@ -34,7 +34,8 @@ class CardSettingsDouble extends StatelessWidget
     this.autofocus: false,
     this.obscureText: false,
     this.autocorrect: false,
-    this.autovalidate: false,
+    //this.autovalidate: false,
+    this.autovalidateMode : AutovalidateMode.onUserInteraction,
     this.validator,
     this.onSaved,
     this.onChanged,
@@ -94,8 +95,10 @@ class CardSettingsDouble extends StatelessWidget
 
   final bool autocorrect;
 
+/*   @override
+  final bool autovalidate; */
   @override
-  final bool autovalidate;
+  final AutovalidateMode autovalidateMode;
 
   @override
   final FormFieldValidator<double> validator;
@@ -162,7 +165,8 @@ class CardSettingsDouble extends StatelessWidget
       autofocus: autofocus,
       obscureText: obscureText,
       autocorrect: autocorrect,
-      autovalidate: autovalidate,
+      //autovalidate: autovalidate,
+      autovalidateMode: autovalidateMode,
       validator: (val) => _safeValidator(val, formatter),
       onSaved: (val) => _safeOnSaved(val, formatter),
       onChanged: (val) => _safeOnChanged(val, formatter),
