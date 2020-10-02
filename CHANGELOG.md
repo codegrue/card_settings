@@ -1,5 +1,10 @@
 # Releases
 
+## [1.14.0] - vNext
+
+- upgraaded to latest `flutter_material_pickers`
+- changed autovalidate to be compatible with new channels [KingLudwig94]
+
 ## [1.13.0] - 2020-09-16
 
 - removed dependency on `cupertino_icons`

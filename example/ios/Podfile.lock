@@ -1,122 +1,81 @@
 PODS:
-  - DKImagePickerController/Core (4.3.1):
+  - DKImagePickerController/Core (4.3.2):
     - DKImagePickerController/ImageDataManager
     - DKImagePickerController/Resource
-  - DKImagePickerController/ImageDataManager (4.3.1)
-  - DKImagePickerController/PhotoGallery (4.3.1):
+  - DKImagePickerController/ImageDataManager (4.3.2)
+  - DKImagePickerController/PhotoGallery (4.3.2):
     - DKImagePickerController/Core
     - DKPhotoGallery
-  - DKImagePickerController/Resource (4.3.1)
-  - DKPhotoGallery (0.0.15):
-    - DKPhotoGallery/Core (= 0.0.15)
-    - DKPhotoGallery/Model (= 0.0.15)
-    - DKPhotoGallery/Preview (= 0.0.15)
-    - DKPhotoGallery/Resource (= 0.0.15)
+  - DKImagePickerController/Resource (4.3.2)
+  - DKPhotoGallery (0.0.17):
+    - DKPhotoGallery/Core (= 0.0.17)
+    - DKPhotoGallery/Model (= 0.0.17)
+    - DKPhotoGallery/Preview (= 0.0.17)
+    - DKPhotoGallery/Resource (= 0.0.17)
     - SDWebImage
-    - SDWebImageFLPlugin
-  - DKPhotoGallery/Core (0.0.15):
+    - SwiftyGif
+  - DKPhotoGallery/Core (0.0.17):
     - DKPhotoGallery/Model
     - DKPhotoGallery/Preview
     - SDWebImage
-    - SDWebImageFLPlugin
-  - DKPhotoGallery/Model (0.0.15):
+    - SwiftyGif
+  - DKPhotoGallery/Model (0.0.17):
     - SDWebImage
-    - SDWebImageFLPlugin
-  - DKPhotoGallery/Preview (0.0.15):
+    - SwiftyGif
+  - DKPhotoGallery/Preview (0.0.17):
     - DKPhotoGallery/Model
     - DKPhotoGallery/Resource
     - SDWebImage
-    - SDWebImageFLPlugin
-  - DKPhotoGallery/Resource (0.0.15):
+    - SwiftyGif
+  - DKPhotoGallery/Resource (0.0.17):
     - SDWebImage
-    - SDWebImageFLPlugin
+    - SwiftyGif
   - file_picker (0.0.1):
     - DKImagePickerController/PhotoGallery
     - Flutter
-  - file_picker_web (0.0.1):
-    - Flutter
-  - FLAnimatedImage (1.0.12)
   - Flutter (1.0.0)
-  - flutter_plugin_android_lifecycle (0.0.1):
-    - Flutter
   - path_provider (0.0.1):
     - Flutter
-  - path_provider_linux (0.0.1):
-    - Flutter
-  - path_provider_macos (0.0.1):
-    - Flutter
-  - SDWebImage (5.7.2):
-    - SDWebImage/Core (= 5.7.2)
-  - SDWebImage/Core (5.7.2)
-  - SDWebImageFLPlugin (0.4.0):
-    - FLAnimatedImage (>= 1.0.11)
-    - SDWebImage/Core (~> 5.6)
+  - SDWebImage (5.9.2):
+    - SDWebImage/Core (= 5.9.2)
+  - SDWebImage/Core (5.9.2)
   - shared_preferences (0.0.1):
     - Flutter
-  - shared_preferences_macos (0.0.1):
-    - Flutter
-  - shared_preferences_web (0.0.1):
-    - Flutter
+  - SwiftyGif (5.3.0)
 
 DEPENDENCIES:
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
-  - file_picker_web (from `.symlinks/plugins/file_picker_web/ios`)
   - Flutter (from `Flutter`)
-  - flutter_plugin_android_lifecycle (from `.symlinks/plugins/flutter_plugin_android_lifecycle/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
-  - path_provider_linux (from `.symlinks/plugins/path_provider_linux/ios`)
-  - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
-  - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
-  - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
 
 SPEC REPOS:
   trunk:
     - DKImagePickerController
     - DKPhotoGallery
-    - FLAnimatedImage
     - SDWebImage
-    - SDWebImageFLPlugin
+    - SwiftyGif
 
 EXTERNAL SOURCES:
   file_picker:
     :path: ".symlinks/plugins/file_picker/ios"
-  file_picker_web:
-    :path: ".symlinks/plugins/file_picker_web/ios"
   Flutter:
     :path: Flutter
-  flutter_plugin_android_lifecycle:
-    :path: ".symlinks/plugins/flutter_plugin_android_lifecycle/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
-  path_provider_linux:
-    :path: ".symlinks/plugins/path_provider_linux/ios"
-  path_provider_macos:
-    :path: ".symlinks/plugins/path_provider_macos/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
-  shared_preferences_macos:
-    :path: ".symlinks/plugins/shared_preferences_macos/ios"
-  shared_preferences_web:
-    :path: ".symlinks/plugins/shared_preferences_web/ios"
 
 SPEC CHECKSUMS:
-  DKImagePickerController: f3d397887f38b98276a506b02ed9c167425f7cf3
-  DKPhotoGallery: e880aef16c108333240e1e7327896f2ea380f4f0
+  DKImagePickerController: b5eb7f7a388e4643264105d648d01f727110fc3d
+  DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   file_picker: 3e6c3790de664ccf9b882732d9db5eaf6b8d4eb1
-  file_picker_web: 37b10786e88885124fac99dc899866e78a132ef3
-  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_plugin_android_lifecycle: dc0b544e129eebb77a6bfb1239d4d1c673a60a35
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
-  path_provider_linux: 4d630dc393e1f20364f3e3b4a2ff41d9674a84e4
-  path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
-  SDWebImage: d9ea4959d99c52276dfada481987018fcaea3d58
-  SDWebImageFLPlugin: 6c2295fb1242d44467c6c87dc5db6b0a13228fd8
+  SDWebImage: 0b42b8719ab0c5257177d5894306e8a336b21cbb
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
-  shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
-  shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
+  SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40
 
-PODFILE CHECKSUM: 7d5a9d718abd753db391aff1bd51189dccbd73ec
+PODFILE CHECKSUM: 283782142d5ec999401d02a4b1ee8c70f7745c8a
 
 COCOAPODS: 1.9.3

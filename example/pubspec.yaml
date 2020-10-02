@@ -9,8 +9,8 @@ dependencies:
     sdk: flutter
   card_settings:
     path: ../
-  font_awesome_flutter: ^8.7.0
-  dynamic_theme: ^1.0.0
+  font_awesome_flutter:
+  dynamic_theme: ^1.0.1
   google_fonts: ^1.1.0
 
 flutter:
