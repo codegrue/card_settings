@@ -1,6 +1,6 @@
 # Releases
 
-## [1.14.0] - vNext
+## [1.14.0] - 2020-10-05
 
 - upgraaded to latest `flutter_material_pickers`
 - changed autovalidate to be compatible with new channels [KingLudwig94]
