@@ -268,14 +268,12 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
         requiredIndicator: widget?.requiredIndicator,
         errorText: errorText,
         fieldPadding: widget.fieldPadding,
-        content: Flexible(
-          child: Text(
-            value == null ? '' : DateFormat.yMd().add_jm().format(value),
-            style: contentStyle(context, value, widget.enabled),
-            overflow: TextOverflow.ellipsis,
-            textAlign:
-                widget?.contentAlign ?? CardSettings.of(context).contentAlign,
-          ),
+        content: Text(
+          value == null ? '' : DateFormat.yMd().add_jm().format(value),
+          style: contentStyle(context, value, widget.enabled),
+          overflow: TextOverflow.ellipsis,
+          textAlign:
+              widget?.contentAlign ?? CardSettings.of(context).contentAlign,
         ),
         pickerIcon: (widget.enabled) ? Icons.arrow_drop_down : null,
       ),

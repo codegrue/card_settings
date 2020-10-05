@@ -4,6 +4,7 @@
 
 - upgraaded to latest `flutter_material_pickers`
 - changed autovalidate to be compatible with new channels [KingLudwig94]
+- fixed `DateTimePicker` parent layout error
 
 ## [1.13.0] - 2020-09-16
 
