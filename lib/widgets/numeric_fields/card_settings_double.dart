@@ -35,7 +35,7 @@ class CardSettingsDouble extends StatelessWidget
     this.obscureText: false,
     this.autocorrect: false,
     //this.autovalidate: false,
-    this.autovalidateMode : AutovalidateMode.onUserInteraction,
+    this.autovalidateMode: AutovalidateMode.onUserInteraction,
     this.validator,
     this.onSaved,
     this.onChanged,

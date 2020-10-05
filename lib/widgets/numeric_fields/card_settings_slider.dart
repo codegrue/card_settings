@@ -16,7 +16,7 @@ class CardSettingsSlider extends FormField<double>
   CardSettingsSlider({
     Key key,
     bool autovalidate: false,
-    AutovalidateMode autovalidateMode : AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     FormFieldSetter<double> onSaved,
     FormFieldValidator<double> validator,
     double initialValue = 0.0,
