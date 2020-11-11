@@ -1,5 +1,6 @@
 # Card Settings
 
+[![Awesome Flutter](https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square)](https://github.com/Solido/awesome-flutter)
 [![Pub Package](https://img.shields.io/pub/v/card_settings.svg)](https://pub.dartlang.org/packages/card_settings)
 [![GitHub stars](https://img.shields.io/github/stars/codegrue/card_settings?color=brightgreen)](https://github.com/codegrue/card_settings/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/codegrue/card_settings)](https://github.com/codegrue/card_settings/network/members)

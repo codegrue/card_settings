@@ -1,5 +1,9 @@
 # Releases
 
+## [1.15.0] - 2020-11-11
+
+- upgraded `flutter_material_pickers` and thus `file_picker`. Breaking change `UInt8File` replaced with `PlatformFile`
+
 ## [1.14.0] - 2020-10-05
 
 - upgraaded to latest `flutter_material_pickers`

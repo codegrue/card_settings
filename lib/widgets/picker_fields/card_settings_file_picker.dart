@@ -42,7 +42,7 @@ class CardSettingsFilePicker extends FormField<Uint8List>
     this.showMaterialonIOS,
     this.fieldPadding,
     this.fileType,
-    this.fileExtension,
+    this.allowedExtensions,
   })  : unattachDialogTitle = unattachDialogTitle ?? 'Unattach ' + label + "?",
         super(
             key: key,
@@ -98,7 +98,7 @@ class CardSettingsFilePicker extends FormField<Uint8List>
 
   final FileType fileType;
 
-  final String fileExtension;
+  final List<String> allowedExtensions;
 
   @override
   final EdgeInsetsGeometry fieldPadding;
@@ -134,9 +134,11 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
   void onTap() {
     if (value == null) {
       showMaterialFilePicker(
+        fileType: widget.fileType,
+        allowedExtensions: widget.allowedExtensions,
         onChanged: (file) => setState(() {
-          didChange(file);
-          if (widget.onChanged != null) widget.onChanged(file);
+          didChange(file.bytes);
+          if (widget.onChanged != null) widget.onChanged(file.bytes);
         }),
       );
     } else {

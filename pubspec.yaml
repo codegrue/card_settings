@@ -1,6 +1,6 @@
 name: card_settings
 description: A flutter package for building card based settings forms. This includes a library of pre-built form field widgets.
-version: 1.14.0
+version: 1.15.0
 homepage: https://github.com/codegrue/card_settings
 
 dependencies:
@@ -10,7 +10,7 @@ dependencies:
   intl: ^0.16.0
   meta: ^1.2.3
   flutter_cupertino_settings: ^0.3.1
-  flutter_material_pickers: ^1.8.0
+  flutter_material_pickers: ^1.8.1
   pattern_formatter: ^1.0.2 # used for localized doubles
   flutter_multi_formatter: ^1.1.8 # used for localized phone numbers
 

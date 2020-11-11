@@ -502,7 +502,7 @@ class ExampleFormState extends State<ExampleForm> {
       icon: Icon(Icons.insert_drive_file),
       label: 'Custom file',
       fileType: FileType.custom,
-      fileExtension: '.jpg,.mp4',
+      allowedExtensions: ['jpg'],
       initialValue: _ponyModel.customFile,
       onSaved: (value) => _ponyModel.customFile = value,
       onChanged: (value) {
