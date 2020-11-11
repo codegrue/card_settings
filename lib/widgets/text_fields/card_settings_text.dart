@@ -20,7 +20,7 @@ class CardSettingsText extends FormField<String>
     Key key,
     String initialValue,
     bool autovalidate: false,
-    AutovalidateMode autovalidateMode : AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.onSaved,
     this.validator,
@@ -56,7 +56,6 @@ class CardSettingsText extends FormField<String>
     this.showMaterialonIOS,
     this.showClearButtonIOS = OverlayVisibilityMode.never,
     this.fieldPadding,
-    
   })  : //assert(initialValue == null || controller == null),
         assert(keyboardType != null),
         assert(autofocus != null),
@@ -227,7 +226,8 @@ class _CardSettingsTextState extends FormFieldState<String> {
 
   void _handleOnChanged(String value) {
     if (widget.onChanged != null) {
-      widget.onChanged(value);
+      // `value` doesn't apple any masks when this is called, so the controller has the actual formatted value
+      widget.onChanged(_controller.value.text);
     }
   }
 

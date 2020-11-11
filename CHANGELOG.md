@@ -3,6 +3,7 @@
 ## [1.15.0] - 2020-11-11
 
 - upgraded `flutter_material_pickers` and thus `file_picker`. Breaking change `UInt8File` replaced with `PlatformFile`
+- Fixed bug in `CardSettingsText` when applying a `inputMask`, formatting lagged by one character input
 
 ## [1.14.0] - 2020-10-05
 

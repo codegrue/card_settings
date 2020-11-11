@@ -753,6 +753,7 @@ class ExampleFormState extends State<ExampleForm> {
       focusNode: _nameNode,
       inputAction: TextInputAction.next,
       inputActionNode: _descriptionNode,
+      //inputMask: '000.000.000.000',
       validator: (value) {
         if (value == null || value.isEmpty) return 'Name is required.';
         return null;
