@@ -20,7 +20,7 @@ class CardSettingsText extends FormField<String>
     Key key,
     String initialValue,
     bool autovalidate: false,
-    AutovalidateMode autovalidateMode : AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.onSaved,
     this.validator,
@@ -56,7 +56,7 @@ class CardSettingsText extends FormField<String>
     this.showMaterialonIOS,
     this.showClearButtonIOS = OverlayVisibilityMode.never,
     this.fieldPadding,
-    
+    this.contentPadding = const EdgeInsets.all(0.0),
   })  : //assert(initialValue == null || controller == null),
         assert(keyboardType != null),
         assert(autofocus != null),
@@ -153,6 +153,8 @@ class CardSettingsText extends FormField<String>
 
   @override
   final EdgeInsetsGeometry fieldPadding;
+
+  final EdgeInsetsGeometry contentPadding;
 
   ///Since the CupertinoTextField does not support onSaved, please use [onChanged] or [onFieldSubmitted] instead
   @override
@@ -448,7 +450,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
         readOnly: !widget.enabled,
         style: contentStyle(context, value, widget.enabled),
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(0.0),
+          contentPadding: widget.contentPadding,
           border: InputBorder.none,
           errorText: errorText,
           prefixText: widget?.prefixText,
