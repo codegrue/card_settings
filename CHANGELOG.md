@@ -1,5 +1,10 @@
 # Releases
 
+## [1.16.0] - 2021-01-05
+
+- added contentPadding parameter (thanks bramdekker)
+- upgraded depenencies
+
 ## [1.15.0] - 2020-11-11
 
 - upgraded `flutter_material_pickers` and thus `file_picker`. Breaking change `UInt8File` replaced with `PlatformFile`

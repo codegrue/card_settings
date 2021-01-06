@@ -393,4 +393,4 @@ Please see the [Changelog](https://github.com/codegrue/card_settings/blob/master
 
 If you find a bug or want a feature, but don't know how to fix/implement it, please fill an [issue](https://github.com/codegrue/card_settings/issues).
 
-If you fixed a bug or implemented a new feature, please send a [pull request](https://github.com/codegrue/card_settings/pulls).
+If you fixed a bug or implemented a new feature, please send a [pull request](https://github.com/codegrue/card_settings/pulls). **Please include a note about your change in CHANGELOG.md with your pull request.**
