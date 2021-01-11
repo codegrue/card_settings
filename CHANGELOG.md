@@ -1,6 +1,6 @@
 # Releases
 
-## [1.16.0] - 2021-01-05
+## [1.16.0] - 2021-01-11
 
 - added contentPadding parameter (thanks bramdekker)
 - upgraded depenencies
