@@ -24,19 +24,33 @@ class CardSettingsButton extends StatelessWidget
     this.showMaterialonIOS,
   });
 
+  /// The text to place in the button
   final String label;
 
+  /// tells the Ui the button is destructive. Helps select color.
   final bool isDestructive;
+
+  /// The background color for normal buttons
   final Color backgroundColor;
+
+  /// The text color for normal buttons
   final Color textColor;
+
+  /// allows adding extra padding at the bottom
   final double bottomSpacing;
+
+  /// If false, grays out the field and makes it unresponsive
   final bool enabled;
+
+  /// Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
+
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
-  // Events
+  /// Fires when the button is pressed
   final VoidCallback onPressed;
 
   @override

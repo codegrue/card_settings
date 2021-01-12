@@ -16,7 +16,7 @@ class CardSettingsSwitch extends FormField<bool>
   CardSettingsSwitch({
     Key key,
     // bool autovalidate: false,
-    AutovalidateMode autovalidateMode : AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     FormFieldSetter<bool> onSaved,
     FormFieldValidator<bool> validator,
     bool initialValue = false,
@@ -43,40 +43,53 @@ class CardSettingsSwitch extends FormField<bool>
             builder: (FormFieldState<bool> field) =>
                 (field as _CardSettingsSwitchState)._build(field.context));
 
+  /// The text to identify the field to the user
   @override
   final String label;
 
+  /// If false the field is grayed out and unresponsive
   @override
   final bool enabled;
 
+  /// The alignment of the label paret of the field. Default is left.
   @override
   final TextAlign labelAlign;
 
+  /// The width of the field label. If provided overrides the global setting.
   @override
   final double labelWidth;
 
+  /// controls how the widget in the content area of the field is aligned
   @override
   final TextAlign contentAlign;
 
+  /// The icon to display to the left of the field content
   @override
   final Icon icon;
 
+  /// A widget to show next to the label if the field is required
   @override
   final Widget requiredIndicator;
 
+  /// The text to show if the switch is "on"
   final String trueLabel;
 
+  /// The text to show if the switch if "off"
   final String falseLabel;
 
+  /// Fires when the switch state is changed
   @override
   final ValueChanged<bool> onChanged;
 
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
+  /// Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
 
+  /// provides padding to wrap the entire field
   @override
   final EdgeInsetsGeometry fieldPadding;
 

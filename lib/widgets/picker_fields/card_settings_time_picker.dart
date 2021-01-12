@@ -19,7 +19,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay>
     FormFieldValidator<TimeOfDay> validator,
     TimeOfDay initialValue,
     // bool autovalidate: false,
-    AutovalidateMode autovalidateMode : AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.visible = true,
     this.onChanged,
@@ -43,38 +43,50 @@ class CardSettingsTimePicker extends FormField<TimeOfDay>
               (field as _CardSettingsTimePickerState)._build(field.context),
         );
 
+  /// fired when the selection changes
   @override
   final ValueChanged<TimeOfDay> onChanged;
 
+  /// The alignment of the label paret of the field. Default is left.
   @override
   final TextAlign labelAlign;
 
+  /// controls how the widget in the content area of the field is aligned
   @override
   final TextAlign contentAlign;
 
+  /// The icon to display to the left of the field content
   @override
   final Icon icon;
 
+  /// If false the field is grayed out and unresponsive
   @override
   final bool enabled;
 
+  /// A widget to show next to the label if the field is required
   @override
   final Widget requiredIndicator;
 
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
+  /// The text to identify the field to the user
   @override
   final String label;
 
+  /// The width of the field label. If provided overrides the global setting.
   @override
   final double labelWidth;
 
+  /// the style of the text in the label
   final TextStyle style;
 
+  /// Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
 
+  /// places padding around the entire field
   @override
   final EdgeInsetsGeometry fieldPadding;
 

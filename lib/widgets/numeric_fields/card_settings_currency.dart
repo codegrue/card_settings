@@ -30,8 +30,6 @@ class CardSettingsCurrency extends StatefulWidget
     this.enabled: true,
     this.autofocus: false,
     this.obscureText: false,
-    this.autocorrect: false,
-    //this.autovalidate: false,
     this.autovalidateMode: AutovalidateMode.onUserInteraction,
     this.validator,
     this.onSaved,
@@ -50,50 +48,59 @@ class CardSettingsCurrency extends StatefulWidget
     this.locale,
   });
 
+  /// The text to identify the field to the user
   @override
   final String label;
 
+  /// The alignment of the label paret of the field. Default is left.
   @override
   final TextAlign labelAlign;
 
+  /// The width of the field label. If provided overrides the global setting.
   @override
   final double labelWidth;
 
+  /// controls how the widget in the content area of the field is aligned
   @override
   final TextAlign contentAlign;
 
+  /// The initial value to display
   final double initialValue;
 
+  /// The icon to display to the left of the field content
   @override
   final Icon icon;
 
+  /// A widget to show next to the label if the field is required
   @override
   final Widget requiredIndicator;
 
+  /// The symbol to use for the currency
   final String currencySymbol;
 
+  /// the name of the currency. E.g. USD
   final String currencyName;
 
+  /// the character to use for decimal separation
   final String decimalSeparator;
 
+  /// the character to use for the thousands place.
   final String thousandSeparator;
 
+  /// The maxinum length of the value in characters
   final int maxLength;
 
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
+  /// If false, grays out the field and makes it unresponsive
   final bool enabled;
 
   final bool autofocus;
 
   final bool obscureText;
 
-  final bool autocorrect;
-
-/*   @override
-  final bool autovalidate;
- */
   @override
   final AutovalidateMode autovalidateMode;
 
@@ -126,9 +133,11 @@ class CardSettingsCurrency extends StatefulWidget
 
   final Locale locale;
 
+  // Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
 
+  // provides padding to wrap the entire field
   @override
   final EdgeInsetsGeometry fieldPadding;
 
@@ -177,8 +186,6 @@ class _CardSettingsCurrencyState extends State<CardSettingsCurrency> {
       enabled: widget.enabled,
       autofocus: widget.autofocus,
       obscureText: widget.obscureText,
-      autocorrect: widget.autocorrect,
-      // autovalidate: widget.autovalidate,
       autovalidateMode: widget.autovalidateMode,
       validator: (val) => _safeValidator(val, formatter),
       onSaved: (val) => _safeOnSaved(val, formatter),

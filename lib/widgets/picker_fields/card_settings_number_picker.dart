@@ -21,7 +21,6 @@ class CardSettingsNumberPicker extends StatelessWidget
     @required this.min,
     @required this.max,
     this.stepInterval: 1,
-    // this.autovalidate: false,
     this.autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled: true,
     this.validator,
@@ -32,40 +31,70 @@ class CardSettingsNumberPicker extends StatelessWidget
     this.fieldPadding,
   }) : assert(min < max);
 
-  // Variables
+  /// The text to identify the field to the user
   @override
   final String label;
+
+  /// The alignment of the label paret of the field. Default is left.
   @override
   final TextAlign labelAlign;
+
+  /// controls how the widget in the content area of the field is aligned
   @override
   final TextAlign contentAlign;
+
+  /// The icon to display to the left of the field content
   @override
   final Icon icon;
+
+  /// A widget to show next to the label if the field is required
   @override
   final Widget requiredIndicator;
+
+  /// the initial value fo the picker to be placed on
   final int initialValue;
+
+  /// the lowest value that will be shown
   final int min;
+
+  /// the highest value that will be shown
   final int max;
+
+  /// the interval for the values. Default is 1
   final int stepInterval;
-/*   @override
-  final bool autovalidate; */
+
+  /// places the field into auto validation mode
   @override
   final AutovalidateMode autovalidateMode;
+
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
+
+  /// Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
+
+  /// If false, grays out the field and makes it unresponsive
   final bool enabled;
+
+  /// The width of the field label. If provided overrides the global setting.
   @override
   final double labelWidth;
+
+  /// provides padding to wrap the entire field
   @override
   final EdgeInsetsGeometry fieldPadding;
 
-  // Events
+  /// fires when validation is requested
   @override
   final FormFieldValidator<int> validator;
+
+  /// vires when the enclosing for is saved
   @override
   final FormFieldSetter<int> onSaved;
+
+  /// firest when the content is changed
   @override
   final ValueChanged<int> onChanged;
 
@@ -88,7 +117,6 @@ class CardSettingsNumberPicker extends StatelessWidget
         (max - min) ~/ stepInterval + 1,
         (i) => (i * stepInterval + min).toString(),
       ),
-      // autovalidate: autovalidate,
       autovalidateMode: autovalidateMode,
       validator: _safeValidator,
       onSaved: _safeOnSaved,

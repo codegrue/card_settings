@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/services.dart';
 
+/// Limits text entry to decimal characters only
 class DecimalTextInputFormatter extends TextInputFormatter {
   DecimalTextInputFormatter({this.decimalDigits})
       : assert(decimalDigits == null || decimalDigits > 0);

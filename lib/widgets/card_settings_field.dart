@@ -28,24 +28,49 @@ class CardSettingsField extends StatelessWidget
     @required this.fieldPadding,
   });
 
+  /// The text to identify the field to the user
   @override
   final String label;
+
+  /// If provided, displays text to the right of the content.
   final String unitLabel;
+
+  /// The widget that is placed in the content region of the field
   final Widget content;
+
+  /// If the field is a picker, this is the icon shown to the right of the content
   final IconData pickerIcon;
+
+  /// The width of the field label. If provided overrides the global setting.
   @override
   final double labelWidth;
+
+  /// Place the content below the label rather than next to the label
   final bool contentOnNewLine;
+
+  /// The text to display if the field fails validation
   final String errorText;
+
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
+
+  /// The alignment of the label paret of the field. Default is left.
   @override
   final TextAlign labelAlign;
+
+  /// The icon to display to the left of the field content
   @override
   final Icon icon;
+
+  /// A widget to show next to the label if the field is required
   @override
   final Widget requiredIndicator;
+
+  /// If false, grays out the field and makes it unresponsive
   final bool enabled;
+
+  /// padding to place around the entire field widget
   @override
   final EdgeInsetsGeometry fieldPadding;
 
@@ -55,8 +80,6 @@ class CardSettingsField extends StatelessWidget
   bool get showMaterialonIOS => throw UnimplementedError(unimplemented);
   @override
   AutovalidateMode get autovalidateMode => throw UnimplementedError();
-  /* @override
-  bool get autovalidate => throw UnimplementedError(unimplemented); */
   @override
   Function get onChanged => throw UnimplementedError(unimplemented);
   @override

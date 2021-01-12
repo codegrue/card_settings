@@ -50,42 +50,56 @@ class CardSettingsDateTimePicker extends FormField<DateTime>
                 (field as _CardSettingsDateTimePickerState)
                     ._build(field.context));
 
+  /// fires when the picker value is changed
   @override
   final ValueChanged<DateTime> onChanged;
 
+  /// The text to identify the field to the user
   @override
   final String label;
 
+  /// The alignment of the label paret of the field. Default is left.
   @override
   final TextAlign labelAlign;
 
+  /// The width of the field label. If provided overrides the global setting.
   @override
   final double labelWidth;
 
+  /// controls how the widget in the content area of the field is aligned
   @override
   final TextAlign contentAlign;
 
+  /// the first date in the selectable picker range
   final DateTime firstDate;
 
+  /// the last date in the selectable picker range
   final DateTime lastDate;
 
+  /// If false the field is grayed out and unresponsive
   @override
   final bool enabled;
 
+  /// The icon to display to the left of the field content
   @override
   final Icon icon;
 
+  /// A widget to show next to the label if the field is required
   @override
   final Widget requiredIndicator;
 
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
+  /// the style of the label text
   final TextStyle style;
 
+  /// Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
 
+  /// provides padding to wrap the entire field
   @override
   final EdgeInsetsGeometry fieldPadding;
 

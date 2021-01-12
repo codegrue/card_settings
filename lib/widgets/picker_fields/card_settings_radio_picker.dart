@@ -20,7 +20,7 @@ class CardSettingsRadioPicker extends FormField<String>
     FormFieldSetter<String> onSaved,
     FormFieldValidator<String> validator,
     // bool autovalidate: false,
-    AutovalidateMode autovalidateMode : AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.label = 'Label',
     this.visible = true,
@@ -47,42 +47,56 @@ class CardSettingsRadioPicker extends FormField<String>
             builder: (FormFieldState<String> field) =>
                 (field as _CardSettingsRadioPickerState)._build(field.context));
 
+  /// fires when the selection changes
   @override
   final ValueChanged<String> onChanged;
 
+  /// The text to identify the field to the user
   @override
   final String label;
 
+  /// The alignment of the label paret of the field. Default is left.
   @override
   final TextAlign labelAlign;
 
+  /// The width of the field label. If provided overrides the global setting.
   @override
   final double labelWidth;
 
+  /// controls how the widget in the content area of the field is aligned
   @override
   final TextAlign contentAlign;
 
+  /// text to display to guide the user on what to enter
   final String hintText;
 
+  /// The icon to display to the left of the field content
   @override
   final Icon icon;
 
+  /// If false the field is grayed out and unresponsive
   @override
   final bool enabled;
 
+  /// A widget to show next to the label if the field is required
   @override
   final Widget requiredIndicator;
 
+  /// a list of options to show on the picker
   final List<String> options;
 
+  /// a list of values for each option. If null, options are values.
   final List<String> values;
 
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
+  /// Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
 
+  /// provides padding to wrap the entire field
   @override
   final EdgeInsetsGeometry fieldPadding;
 

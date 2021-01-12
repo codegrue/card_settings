@@ -20,13 +20,24 @@ class CardSettingsInstructions extends StatelessWidget
     this.fieldPadding,
   });
 
+  /// The text for the instructions
   final String text;
+
+  /// the color for the background
   final Color backgroundColor;
+
+  /// The color of the text
   final Color textColor;
+
+  /// Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
+
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
+
+  /// padding to place around then entire field
   final EdgeInsetsGeometry fieldPadding;
 
   @override

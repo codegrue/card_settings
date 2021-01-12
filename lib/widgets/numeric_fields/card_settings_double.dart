@@ -33,8 +33,6 @@ class CardSettingsDouble extends StatelessWidget
     this.enabled: true,
     this.autofocus: false,
     this.obscureText: false,
-    this.autocorrect: false,
-    //this.autovalidate: false,
     this.autovalidateMode: AutovalidateMode.onUserInteraction,
     this.validator,
     this.onSaved,
@@ -53,87 +51,114 @@ class CardSettingsDouble extends StatelessWidget
     this.fieldPadding,
   });
 
+  /// The text to identify the field to the user
   @override
   final String label;
 
+  /// The width of the field label. If provided overrides the global setting.
   @override
   final double labelWidth;
 
+  /// The alignment of the label paret of the field. Default is left.
   @override
   final TextAlign labelAlign;
 
+  /// controls how the widget in the content area of the field is aligned
   @override
   final TextAlign contentAlign;
 
   @override
+
+  /// text to display to guide the user on what to enter
   final String hintText;
 
+  /// Text to show before the content area
   final String prefixText;
 
+  /// The initial value of the content
   final double initialValue;
 
+  /// Put the content below the label
   final bool contentOnNewLine;
 
+  /// number of digits for the value
   final int maxLength;
 
+  /// if provided, show text after the value
   final String unitLabel;
 
+  /// The icon to display to the left of the field content
   @override
   final Icon icon;
 
+  /// A widget to show next to the label if the field is required
   @override
   final Widget requiredIndicator;
 
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
+  /// If false, grays out the field and makes it unresponsive
   final bool enabled;
 
+  /// Allows flutter to advance to this field
   final bool autofocus;
 
   final bool obscureText;
 
-  final bool autocorrect;
-
-/*   @override
-  final bool autovalidate; */
+  /// used to configure the autovalidation of this field
   @override
   final AutovalidateMode autovalidateMode;
 
+  /// The function to call to validate the content
   @override
   final FormFieldValidator<double> validator;
 
+  /// This fires when the form is saved
   @override
   final FormFieldSetter<double> onSaved;
 
+  /// This fires when the value is changed
   @override
   final ValueChanged<double> onChanged;
 
+  /// You can provide a custom text controller here
   final TextEditingController controller;
 
+  /// the order for this node to receive focus
   final FocusNode focusNode;
 
   final FocusNode inputActionNode;
 
+  /// the type of keyboard to show
   final TextInputType keyboardType;
 
+  /// The style for the label
   final TextStyle style;
 
   final TextInputAction inputAction;
 
+  /// the max length of the number in characters
   final bool maxLengthEnforced;
 
+  /// the number of digits allowed after the decimal
   final int decimalDigits;
 
+  /// This fires when the form is submitted
   final ValueChanged<String> onFieldSubmitted;
 
+  /// input formatters to enforce entry
   final List<TextInputFormatter> inputFormatters;
 
+  /// the localization region to use
   final Locale locale;
 
+  /// Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
 
+  /// provides padding to wrap the entire field
   @override
   final EdgeInsetsGeometry fieldPadding;
 
@@ -164,8 +189,6 @@ class CardSettingsDouble extends StatelessWidget
       enabled: enabled,
       autofocus: autofocus,
       obscureText: obscureText,
-      autocorrect: autocorrect,
-      //autovalidate: autovalidate,
       autovalidateMode: autovalidateMode,
       validator: (val) => _safeValidator(val, formatter),
       onSaved: (val) => _safeOnSaved(val, formatter),

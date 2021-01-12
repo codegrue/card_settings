@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'minimum_field_properties.dart';
 
-// Interface to ensure that all widgets implement this minimum
-// set of properties
+/// Interface to ensure that all widgets implement this minimum
+/// set of properties
 abstract class ICommonFieldProperties extends IMinimumFieldSettings {
   final String label = null;
   final double labelWidth = null;

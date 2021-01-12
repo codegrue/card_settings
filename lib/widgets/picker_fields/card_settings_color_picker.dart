@@ -46,40 +46,52 @@ class CardSettingsColorPicker extends FormField<Color>
             builder: (FormFieldState<Color> field) =>
                 (field as _CardSettingsColorPickerState)._build(field.context));
 
+  /// Fires when the color value changes
   @override
   final ValueChanged<Color> onChanged;
 
+  /// The alignment of the label paret of the field. Default is left.
   @override
   final TextAlign labelAlign;
 
+  /// The width of the field label. If provided overrides the global setting.
   @override
   final double labelWidth;
 
-  /// here for consistency, but does nothing.
+  /// controls how the widget in the content area of the field is aligned
+  // here for consistency, but does nothing.
   @override
   final TextAlign contentAlign;
 
+  /// The icon to display to the left of the field content
   @override
   final Icon icon;
 
+  /// A widget to show next to the label if the field is required
   @override
   final Widget requiredIndicator;
 
+  /// The text to identify the field to the user
   @override
   final String label;
 
+  /// If false the field is grayed out and unresponsive
   @override
   final bool enabled;
 
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
+  /// Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
 
+  /// provides padding to wrap the entire field
   @override
   final EdgeInsetsGeometry fieldPadding;
 
+  /// the specific variant of the color picker to use
   final CardSettingsColorPickerType pickerType;
 
   @override

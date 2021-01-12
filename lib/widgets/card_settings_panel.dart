@@ -45,7 +45,7 @@ class CardSettings extends InheritedWidget {
           ),
         );
 
-  // constructor that wraps each section in it's own card
+  /// constructor that wraps each section in it's own card
   CardSettings.sectioned({
     Key key,
     this.labelAlign,
@@ -97,7 +97,7 @@ class CardSettings extends InheritedWidget {
     return context.dependOnInheritedWidgetOfExactType<CardSettings>();
   }
 
-  // notify child widgets if a setting changes on the overall wrapper
+  /// notify child widgets if a setting changes on the overall wrapper
   @override
   bool updateShouldNotify(CardSettings old) {
     if (labelAlign != old.labelAlign) return true;

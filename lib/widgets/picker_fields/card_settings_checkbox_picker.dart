@@ -19,7 +19,6 @@ class CardSettingsCheckboxPicker extends FormField<List<String>>
     List<String> initialValues,
     FormFieldSetter<List<String>> onSaved,
     FormFieldValidator<List<String>> validator,
-    // bool autovalidate: false,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.onChanged,
@@ -44,38 +43,50 @@ class CardSettingsCheckboxPicker extends FormField<List<String>>
               (field as _CardSettingsCheckboxPickerState)._build(field.context),
         );
 
+  /// The text to identify the field to the user
   @override
   final String label;
 
+  /// If false the field is grayed out and unresponsive
   @override
   final bool enabled;
 
+  /// The alignment of the label paret of the field. Default is left.
   @override
   final TextAlign labelAlign;
 
+  /// The width of the field label. If provided overrides the global setting.
   @override
   final double labelWidth;
 
+  /// controls how the widget in the content area of the field is aligned
   @override
   final TextAlign contentAlign;
 
+  /// The icon to display to the left of the field content
   @override
   final Icon icon;
 
+  /// A widget to show next to the label if the field is required
   @override
   final Widget requiredIndicator;
 
+  /// a list of options to display in the picker
   final List<String> options;
 
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
+  /// Fires when the picked values are changed
   @override
   final ValueChanged<List<String>> onChanged;
 
+  /// Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
 
+  /// provides padding to wrap the entire field
   @override
   final EdgeInsetsGeometry fieldPadding;
 

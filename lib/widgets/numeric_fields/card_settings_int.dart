@@ -27,7 +27,6 @@ class CardSettingsInt extends CardSettingsText
     bool autofocus: false,
     bool obscureText: false,
     bool autocorrect: false,
-    // bool autovalidate: false,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     FormFieldValidator<int> validator,
     FormFieldSetter<int> onSaved,
@@ -61,7 +60,6 @@ class CardSettingsInt extends CardSettingsText
           autofocus: autofocus,
           obscureText: obscureText,
           autocorrect: autocorrect,
-          // autovalidate: autovalidate,
           autovalidateMode: autovalidateMode,
           fieldPadding: fieldPadding,
           validator: (value) {

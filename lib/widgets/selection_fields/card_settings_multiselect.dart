@@ -14,7 +14,7 @@ class CardSettingsMultiselect extends CardSettingsCheckboxPicker {
     FormFieldSetter<List<String>> onSaved,
     FormFieldValidator<List<String>> validator,
     // bool autovalidate: false,
-    AutovalidateMode autovalidateMode : AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     ValueChanged<List<String>> onChanged,
     String label = 'Select',
     bool visible = true,

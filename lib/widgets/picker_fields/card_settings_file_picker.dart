@@ -54,52 +54,71 @@ class CardSettingsFilePicker extends FormField<Uint8List>
             builder: (FormFieldState<Uint8List> field) =>
                 (field as _CardSettingsFilePickerState)._build(field.context));
 
+  /// fires when the picker data is changed
   @override
   final ValueChanged<Uint8List> onChanged;
 
+  /// The text to identify the field to the user
   @override
   final String label;
 
+  /// The title of the dialog when a file is unattached
   final String unattachDialogTitle;
 
+  /// The confirm label of the dialog when a file is unattached
   final String unattachDialogConfirm;
 
+  /// The cancel label of the dialog when a file is unattached
   final String unattachDialogCancel;
 
+  /// The alignment of the label paret of the field. Default is left.
   @override
   final TextAlign labelAlign;
 
+  /// The width of the field label. If provided overrides the global setting.
   @override
   final double labelWidth;
 
+  /// controls how the widget in the content area of the field is aligned
   @override
   final TextAlign contentAlign;
 
+  /// The icon to display to the left of the field content
   @override
   final Icon icon;
 
+  /// a restriction on the width growth of the thumbnail
   final double maxThumbnailWidth;
 
+  /// a restriction on the height growth of the thumbnail
   final double maxThumbnailHeight;
 
+  /// If false the field is grayed out and unresponsive
   @override
   final bool enabled;
 
+  /// A widget to show next to the label if the field is required
   @override
   final Widget requiredIndicator;
 
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
+  /// the style of the label text
   final TextStyle style;
 
+  /// Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
 
+  /// the type of the files allowed
   final FileType fileType;
 
+  /// a list of allowed file extensions
   final List<String> allowedExtensions;
 
+  /// provides padding to wrap the entire field
   @override
   final EdgeInsetsGeometry fieldPadding;
 

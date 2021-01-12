@@ -1,5 +1,13 @@
 # Releases
 
+## [1.16.2] - 2021-01-12
+
+- documentation formatting
+
+## [1.16.1] - 2021-01-12
+
+- improved documentation
+
 ## [1.16.0] - 2021-01-11
 
 - added contentPadding parameter (thanks bramdekker)

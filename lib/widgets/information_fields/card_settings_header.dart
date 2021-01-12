@@ -21,15 +21,30 @@ class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
     this.fieldPadding,
   });
 
+  /// the text for the header
   final String label;
+
+  /// how to align the header text
   final TextAlign labelAlign;
+
+  /// the height of the content
   final double height;
+
+  /// the background color
   final Color color;
+
+  /// Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
+
+  /// If false hides the widget on the card setting panel
   @override
   final bool visible;
+
+  /// The child to place in the content, instead of the label
   final Widget child;
+
+  /// placed padding around the entire widget
   final EdgeInsetsGeometry fieldPadding;
 
   @override

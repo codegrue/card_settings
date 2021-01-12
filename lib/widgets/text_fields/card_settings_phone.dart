@@ -30,7 +30,6 @@ class CardSettingsPhone extends StatelessWidget
     this.autofocus: false,
     this.obscureText: false,
     this.autocorrect: false,
-    // this.autovalidate: false,
     this.autovalidateMode: AutovalidateMode.onUserInteraction,
     this.validator,
     this.onSaved,
@@ -48,19 +47,24 @@ class CardSettingsPhone extends StatelessWidget
     this.fieldPadding,
   });
 
+  // The text to identify the field to the user
   @override
   final String label;
 
+  // The width of the field label. If provided overrides the global setting.
   @override
   final double labelWidth;
 
+  // The alignment of the label paret of the field. Default is left.
   @override
   final TextAlign labelAlign;
 
+  // controls how the widget in the content area of the field is aligned
   @override
   final TextAlign contentAlign;
 
   @override
+  // text to display to guide the user on what to enter
   final String hintText;
 
   final String prefixText;
@@ -71,15 +75,19 @@ class CardSettingsPhone extends StatelessWidget
 
   final int maxLength;
 
+  // The icon to display to the left of the field content
   @override
   final Icon icon;
 
+  // A widget to show next to the label if the field is required
   @override
   final Widget requiredIndicator;
 
+  // If false hides the widget on the card setting panel
   @override
   final bool visible;
 
+  // If false, grays out the field and makes it unresponsive
   final bool enabled;
 
   final bool autofocus;
@@ -121,9 +129,11 @@ class CardSettingsPhone extends StatelessWidget
 
   final List<TextInputFormatter> inputFormatters;
 
+  // provides padding to wrap the entire field
   @override
   final EdgeInsetsGeometry fieldPadding;
 
+  // Force the widget to use Material style on an iOS device
   @override
   final bool showMaterialonIOS;
 
@@ -150,7 +160,6 @@ class CardSettingsPhone extends StatelessWidget
       showMaterialonIOS: showMaterialonIOS,
       obscureText: obscureText,
       autocorrect: autocorrect,
-      //autovalidate: autovalidate,
       autovalidateMode: autovalidateMode,
       validator: _safeValidator,
       onSaved: _safeOnSaved,
