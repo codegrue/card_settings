@@ -1,6 +1,7 @@
 name: card_settings_example
 description: A Flutter project that demonstrated the use of the card_settings package.
 version: 1.0.0
+publish_to: none
 
 dependencies:
   flutter:
@@ -12,6 +13,12 @@ dependencies:
   font_awesome_flutter:
   dynamic_theme: ^1.0.1
   google_fonts: ^1.1.0
+
+dependency_overrides:
+  intl: ^0.16.0
+
+environment:
+  sdk: ">=2.0.0 <3.0.0"
 
 flutter:
   uses-material-design: true
