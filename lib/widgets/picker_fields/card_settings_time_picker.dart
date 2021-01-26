@@ -150,6 +150,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
               if (widget.onChanged != null)
                 widget.onChanged(TimeOfDay.fromDateTime(newDateTime));
             },
+            use24hFormat: MediaQuery.of(context).alwaysUse24HourFormat,
           ),
         );
       },

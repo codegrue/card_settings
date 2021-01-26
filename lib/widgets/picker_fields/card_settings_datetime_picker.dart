@@ -148,6 +148,7 @@ class _CardSettingsDateTimePickerState extends FormFieldState<DateTime> {
               didChange(newDateTime);
               if (widget.onChanged != null) widget.onChanged(newDateTime);
             },
+            use24hFormat: MediaQuery.of(context).alwaysUse24HourFormat,
           ),
         );
       },
