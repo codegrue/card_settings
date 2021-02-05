@@ -1,5 +1,9 @@
 # Releases
 
+## [1.16.3] - 2021-02-05
+
+- Added range for `intl` dependency
+
 ## [1.16.2] - 2021-01-12
 
 - documentation formatting

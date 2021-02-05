@@ -15,7 +15,7 @@ dependencies:
   google_fonts: ^1.1.0
 
 dependency_overrides:
-  intl: ^0.16.0
+  intl: ^0.17.0-nullsafety.2
 
 environment:
   sdk: ">=2.0.0 <3.0.0"
