@@ -1,5 +1,9 @@
 # Releases
 
+## [1.16.4] - NOT YET RELEASED
+
+- upgraded dependencies
+
 ## [1.16.3] - 2021-02-05
 
 - Added range for `intl` dependency
