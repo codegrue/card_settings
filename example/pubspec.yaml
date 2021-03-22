@@ -14,9 +14,6 @@ dependencies:
   adaptive_theme: ^2.0.0
   google_fonts: ^2.0.0
 
-dependency_overrides:
-  intl: ^0.17.0
-
 environment:
   sdk: ">=2.0.0 <3.0.0"
 

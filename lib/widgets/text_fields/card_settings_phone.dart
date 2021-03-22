@@ -14,7 +14,7 @@ class CardSettingsPhone extends StatelessWidget
     implements ICommonFieldProperties, ITextFieldProperties {
   CardSettingsPhone({
     Key? key,
-    this.label: 'Label',
+    this.label: 'Phone',
     this.labelWidth,
     this.labelAlign,
     this.hintText,
@@ -95,10 +95,7 @@ class CardSettingsPhone extends StatelessWidget
   final bool obscureText;
 
   final bool autocorrect;
-/* 
-  @override
-  final bool autovalidate;
- */
+
   @override
   final AutovalidateMode autovalidateMode;
 
