@@ -14,11 +14,11 @@ import '../../interfaces/common_field_properties.dart';
 class CardSettingsSwitch extends FormField<bool>
     implements ICommonFieldProperties {
   CardSettingsSwitch({
-    Key key,
+    Key? key,
     // bool autovalidate: false,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
-    FormFieldSetter<bool> onSaved,
-    FormFieldValidator<bool> validator,
+    FormFieldSetter<bool>? onSaved,
+    FormFieldValidator<bool>? validator,
     bool initialValue = false,
     this.enabled = true,
     this.trueLabel = "Yes",
@@ -53,23 +53,23 @@ class CardSettingsSwitch extends FormField<bool>
 
   /// The alignment of the label paret of the field. Default is left.
   @override
-  final TextAlign labelAlign;
+  final TextAlign? labelAlign;
 
   /// The width of the field label. If provided overrides the global setting.
   @override
-  final double labelWidth;
+  final double? labelWidth;
 
   /// controls how the widget in the content area of the field is aligned
   @override
-  final TextAlign contentAlign;
+  final TextAlign? contentAlign;
 
   /// The icon to display to the left of the field content
   @override
-  final Icon icon;
+  final Icon? icon;
 
   /// A widget to show next to the label if the field is required
   @override
-  final Widget requiredIndicator;
+  final Widget? requiredIndicator;
 
   /// The text to show if the switch is "on"
   final String trueLabel;
@@ -79,7 +79,7 @@ class CardSettingsSwitch extends FormField<bool>
 
   /// Fires when the switch state is changed
   @override
-  final ValueChanged<bool> onChanged;
+  final ValueChanged<bool>? onChanged;
 
   /// If false hides the widget on the card setting panel
   @override
@@ -87,11 +87,11 @@ class CardSettingsSwitch extends FormField<bool>
 
   /// Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   /// provides padding to wrap the entire field
   @override
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   @override
   _CardSettingsSwitchState createState() => _CardSettingsSwitchState();
@@ -109,33 +109,33 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
 
   Widget _materialSettingsSwitch() {
     return CardSettingsField(
-      label: widget?.label,
-      labelAlign: widget?.labelAlign,
-      labelWidth: widget?.labelWidth,
-      enabled: widget?.enabled,
-      visible: widget?.visible,
-      icon: widget?.icon,
-      requiredIndicator: widget?.requiredIndicator,
+      label: widget.label,
+      labelAlign: widget.labelAlign,
+      labelWidth: widget.labelWidth,
+      enabled: widget.enabled,
+      visible: widget.visible,
+      icon: widget.icon,
+      requiredIndicator: widget.requiredIndicator,
       errorText: errorText,
       fieldPadding: widget.fieldPadding,
       content: Row(children: <Widget>[
         Expanded(
           child: Text(
-            value ? widget?.trueLabel : widget?.falseLabel,
+            value! ? widget.trueLabel : widget.falseLabel,
             style: contentStyle(context, value, widget.enabled),
             textAlign:
-                widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+                widget.contentAlign ?? CardSettings.of(context)?.contentAlign,
           ),
         ),
         Container(
           padding: EdgeInsets.all(0.0),
           height: 20.0,
           child: Switch(
-            value: value,
+            value: value!,
             onChanged: (widget.enabled)
                 ? (value) {
                     didChange(value);
-                    if (widget?.onChanged != null) widget?.onChanged(value);
+                    if (widget.onChanged != null) widget.onChanged!(value);
                   }
                 : null, // to disable, we need to not provide an onChanged function
           ),
@@ -145,35 +145,35 @@ class _CardSettingsSwitchState extends FormFieldState<bool> {
   }
 
   Widget _cupertinoSettingsSwitch() {
-    final ls = labelStyle(context, widget?.enabled ?? true);
+    final ls = labelStyle(context, widget.enabled);
     return Container(
-      child: widget?.visible == false
+      child: widget.visible == false
           ? null
           : CSControl(
               nameWidget: Container(
-                width: widget?.labelWidth ??
-                    CardSettings.of(context).labelWidth ??
+                width: widget.labelWidth ??
+                    CardSettings.of(context)?.labelWidth ??
                     120.0,
-                child: widget?.requiredIndicator != null
+                child: widget.requiredIndicator != null
                     ? Text(
-                        (widget?.label ?? "") + ' *',
+                        (widget.label) + ' *',
                         style: ls,
                       )
                     : Text(
-                        widget?.label,
+                        widget.label,
                         style: ls,
                       ),
               ),
               contentWidget: CupertinoSwitch(
-                value: value,
+                value: value!,
                 onChanged: (widget.enabled)
                     ? (value) {
                         didChange(value);
-                        if (widget?.onChanged != null) widget?.onChanged(value);
+                        if (widget.onChanged != null) widget.onChanged!(value);
                       }
                     : null, // to disable, we need to not provide an onChanged function
               ),
-              style: CSWidgetStyle(icon: widget?.icon),
+              style: CSWidgetStyle(icon: widget.icon),
             ),
     );
   }

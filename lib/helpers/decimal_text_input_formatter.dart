@@ -6,7 +6,7 @@ class DecimalTextInputFormatter extends TextInputFormatter {
   DecimalTextInputFormatter({this.decimalDigits})
       : assert(decimalDigits == null || decimalDigits > 0);
 
-  final int decimalDigits;
+  final int? decimalDigits;
 
   @override
   TextEditingValue formatEditUpdate(
@@ -20,7 +20,7 @@ class DecimalTextInputFormatter extends TextInputFormatter {
       String value = newValue.text;
 
       if (value.contains(".") &&
-          value.substring(value.indexOf(".") + 1).length > decimalDigits) {
+          value.substring(value.indexOf(".") + 1).length > decimalDigits!) {
         truncated = oldValue.text;
         newSelection = oldValue.selection;
       } else if (value == ".") {

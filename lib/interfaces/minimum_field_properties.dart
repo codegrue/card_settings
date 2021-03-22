@@ -4,7 +4,7 @@ import '../widgets/card_settings_widget.dart';
 /// set of properties expected buy the settings panel wrapper
 abstract class IMinimumFieldSettings implements CardSettingsWidget {
   @override
-  final bool showMaterialonIOS = null;
+  final bool? showMaterialonIOS = null;
   @override
-  final bool visible = null;
+  final bool? visible = null;
 }

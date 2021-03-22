@@ -24,21 +24,21 @@ class CardSettingsInstructions extends StatelessWidget
   final String text;
 
   /// the color for the background
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// The color of the text
-  final Color textColor;
+  final Color? textColor;
 
   /// Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
   /// padding to place around then entire field
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class CardSettingsInstructions extends StatelessWidget
 
     TextStyle textStyle = Theme.of(context)
         .primaryTextTheme
-        .caption
+        .caption!
         .copyWith(color: textColor ?? Theme.of(context).accentColor);
     if (showCupertino(context, showMaterialonIOS)) {
       return Container(
@@ -63,7 +63,7 @@ class CardSettingsInstructions extends StatelessWidget
 
   Widget _materialInstruction(BuildContext context, TextStyle textStyle) {
     EdgeInsetsGeometry _fieldPadding = (fieldPadding ??
-        CardSettings.of(context).fieldPadding ??
+        CardSettings.of(context)?.fieldPadding ??
         EdgeInsets.all(14.0));
 
     return Container(

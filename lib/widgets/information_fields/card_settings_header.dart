@@ -31,26 +31,26 @@ class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
   final double height;
 
   /// the background color
-  final Color color;
+  final Color? color;
 
   /// Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
   /// The child to place in the content, instead of the label
-  final Widget child;
+  final Widget? child;
 
   /// placed padding around the entire widget
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   @override
   Widget build(BuildContext context) {
     if (!visible) return Container();
-    if (child != null) return child;
+    if (child != null) return child ?? Container();
 
     if (showCupertino(context, showMaterialonIOS))
       return _cupertinoHeader(context);
@@ -70,7 +70,7 @@ class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
 
   Widget _materialHeader(BuildContext context) {
     EdgeInsetsGeometry _fieldPadding = (fieldPadding ??
-        CardSettings.of(context).fieldPadding ??
+        CardSettings.of(context)?.fieldPadding ??
         EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0));
 
     return Container(

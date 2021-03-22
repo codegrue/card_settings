@@ -13,7 +13,7 @@ import '../../interfaces/text_field_properties.dart';
 class CardSettingsPhone extends StatelessWidget
     implements ICommonFieldProperties, ITextFieldProperties {
   CardSettingsPhone({
-    Key key,
+    Key? key,
     this.label: 'Label',
     this.labelWidth,
     this.labelAlign,
@@ -22,7 +22,7 @@ class CardSettingsPhone extends StatelessWidget
     this.contentAlign,
     this.initialValue,
     this.contentOnNewLine = false,
-    this.maxLength,
+    this.maxLength = 20,
     this.icon,
     this.requiredIndicator,
     this.visible: true,
@@ -40,7 +40,7 @@ class CardSettingsPhone extends StatelessWidget
     this.inputActionNode,
     this.keyboardType,
     this.style,
-    this.maxLengthEnforced: true,
+    this.maxLengthEnforcement: MaxLengthEnforcement.enforced,
     this.onFieldSubmitted,
     this.inputFormatters,
     this.showMaterialonIOS,
@@ -53,23 +53,23 @@ class CardSettingsPhone extends StatelessWidget
 
   // The width of the field label. If provided overrides the global setting.
   @override
-  final double labelWidth;
+  final double? labelWidth;
 
   // The alignment of the label paret of the field. Default is left.
   @override
-  final TextAlign labelAlign;
+  final TextAlign? labelAlign;
 
   // controls how the widget in the content area of the field is aligned
   @override
-  final TextAlign contentAlign;
+  final TextAlign? contentAlign;
 
   @override
   // text to display to guide the user on what to enter
-  final String hintText;
+  final String? hintText;
 
-  final String prefixText;
+  final String? prefixText;
 
-  final int initialValue;
+  final int? initialValue;
 
   final bool contentOnNewLine;
 
@@ -77,11 +77,11 @@ class CardSettingsPhone extends StatelessWidget
 
   // The icon to display to the left of the field content
   @override
-  final Icon icon;
+  final Icon? icon;
 
   // A widget to show next to the label if the field is required
   @override
-  final Widget requiredIndicator;
+  final Widget? requiredIndicator;
 
   // If false hides the widget on the card setting panel
   @override
@@ -103,39 +103,39 @@ class CardSettingsPhone extends StatelessWidget
   final AutovalidateMode autovalidateMode;
 
   @override
-  final FormFieldValidator<int> validator;
+  final FormFieldValidator<int>? validator;
 
   @override
-  final FormFieldSetter<int> onSaved;
+  final FormFieldSetter<int>? onSaved;
 
   @override
-  final ValueChanged<int> onChanged;
+  final ValueChanged<int?>? onChanged;
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
 
-  final FocusNode inputActionNode;
+  final FocusNode? inputActionNode;
 
-  final TextInputType keyboardType;
+  final TextInputType? keyboardType;
 
-  final TextStyle style;
+  final TextStyle? style;
 
-  final TextInputAction inputAction;
+  final TextInputAction? inputAction;
 
-  final bool maxLengthEnforced;
+  final MaxLengthEnforcement? maxLengthEnforcement;
 
-  final ValueChanged<String> onFieldSubmitted;
+  final ValueChanged<String>? onFieldSubmitted;
 
-  final List<TextInputFormatter> inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
 
   // provides padding to wrap the entire field
   @override
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   // Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +171,7 @@ class CardSettingsPhone extends StatelessWidget
       keyboardType:
           keyboardType ?? TextInputType.numberWithOptions(decimal: false),
       style: style,
-      maxLengthEnforced: maxLengthEnforced,
+      maxLengthEnforcement: maxLengthEnforcement,
       onFieldSubmitted: onFieldSubmitted,
       inputFormatters: [
         PhoneInputFormatter(),
@@ -180,21 +180,21 @@ class CardSettingsPhone extends StatelessWidget
     );
   }
 
-  String _safeValidator(String value) {
+  String? _safeValidator(String? value) {
     if (validator == null) return null;
     var numbers = toNumericString(value);
-    return validator(intelligentCast<int>(numbers));
+    return validator!(intelligentCast<int>(numbers));
   }
 
-  void _safeOnSaved(String value) {
+  void _safeOnSaved(String? value) {
     if (onSaved == null) return;
     var numbers = toNumericString(value);
-    onSaved(intelligentCast<int>(numbers));
+    onSaved!(intelligentCast<int>(numbers));
   }
 
-  void _safeOnChanged(String value) {
+  void _safeOnChanged(String? value) {
     if (onChanged == null) return;
     var numbers = toNumericString(value);
-    onChanged(intelligentCast<int>(numbers));
+    onChanged!(intelligentCast<int>(numbers));
   }
 }

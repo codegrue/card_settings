@@ -1,8 +1,8 @@
 # Releases
 
-## [1.16.4] - NOT YET RELEASED
+## [2.0.0] - NOT YET RELEASED
 
-- upgraded dependencies
+- upgraded to Flutter 2.0
 
 ## [1.16.3] - 2021-02-05
 

@@ -14,7 +14,7 @@ class CardSettingsField extends StatelessWidget
     implements ICommonFieldProperties {
   CardSettingsField({
     this.label: 'Label',
-    this.content,
+    required this.content,
     this.icon,
     this.pickerIcon,
     this.labelWidth,
@@ -22,10 +22,10 @@ class CardSettingsField extends StatelessWidget
     this.unitLabel,
     this.errorText,
     this.visible: true,
-    @required this.labelAlign,
-    @required this.requiredIndicator,
+    required this.labelAlign,
+    required this.requiredIndicator,
     this.enabled = true,
-    @required this.fieldPadding,
+    required this.fieldPadding,
   });
 
   /// The text to identify the field to the user
@@ -33,23 +33,23 @@ class CardSettingsField extends StatelessWidget
   final String label;
 
   /// If provided, displays text to the right of the content.
-  final String unitLabel;
+  final String? unitLabel;
 
   /// The widget that is placed in the content region of the field
   final Widget content;
 
   /// If the field is a picker, this is the icon shown to the right of the content
-  final IconData pickerIcon;
+  final IconData? pickerIcon;
 
   /// The width of the field label. If provided overrides the global setting.
   @override
-  final double labelWidth;
+  final double? labelWidth;
 
   /// Place the content below the label rather than next to the label
   final bool contentOnNewLine;
 
   /// The text to display if the field fails validation
-  final String errorText;
+  final String? errorText;
 
   /// If false hides the widget on the card setting panel
   @override
@@ -57,22 +57,22 @@ class CardSettingsField extends StatelessWidget
 
   /// The alignment of the label paret of the field. Default is left.
   @override
-  final TextAlign labelAlign;
+  final TextAlign? labelAlign;
 
   /// The icon to display to the left of the field content
   @override
-  final Icon icon;
+  final Icon? icon;
 
   /// A widget to show next to the label if the field is required
   @override
-  final Widget requiredIndicator;
+  final Widget? requiredIndicator;
 
   /// If false, grays out the field and makes it unresponsive
   final bool enabled;
 
   /// padding to place around the entire field widget
   @override
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   @override
   TextAlign get contentAlign => throw UnimplementedError(unimplemented);
@@ -90,7 +90,7 @@ class CardSettingsField extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     EdgeInsetsGeometry _fieldPadding = (fieldPadding ??
-        CardSettings.of(context).fieldPadding ??
+        CardSettings.of(context)?.fieldPadding ??
         EdgeInsets.only(left: 14.0, top: 8.0, right: 14.0, bottom: 8.0));
 
     if (visible) {
@@ -155,7 +155,7 @@ class CardSettingsField extends StatelessWidget
 
   Widget _buildLabelBlock(BuildContext context) {
     var padding =
-        EdgeInsets.only(right: CardSettings.of(context).labelPadding ?? 6.0);
+        EdgeInsets.only(right: CardSettings.of(context)?.labelPadding ?? 6.0);
 
     return (contentOnNewLine)
         ? Expanded(
@@ -165,7 +165,7 @@ class CardSettingsField extends StatelessWidget
             ),
           )
         : Container(
-            width: labelWidth ?? CardSettings.of(context).labelWidth ?? 120.0,
+            width: labelWidth ?? CardSettings.of(context)?.labelWidth ?? 120.0,
             padding: padding,
             child: _buildLabelRow(context),
           );
@@ -202,7 +202,7 @@ class CardSettingsField extends StatelessWidget
 
   Widget _buildLabelSpacer(BuildContext context) {
     return ((labelAlign ??
-                CardSettings.of(context).labelAlign ??
+                CardSettings.of(context)?.labelAlign ??
                 TextAlign.left) ==
             TextAlign.right)
         ? Expanded(child: Container())
@@ -211,9 +211,7 @@ class CardSettingsField extends StatelessWidget
 
   Widget _buildLabelSuffix(BuildContext context) {
     return Text(
-      (CardSettings.of(context).labelSuffix == null)
-          ? ''
-          : CardSettings.of(context).labelSuffix,
+      CardSettings.of(context)?.labelSuffix ?? '',
       style: _buildLabelStyle(context),
     );
   }
@@ -226,12 +224,12 @@ class CardSettingsField extends StatelessWidget
       var style = _buildLabelStyle(context).merge(indicatorStyle);
 
       return Text(
-        (requiredIndicator as Text).data,
+        (requiredIndicator! as Text).data ?? '',
         style: style,
       );
     }
 
-    return requiredIndicator;
+    return requiredIndicator!;
   }
 
   TextStyle _buildLabelStyle(BuildContext context) {
@@ -249,7 +247,7 @@ class CardSettingsField extends StatelessWidget
   }
 
   Widget _buildLeftIcon(BuildContext context) {
-    TextStyle labelStyle = Theme.of(context).inputDecorationTheme.labelStyle;
+    TextStyle? labelStyle = Theme.of(context).inputDecorationTheme.labelStyle;
 
     return (icon == null)
         ? Container()
@@ -257,9 +255,9 @@ class CardSettingsField extends StatelessWidget
             margin: EdgeInsets.all(0.0),
             padding: EdgeInsets.only(right: 4.0),
             child: Icon(
-              icon.icon,
-              color: (icon.color != null)
-                  ? icon.color
+              icon?.icon,
+              color: (icon?.color != null)
+                  ? icon?.color
                   : (labelStyle == null)
                       ? null
                       : labelStyle.color,
@@ -275,7 +273,7 @@ class CardSettingsField extends StatelessWidget
             child: (pickerIcon != null)
                 ? Icon(pickerIcon, size: 20)
                 : Text(
-                    unitLabel,
+                    unitLabel ?? '',
                     style: TextStyle(fontStyle: FontStyle.italic),
                   ),
           )

@@ -17,8 +17,8 @@ import '../../interfaces/text_field_properties.dart';
 class CardSettingsText extends FormField<String>
     implements ICommonFieldProperties, ITextFieldProperties {
   CardSettingsText({
-    Key key,
-    String initialValue,
+    Key? key,
+    String? initialValue,
     bool autovalidate: false,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
@@ -28,7 +28,7 @@ class CardSettingsText extends FormField<String>
     this.controller,
     this.textCapitalization = TextCapitalization.none,
     this.keyboardType = TextInputType.text,
-    this.maxLengthEnforced = true,
+    this.maxLengthEnforcement: MaxLengthEnforcement.enforced,
     this.inputMask,
     this.inputFormatters,
     this.onFieldSubmitted,
@@ -57,15 +57,7 @@ class CardSettingsText extends FormField<String>
     this.showClearButtonIOS = OverlayVisibilityMode.never,
     this.fieldPadding,
     this.contentPadding = const EdgeInsets.all(0.0),
-  })  : //assert(initialValue == null || controller == null),
-        assert(keyboardType != null),
-        assert(autofocus != null),
-        assert(obscureText != null),
-        assert(autocorrect != null),
-        assert(autovalidateMode != null),
-        assert(textCapitalization != null),
-        assert(maxLengthEnforced != null),
-        assert(maxLength == null || maxLength > 0),
+  })  : assert(maxLength > 0),
         assert(controller == null || inputMask == null),
         super(
           key: key,
@@ -79,34 +71,34 @@ class CardSettingsText extends FormField<String>
         );
 
   @override
-  final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onChanged;
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
-  final String inputMask;
+  final String? inputMask;
 
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
 
-  final TextInputAction inputAction;
+  final TextInputAction? inputAction;
 
-  final FocusNode inputActionNode;
+  final FocusNode? inputActionNode;
 
   final TextInputType keyboardType;
 
   final TextCapitalization textCapitalization;
 
-  final TextStyle style;
+  final TextStyle? style;
 
   // If false the field is grayed out and unresponsive
   @override
   // If false, grays out the field and makes it unresponsive
   final bool enabled;
 
-  final bool maxLengthEnforced;
+  final MaxLengthEnforcement? maxLengthEnforcement;
 
-  final ValueChanged<String> onFieldSubmitted;
+  final ValueChanged<String>? onFieldSubmitted;
 
-  final List<TextInputFormatter> inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
 
   // The text to identify the field to the user
   @override
@@ -114,31 +106,31 @@ class CardSettingsText extends FormField<String>
 
   // The alignment of the label paret of the field. Default is left.
   @override
-  final TextAlign labelAlign;
+  final TextAlign? labelAlign;
 
   // The width of the field label. If provided overrides the global setting.
   @override
-  final double labelWidth;
+  final double? labelWidth;
 
   // controls how the widget in the content area of the field is aligned
   @override
-  final TextAlign contentAlign;
+  final TextAlign? contentAlign;
 
-  final String unitLabel;
+  final String? unitLabel;
 
-  final String prefixText;
+  final String? prefixText;
 
   @override
   // text to display to guide the user on what to enter
-  final String hintText;
+  final String? hintText;
 
   // The icon to display to the left of the field content
   @override
-  final Icon icon;
+  final Icon? icon;
 
   // A widget to show next to the label if the field is required
   @override
-  final Widget requiredIndicator;
+  final Widget? requiredIndicator;
 
   final bool contentOnNewLine;
 
@@ -160,22 +152,22 @@ class CardSettingsText extends FormField<String>
 
   // Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   // provides padding to wrap the entire field
   @override
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   final EdgeInsetsGeometry contentPadding;
 
   ///Since the CupertinoTextField does not support onSaved, please use [onChanged] or [onFieldSubmitted] instead
   @override
-  final FormFieldSetter<String> onSaved;
+  final FormFieldSetter<String>? onSaved;
 
   ///In material mode this shows the validation text under the field
   ///In cupertino mode, it shows a [red] [Border] around the [CupertinoTextField]
   @override
-  final FormFieldValidator<String> validator;
+  final FormFieldValidator<String>? validator;
 
   final OverlayVisibilityMode showClearButtonIOS;
 
@@ -184,7 +176,7 @@ class CardSettingsText extends FormField<String>
 }
 
 class _CardSettingsTextState extends FormFieldState<String> {
-  TextEditingController _controller;
+  TextEditingController? _controller;
 
   @override
   CardSettingsText get widget => super.widget as CardSettingsText;
@@ -200,11 +192,11 @@ class _CardSettingsTextState extends FormFieldState<String> {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) {
       oldWidget.controller?.removeListener(_handleControllerChanged);
-      _initController(oldWidget.controller.value.toString());
+      _initController(oldWidget.controller?.value.toString());
     }
   }
 
-  void _initController(String initialValue) {
+  void _initController(String? initialValue) {
     if (widget.controller == null) {
       if (widget.inputMask == null) {
         _controller = TextEditingController(text: initialValue);
@@ -216,7 +208,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
       _controller = widget.controller;
     }
 
-    _controller.addListener(_handleControllerChanged);
+    _controller!.addListener(_handleControllerChanged);
   }
 
   @override
@@ -229,33 +221,33 @@ class _CardSettingsTextState extends FormFieldState<String> {
   void reset() {
     super.reset();
     setState(() {
-      _controller.text = widget.initialValue;
+      _controller!.text = widget.initialValue ?? '';
     });
   }
 
   void _handleControllerChanged() {
-    if (_controller.text != value) {
-      didChange(_controller.text);
+    if (_controller!.text != value) {
+      didChange(_controller!.text);
     }
   }
 
   void _handleOnChanged(String value) {
     if (widget.onChanged != null) {
       // `value` doesn't apple any masks when this is called, so the controller has the actual formatted value
-      widget.onChanged(_controller.value.text);
+      widget.onChanged!(_controller!.value.text);
     }
   }
 
   void _onFieldSubmitted(String value) {
-    if (this.widget?.focusNode != null) this.widget.focusNode.unfocus();
+    if (this.widget.focusNode != null) this.widget.focusNode!.unfocus();
 
-    if (this.widget?.inputActionNode != null) {
-      this.widget.inputActionNode.requestFocus();
+    if (this.widget.inputActionNode != null) {
+      this.widget.inputActionNode!.requestFocus();
       return;
     }
 
-    if (this.widget?.onFieldSubmitted != null)
-      this.widget.onFieldSubmitted(value);
+    if (this.widget.onFieldSubmitted != null)
+      this.widget.onFieldSubmitted!(value);
   }
 
   Widget _build(BuildContext context) {
@@ -268,30 +260,30 @@ class _CardSettingsTextState extends FormFieldState<String> {
   Container _buildCupertinoTextbox(BuildContext context) {
     bool hasError = false;
     if (widget.validator != null) {
-      String errorMessage = widget.validator(value);
+      String? errorMessage = widget.validator!(value);
       hasError = (errorMessage != null);
     }
 
-    final ls = labelStyle(context, widget?.enabled ?? true);
+    final ls = labelStyle(context, widget.enabled);
     final _child = Container(
       child: CupertinoTextField(
-        prefix: widget?.prefixText == null
+        prefix: widget.prefixText == null
             ? null
             : Text(
-                widget.prefixText,
+                widget.prefixText ?? '',
                 style: ls,
               ),
-        suffix: widget?.unitLabel == null
+        suffix: widget.unitLabel == null
             ? null
             : Text(
-                widget.unitLabel,
+                widget.unitLabel ?? '',
                 style: ls,
               ),
         controller: _controller,
-        focusNode: widget?.focusNode,
-        textInputAction: widget?.inputAction,
-        keyboardType: widget?.keyboardType,
-        textCapitalization: widget?.textCapitalization,
+        focusNode: widget.focusNode,
+        textInputAction: widget.inputAction,
+        keyboardType: widget.keyboardType,
+        textCapitalization: widget.textCapitalization,
         style: contentStyle(context, value, widget.enabled),
         decoration: hasError
             ? BoxDecoration(
@@ -327,43 +319,43 @@ class _CardSettingsTextState extends FormFieldState<String> {
                   Radius.circular(4.0),
                 ),
               ),
-        clearButtonMode: widget?.showClearButtonIOS,
-        placeholder: widget?.hintText,
-        textAlign: widget?.contentAlign ?? TextAlign.end,
-        autofocus: widget?.autofocus ?? false,
-        obscureText: widget?.obscureText ?? false,
-        autocorrect: widget?.autocorrect ?? true,
-        maxLengthEnforced: widget?.maxLengthEnforced ?? false,
-        maxLines: widget?.numberOfLines,
-        maxLength: (widget?.showCounter ?? false)
-            ? widget?.maxLength
+        clearButtonMode: widget.showClearButtonIOS,
+        placeholder: widget.hintText,
+        textAlign: widget.contentAlign ?? TextAlign.end,
+        autofocus: widget.autofocus,
+        obscureText: widget.obscureText,
+        autocorrect: widget.autocorrect,
+        maxLengthEnforcement: widget.maxLengthEnforcement,
+        maxLines: widget.numberOfLines,
+        maxLength: (widget.showCounter)
+            ? widget.maxLength
             : null, // if we want counter use default behavior
         onChanged: _handleOnChanged,
         onSubmitted: _onFieldSubmitted,
-        inputFormatters: widget?.inputFormatters ??
+        inputFormatters: widget.inputFormatters ??
             [
               // if we don't want the counter, use this maxLength instead
-              LengthLimitingTextInputFormatter(widget?.maxLength)
+              LengthLimitingTextInputFormatter(widget.maxLength)
             ],
-        enabled: widget?.enabled,
+        enabled: widget.enabled,
       ),
     );
     return Container(
-      child: widget?.visible == false
+      child: widget.visible == false
           ? null
-          : widget?.contentOnNewLine == true
+          : widget.contentOnNewLine == true
               ? Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     CSControl(
-                      nameWidget: widget?.requiredIndicator != null
+                      nameWidget: widget.requiredIndicator != null
                           ? Text(
-                              (widget?.label ?? "") + ' *',
+                              (widget.label) + ' *',
                               style: ls,
                             )
-                          : Text(widget?.label, style: ls),
+                          : Text(widget.label, style: ls),
                       contentWidget: Container(),
-                      style: CSWidgetStyle(icon: widget?.icon),
+                      style: CSWidgetStyle(icon: widget.icon),
                     ),
                     Container(
                       padding: EdgeInsets.all(5.0),
@@ -373,18 +365,16 @@ class _CardSettingsTextState extends FormFieldState<String> {
                           : CupertinoColors.white,
                     ),
                     Container(
-                      padding: widget?.showCounter ?? false
-                          ? EdgeInsets.all(5.0)
-                          : null,
+                      padding: widget.showCounter ? EdgeInsets.all(5.0) : null,
                       color: Theme.of(context).brightness == Brightness.dark
                           ? null
                           : CupertinoColors.white,
-                      child: widget?.showCounter ?? false
+                      child: widget.showCounter
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  "${_controller?.text?.length ?? 0}/${widget?.maxLength}",
+                                  "${_controller?.text.length ?? 0}/${widget.maxLength}",
                                   style: TextStyle(
                                     color: CupertinoColors.inactiveGray,
                                   ),
@@ -400,12 +390,12 @@ class _CardSettingsTextState extends FormFieldState<String> {
                   children: <Widget>[
                     CSControl(
                       nameWidget: Container(
-                        width: widget?.labelWidth ??
-                            CardSettings.of(context).labelWidth ??
+                        width: widget.labelWidth ??
+                            CardSettings.of(context)?.labelWidth ??
                             120.0,
-                        child: widget?.requiredIndicator != null
-                            ? Text((widget?.label ?? "") + ' *', style: ls)
-                            : Text(widget?.label, style: ls),
+                        child: widget.requiredIndicator != null
+                            ? Text((widget.label) + ' *', style: ls)
+                            : Text(widget.label, style: ls),
                       ),
                       contentWidget: Expanded(
                         child: Container(
@@ -413,21 +403,19 @@ class _CardSettingsTextState extends FormFieldState<String> {
                           child: _child,
                         ),
                       ),
-                      style: CSWidgetStyle(icon: widget?.icon),
+                      style: CSWidgetStyle(icon: widget.icon),
                     ),
                     Container(
-                      padding: widget?.showCounter ?? false
-                          ? EdgeInsets.all(5.0)
-                          : null,
+                      padding: widget.showCounter ? EdgeInsets.all(5.0) : null,
                       color: Theme.of(context).brightness == Brightness.dark
                           ? null
                           : CupertinoColors.white,
-                      child: widget?.showCounter ?? false
+                      child: widget.showCounter
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  "${_controller?.text?.length ?? 0}/${widget?.maxLength}",
+                                  "${_controller?.text.length ?? 0}/${widget.maxLength}",
                                   style: TextStyle(
                                     color: CupertinoColors.inactiveGray,
                                   ),
@@ -444,21 +432,21 @@ class _CardSettingsTextState extends FormFieldState<String> {
   CardSettingsField _buildMaterialTextbox(BuildContext context) {
     return CardSettingsField(
       label: widget.label,
-      labelAlign: widget?.labelAlign,
-      labelWidth: widget?.labelWidth,
-      visible: widget?.visible,
-      unitLabel: widget?.unitLabel,
-      icon: widget?.icon,
-      requiredIndicator: widget?.requiredIndicator,
-      contentOnNewLine: widget?.contentOnNewLine ?? false,
+      labelAlign: widget.labelAlign,
+      labelWidth: widget.labelWidth,
+      visible: widget.visible,
+      unitLabel: widget.unitLabel,
+      icon: widget.icon,
+      requiredIndicator: widget.requiredIndicator,
+      contentOnNewLine: widget.contentOnNewLine,
       enabled: widget.enabled,
       fieldPadding: widget.fieldPadding,
       content: TextField(
         controller: _controller,
-        focusNode: widget?.focusNode,
-        keyboardType: widget?.keyboardType,
-        textInputAction: widget?.inputAction,
-        textCapitalization: widget?.textCapitalization,
+        focusNode: widget.focusNode,
+        keyboardType: widget.keyboardType,
+        textInputAction: widget.inputAction,
+        textCapitalization: widget.textCapitalization,
         enabled: widget.enabled,
         readOnly: !widget.enabled,
         style: contentStyle(context, value, widget.enabled),
@@ -466,26 +454,26 @@ class _CardSettingsTextState extends FormFieldState<String> {
           contentPadding: widget.contentPadding,
           border: InputBorder.none,
           errorText: errorText,
-          prefixText: widget?.prefixText,
-          hintText: widget?.hintText,
+          prefixText: widget.prefixText,
+          hintText: widget.hintText,
           isDense: true,
         ),
         textAlign:
-            widget?.contentAlign ?? CardSettings.of(context).contentAlign,
-        autofocus: widget?.autofocus ?? false,
-        obscureText: widget?.obscureText ?? false,
-        autocorrect: widget?.autocorrect ?? true,
-        maxLengthEnforced: widget?.maxLengthEnforced ?? false,
-        maxLines: widget?.numberOfLines,
-        maxLength: (widget?.showCounter ?? false)
-            ? widget?.maxLength
+            widget.contentAlign ?? CardSettings.of(context)!.contentAlign,
+        autofocus: widget.autofocus,
+        obscureText: widget.obscureText,
+        autocorrect: widget.autocorrect,
+        maxLengthEnforcement: widget.maxLengthEnforcement,
+        maxLines: widget.numberOfLines,
+        maxLength: (widget.showCounter)
+            ? widget.maxLength
             : null, // if we want counter use default behavior
         onChanged: _handleOnChanged,
         onSubmitted: _onFieldSubmitted,
-        inputFormatters: widget?.inputFormatters ??
+        inputFormatters: widget.inputFormatters ??
             [
               // if we don't want the counter, use this maxLength instead
-              LengthLimitingTextInputFormatter(widget?.maxLength)
+              LengthLimitingTextInputFormatter(widget.maxLength)
             ],
       ),
     );

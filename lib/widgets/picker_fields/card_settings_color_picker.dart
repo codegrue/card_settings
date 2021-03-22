@@ -18,10 +18,10 @@ enum CardSettingsColorPickerType { colors, material, block }
 class CardSettingsColorPicker extends FormField<Color>
     implements ICommonFieldProperties {
   CardSettingsColorPicker({
-    Key key,
+    Key? key,
     // bool autovalidate: false,
-    FormFieldSetter<Color> onSaved,
-    FormFieldValidator<Color> validator,
+    FormFieldSetter<Color>? onSaved,
+    FormFieldValidator<Color>? validator,
     Color initialValue = Colors.green,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
@@ -38,38 +38,37 @@ class CardSettingsColorPicker extends FormField<Color>
     this.fieldPadding,
   }) : super(
             key: key,
-            initialValue: initialValue ?? Colors.black,
+            initialValue: initialValue,
             onSaved: onSaved,
             validator: validator,
-            // autovalidate: autovalidate,
             autovalidateMode: autovalidateMode,
             builder: (FormFieldState<Color> field) =>
                 (field as _CardSettingsColorPickerState)._build(field.context));
 
   /// Fires when the color value changes
   @override
-  final ValueChanged<Color> onChanged;
+  final ValueChanged<Color>? onChanged;
 
   /// The alignment of the label paret of the field. Default is left.
   @override
-  final TextAlign labelAlign;
+  final TextAlign? labelAlign;
 
   /// The width of the field label. If provided overrides the global setting.
   @override
-  final double labelWidth;
+  final double? labelWidth;
 
   /// controls how the widget in the content area of the field is aligned
   // here for consistency, but does nothing.
   @override
-  final TextAlign contentAlign;
+  final TextAlign? contentAlign;
 
   /// The icon to display to the left of the field content
   @override
-  final Icon icon;
+  final Icon? icon;
 
   /// A widget to show next to the label if the field is required
   @override
-  final Widget requiredIndicator;
+  final Widget? requiredIndicator;
 
   /// The text to identify the field to the user
   @override
@@ -85,11 +84,11 @@ class CardSettingsColorPicker extends FormField<Color>
 
   /// Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   /// provides padding to wrap the entire field
   @override
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   /// the specific variant of the color picker to use
   final CardSettingsColorPickerType pickerType;
@@ -103,10 +102,10 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   @override
   CardSettingsColorPicker get widget => super.widget as CardSettingsColorPicker;
 
-  Color pickerColor;
+  Color pickerColor = Colors.green;
 
   void _showDialog() {
-    pickerColor = value;
+    pickerColor = value!;
 
     var title = widget.label;
 
@@ -126,7 +125,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
           onChanged: (value) {
             if (value != null) {
               didChange(value);
-              if (widget.onChanged != null) widget.onChanged(value);
+              if (widget.onChanged != null) widget.onChanged!(value);
             }
           },
         );
@@ -142,7 +141,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
           onChanged: (value) {
             if (value != null) {
               didChange(value);
-              if (widget.onChanged != null) widget.onChanged(value);
+              if (widget.onChanged != null) widget.onChanged!(value);
             }
           },
         );
@@ -158,7 +157,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
           onChanged: (value) {
             if (value != null) {
               didChange(value);
-              if (widget.onChanged != null) widget.onChanged(value);
+              if (widget.onChanged != null) widget.onChanged!(value);
             }
           },
         );
@@ -174,9 +173,9 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
   }
 
   Widget _cupertinoSettingsColorPicker() {
-    final ls = labelStyle(context, widget?.enabled ?? true);
+    final ls = labelStyle(context, widget.enabled);
     return Container(
-      child: widget?.visible == false
+      child: widget.visible == false
           ? null
           : GestureDetector(
               onTap: () {
@@ -184,16 +183,16 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
               },
               child: CSControl(
                 nameWidget: Container(
-                  width: widget?.labelWidth ??
-                      CardSettings.of(context).labelWidth ??
+                  width: widget.labelWidth ??
+                      CardSettings.of(context)?.labelWidth ??
                       120.0,
-                  child: widget?.requiredIndicator != null
+                  child: widget.requiredIndicator != null
                       ? Text(
-                          (widget?.label ?? "") + ' *',
+                          (widget.label) + ' *',
                           style: ls,
                         )
                       : Text(
-                          widget?.label,
+                          widget.label,
                           style: ls,
                         ),
                 ),
@@ -205,7 +204,7 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                style: CSWidgetStyle(icon: widget?.icon),
+                style: CSWidgetStyle(icon: widget.icon),
               ),
             ),
     );
@@ -217,13 +216,13 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
         if (widget.enabled) _showDialog();
       },
       child: CardSettingsField(
-        label: widget?.label,
-        labelAlign: widget?.labelAlign,
-        labelWidth: widget?.labelWidth,
-        enabled: widget?.enabled,
-        visible: widget?.visible,
-        icon: widget?.icon,
-        requiredIndicator: widget?.requiredIndicator,
+        label: widget.label,
+        labelAlign: widget.labelAlign,
+        labelWidth: widget.labelWidth,
+        enabled: widget.enabled,
+        visible: widget.visible,
+        icon: widget.icon,
+        requiredIndicator: widget.requiredIndicator,
         errorText: errorText,
         fieldPadding: widget.fieldPadding,
         content: Container(

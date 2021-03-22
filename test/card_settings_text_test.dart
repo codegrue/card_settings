@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('CardSettingsText', () {
-    Widget widgetTree;
+    Widget widgetTree = Container();
     var key = GlobalKey();
     var label = "MeInput";
     var initialValue = "Hello World";
@@ -14,7 +14,6 @@ void main() {
     var focusNode = FocusNode();
     var inputActionNode = FocusNode();
     var inputAction = TextInputAction.next;
-
 
     setUpAll(() async {
       widgetTree = MaterialApp(
@@ -83,7 +82,6 @@ void main() {
     });
 
     testWidgets('focusNode is focused', (WidgetTester tester) async {
-
       // arrange
       await tester.pumpWidget(widgetTree);
 
@@ -94,8 +92,8 @@ void main() {
       expect(focusNode.hasFocus, isTrue);
     });
 
-    testWidgets('input action unfocuses focusNode', (WidgetTester tester) async {
-
+    testWidgets('input action unfocuses focusNode',
+        (WidgetTester tester) async {
       // arrange
       await tester.pumpWidget(widgetTree);
 
@@ -108,8 +106,8 @@ void main() {
       expect(focusNode.hasFocus, isFalse);
     });
 
-    testWidgets('input action focuses inputActionNode', (WidgetTester tester) async {
-
+    testWidgets('input action focuses inputActionNode',
+        (WidgetTester tester) async {
       // arrange
       await tester.pumpWidget(widgetTree);
 

@@ -24,7 +24,7 @@ void main() {
 
     test('on iOS, returns true if showMaterialonIOS and context not provided',
         () {
-      bool showMaterialonIOS; // null
+      bool? showMaterialonIOS; // null
       bool isIOS = true;
       var result = showCupertino(null, showMaterialonIOS, mockIOS: isIOS);
 
@@ -45,7 +45,7 @@ void main() {
         ),
       );
 
-      bool showMaterialonIOS; // null
+      bool? showMaterialonIOS; // null
       bool isIOS = true;
       var result = showCupertino(context, showMaterialonIOS, mockIOS: isIOS);
 
@@ -63,8 +63,8 @@ void main() {
       var result = labelStyle(context, enabled);
 
       // Assert
-      var expectedColor = Theme.of(context).textTheme.subtitle1.color;
-      expect(result.color, expectedColor);
+      var expectedColor = Theme.of(context).textTheme.subtitle1?.color;
+      expect(result?.color, expectedColor);
     });
 
     test('disabled uses disabledColor', () {
@@ -77,7 +77,7 @@ void main() {
 
       // Assert
       var expectedColor = Theme.of(context).disabledColor;
-      expect(result.color, expectedColor);
+      expect(result?.color, expectedColor);
     });
   });
 
@@ -92,14 +92,14 @@ void main() {
       var result = contentStyle(context, value, enabled);
 
       // Assert
-      var expectedColor = Theme.of(context).textTheme.subtitle1.color;
-      expect(result.color, expectedColor);
+      var expectedColor = Theme.of(context).textTheme.subtitle1?.color;
+      expect(result?.color, expectedColor);
     });
 
     test('enabled uses textTheme.hintColor if value not present', () {
       // Arrange
       bool enabled = true;
-      String value; // null
+      String? value; // null
       var context = MockContext();
 
       // Act
@@ -107,7 +107,7 @@ void main() {
 
       // Assert
       var expectedColor = Theme.of(context).hintColor;
-      expect(result.color, expectedColor);
+      expect(result?.color, expectedColor);
     });
 
     test('disabled uses disabledColor', () {
@@ -121,7 +121,7 @@ void main() {
 
       // Assert
       var expectedColor = Theme.of(context).disabledColor;
-      expect(result.color, expectedColor);
+      expect(result?.color, expectedColor);
     });
   });
 }

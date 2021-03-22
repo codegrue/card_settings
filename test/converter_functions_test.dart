@@ -8,12 +8,12 @@ import 'package:card_settings/card_settings.dart';
 void main() {
   group('intelligentCast', () {
     test('handles doubles', () {
-      double result = intelligentCast<double>("3.145");
+      double? result = intelligentCast<double>("3.145");
       expect(result, 3.145);
     });
 
     test('handles booleans', () {
-      bool result = intelligentCast<bool>("True");
+      bool? result = intelligentCast<bool>("True");
       expect(result, true);
 
       result = intelligentCast<bool>("Yes");
@@ -33,26 +33,26 @@ void main() {
     });
 
     test('handles integers', () {
-      int result = intelligentCast<int>("42");
+      int? result = intelligentCast<int>("42");
       expect(result, 42);
     });
 
     test('handles nulls', () {
-      bool boolResult = intelligentCast<bool>(null);
+      bool? boolResult = intelligentCast<bool>(null);
       expect(boolResult, false);
 
-      int intResult = intelligentCast<int>(null);
+      int? intResult = intelligentCast<int>(null);
       expect(intResult, null);
 
-      double doubleResult = intelligentCast<double>(null);
+      double? doubleResult = intelligentCast<double>(null);
       expect(doubleResult, null);
 
-      Color colorResult = intelligentCast<Color>(null);
+      Color? colorResult = intelligentCast<Color>(null);
       expect(colorResult, null);
     });
 
     test('handles Strings', () {
-      String result = intelligentCast<String>('sample');
+      String? result = intelligentCast<String>('sample');
       expect(result, 'sample');
 
       result = intelligentCast<String>(''); // empty string becomes null
@@ -60,7 +60,7 @@ void main() {
     });
 
     test('handles Colors', () {
-      Color result = intelligentCast<Color>("FFFFFFFF");
+      Color? result = intelligentCast<Color>("FFFFFFFF");
       expect(result, Colors.white);
 
       result = intelligentCast<Color>("000000");

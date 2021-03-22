@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('CardSettingsInstructions', () {
-    Widget widgetTree;
+    Widget widgetTree = Container();
     var instructions = "Don't panic!";
     var color = Colors.indigo;
 
@@ -31,7 +31,7 @@ void main() {
       final instructionsFinder = find.text(instructions);
       expect(instructionsFinder, findsOneWidget);
       final value = instructionsFinder.evaluate().first.widget as Text;
-      expect(value.style.color, color);
+      expect(value.style?.color, color);
     });
   });
 }

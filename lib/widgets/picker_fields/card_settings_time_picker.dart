@@ -14,10 +14,10 @@ import '../../interfaces/common_field_properties.dart';
 class CardSettingsTimePicker extends FormField<TimeOfDay>
     implements ICommonFieldProperties {
   CardSettingsTimePicker({
-    Key key,
-    FormFieldSetter<TimeOfDay> onSaved,
-    FormFieldValidator<TimeOfDay> validator,
-    TimeOfDay initialValue,
+    Key? key,
+    FormFieldSetter<TimeOfDay>? onSaved,
+    FormFieldValidator<TimeOfDay>? validator,
+    TimeOfDay? initialValue,
     // bool autovalidate: false,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
@@ -27,7 +27,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay>
     this.requiredIndicator,
     this.labelAlign,
     this.labelWidth,
-    this.label = 'Label',
+    this.label = 'Time',
     this.icon,
     this.style,
     this.showMaterialonIOS,
@@ -45,19 +45,19 @@ class CardSettingsTimePicker extends FormField<TimeOfDay>
 
   /// fired when the selection changes
   @override
-  final ValueChanged<TimeOfDay> onChanged;
+  final ValueChanged<TimeOfDay>? onChanged;
 
   /// The alignment of the label paret of the field. Default is left.
   @override
-  final TextAlign labelAlign;
+  final TextAlign? labelAlign;
 
   /// controls how the widget in the content area of the field is aligned
   @override
-  final TextAlign contentAlign;
+  final TextAlign? contentAlign;
 
   /// The icon to display to the left of the field content
   @override
-  final Icon icon;
+  final Icon? icon;
 
   /// If false the field is grayed out and unresponsive
   @override
@@ -65,7 +65,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay>
 
   /// A widget to show next to the label if the field is required
   @override
-  final Widget requiredIndicator;
+  final Widget? requiredIndicator;
 
   /// If false hides the widget on the card setting panel
   @override
@@ -77,18 +77,18 @@ class CardSettingsTimePicker extends FormField<TimeOfDay>
 
   /// The width of the field label. If provided overrides the global setting.
   @override
-  final double labelWidth;
+  final double? labelWidth;
 
   /// the style of the text in the label
-  final TextStyle style;
+  final TextStyle? style;
 
   /// Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   /// places padding around the entire field
   @override
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   @override
   _CardSettingsTimePickerState createState() => _CardSettingsTimePickerState();
@@ -144,11 +144,11 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
             initialDateTime: value == null
                 ? DateTime.now()
                 : DateTime(DateTime.now().year, DateTime.now().month,
-                    DateTime.now().day, value.hour, value.minute),
+                    DateTime.now().day, value!.hour, value!.minute),
             onDateTimeChanged: (DateTime newDateTime) {
               didChange(TimeOfDay.fromDateTime(newDateTime));
               if (widget.onChanged != null)
-                widget.onChanged(TimeOfDay.fromDateTime(newDateTime));
+                widget.onChanged!(TimeOfDay.fromDateTime(newDateTime));
             },
           ),
         );
@@ -157,7 +157,7 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
       if (_value != null) {
         didChange(TimeOfDay.fromDateTime(_value));
         if (widget.onChanged != null)
-          widget.onChanged(TimeOfDay.fromDateTime(_value));
+          widget.onChanged!(TimeOfDay.fromDateTime(_value));
       }
     });
   }
@@ -165,19 +165,19 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
   void _showMaterialPopUpTimePicker() {
     showTimePicker(
       context: context,
-      initialTime: value,
+      initialTime: value!,
     ).then((_value) {
       if (_value != null) {
         didChange(_value);
-        if (widget.onChanged != null) widget.onChanged(_value);
+        if (widget.onChanged != null) widget.onChanged!(_value);
       }
     });
   }
 
   Widget _cupertinoSettingsTimePicker() {
-    final ls = labelStyle(context, widget?.enabled ?? true);
+    final ls = labelStyle(context, widget.enabled);
     return Container(
-      child: widget?.visible == false
+      child: widget.visible == false
           ? null
           : GestureDetector(
               onTap: () {
@@ -185,26 +185,26 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
               },
               child: CSControl(
                 nameWidget: Container(
-                  width: widget?.labelWidth ??
-                      CardSettings.of(context).labelWidth ??
+                  width: widget.labelWidth ??
+                      CardSettings.of(context)?.labelWidth ??
                       120.0,
-                  child: widget?.requiredIndicator != null
+                  child: widget.requiredIndicator != null
                       ? Text(
-                          (widget?.label ?? "") + ' *',
+                          (widget.label) + ' *',
                           style: ls,
                         )
                       : Text(
-                          widget?.label,
+                          widget.label,
                           style: ls,
                         ),
                 ),
                 contentWidget: Text(
-                  value == null ? '' : value.format(context),
+                  value == null ? '' : value!.format(context),
                   style: contentStyle(context, value, widget.enabled),
-                  textAlign: widget?.contentAlign ??
-                      CardSettings.of(context).contentAlign,
+                  textAlign: widget.contentAlign ??
+                      CardSettings.of(context)?.contentAlign,
                 ),
-                style: CSWidgetStyle(icon: widget?.icon),
+                style: CSWidgetStyle(icon: widget.icon),
               ),
             ),
     );
@@ -216,20 +216,20 @@ class _CardSettingsTimePickerState extends FormFieldState<TimeOfDay> {
         if (widget.enabled) _showDialog();
       },
       child: CardSettingsField(
-        label: widget?.label ?? "Time",
-        labelAlign: widget?.labelAlign,
-        labelWidth: widget?.labelWidth,
-        enabled: widget?.enabled,
-        visible: widget?.visible ?? true,
-        icon: widget?.icon ?? Icon(Icons.event),
-        requiredIndicator: widget?.requiredIndicator,
+        label: widget.label,
+        labelAlign: widget.labelAlign,
+        labelWidth: widget.labelWidth,
+        enabled: widget.enabled,
+        visible: widget.visible,
+        icon: widget.icon ?? Icon(Icons.event),
+        requiredIndicator: widget.requiredIndicator,
         errorText: errorText,
         fieldPadding: widget.fieldPadding,
         content: Text(
-          value == null ? '' : value.format(context),
+          value == null ? '' : value!.format(context),
           style: contentStyle(context, value, widget.enabled),
           textAlign:
-              widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+              widget.contentAlign ?? CardSettings.of(context)?.contentAlign,
         ),
         pickerIcon: (widget.enabled) ? Icons.arrow_drop_down : null,
       ),

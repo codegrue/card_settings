@@ -15,7 +15,7 @@ import '../../interfaces/text_field_properties.dart';
 class CardSettingsDouble extends StatelessWidget
     implements ICommonFieldProperties, ITextFieldProperties {
   CardSettingsDouble({
-    Key key,
+    Key? key,
     this.label: 'Label',
     this.labelWidth,
     this.labelAlign,
@@ -43,7 +43,7 @@ class CardSettingsDouble extends StatelessWidget
     this.inputActionNode,
     this.keyboardType,
     this.style,
-    this.maxLengthEnforced: true,
+    this.maxLengthEnforcement: MaxLengthEnforcement.enforced,
     this.onFieldSubmitted,
     this.inputFormatters,
     this.showMaterialonIOS,
@@ -57,26 +57,26 @@ class CardSettingsDouble extends StatelessWidget
 
   /// The width of the field label. If provided overrides the global setting.
   @override
-  final double labelWidth;
+  final double? labelWidth;
 
   /// The alignment of the label paret of the field. Default is left.
   @override
-  final TextAlign labelAlign;
+  final TextAlign? labelAlign;
 
   /// controls how the widget in the content area of the field is aligned
   @override
-  final TextAlign contentAlign;
+  final TextAlign? contentAlign;
 
   @override
 
   /// text to display to guide the user on what to enter
-  final String hintText;
+  final String? hintText;
 
   /// Text to show before the content area
-  final String prefixText;
+  final String? prefixText;
 
   /// The initial value of the content
-  final double initialValue;
+  final double? initialValue;
 
   /// Put the content below the label
   final bool contentOnNewLine;
@@ -85,15 +85,15 @@ class CardSettingsDouble extends StatelessWidget
   final int maxLength;
 
   /// if provided, show text after the value
-  final String unitLabel;
+  final String? unitLabel;
 
   /// The icon to display to the left of the field content
   @override
-  final Icon icon;
+  final Icon? icon;
 
   /// A widget to show next to the label if the field is required
   @override
-  final Widget requiredIndicator;
+  final Widget? requiredIndicator;
 
   /// If false hides the widget on the card setting panel
   @override
@@ -113,54 +113,54 @@ class CardSettingsDouble extends StatelessWidget
 
   /// The function to call to validate the content
   @override
-  final FormFieldValidator<double> validator;
+  final FormFieldValidator<double>? validator;
 
   /// This fires when the form is saved
   @override
-  final FormFieldSetter<double> onSaved;
+  final FormFieldSetter<double>? onSaved;
 
   /// This fires when the value is changed
   @override
-  final ValueChanged<double> onChanged;
+  final ValueChanged<double?>? onChanged;
 
   /// You can provide a custom text controller here
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   /// the order for this node to receive focus
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
 
-  final FocusNode inputActionNode;
+  final FocusNode? inputActionNode;
 
   /// the type of keyboard to show
-  final TextInputType keyboardType;
+  final TextInputType? keyboardType;
 
   /// The style for the label
-  final TextStyle style;
+  final TextStyle? style;
 
-  final TextInputAction inputAction;
+  final TextInputAction? inputAction;
 
   /// the max length of the number in characters
-  final bool maxLengthEnforced;
+  final MaxLengthEnforcement? maxLengthEnforcement;
 
   /// the number of digits allowed after the decimal
   final int decimalDigits;
 
   /// This fires when the form is submitted
-  final ValueChanged<String> onFieldSubmitted;
+  final ValueChanged<String>? onFieldSubmitted;
 
   /// input formatters to enforce entry
-  final List<TextInputFormatter> inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
 
   /// the localization region to use
-  final Locale locale;
+  final Locale? locale;
 
   /// Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   /// provides padding to wrap the entire field
   @override
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -200,7 +200,7 @@ class CardSettingsDouble extends StatelessWidget
       keyboardType:
           keyboardType ?? TextInputType.numberWithOptions(decimal: true),
       style: style,
-      maxLengthEnforced: maxLengthEnforced,
+      maxLengthEnforcement: maxLengthEnforcement,
       onFieldSubmitted: onFieldSubmitted,
       inputFormatters: [
         ThousandsFormatter(
@@ -210,21 +210,24 @@ class CardSettingsDouble extends StatelessWidget
     );
   }
 
-  String _safeValidator(String value, NumberFormat formatter) {
+  String? _safeValidator(String? value, NumberFormat formatter) {
     if (validator == null) return null;
+    if (value == null) return null;
     var number = formatter.parse(value);
-    return validator(intelligentCast<double>(number));
+    return validator!(intelligentCast<double>(number));
   }
 
-  void _safeOnSaved(String value, NumberFormat formatter) {
+  void _safeOnSaved(String? value, NumberFormat formatter) {
     if (onSaved == null) return;
+    if (value == null) return null;
     var number = formatter.parse(value);
-    onSaved(intelligentCast<double>(number));
+    onSaved!(intelligentCast<double>(number));
   }
 
-  void _safeOnChanged(String value, NumberFormat formatter) {
+  void _safeOnChanged(String? value, NumberFormat formatter) {
     if (onChanged == null) return;
+    if (value == null) return null;
     var number = formatter.parse(value);
-    onChanged(intelligentCast<double>(number));
+    onChanged!(intelligentCast<double>(number));
   }
 }

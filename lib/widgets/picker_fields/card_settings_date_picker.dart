@@ -15,15 +15,15 @@ import '../../interfaces/common_field_properties.dart';
 class CardSettingsDatePicker extends FormField<DateTime>
     implements ICommonFieldProperties {
   CardSettingsDatePicker({
-    Key key,
+    Key? key,
     // bool autovalidate: false,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
-    FormFieldSetter<DateTime> onSaved,
-    FormFieldValidator<DateTime> validator,
-    DateTime initialValue,
+    FormFieldSetter<DateTime>? onSaved,
+    FormFieldValidator<DateTime>? validator,
+    DateTime? initialValue,
     this.enabled = true,
     this.visible = true,
-    this.label = 'Label',
+    this.label = 'Date',
     this.onChanged,
     this.contentAlign,
     this.icon,
@@ -48,7 +48,7 @@ class CardSettingsDatePicker extends FormField<DateTime>
 
   /// fires when the picker value changes
   @override
-  final ValueChanged<DateTime> onChanged;
+  final ValueChanged<DateTime>? onChanged;
 
   /// The text to identify the field to the user
   @override
@@ -56,51 +56,51 @@ class CardSettingsDatePicker extends FormField<DateTime>
 
   /// The alignment of the label paret of the field. Default is left.
   @override
-  final TextAlign labelAlign;
+  final TextAlign? labelAlign;
 
   /// The width of the field label. If provided overrides the global setting.
   @override
-  final double labelWidth;
+  final double? labelWidth;
 
   /// controls how the widget in the content area of the field is aligned
   @override
-  final TextAlign contentAlign;
+  final TextAlign? contentAlign;
 
   /// If false the field is grayed out and unresponsive
   @override
   final bool enabled;
 
   /// the first date in the selectable picker range
-  final DateTime firstDate;
+  final DateTime? firstDate;
 
   /// the last date in the selectable picker range
-  final DateTime lastDate;
+  final DateTime? lastDate;
 
   /// the format to show the date in the field
-  final DateFormat dateFormat;
+  final DateFormat? dateFormat;
 
   /// The icon to display to the left of the field content
   @override
-  final Icon icon;
+  final Icon? icon;
 
   /// A widget to show next to the label if the field is required
   @override
-  final Widget requiredIndicator;
+  final Widget? requiredIndicator;
 
   /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
   /// The label style
-  final TextStyle style;
+  final TextStyle? style;
 
   /// Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   /// provides padding to wrap the entire field
   @override
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   @override
   _CardSettingsDatePickerState createState() => _CardSettingsDatePickerState();
@@ -111,11 +111,11 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   CardSettingsDatePicker get widget => super.widget as CardSettingsDatePicker;
 
   void _showDialog() {
-    DateTime _startDate = widget?.firstDate ?? DateTime.now();
+    DateTime _startDate = widget.firstDate ?? DateTime.now();
     if ((value ?? DateTime.now()).isBefore(_startDate)) {
-      _startDate = value;
+      _startDate = value!;
     }
-    final _endDate = widget?.lastDate ?? _startDate.add(Duration(days: 1800));
+    final _endDate = widget.lastDate ?? _startDate.add(Duration(days: 1800));
 
     if (showCupertino(context, widget.showMaterialonIOS))
       showCupertinoDatePicker(_startDate, _endDate);
@@ -137,7 +137,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
             initialDateTime: value ?? DateTime.now(),
             onDateTimeChanged: (DateTime newDateTime) {
               didChange(newDateTime);
-              if (widget.onChanged != null) widget.onChanged(newDateTime);
+              if (widget.onChanged != null) widget.onChanged!(newDateTime);
             },
           ),
         );
@@ -145,7 +145,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     ).then((_value) {
       if (_value != null) {
         didChange(_value);
-        if (widget.onChanged != null) widget.onChanged(_value);
+        if (widget.onChanged != null) widget.onChanged!(_value);
       }
     });
   }
@@ -159,7 +159,7 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     ).then((_value) {
       if (_value != null) {
         didChange(_value);
-        if (widget.onChanged != null) widget.onChanged(_value);
+        if (widget.onChanged != null) widget.onChanged!(_value);
       }
     });
   }
@@ -168,8 +168,8 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
     String formattedValue = (value == null)
         ? ''
         : (widget.dateFormat == null)
-            ? DateFormat.yMd().format(value)
-            : widget.dateFormat.format(value);
+            ? DateFormat.yMd().format(value!)
+            : widget.dateFormat!.format(value!);
 
     if (showCupertino(context, widget.showMaterialonIOS))
       return _cupertinoSettingsDatePicker(formattedValue);
@@ -200,9 +200,9 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
   }
 
   Widget _cupertinoSettingsDatePicker(String formattedValue) {
-    final ls = labelStyle(context, widget?.enabled ?? true);
+    final ls = labelStyle(context, widget.enabled);
     return Container(
-      child: widget?.visible == false
+      child: widget.visible == false
           ? null
           : GestureDetector(
               onTap: () {
@@ -210,26 +210,26 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
               },
               child: CSControl(
                 nameWidget: Container(
-                  width: widget?.labelWidth ??
-                      CardSettings.of(context).labelWidth ??
+                  width: widget.labelWidth ??
+                      CardSettings.of(context)?.labelWidth ??
                       120.0,
-                  child: widget?.requiredIndicator != null
+                  child: widget.requiredIndicator != null
                       ? Text(
-                          (widget?.label ?? "") + ' *',
+                          (widget.label) + ' *',
                           style: ls,
                         )
                       : Text(
-                          widget?.label,
+                          widget.label,
                           style: ls,
                         ),
                 ),
                 contentWidget: Text(
                   formattedValue,
                   style: contentStyle(context, value, widget.enabled),
-                  textAlign: widget?.contentAlign ??
-                      CardSettings.of(context).contentAlign,
+                  textAlign: widget.contentAlign ??
+                      CardSettings.of(context)?.contentAlign,
                 ),
-                style: CSWidgetStyle(icon: widget?.icon),
+                style: CSWidgetStyle(icon: widget.icon),
               ),
             ),
     );
@@ -241,20 +241,20 @@ class _CardSettingsDatePickerState extends FormFieldState<DateTime> {
         if (widget.enabled) _showDialog();
       },
       child: CardSettingsField(
-        label: widget?.label ?? "Date",
-        labelAlign: widget?.labelAlign,
-        labelWidth: widget?.labelWidth,
-        enabled: widget?.enabled,
-        visible: widget?.visible ?? true,
-        icon: widget?.icon ?? Icon(Icons.event),
-        requiredIndicator: widget?.requiredIndicator,
+        label: widget.label,
+        labelAlign: widget.labelAlign,
+        labelWidth: widget.labelWidth,
+        enabled: widget.enabled,
+        visible: widget.visible,
+        icon: widget.icon ?? Icon(Icons.event),
+        requiredIndicator: widget.requiredIndicator,
         errorText: errorText,
         fieldPadding: widget.fieldPadding,
         content: Text(
           formattedValue,
           style: contentStyle(context, value, widget.enabled),
           textAlign:
-              widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+              widget.contentAlign ?? CardSettings.of(context)?.contentAlign,
         ),
         pickerIcon: (widget.enabled) ? Icons.arrow_drop_down : null,
       ),

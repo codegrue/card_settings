@@ -18,16 +18,16 @@ import '../../interfaces/common_field_properties.dart';
 class CardSettingsFilePicker extends FormField<Uint8List>
     implements ICommonFieldProperties {
   CardSettingsFilePicker({
-    Key key,
+    Key? key,
     // bool autovalidate: false,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
-    FormFieldSetter<Uint8List> onSaved,
-    FormFieldValidator<Uint8List> validator,
-    Uint8List initialValue,
+    FormFieldSetter<Uint8List>? onSaved,
+    FormFieldValidator<Uint8List>? validator,
+    Uint8List? initialValue,
     this.visible = true,
-    this.label = 'Label',
+    this.label = 'File',
     this.enabled = true,
-    String unattachDialogTitle,
+    String? unattachDialogTitle,
     this.unattachDialogCancel = 'Cancel',
     this.unattachDialogConfirm = 'Unattach',
     this.onChanged,
@@ -56,7 +56,7 @@ class CardSettingsFilePicker extends FormField<Uint8List>
 
   /// fires when the picker data is changed
   @override
-  final ValueChanged<Uint8List> onChanged;
+  final ValueChanged<Uint8List?>? onChanged;
 
   /// The text to identify the field to the user
   @override
@@ -73,19 +73,19 @@ class CardSettingsFilePicker extends FormField<Uint8List>
 
   /// The alignment of the label paret of the field. Default is left.
   @override
-  final TextAlign labelAlign;
+  final TextAlign? labelAlign;
 
   /// The width of the field label. If provided overrides the global setting.
   @override
-  final double labelWidth;
+  final double? labelWidth;
 
   /// controls how the widget in the content area of the field is aligned
   @override
-  final TextAlign contentAlign;
+  final TextAlign? contentAlign;
 
   /// The icon to display to the left of the field content
   @override
-  final Icon icon;
+  final Icon? icon;
 
   /// a restriction on the width growth of the thumbnail
   final double maxThumbnailWidth;
@@ -99,28 +99,28 @@ class CardSettingsFilePicker extends FormField<Uint8List>
 
   /// A widget to show next to the label if the field is required
   @override
-  final Widget requiredIndicator;
+  final Widget? requiredIndicator;
 
   /// If false hides the widget on the card setting panel
   @override
   final bool visible;
 
   /// the style of the label text
-  final TextStyle style;
+  final TextStyle? style;
 
   /// Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   /// the type of the files allowed
-  final FileType fileType;
+  final FileType? fileType;
 
   /// a list of allowed file extensions
-  final List<String> allowedExtensions;
+  final List<String>? allowedExtensions;
 
   /// provides padding to wrap the entire field
   @override
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   @override
   _CardSettingsFilePickerState createState() => _CardSettingsFilePickerState();
@@ -142,7 +142,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
   Widget _build(BuildContext context) {
     String formattedValue = (value == null)
         ? ''
-        : CardSettingsFilePicker.formatBytes(value.length, 2);
+        : CardSettingsFilePicker.formatBytes(value!.length, 2);
 
     if (showCupertino(context, widget.showMaterialonIOS))
       return _buildCupertinoFilePicker(formattedValue);
@@ -153,11 +153,11 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
   void onTap() {
     if (value == null) {
       showMaterialFilePicker(
-        fileType: widget.fileType,
+        fileType: widget.fileType ?? FileType.any,
         allowedExtensions: widget.allowedExtensions,
         onChanged: (file) => setState(() {
           didChange(file.bytes);
-          if (widget.onChanged != null) widget.onChanged(file.bytes);
+          if (widget.onChanged != null) widget.onChanged!(file.bytes);
         }),
       );
     } else {
@@ -177,23 +177,21 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
           return AlertDialog(
             title: Text(
               widget.unattachDialogTitle,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6
-                  .copyWith(color: Theme.of(context).textTheme.headline1.color),
+              style: Theme.of(context).textTheme.headline6?.copyWith(
+                  color: Theme.of(context).textTheme.headline1?.color),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text(
                   widget.unattachDialogCancel,
                 ),
                 onPressed: () => Navigator.of(context).pop(),
               ),
-              FlatButton(
+              TextButton(
                 child: Text(widget.unattachDialogConfirm),
                 onPressed: () {
                   didChange(null);
-                  if (widget.onChanged != null) widget.onChanged(null);
+                  if (widget.onChanged != null) widget.onChanged!(null);
                   Navigator.of(context).pop();
                 },
               ),
@@ -216,7 +214,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
                 child: Text(widget.unattachDialogConfirm),
                 onPressed: () {
                   didChange(null);
-                  if (widget.onChanged != null) widget.onChanged(null);
+                  if (widget.onChanged != null) widget.onChanged!(null);
                   Navigator.of(context).pop();
                 },
               ),
@@ -228,9 +226,9 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
   }
 
   Widget _buildCupertinoFilePicker(String formattedValue) {
-    final ls = labelStyle(context, widget?.enabled ?? true);
+    final ls = labelStyle(context, widget.enabled);
     return Container(
-      child: widget?.visible == false
+      child: widget.visible == false
           ? null
           : GestureDetector(
               onTap: () {
@@ -238,18 +236,18 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
               },
               child: CSControl(
                 nameWidget: Container(
-                  width: widget?.labelWidth ??
-                      CardSettings.of(context).labelWidth ??
+                  width: widget.labelWidth ??
+                      CardSettings.of(context)!.labelWidth ??
                       120.0,
-                  child: widget?.requiredIndicator != null
+                  child: widget.requiredIndicator != null
                       ? Text(
-                          (widget?.label ?? "") + ' *',
+                          (widget.label) + ' *',
                           style: ls,
                         )
-                      : Text(widget?.label, style: ls),
+                      : Text(widget.label, style: ls),
                 ),
                 contentWidget: _buildFieldContent(formattedValue),
-                style: CSWidgetStyle(icon: widget?.icon),
+                style: CSWidgetStyle(icon: widget.icon),
               ),
             ),
     );
@@ -261,13 +259,13 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
         if (widget.enabled) onTap();
       },
       child: CardSettingsField(
-        label: widget?.label ?? "File",
-        enabled: widget?.enabled,
-        labelAlign: widget?.labelAlign,
-        labelWidth: widget?.labelWidth,
-        visible: widget?.visible ?? true,
-        icon: widget?.icon ?? Icon(Icons.attach_file),
-        requiredIndicator: widget?.requiredIndicator,
+        label: widget.label,
+        enabled: widget.enabled,
+        labelAlign: widget.labelAlign,
+        labelWidth: widget.labelWidth,
+        visible: widget.visible,
+        icon: widget.icon ?? Icon(Icons.attach_file),
+        requiredIndicator: widget.requiredIndicator,
         errorText: errorText,
         fieldPadding: widget.fieldPadding,
         content: _buildFieldContent(formattedValue),
@@ -282,7 +280,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
 
   Widget _buildFieldContent(String formattedValue) {
     var contentAlign =
-        widget?.contentAlign ?? CardSettings.of(context).contentAlign;
+        widget.contentAlign ?? CardSettings.of(context)?.contentAlign;
 
     var paddingAmt =
         showCupertino(context, widget.showMaterialonIOS) ? 10.0 : 0.0;
@@ -299,7 +297,7 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
             alignment: (contentAlign == TextAlign.right)
                 ? Alignment.topRight
                 : Alignment.topLeft,
-            child: Image.memory(value),
+            child: Image.memory(value!),
           ));
     } else {
       return Text(

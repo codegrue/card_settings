@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('CardSettingsHeader', () {
-    Widget widgetTree;
+    Widget widgetTree = Container();
     var label = "ArbitraryTitle";
 
     setUpAll(() async {

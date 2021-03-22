@@ -14,7 +14,7 @@ class CardSettingsButton extends StatelessWidget
     implements IMinimumFieldSettings {
   CardSettingsButton({
     this.label: 'Label',
-    @required this.onPressed,
+    required this.onPressed,
     this.visible: true,
     this.backgroundColor,
     this.textColor,
@@ -31,10 +31,10 @@ class CardSettingsButton extends StatelessWidget
   final bool isDestructive;
 
   /// The background color for normal buttons
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// The text color for normal buttons
-  final Color textColor;
+  final Color? textColor;
 
   /// allows adding extra padding at the bottom
   final double bottomSpacing;
@@ -44,7 +44,7 @@ class CardSettingsButton extends StatelessWidget
 
   /// Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   /// If false hides the widget on the card setting panel
   @override
@@ -56,7 +56,7 @@ class CardSettingsButton extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     TextStyle buttonStyle =
-        Theme.of(context).textTheme.button.copyWith(color: textColor);
+        Theme.of(context).textTheme.button!.copyWith(color: textColor);
 
     if (visible) {
       if (showCupertino(context, showMaterialonIOS))

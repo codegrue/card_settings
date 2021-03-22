@@ -13,7 +13,7 @@ import '../../interfaces/common_field_properties.dart';
 class CardSettingsCurrency extends StatefulWidget
     implements ICommonFieldProperties {
   CardSettingsCurrency({
-    Key key,
+    Key? key,
     this.label: 'Label',
     this.labelAlign,
     this.labelWidth,
@@ -40,7 +40,7 @@ class CardSettingsCurrency extends StatefulWidget
     this.inputActionNode,
     this.keyboardType,
     this.style,
-    this.maxLengthEnforced: true,
+    this.maxLengthEnforcement: MaxLengthEnforcement.enforced,
     this.onFieldSubmitted,
     this.inputFormatters,
     this.showMaterialonIOS,
@@ -54,26 +54,26 @@ class CardSettingsCurrency extends StatefulWidget
 
   /// The alignment of the label paret of the field. Default is left.
   @override
-  final TextAlign labelAlign;
+  final TextAlign? labelAlign;
 
   /// The width of the field label. If provided overrides the global setting.
   @override
-  final double labelWidth;
+  final double? labelWidth;
 
   /// controls how the widget in the content area of the field is aligned
   @override
-  final TextAlign contentAlign;
+  final TextAlign? contentAlign;
 
   /// The initial value to display
   final double initialValue;
 
   /// The icon to display to the left of the field content
   @override
-  final Icon icon;
+  final Icon? icon;
 
   /// A widget to show next to the label if the field is required
   @override
-  final Widget requiredIndicator;
+  final Widget? requiredIndicator;
 
   /// The symbol to use for the currency
   final String currencySymbol;
@@ -105,41 +105,41 @@ class CardSettingsCurrency extends StatefulWidget
   final AutovalidateMode autovalidateMode;
 
   @override
-  final FormFieldValidator<double> validator;
+  final FormFieldValidator<double>? validator;
 
   @override
-  final FormFieldSetter<double> onSaved;
+  final FormFieldSetter<double>? onSaved;
 
   @override
-  final ValueChanged<double> onChanged;
+  final ValueChanged<double?>? onChanged;
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
 
-  final TextInputAction inputAction;
+  final TextInputAction? inputAction;
 
-  final FocusNode inputActionNode;
+  final FocusNode? inputActionNode;
 
-  final TextInputType keyboardType;
+  final TextInputType? keyboardType;
 
-  final TextStyle style;
+  final TextStyle? style;
 
-  final bool maxLengthEnforced;
+  final MaxLengthEnforcement? maxLengthEnforcement;
 
-  final ValueChanged<String> onFieldSubmitted;
+  final ValueChanged<String>? onFieldSubmitted;
 
-  final List<TextInputFormatter> inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
 
-  final Locale locale;
+  final Locale? locale;
 
   // Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   // provides padding to wrap the entire field
   @override
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   @override
   _CardSettingsCurrencyState createState() {
@@ -148,7 +148,7 @@ class CardSettingsCurrency extends StatefulWidget
 }
 
 class _CardSettingsCurrencyState extends State<CardSettingsCurrency> {
-  MoneyMaskedTextController _moneyController;
+  MoneyMaskedTextController? _moneyController;
 
   @override
   void initState() {
@@ -157,7 +157,7 @@ class _CardSettingsCurrencyState extends State<CardSettingsCurrency> {
       _moneyController = MoneyMaskedTextController(
           decimalSeparator: widget.decimalSeparator,
           thousandSeparator: widget.thousandSeparator);
-      _moneyController.updateValue(widget.initialValue);
+      _moneyController!.updateValue(widget.initialValue);
     }
   }
 
@@ -170,11 +170,11 @@ class _CardSettingsCurrencyState extends State<CardSettingsCurrency> {
     var formatter = NumberFormat(pattern, myLocale.languageCode);
 
     return CardSettingsText(
-      showMaterialonIOS: widget?.showMaterialonIOS,
+      showMaterialonIOS: widget.showMaterialonIOS,
       fieldPadding: widget.fieldPadding,
       label: widget.label,
       labelAlign: widget.labelAlign,
-      labelWidth: widget?.labelWidth,
+      labelWidth: widget.labelWidth,
       contentAlign: widget.contentAlign,
       initialValue: widget.initialValue.toString(),
       unitLabel: widget.currencyName,
@@ -197,32 +197,32 @@ class _CardSettingsCurrencyState extends State<CardSettingsCurrency> {
       keyboardType: widget.keyboardType ??
           TextInputType.numberWithOptions(decimal: false),
       style: widget.style,
-      maxLengthEnforced: widget.maxLengthEnforced,
+      maxLengthEnforcement: widget.maxLengthEnforcement,
       onFieldSubmitted: widget.onFieldSubmitted,
       inputFormatters: widget.inputFormatters,
     );
   }
 
-  String _safeValidator(String value, NumberFormat formatter) {
+  String? _safeValidator(String? value, NumberFormat formatter) {
     if (widget.validator == null) return null;
-    var number = formatter.parse(value);
-    return widget.validator(intelligentCast<double>(number));
+    var number = formatter.parse(value!);
+    return widget.validator!(intelligentCast<double>(number));
   }
 
-  void _safeOnSaved(String value, NumberFormat formatter) {
+  void _safeOnSaved(String? value, NumberFormat formatter) {
     if (widget.onSaved == null) return;
-    var number = formatter.parse(value);
-    widget.onSaved(intelligentCast<double>(number));
+    var number = formatter.parse(value!);
+    widget.onSaved!(intelligentCast<double>(number));
   }
 
-  void _safeOnChanged(String value, NumberFormat formatter) {
+  void _safeOnChanged(String? value, NumberFormat formatter) {
     if (widget.onChanged == null) return;
 
     if (_moneyController != null) {
-      widget.onChanged(_moneyController.numberValue);
+      widget.onChanged!(_moneyController!.numberValue);
     } else {
-      var number = formatter.parse(value);
-      widget.onChanged(intelligentCast<double>(number));
+      var number = formatter.parse(value!);
+      widget.onChanged!(intelligentCast<double>(number));
     }
   }
 }

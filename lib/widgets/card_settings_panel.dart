@@ -14,7 +14,7 @@ import 'information_fields/card_settings_instructions.dart';
 /// This is the card wrapper that all the field controls are placed into
 class CardSettings extends InheritedWidget {
   CardSettings({
-    Key key,
+    Key? key,
     this.labelAlign,
     this.labelWidth,
     this.labelPadding,
@@ -23,7 +23,7 @@ class CardSettings extends InheritedWidget {
     this.padding: const EdgeInsets.all(0.0),
     this.margin: const EdgeInsets.all(8.0),
     this.cardElevation,
-    List<CardSettingsSection> children,
+    List<CardSettingsSection> children: const <CardSettingsSection>[],
     this.showMaterialonIOS: false,
     this.shrinkWrap = false,
     this.cardless = false,
@@ -47,7 +47,7 @@ class CardSettings extends InheritedWidget {
 
   /// constructor that wraps each section in it's own card
   CardSettings.sectioned({
-    Key key,
+    Key? key,
     this.labelAlign,
     this.labelWidth,
     this.labelPadding,
@@ -56,7 +56,7 @@ class CardSettings extends InheritedWidget {
     this.padding: const EdgeInsets.all(0.0),
     this.margin: const EdgeInsets.fromLTRB(8, 8, 8, 0.0),
     this.cardElevation,
-    List<CardSettingsSection> children,
+    List<CardSettingsSection> children: const <CardSettingsSection>[],
     this.showMaterialonIOS: false,
     this.shrinkWrap = true,
     this.cardless = false,
@@ -78,22 +78,22 @@ class CardSettings extends InheritedWidget {
           ),
         );
 
-  final TextAlign labelAlign;
-  final double labelWidth;
-  final double labelPadding;
-  final String labelSuffix;
+  final TextAlign? labelAlign;
+  final double? labelWidth;
+  final double? labelPadding;
+  final String? labelSuffix;
   final TextAlign contentAlign;
   final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry margin;
-  final double cardElevation;
+  final double? cardElevation;
   final bool shrinkWrap;
   final bool showMaterialonIOS;
   final bool cardless;
-  final Divider divider;
+  final Divider? divider;
   final bool scrollable;
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
-  static CardSettings of(BuildContext context) {
+  static CardSettings? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<CardSettings>();
   }
 
@@ -113,24 +113,24 @@ class CardSettings extends InheritedWidget {
 /// area of a card settings form
 class _CardSettingsContent extends StatelessWidget {
   const _CardSettingsContent({
-    Key key,
-    @required this.children,
+    Key? key,
+    this.children: const <CardSettingsSection>[],
     @required this.showMaterialonIOS,
     @required this.cardElevation,
     @required this.padding,
     @required this.margin,
     @required this.shrinkWrap,
-    @required this.sectioned,
-    @required this.cardless,
-    @required this.scrollable,
+    this.sectioned: true,
+    this.cardless: false,
+    this.scrollable: true,
   }) : super(key: key);
 
   final List<CardSettingsSection> children;
-  final bool showMaterialonIOS;
-  final double cardElevation;
-  final EdgeInsetsGeometry padding;
-  final EdgeInsetsGeometry margin;
-  final bool shrinkWrap;
+  final bool? showMaterialonIOS;
+  final double? cardElevation;
+  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
+  final bool? shrinkWrap;
   final bool sectioned;
   final bool cardless;
   final bool scrollable;
@@ -179,7 +179,7 @@ class _CardSettingsContent extends StatelessWidget {
     return _children;
   }
 
-  Widget _buildMaterialCardWrapper(BuildContext context, {Widget content}) {
+  Widget _buildMaterialCardWrapper(BuildContext context, {Widget? content}) {
     return (cardless)
         ? Container(
             margin: margin,
@@ -192,7 +192,7 @@ class _CardSettingsContent extends StatelessWidget {
                 Theme.of(context).cardTheme.clipBehavior ?? Clip.antiAlias,
             elevation: cardElevation,
             child: Padding(
-              padding: padding,
+              padding: padding ?? EdgeInsets.all(0),
               child: content,
             ),
           );
@@ -205,20 +205,20 @@ class CardSettingsSection extends StatelessWidget {
     this.instructions,
     this.children,
     this.header,
-    this.showMaterialonIOS,
+    this.showMaterialonIOS: false,
     this.divider,
   });
 
-  final CardSettingsHeader header;
-  final CardSettingsInstructions instructions;
-  final List<CardSettingsWidget> children;
+  final CardSettingsHeader? header;
+  final CardSettingsInstructions? instructions;
+  final List<CardSettingsWidget>? children;
   final bool showMaterialonIOS;
-  final Divider divider;
+  final Divider? divider;
 
   @override
   Widget build(BuildContext context) {
     var _divider = divider ??
-        CardSettings.of(context).divider ??
+        CardSettings.of(context)?.divider ??
         Divider(
           thickness: 1.0,
           color: Theme.of(context).dividerColor,
@@ -226,15 +226,15 @@ class CardSettingsSection extends StatelessWidget {
 
     List<Widget> _children = <Widget>[];
     if (showCupertino(context, showMaterialonIOS)) {
-      if (header != null) _children.add(header);
-      if (children != null) _children.addAll(children);
-      if (instructions != null) _children.add(instructions);
+      if (header != null) _children.add(header!);
+      if (children != null) _children.addAll(children!);
+      if (instructions != null) _children.add(instructions!);
     } else {
-      if (header != null) _children.add(header);
-      if (instructions != null) _children.add(instructions);
+      if (header != null) _children.add(header!);
+      if (instructions != null) _children.add(instructions!);
 
       if (children != null) {
-        var visibleChildren = children.where((c) => c.visible);
+        var visibleChildren = children!.where((c) => c.visible ?? true);
         for (var child in visibleChildren) {
           _children.add(child);
 

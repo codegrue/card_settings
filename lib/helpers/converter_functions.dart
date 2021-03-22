@@ -6,7 +6,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 /// This attempts to intelligently cast any value to the desired type.
-T intelligentCast<T>(dynamic value) {
+T? intelligentCast<T>(dynamic value) {
   // instead of empty string we want to return null
   if (value.toString().isEmpty) return null;
 
@@ -28,7 +28,7 @@ T intelligentCast<T>(dynamic value) {
 }
 
 /// This will parse various conceptual representaitons of yes/no into a boolean
-bool boolParse(String value) {
+bool boolParse(String? value) {
   if (value == null) return false;
 
   if (value.toLowerCase() == 'true') return true;

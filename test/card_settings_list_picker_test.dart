@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('CardSettingsListPicker', () {
-    Widget widgetTree;
+    Widget widgetTree = Container();
     var label = "PickOne";
     var initialValue = "A";
     var option1 = "Aaa";

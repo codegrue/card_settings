@@ -15,10 +15,10 @@ import '../../interfaces/common_field_properties.dart';
 class CardSettingsListPicker extends FormField<String>
     implements ICommonFieldProperties {
   CardSettingsListPicker({
-    Key key,
-    String initialValue,
-    FormFieldSetter<String> onSaved,
-    FormFieldValidator<String> validator,
+    Key? key,
+    String? initialValue,
+    FormFieldSetter<String?>? onSaved,
+    FormFieldValidator<String?>? validator,
     // bool autovalidate: false,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
@@ -31,7 +31,7 @@ class CardSettingsListPicker extends FormField<String>
     this.icon,
     this.contentAlign,
     this.hintText,
-    this.options,
+    required this.options,
     this.values,
     this.showMaterialonIOS,
     this.fieldPadding,
@@ -49,7 +49,7 @@ class CardSettingsListPicker extends FormField<String>
 
   /// fires when the picker value is changed
   @override
-  final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onChanged;
 
   /// The text to identify the field to the user
   @override
@@ -61,32 +61,32 @@ class CardSettingsListPicker extends FormField<String>
 
   /// The alignment of the label paret of the field. Default is left.
   @override
-  final TextAlign labelAlign;
+  final TextAlign? labelAlign;
 
   /// The width of the field label. If provided overrides the global setting.
   @override
-  final double labelWidth;
+  final double? labelWidth;
 
   /// controls how the widget in the content area of the field is aligned
   @override
-  final TextAlign contentAlign;
+  final TextAlign? contentAlign;
 
   /// text to display to guide the user on what to enter
-  final String hintText;
+  final String? hintText;
 
   /// The icon to display to the left of the field content
   @override
-  final Icon icon;
+  final Icon? icon;
 
   /// A widget to show next to the label if the field is required
   @override
-  final Widget requiredIndicator;
+  final Widget? requiredIndicator;
 
   /// a list of options for the picker
   final List<String> options;
 
   /// a list of values for each option. If null, options are values.
-  final List<String> values;
+  final List<String>? values;
 
   /// If false hides the widget on the card setting panel
   @override
@@ -94,11 +94,11 @@ class CardSettingsListPicker extends FormField<String>
 
   /// Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   /// provides padding to wrap the entire field
   @override
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   @override
   _CardSettingsListPickerState createState() => _CardSettingsListPickerState();
@@ -108,12 +108,12 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   @override
   CardSettingsListPicker get widget => super.widget as CardSettingsListPicker;
 
-  List<String> values;
-  List<String> options;
+  List<String> values = List<String>.empty();
+  List<String> options = List<String>.empty();
 
   void _showDialog(String label) {
-    int optionIndex = values.indexOf(value);
-    String option;
+    int optionIndex = values.indexOf(value!);
+    String option = '';
     if (optionIndex >= 0) {
       option = options[optionIndex];
     } else {
@@ -138,7 +138,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
             backgroundColor: CupertinoColors.white,
             onSelectedItemChanged: (int index) {
               didChange(values[index]);
-              widget.onChanged(values[index]);
+              widget.onChanged!(values[index]);
             },
             children: List<Widget>.generate(options.length, (int index) {
               return Center(
@@ -150,9 +150,9 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
       },
     ).then((option) {
       if (option != null) {
-        String value = values[options.indexOf(option) ?? 0];
+        String value = values[options.indexOf(option)];
         didChange(value);
-        if (widget.onChanged != null) widget.onChanged(value);
+        if (widget.onChanged != null) widget.onChanged!(value);
       }
     });
   }
@@ -164,12 +164,10 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
       items: options,
       selectedItem: option,
       onChanged: (option) {
-        if (option != null) {
-          int optionIndex = options.indexOf(option);
-          String value = values[optionIndex];
-          didChange(value);
-          if (widget.onChanged != null) widget.onChanged(value);
-        }
+        int optionIndex = options.indexOf(option);
+        String value = values[optionIndex];
+        didChange(value);
+        if (widget.onChanged != null) widget.onChanged!(value);
       },
     );
   }
@@ -199,16 +197,13 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   Widget _build(BuildContext context) {
     // make local mutable copies of values and options
     options = widget.options;
-    if (widget.values == null) {
-      // if values are not provided, copy the options over and use those
-      values = widget.options;
-    } else {
-      values = widget.values;
-    }
+
+    // if values are not provided, copy the options over and use those
+    values = widget.values ?? widget.options;
 
     // get the content label from options based on value
-    int optionIndex = values.indexOf(value);
-    String content = widget?.hintText ?? '';
+    int optionIndex = values.indexOf(value!);
+    String content = widget.hintText ?? '';
     if (optionIndex >= 0) {
       content = options[optionIndex];
     }
@@ -220,36 +215,36 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   }
 
   Widget _cupertinoSettingsListPicker(String content) {
-    final ls = labelStyle(context, widget?.enabled ?? true);
+    final ls = labelStyle(context, widget.enabled);
     return Container(
-      child: widget?.visible == false
+      child: widget.visible == false
           ? null
           : GestureDetector(
               onTap: () {
-                if (widget.enabled) _showDialog(widget?.label);
+                if (widget.enabled) _showDialog(widget.label);
               },
               child: CSControl(
                 nameWidget: Container(
-                  width: widget?.labelWidth ??
-                      CardSettings.of(context).labelWidth ??
+                  width: widget.labelWidth ??
+                      CardSettings.of(context)?.labelWidth ??
                       120.0,
-                  child: widget?.requiredIndicator != null
+                  child: widget.requiredIndicator != null
                       ? Text(
-                          (widget?.label ?? "") + ' *',
+                          (widget.label) + ' *',
                           style: ls,
                         )
                       : Text(
-                          widget?.label,
+                          widget.label,
                           style: ls,
                         ),
                 ),
                 contentWidget: Text(
                   content,
                   style: contentStyle(context, value, widget.enabled),
-                  textAlign: widget?.contentAlign ??
-                      CardSettings.of(context).contentAlign,
+                  textAlign: widget.contentAlign ??
+                      CardSettings.of(context)?.contentAlign,
                 ),
-                style: CSWidgetStyle(icon: widget?.icon),
+                style: CSWidgetStyle(icon: widget.icon),
               ),
             ),
     );
@@ -258,23 +253,23 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   Widget _materialSettingsListPicker(String content) {
     return GestureDetector(
       onTap: () {
-        if (widget.enabled) _showDialog(widget?.label);
+        if (widget.enabled) _showDialog(widget.label);
       },
       child: CardSettingsField(
-        label: widget?.label,
-        enabled: widget?.enabled,
-        labelAlign: widget?.labelAlign,
-        labelWidth: widget?.labelWidth,
-        visible: widget?.visible,
-        icon: widget?.icon,
-        requiredIndicator: widget?.requiredIndicator,
+        label: widget.label,
+        enabled: widget.enabled,
+        labelAlign: widget.labelAlign,
+        labelWidth: widget.labelWidth,
+        visible: widget.visible,
+        icon: widget.icon,
+        requiredIndicator: widget.requiredIndicator,
         errorText: errorText,
         fieldPadding: widget.fieldPadding,
         content: Text(
           content,
           style: contentStyle(context, value, widget.enabled),
           textAlign:
-              widget?.contentAlign ?? CardSettings.of(context).contentAlign,
+              widget.contentAlign ?? CardSettings.of(context)?.contentAlign,
         ),
         pickerIcon: (widget.enabled) ? Icons.arrow_drop_down : null,
       ),

@@ -10,14 +10,14 @@ class CardFieldLayout extends StatelessWidget implements CardSettingsWidget {
     this.children, {
     this.flexValues,
     this.visible: true,
-    this.showMaterialonIOS,
+    this.showMaterialonIOS: false,
   });
 
   /// the field widgets to place into the layout
   final List<CardSettingsWidget> children;
 
   /// the values that control the relative widths of the layed out widgets
-  final List<int> flexValues;
+  final List<int>? flexValues;
 
   /// Force the widget to use Material style on an iOS device
   @override
@@ -29,7 +29,7 @@ class CardFieldLayout extends StatelessWidget implements CardSettingsWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!visible) return null;
+    if (!visible) return Container();
 
     int iterator = 0;
 
@@ -37,7 +37,7 @@ class CardFieldLayout extends StatelessWidget implements CardSettingsWidget {
       children: children
           .map((c) => Flexible(
                 child: c,
-                flex: (flexValues == null) ? 1 : (flexValues[iterator++] ?? 1),
+                flex: (flexValues == null) ? 1 : (flexValues?[iterator++] ?? 1),
               ))
           .toList(),
     );

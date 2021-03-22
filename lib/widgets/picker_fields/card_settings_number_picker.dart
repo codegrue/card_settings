@@ -10,7 +10,7 @@ import '../../interfaces/common_field_properties.dart';
 class CardSettingsNumberPicker extends StatelessWidget
     implements ICommonFieldProperties {
   CardSettingsNumberPicker({
-    Key key,
+    Key? key,
     this.label: 'Label',
     this.labelAlign,
     this.labelWidth,
@@ -18,8 +18,8 @@ class CardSettingsNumberPicker extends StatelessWidget
     this.contentAlign,
     this.icon,
     this.requiredIndicator,
-    @required this.min,
-    @required this.max,
+    required this.min,
+    required this.max,
     this.stepInterval: 1,
     this.autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled: true,
@@ -37,22 +37,22 @@ class CardSettingsNumberPicker extends StatelessWidget
 
   /// The alignment of the label paret of the field. Default is left.
   @override
-  final TextAlign labelAlign;
+  final TextAlign? labelAlign;
 
   /// controls how the widget in the content area of the field is aligned
   @override
-  final TextAlign contentAlign;
+  final TextAlign? contentAlign;
 
   /// The icon to display to the left of the field content
   @override
-  final Icon icon;
+  final Icon? icon;
 
   /// A widget to show next to the label if the field is required
   @override
-  final Widget requiredIndicator;
+  final Widget? requiredIndicator;
 
   /// the initial value fo the picker to be placed on
-  final int initialValue;
+  final int? initialValue;
 
   /// the lowest value that will be shown
   final int min;
@@ -73,30 +73,30 @@ class CardSettingsNumberPicker extends StatelessWidget
 
   /// Force the widget to use Material style on an iOS device
   @override
-  final bool showMaterialonIOS;
+  final bool? showMaterialonIOS;
 
   /// If false, grays out the field and makes it unresponsive
   final bool enabled;
 
   /// The width of the field label. If provided overrides the global setting.
   @override
-  final double labelWidth;
+  final double? labelWidth;
 
   /// provides padding to wrap the entire field
   @override
-  final EdgeInsetsGeometry fieldPadding;
+  final EdgeInsetsGeometry? fieldPadding;
 
   /// fires when validation is requested
   @override
-  final FormFieldValidator<int> validator;
+  final FormFieldValidator<int>? validator;
 
   /// vires when the enclosing for is saved
   @override
-  final FormFieldSetter<int> onSaved;
+  final FormFieldSetter<int>? onSaved;
 
   /// firest when the content is changed
   @override
-  final ValueChanged<int> onChanged;
+  final ValueChanged<int?>? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -124,18 +124,18 @@ class CardSettingsNumberPicker extends StatelessWidget
     );
   }
 
-  String _safeValidator(String value) {
+  String? _safeValidator(String? value) {
     if (validator == null) return null;
-    return validator(intelligentCast<int>(value));
+    return validator!(intelligentCast<int>(value));
   }
 
-  void _safeOnSaved(String value) {
+  void _safeOnSaved(String? value) {
     if (onSaved == null) return;
-    onSaved(intelligentCast<int>(value));
+    onSaved!(intelligentCast<int>(value));
   }
 
   void _safeOnChanged(String value) {
     if (onChanged == null) return;
-    onChanged(intelligentCast<int>(value));
+    onChanged!(intelligentCast<int>(value));
   }
 }

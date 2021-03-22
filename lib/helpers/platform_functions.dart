@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 /// version or the material version, since this can be determined by
 /// several settings throughout the package
 bool showCupertino(
-  BuildContext context,
-  bool showMaterialonIOS, {
+  BuildContext? context,
+  bool? showMaterialonIOS, {
   bool mockIOS = false,
 }) {
   // don't show on web
@@ -18,15 +18,13 @@ bool showCupertino(
   if (mockIOS || Platform.isIOS) {
     // if showMaterialonIOS not specified calculate it
     if (showMaterialonIOS == null) {
-      // default to cupertino
-      showMaterialonIOS = false;
-
       if (context != null)
         // set showMaterialOnIOS to parent CardSettings value
-        showMaterialonIOS = CardSettings.of(context).showMaterialonIOS;
+        showMaterialonIOS =
+            CardSettings.of(context)?.showMaterialonIOS ?? showMaterialonIOS;
     }
 
-    return !showMaterialonIOS;
+    return showMaterialonIOS!;
   }
 
   // material by default
@@ -34,21 +32,19 @@ bool showCupertino(
 }
 
 /// This centralizes the style calculations for field labels, used by almost all widgets in this package
-TextStyle labelStyle(BuildContext context, bool enabled) {
+TextStyle? labelStyle(BuildContext context, bool enabled) {
   var theme = Theme.of(context);
   var style = theme.textTheme.subtitle1;
-  if (!enabled)
-    style = style.copyWith(color: theme.disabledColor ?? Colors.grey);
+  if (!enabled) style = style?.copyWith(color: theme.disabledColor);
   return style;
 }
 
 /// This centralizes the style calculations for content, used by almost all widgets in this package
-TextStyle contentStyle(BuildContext context, dynamic value, bool enabled) {
+TextStyle? contentStyle(BuildContext context, dynamic value, bool enabled) {
   var theme = Theme.of(context);
-  var style = theme.textTheme.subtitle1.copyWith(
+  var style = theme.textTheme.subtitle1?.copyWith(
       color:
-          (value == null) ? theme.hintColor : theme.textTheme.subtitle1.color);
-  if (!enabled)
-    style = style.copyWith(color: theme.disabledColor ?? Colors.grey);
+          (value == null) ? theme.hintColor : theme.textTheme.subtitle1?.color);
+  if (!enabled) style = style?.copyWith(color: theme.disabledColor);
   return style;
 }
