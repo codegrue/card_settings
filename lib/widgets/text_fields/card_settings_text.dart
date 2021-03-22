@@ -5,7 +5,7 @@ import 'package:card_settings/helpers/platform_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -202,7 +202,7 @@ class _CardSettingsTextState extends FormFieldState<String> {
         _controller = TextEditingController(text: initialValue);
       } else {
         _controller =
-            MaskedTextController(mask: widget.inputMask, text: initialValue);
+            MaskedTextController(mask: widget.inputMask!, text: initialValue);
       }
     } else {
       _controller = widget.controller;
