@@ -21,7 +21,9 @@ T? intelligentCast<T>(dynamic value) {
 
   // perform explicit parsing on the value as a string
   if (T.toString() == 'double') return double.parse(value.toString()) as T;
+  if (T.toString() == 'double?') return double?.parse(value.toString()) as T;
   if (T.toString() == 'int') return int.parse(value.toString()) as T;
+  if (T.toString() == 'int?') return int?.parse(value.toString()) as T;
   if (T.toString() == 'Color') return colorParse(value) as T;
 
   throw Exception('Failed to convert $value to $T');

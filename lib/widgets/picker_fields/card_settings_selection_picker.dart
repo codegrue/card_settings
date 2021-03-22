@@ -172,12 +172,10 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
       icons: widget.icons,
       selectedItem: option,
       onChanged: (option) {
-        if (option != null) {
-          int optionIndex = options.indexOf(option);
-          String value = values[optionIndex];
-          didChange(value);
-          if (widget.onChanged != null) widget.onChanged!(value);
-        }
+        int optionIndex = options.indexOf(option);
+        String value = values[optionIndex];
+        didChange(value);
+        if (widget.onChanged != null) widget.onChanged!(value);
       },
     );
   }

@@ -11,11 +11,11 @@ dependencies:
   card_settings:
     path: ../
   font_awesome_flutter:
-  dynamic_theme: ^1.0.1
-  google_fonts: ^1.1.0
+  adaptive_theme: ^2.0.0
+  google_fonts: ^2.0.0
 
 dependency_overrides:
-  intl: ^0.17.0-nullsafety.2
+  intl: ^0.17.0
 
 environment:
   sdk: ">=2.0.0 <3.0.0"

@@ -11,8 +11,10 @@ bool showCupertino(
   bool? showMaterialonIOS, {
   bool mockIOS = false,
 }) {
+  bool defaultValue = false;
+
   // don't show on web
-  if (kIsWeb) return false;
+  if (kIsWeb) return defaultValue;
 
   // if we are on iOS then determine if we want material
   if (mockIOS || Platform.isIOS) {
@@ -21,14 +23,14 @@ bool showCupertino(
       if (context != null)
         // set showMaterialOnIOS to parent CardSettings value
         showMaterialonIOS =
-            CardSettings.of(context)?.showMaterialonIOS ?? showMaterialonIOS;
+            CardSettings.of(context)?.showMaterialonIOS ?? defaultValue;
     }
 
-    return showMaterialonIOS!;
+    return !showMaterialonIOS!;
   }
 
   // material by default
-  return false;
+  return defaultValue;
 }
 
 /// This centralizes the style calculations for field labels, used by almost all widgets in this package

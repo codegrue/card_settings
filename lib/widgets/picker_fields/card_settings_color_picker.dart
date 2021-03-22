@@ -123,10 +123,8 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
           headerTextColor: textColor,
           selectedColor: pickerColor,
           onChanged: (value) {
-            if (value != null) {
-              didChange(value);
-              if (widget.onChanged != null) widget.onChanged!(value);
-            }
+            didChange(value);
+            if (widget.onChanged != null) widget.onChanged!(value);
           },
         );
         break;
@@ -139,10 +137,8 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
           headerTextColor: textColor,
           selectedColor: pickerColor,
           onChanged: (value) {
-            if (value != null) {
-              didChange(value);
-              if (widget.onChanged != null) widget.onChanged!(value);
-            }
+            didChange(value);
+            if (widget.onChanged != null) widget.onChanged!(value);
           },
         );
         break;
@@ -155,10 +151,8 @@ class _CardSettingsColorPickerState extends FormFieldState<Color> {
           buttonTextColor: textColor,
           selectedColor: pickerColor,
           onChanged: (value) {
-            if (value != null) {
-              didChange(value);
-              if (widget.onChanged != null) widget.onChanged!(value);
-            }
+            didChange(value);
+            if (widget.onChanged != null) widget.onChanged!(value);
           },
         );
         break;

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,10 +38,7 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
             icon: Theme.of(context).brightness == Brightness.dark
                 ? Icon(Icons.brightness_7)
                 : Icon(Icons.brightness_4),
-            onPressed: () => DynamicTheme.of(context).setBrightness(
-                Theme.of(context).brightness == Brightness.dark
-                    ? Brightness.light
-                    : Brightness.dark),
+            onPressed: () => AdaptiveTheme.of(context).toggleThemeMode(),
           ),
           _cupertinoSwitchButton(),
           IconButton(

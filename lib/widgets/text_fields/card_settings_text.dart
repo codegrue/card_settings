@@ -64,7 +64,6 @@ class CardSettingsText extends FormField<String>
           initialValue: initialValue,
           onSaved: onSaved,
           validator: validator,
-          //autovalidate: autovalidate,
           autovalidateMode: autovalidateMode,
           builder: (FormFieldState<String> field) =>
               (field as _CardSettingsTextState)._build(field.context),
