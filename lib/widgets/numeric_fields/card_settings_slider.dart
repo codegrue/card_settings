@@ -138,7 +138,7 @@ class _CardSettingsSliderState extends FormFieldState<double> {
                       ),
               ),
               contentWidget: CupertinoSlider(
-                value: value,
+                value: value!,
                 divisions: widget.divisions,
                 min: widget.min ?? 0,
                 max: widget.max ?? 1,
