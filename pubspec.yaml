@@ -12,10 +12,10 @@ dependencies:
   extended_masked_text: ^2.1.0
   intl: ^0.17.0
   meta: ^1.2.4
-  flutter_cupertino_settings: ^0.3.1
+  flutter_cupertino_settings: ^0.4.0
   flutter_material_pickers: ^2.0.1
   pattern_formatter: ^2.0.0 # used for localized doubles
-  flutter_multi_formatter: ^2.0.1 # used for localized phone numbers
+  flutter_multi_formatter: ^2.0.2 # used for localized phone numbers
 
 dev_dependencies:
   flutter_test:

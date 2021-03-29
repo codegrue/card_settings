@@ -1,6 +1,10 @@
 # Releases
 
-## [2.0.0] - NOT YET RELEASED
+## [2.0.1] - vNext
+
+- use alwaysUse24HourFormat from MediaQuery in CupertinoDatePicker
+
+## [2.0.0] - 2021-03-29
 
 - upgraded to Flutter 2.0
 
