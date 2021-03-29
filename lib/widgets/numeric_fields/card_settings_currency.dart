@@ -205,13 +205,13 @@ class _CardSettingsCurrencyState extends State<CardSettingsCurrency> {
 
   String? _safeValidator(String? value, NumberFormat formatter) {
     if (widget.validator == null) return null;
-    var number = formatter.parse(value!);
+    num? number = (value == "") ? null : formatter.parse(value!);
     return widget.validator!(intelligentCast<double>(number));
   }
 
   void _safeOnSaved(String? value, NumberFormat formatter) {
     if (widget.onSaved == null) return;
-    var number = formatter.parse(value!);
+    num? number = (value == "") ? null : formatter.parse(value!);
     widget.onSaved!(intelligentCast<double>(number));
   }
 
@@ -221,7 +221,7 @@ class _CardSettingsCurrencyState extends State<CardSettingsCurrency> {
     if (_moneyController != null) {
       widget.onChanged!(_moneyController!.numberValue);
     } else {
-      var number = formatter.parse(value!);
+      num? number = (value == "") ? null : formatter.parse(value!);
       widget.onChanged!(intelligentCast<double>(number));
     }
   }
