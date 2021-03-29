@@ -1,8 +1,9 @@
 # Releases
 
-## [2.0.1] - vNext
+## [2.0.1] - 2021-03-29
 
 - use alwaysUse24HourFormat from MediaQuery in CupertinoDatePicker
+- fixed CardSettingsDouble empty exception
 
 ## [2.0.0] - 2021-03-29
 

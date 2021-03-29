@@ -171,6 +171,9 @@ class CardSettingsDouble extends StatelessWidget
 
     var formatter = NumberFormat(pattern, myLocale.languageCode);
 
+    String? initialText =
+        (initialValue == null) ? null : formatter.format(initialValue!);
+
     return CardSettingsText(
       key: key,
       label: label,
@@ -180,7 +183,7 @@ class CardSettingsDouble extends StatelessWidget
       labelAlign: labelAlign,
       labelWidth: labelWidth,
       contentAlign: contentAlign,
-      initialValue: formatter.format(initialValue),
+      initialValue: initialText,
       unitLabel: unitLabel,
       icon: icon,
       requiredIndicator: requiredIndicator,
@@ -212,22 +215,19 @@ class CardSettingsDouble extends StatelessWidget
 
   String? _safeValidator(String? value, NumberFormat formatter) {
     if (validator == null) return null;
-    if (value == null) return null;
-    var number = formatter.parse(value);
+    num? number = (value == "") ? null : formatter.parse(value!);
     return validator!(intelligentCast<double>(number));
   }
 
   void _safeOnSaved(String? value, NumberFormat formatter) {
     if (onSaved == null) return;
-    if (value == null) return null;
-    var number = formatter.parse(value);
+    num? number = (value == "") ? null : formatter.parse(value!);
     onSaved!(intelligentCast<double>(number));
   }
 
   void _safeOnChanged(String? value, NumberFormat formatter) {
     if (onChanged == null) return;
-    if (value == null) return null;
-    var number = formatter.parse(value);
+    num? number = (value == "") ? null : formatter.parse(value!);
     onChanged!(intelligentCast<double>(number));
   }
 }
