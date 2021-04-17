@@ -119,22 +119,17 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   List<String> options = List<String>.empty();
 
   void _showDialog(String label) {
-    int optionIndex = values.indexOf(value!);
-    String option = '';
-    if (optionIndex >= 0) {
-      option = options[optionIndex];
+    if (showCupertino(context, widget.showMaterialonIOS)) {
+      int valueIndex = values.indexOf(value!);
+      _showCupertinoBottomPicker(valueIndex);
     } else {
-      optionIndex = 0; // set to first element in the list
+      _showMaterialSelectionPicker(label, value!);
     }
-    if (showCupertino(context, widget.showMaterialonIOS))
-      _showCupertinoBottomPicker(optionIndex);
-    else
-      _showMaterialSelectionPicker(label, option);
   }
 
-  void _showCupertinoBottomPicker(int optionIndex) {
+  void _showCupertinoBottomPicker(int valueIndex) {
     final FixedExtentScrollController scrollController =
-        FixedExtentScrollController(initialItem: optionIndex);
+        FixedExtentScrollController(initialItem: valueIndex);
     showCupertinoModalPopup<String>(
       context: context,
       builder: (BuildContext context) {
@@ -164,16 +159,15 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     });
   }
 
-  void _showMaterialSelectionPicker(String label, String option) {
+  void _showMaterialSelectionPicker(String label, String selectedValue) {
     showMaterialSelectionPicker(
       context: context,
       title: label,
       items: options,
+      values: values,
       icons: widget.icons,
-      selectedItem: option,
-      onChanged: (option) {
-        int optionIndex = options.indexOf(option);
-        String value = values[optionIndex];
+      selectedValue: selectedValue,
+      onChanged: (value) {
         didChange(value);
         if (widget.onChanged != null) widget.onChanged!(value);
       },

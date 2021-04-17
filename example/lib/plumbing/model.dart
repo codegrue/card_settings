@@ -7,7 +7,7 @@ class PonyModel {
   String name = 'Twilight Sparkle';
   String type = 'U';
   int age = 7;
-  String gender = "Female";
+  String gender = "F";
   String coatColor = 'D19FE4';
   String maneColor = '273873';
   bool hasSpots = false;
@@ -23,7 +23,7 @@ class PonyModel {
   ];
   double height = 3.5;
   int weight = 45;
-  String style = "Majestic";
+  String style = "MG";
   DateTime showDateTime = DateTime(2010, 10, 10, 20, 30);
   double ticketPrice = 65.99;
   int boxOfficePhone = 18005551212;

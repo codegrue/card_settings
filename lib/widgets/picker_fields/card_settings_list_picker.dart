@@ -19,7 +19,6 @@ class CardSettingsListPicker extends FormField<String>
     String? initialValue,
     FormFieldSetter<String?>? onSaved,
     FormFieldValidator<String?>? validator,
-    // bool autovalidate: false,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.label = 'Label',
@@ -42,7 +41,6 @@ class CardSettingsListPicker extends FormField<String>
             initialValue: initialValue ?? null,
             onSaved: onSaved,
             validator: validator,
-            //autovalidate: autovalidate,
             autovalidateMode: autovalidateMode,
             builder: (FormFieldState<String> field) =>
                 (field as _CardSettingsListPickerState)._build(field.context));
@@ -112,17 +110,12 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   List<String> options = List<String>.empty();
 
   void _showDialog(String label) {
-    int optionIndex = values.indexOf(value!);
-    String option = '';
-    if (optionIndex >= 0) {
-      option = options[optionIndex];
-    } else {
-      optionIndex = 0; // set to first element in the list
-    }
-    if (showCupertino(context, widget.showMaterialonIOS))
+    if (showCupertino(context, widget.showMaterialonIOS)) {
+      int optionIndex = values.indexOf(value!);
       _showCupertinoBottomPicker(optionIndex);
-    else
-      _showMaterialScrollPicker(label, option);
+    } else {
+      _showMaterialScrollPicker(label, value!);
+    }
   }
 
   void _showCupertinoBottomPicker(int optionIndex) {
@@ -157,15 +150,14 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
     });
   }
 
-  void _showMaterialScrollPicker(String label, String option) {
+  void _showMaterialScrollPicker(String label, String selectedValue) {
     showMaterialScrollPicker(
       context: context,
       title: label,
       items: options,
-      selectedItem: option,
-      onChanged: (option) {
-        int optionIndex = options.indexOf(option);
-        String value = values[optionIndex];
+      values: values,
+      selectedValue: selectedValue,
+      onChanged: (value) {
         didChange(value);
         if (widget.onChanged != null) widget.onChanged!(value);
       },

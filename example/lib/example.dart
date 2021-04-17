@@ -784,6 +784,7 @@ class ExampleFormState extends State<ExampleForm> {
       hintText: 'Select One',
       autovalidateMode: _autoValidateMode,
       options: <String>['Male', 'Female'],
+      values: <String>['M', 'F'],
       validator: (String value) {
         if (value == null || value.isEmpty) return 'You must pick a gender.';
         return null;
@@ -806,6 +807,7 @@ class ExampleFormState extends State<ExampleForm> {
       hintText: 'Select One',
       autovalidateMode: _autoValidateMode,
       options: <String>['Majestic', 'Scrawny', 'Sleek'],
+      values: <String>['MG', 'SC', 'SL'],
       icons: <Icon>[
         Icon(Icons.sort),
         Icon(Icons.clear_all),

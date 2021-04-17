@@ -1,5 +1,10 @@
 # Releases
 
+## [2.0.2] - 2021-04-16
+
+- Upgraded `Flutter_Material_Pickers`
+- Added options `values` list to `CardSettingsSelectionPicker`, `CardSettingsRadioPicker`, `CardSettingsListPicker`, and `CardSettingsCheckboxPicker`
+
 ## [2.0.1] - 2021-03-29
 
 - use alwaysUse24HourFormat from MediaQuery in CupertinoDatePicker

@@ -29,15 +29,17 @@ class CardSettingsCheckboxPicker extends FormField<List<String>>
     this.labelAlign,
     this.labelWidth,
     this.requiredIndicator,
-    this.options,
+    required this.options,
+    this.values,
     this.showMaterialonIOS,
     this.fieldPadding,
-  }) : super(
+  })  : assert(values == null || options.length == values.length,
+            "If you provide 'values', they need the same number as 'options'"),
+        super(
           key: key,
           initialValue: initialValues,
           onSaved: onSaved,
           validator: validator,
-          // autovalidate: autovalidate,
           autovalidateMode: autovalidateMode,
           builder: (FormFieldState<List<String>> field) =>
               (field as _CardSettingsCheckboxPickerState)._build(field.context),
@@ -72,7 +74,10 @@ class CardSettingsCheckboxPicker extends FormField<List<String>>
   final Widget? requiredIndicator;
 
   /// a list of options to display in the picker
-  final List<String>? options;
+  final List<String> options;
+
+  /// a list of values for each option. If null, options are values.
+  final List<String>? values;
 
   /// If false hides the widget on the card setting panel
   @override
@@ -100,6 +105,9 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
   CardSettingsCheckboxPicker get widget =>
       super.widget as CardSettingsCheckboxPicker;
 
+  List<String> values = List<String>.empty();
+  List<String> options = List<String>.empty();
+
   void _showDialog(String label, List<String> options) {
     if (showCupertino(context, widget.showMaterialonIOS))
       _showCupertinoSelectPicker(options, label);
@@ -112,7 +120,8 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
       context: context,
       title: label,
       items: options,
-      selectedItems: value,
+      values: values,
+      selectedValues: value,
       onChanged: (List<String>? selectedValues) {
         if (selectedValues != null) {
           didChange(selectedValues);
@@ -142,6 +151,12 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
   }
 
   Widget _build(BuildContext context) {
+    // make local mutable copies of values and options
+    options = widget.options;
+
+    // if values are not provided, copy the options over and use those
+    values = widget.values ?? widget.options;
+
     if (showCupertino(context, widget.showMaterialonIOS))
       return _cupertinoSettingsMultiselect();
     else
@@ -155,7 +170,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
           ? null
           : GestureDetector(
               onTap: () {
-                if (widget.enabled) _showDialog(widget.label, widget.options!);
+                if (widget.enabled) _showDialog(widget.label, options);
               },
               child: CSControl(
                 nameWidget: Container(
@@ -189,7 +204,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
   Widget _materialSettingsMultiselect() {
     return GestureDetector(
       onTap: () {
-        if (widget.enabled) _showDialog(widget.label, widget.options!);
+        if (widget.enabled) _showDialog(widget.label, options);
       },
       child: CardSettingsField(
         label: widget.label,

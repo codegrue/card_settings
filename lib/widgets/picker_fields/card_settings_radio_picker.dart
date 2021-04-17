@@ -113,22 +113,17 @@ class _CardSettingsRadioPickerState extends FormFieldState<String> {
   List<String> options = List<String>.empty();
 
   void _showDialog(String label) {
-    int optionIndex = values.indexOf(value!);
-    String option = '';
-    if (optionIndex >= 0) {
-      option = options[optionIndex];
+    if (showCupertino(context, widget.showMaterialonIOS)) {
+      int valueIndex = values.indexOf(value!);
+      _showCupertinoBottomPicker(valueIndex);
     } else {
-      optionIndex = 0; // set to first element in the list
+      _showMaterialRadioPicker(label, value!);
     }
-    if (showCupertino(context, widget.showMaterialonIOS))
-      _showCupertinoBottomPicker(optionIndex);
-    else
-      _showMaterialRadioPicker(label, option);
   }
 
-  void _showCupertinoBottomPicker(int optionIndex) {
+  void _showCupertinoBottomPicker(int valueIndex) {
     final FixedExtentScrollController scrollController =
-        FixedExtentScrollController(initialItem: optionIndex);
+        FixedExtentScrollController(initialItem: valueIndex);
     showCupertinoModalPopup<String>(
       context: context,
       builder: (BuildContext context) {
@@ -158,15 +153,14 @@ class _CardSettingsRadioPickerState extends FormFieldState<String> {
     });
   }
 
-  void _showMaterialRadioPicker(String label, String option) {
+  void _showMaterialRadioPicker(String label, String selectedValue) {
     showMaterialRadioPicker(
       context: context,
       title: label,
       items: options,
-      selectedItem: option,
-      onChanged: (option) {
-        int optionIndex = options.indexOf(option);
-        String value = values[optionIndex];
+      values: values,
+      selectedValue: selectedValue,
+      onChanged: (value) {
         didChange(value);
         if (widget.onChanged != null) widget.onChanged!(value);
       },
