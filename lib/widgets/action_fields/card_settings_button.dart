@@ -106,9 +106,7 @@ class CardSettingsButton extends StatelessWidget
                   ? CSButtonType.DESTRUCTIVE
                   : CSButtonType.DEFAULT_CENTER,
               label,
-              (enabled)
-                  ? onPressed
-                  : null, // to disable, we need to not provide an onPressed function
+              onPressed,
             ),
     );
   }

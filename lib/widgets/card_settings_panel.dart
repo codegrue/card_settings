@@ -145,7 +145,7 @@ class _CardSettingsContent extends StatelessWidget {
   Widget _buildCupertinoWrapper() {
     return CupertinoSettings(
       items: children,
-      shrinkWrap: shrinkWrap,
+      shrinkWrap: shrinkWrap!,
     );
   }
 

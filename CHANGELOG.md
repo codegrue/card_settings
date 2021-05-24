@@ -1,5 +1,9 @@
 # Releases
 
+## [2.0.3] - 2021-05-24
+
+- Upgraded `flutter_cupertino_settings` to qualify for null safety
+
 ## [2.0.2] - 2021-04-16
 
 - Upgraded `Flutter_Material_Pickers`
