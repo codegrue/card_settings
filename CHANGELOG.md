@@ -1,6 +1,6 @@
 # Releases
 
-## [2.0.3] - 2021-05-27
+## [2.0.4] - 2021-05-27
 
 - Upgraded README - indentation fix
 
