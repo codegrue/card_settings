@@ -110,9 +110,9 @@ All fields in this package are compatible with the standard Flutter Form widget.
 If you would like separate cards for each section, then use the `.sectioned` constructor:
 
 ```dart
-        child: CardSettings.sectioned(
-          ...
-        ),
+    child: CardSettings.sectioned(
+      ...
+    ),
 ```
 
 See the full demo example [here](https://pub.dartlang.org/packages/card_settings#-example-tab-).
