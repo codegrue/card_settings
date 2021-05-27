@@ -1,5 +1,9 @@
 # Releases
 
+## [2.0.3] - 2021-05-27
+
+- Upgraded README - indentation fix
+
 ## [2.0.3] - 2021-05-24
 
 - Upgraded `flutter_cupertino_settings` to qualify for null safety
