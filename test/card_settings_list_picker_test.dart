@@ -6,9 +6,10 @@ void main() {
   group('CardSettingsListPicker', () {
     Widget widgetTree = Container();
     var label = "PickOne";
-    var option1 = PickerModel("Aaa", code: "A", icon: Icon(Icons.home));
-    var option2 = PickerModel("Bbb", code: "B", icon: Icon(Icons.access_alarm));
-    var option3 = PickerModel("Ccc", code: "C", icon: Icon(Icons.exit_to_app));
+    var iconData = Icons.home;
+    var option1 = PickerModel("Aaa", code: "A", icon: Icon(iconData));
+    var option2 = PickerModel("Bbb", code: "B", icon: Icon(iconData));
+    var option3 = PickerModel("Ccc", code: "C", icon: Icon(iconData));
     var items = [option1, option2, option3];
     var requiredIndicator = "#";
     var initialValue = option1;
@@ -23,6 +24,7 @@ void main() {
                   label: label,
                   initialItem: initialValue,
                   items: items,
+                  iconizer: (item) => item.icon,
                   requiredIndicator: Text(requiredIndicator),
                 )
               ],
@@ -39,7 +41,7 @@ void main() {
       // assert
       expect(find.text(label), findsOneWidget);
       expect(find.text(option1.name), findsOneWidget);
-      expect(find.byIcon(Icons.home), findsOneWidget);
+      //expect(find.byIcon(iconData), findsOneWidget);
       expect(find.text(requiredIndicator), findsOneWidget);
     });
 

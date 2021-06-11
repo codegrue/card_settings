@@ -22,7 +22,8 @@ void main() {
       expect(result, false);
     });
 
-    test('on iOS, returns true if showMaterialonIOS and context not provided',
+    test(
+        'on iOS, returns true if showMaterialonIOS null and context not provided',
         () {
       bool? showMaterialonIOS; // null
       bool isIOS = true;

@@ -20,13 +20,15 @@ bool showCupertino(
   if (mockIOS || Platform.isIOS) {
     // if showMaterialonIOS not specified calculate it
     if (showMaterialonIOS == null) {
+      showMaterialonIOS = defaultValue;
+
       if (context != null)
         // set showMaterialOnIOS to parent CardSettings value
         showMaterialonIOS =
             CardSettings.of(context)?.showMaterialonIOS ?? defaultValue;
     }
 
-    return !showMaterialonIOS!;
+    return !showMaterialonIOS;
   }
 
   // material by default
