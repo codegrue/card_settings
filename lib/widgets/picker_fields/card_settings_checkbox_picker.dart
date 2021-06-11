@@ -12,13 +12,13 @@ import '../../card_settings.dart';
 import '../../interfaces/common_field_properties.dart';
 
 /// This is a selection widget that allows an arbitrary list of options to be provided.
-class CardSettingsCheckboxPicker extends FormField<List<String>>
+class CardSettingsCheckboxPicker<T> extends FormField<List<T>>
     implements ICommonFieldProperties {
   CardSettingsCheckboxPicker({
     Key? key,
-    List<String>? initialValues,
-    FormFieldSetter<List<String>>? onSaved,
-    FormFieldValidator<List<String>>? validator,
+    List<T>? initialItems,
+    FormFieldSetter<List<T>>? onSaved,
+    FormFieldValidator<List<T>>? validator,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.onChanged,
@@ -29,19 +29,16 @@ class CardSettingsCheckboxPicker extends FormField<List<String>>
     this.labelAlign,
     this.labelWidth,
     this.requiredIndicator,
-    required this.options,
-    this.values,
+    required this.items,
     this.showMaterialonIOS,
     this.fieldPadding,
-  })  : assert(values == null || options.length == values.length,
-            "If you provide 'values', they need the same number as 'options'"),
-        super(
+  }) : super(
           key: key,
-          initialValue: initialValues,
+          initialValue: initialItems,
           onSaved: onSaved,
           validator: validator,
           autovalidateMode: autovalidateMode,
-          builder: (FormFieldState<List<String>> field) =>
+          builder: (FormFieldState<List<T>> field) =>
               (field as _CardSettingsCheckboxPickerState)._build(field.context),
         );
 
@@ -73,11 +70,8 @@ class CardSettingsCheckboxPicker extends FormField<List<String>>
   @override
   final Widget? requiredIndicator;
 
-  /// a list of options to display in the picker
-  final List<String> options;
-
-  /// a list of values for each option. If null, options are values.
-  final List<String>? values;
+  /// a list of items to display in the picker
+  final List<T> items;
 
   /// If false hides the widget on the card setting panel
   @override
@@ -85,7 +79,7 @@ class CardSettingsCheckboxPicker extends FormField<List<String>>
 
   /// Fires when the picked values are changed
   @override
-  final ValueChanged<List<String>>? onChanged;
+  final ValueChanged<List<T>>? onChanged;
 
   /// Force the widget to use Material style on an iOS device
   @override
@@ -96,48 +90,46 @@ class CardSettingsCheckboxPicker extends FormField<List<String>>
   final EdgeInsetsGeometry? fieldPadding;
 
   @override
-  _CardSettingsCheckboxPickerState createState() =>
-      _CardSettingsCheckboxPickerState();
+  _CardSettingsCheckboxPickerState<T> createState() =>
+      _CardSettingsCheckboxPickerState<T>();
 }
 
-class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
+class _CardSettingsCheckboxPickerState<T> extends FormFieldState<List<T>> {
   @override
-  CardSettingsCheckboxPicker get widget =>
-      super.widget as CardSettingsCheckboxPicker;
+  CardSettingsCheckboxPicker<T> get widget =>
+      super.widget as CardSettingsCheckboxPicker<T>;
 
-  List<String> values = List<String>.empty();
-  List<String> options = List<String>.empty();
+  List<T> items = List<T>.empty();
 
-  void _showDialog(String label, List<String> options) {
+  void _showDialog(String label) {
     if (showCupertino(context, widget.showMaterialonIOS))
-      _showCupertinoSelectPicker(options, label);
+      _showCupertinoSelectPicker(label);
     else
-      _showMaterialCheckboxPicker(options, label);
+      _showMaterialCheckboxPicker(label);
   }
 
-  void _showMaterialCheckboxPicker(List<String> options, String label) {
+  void _showMaterialCheckboxPicker(String label) {
     showMaterialCheckboxPicker(
       context: context,
       title: label,
-      items: options,
-      values: values,
-      selectedValues: value,
-      onChanged: (List<String>? selectedValues) {
-        if (selectedValues != null) {
-          didChange(selectedValues);
-          if (widget.onChanged != null) widget.onChanged!(selectedValues);
+      items: items,
+      selectedItems: value,
+      onChanged: (List<T>? selectedItems) {
+        if (selectedItems != null) {
+          didChange(selectedItems);
+          if (widget.onChanged != null) widget.onChanged!(selectedItems);
         }
       },
     );
   }
 
-  void _showCupertinoSelectPicker(List<String> options, String label) {
-    Navigator.push<List<String>>(
+  void _showCupertinoSelectPicker(String label) {
+    Navigator.push<List<T>>(
       context,
       MaterialPageRoute(
-        builder: (context) => _FullScreenSelect(
+        builder: (context) => _CupertinoSelect(
           initialItems: value!,
-          options: options,
+          items: items,
           label: label,
         ),
         fullscreenDialog: true,
@@ -152,10 +144,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
 
   Widget _build(BuildContext context) {
     // make local mutable copies of values and options
-    options = widget.options;
-
-    // if values are not provided, copy the options over and use those
-    values = widget.values ?? widget.options;
+    items = widget.items;
 
     if (showCupertino(context, widget.showMaterialonIOS))
       return _cupertinoSettingsMultiselect();
@@ -170,7 +159,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
           ? null
           : GestureDetector(
               onTap: () {
-                if (widget.enabled) _showDialog(widget.label, options);
+                if (widget.enabled) _showDialog(widget.label);
               },
               child: CSControl(
                 nameWidget: Container(
@@ -204,7 +193,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
   Widget _materialSettingsMultiselect() {
     return GestureDetector(
       onTap: () {
-        if (widget.enabled) _showDialog(widget.label, options);
+        if (widget.enabled) _showDialog(widget.label);
       },
       child: CardSettingsField(
         label: widget.label,
@@ -224,7 +213,7 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
           children: value!
               .map(
                 (s) => Chip(
-                    label: Text(s,
+                    label: Text(s.toString(),
                         style: contentStyle(context, value, widget.enabled))),
               )
               .toList(),
@@ -235,22 +224,23 @@ class _CardSettingsCheckboxPickerState extends FormFieldState<List<String>> {
   }
 }
 
-class _FullScreenSelect extends StatefulWidget {
-  _FullScreenSelect({
+class _CupertinoSelect<T> extends StatefulWidget {
+  _CupertinoSelect({
     required this.label,
     this.initialItems,
-    required this.options,
+    required this.items,
   });
 
-  final List<String>? initialItems;
-  final List<String> options;
+  final List<T>? initialItems;
+  final List<T> items;
   final String label;
+
   @override
-  _FullScreenSelectState createState() => _FullScreenSelectState();
+  _CupertinoSelectState<T> createState() => _CupertinoSelectState<T>();
 }
 
-class _FullScreenSelectState extends State<_FullScreenSelect> {
-  List<String> _selected = [];
+class _CupertinoSelectState<T> extends State<_CupertinoSelect<T>> {
+  List<T> _selected = [];
 
   @override
   void initState() {
@@ -288,15 +278,15 @@ class _FullScreenSelectState extends State<_FullScreenSelect> {
           ),
         ),
         body: ListView.builder(
-          itemCount: widget.options.length,
+          itemCount: widget.items.length,
           itemBuilder: (BuildContext context, int index) {
-            final i = widget.options[index];
+            T i = widget.items[index];
             final bool select = _selected.contains(i);
             return ListTile(
               leading: select
                   ? const Icon(CupertinoIcons.check_mark)
                   : Icon(Icons.info, color: Colors.transparent),
-              title: Text(i),
+              title: Text(i.toString()),
               onTap: () {
                 setState(() {
                   if (select) {

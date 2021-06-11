@@ -12,13 +12,13 @@ import '../../card_settings.dart';
 import '../../interfaces/common_field_properties.dart';
 
 /// This is a list picker that allows an arbitrary list of options to be provided.
-class CardSettingsSelectionPicker extends FormField<String>
+class CardSettingsSelectionPicker<T> extends FormField<T>
     implements ICommonFieldProperties {
   CardSettingsSelectionPicker({
     Key? key,
-    String? initialValue,
-    FormFieldSetter<String>? onSaved,
-    FormFieldValidator<String>? validator,
+    T? initialItem,
+    FormFieldSetter<T>? onSaved,
+    FormFieldValidator<T>? validator,
     // bool autovalidate: false,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
@@ -31,28 +31,23 @@ class CardSettingsSelectionPicker extends FormField<String>
     this.icon,
     this.contentAlign,
     this.hintText,
-    required this.options,
-    this.icons,
-    this.values,
+    required this.items,
     this.showMaterialonIOS,
     this.fieldPadding,
-  })  : assert(values == null || options.length == values.length,
-            "If you provide 'values', they need the same number as 'options'"),
-        assert(icons == null || options.length == icons.length,
-            "If you provide 'icons', they need the same number as 'options'"),
-        super(
+    this.iconizer,
+  }) : super(
             key: key,
-            initialValue: initialValue ?? null,
+            initialValue: initialItem ?? null,
             onSaved: onSaved,
             validator: validator,
             // autovalidate: autovalidate,
             autovalidateMode: autovalidateMode,
-            builder: (FormFieldState<String> field) =>
+            builder: (FormFieldState<T> field) =>
                 (field as _CardSettingsListPickerState)._build(field.context));
 
   /// fires when the section is changed
   @override
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<T>? onChanged;
 
   /// The text to identify the field to the user
   @override
@@ -85,14 +80,11 @@ class CardSettingsSelectionPicker extends FormField<String>
   @override
   final Widget? requiredIndicator;
 
-  /// a list of options to provide on the selection picker
-  final List<String> options;
+  /// a list of items to provide on the selection picker
+  final List<T> items;
 
-  /// a list of values that match up with each option. If null, options are values.
-  final List<String>? values;
-
-  /// optional icons to display next to each picker option
-  final List<Icon>? icons;
+  /// the function that will extract the icon from the items model
+  final Iconizer<T>? iconizer;
 
   /// If false hides the widget on the card setting panel
   @override
@@ -107,21 +99,21 @@ class CardSettingsSelectionPicker extends FormField<String>
   final EdgeInsetsGeometry? fieldPadding;
 
   @override
-  _CardSettingsListPickerState createState() => _CardSettingsListPickerState();
+  _CardSettingsListPickerState<T> createState() =>
+      _CardSettingsListPickerState<T>();
 }
 
-class _CardSettingsListPickerState extends FormFieldState<String> {
+class _CardSettingsListPickerState<T> extends FormFieldState<T> {
   @override
-  CardSettingsSelectionPicker get widget =>
-      super.widget as CardSettingsSelectionPicker;
+  CardSettingsSelectionPicker<T> get widget =>
+      super.widget as CardSettingsSelectionPicker<T>;
 
-  List<String> values = List<String>.empty();
-  List<String> options = List<String>.empty();
+  List<T> items = List<T>.empty();
 
   void _showDialog(String label) {
     if (showCupertino(context, widget.showMaterialonIOS)) {
-      int valueIndex = values.indexOf(value!);
-      _showCupertinoBottomPicker(valueIndex);
+      int itemIndex = items.indexOf(value!);
+      _showCupertinoBottomPicker(itemIndex);
     } else {
       _showMaterialSelectionPicker(label, value!);
     }
@@ -130,7 +122,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   void _showCupertinoBottomPicker(int valueIndex) {
     final FixedExtentScrollController scrollController =
         FixedExtentScrollController(initialItem: valueIndex);
-    showCupertinoModalPopup<String>(
+    showCupertinoModalPopup<T>(
       context: context,
       builder: (BuildContext context) {
         return _buildCupertinoBottomPicker(
@@ -139,34 +131,32 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
             itemExtent: kCupertinoPickerItemHeight,
             backgroundColor: CupertinoColors.white,
             onSelectedItemChanged: (int index) {
-              didChange(values[index]);
-              widget.onChanged!(values[index]);
+              didChange(items[index]);
+              widget.onChanged!(items[index]);
             },
-            children: List<Widget>.generate(options.length, (int index) {
+            children: List<Widget>.generate(items.length, (int index) {
               return Center(
-                child: Text(options[index].toString()),
+                child: Text(items[index].toString()),
               );
             }),
           ),
         );
       },
-    ).then((option) {
-      if (option != null) {
-        String value = values[options.indexOf(option)];
-        didChange(value);
-        if (widget.onChanged != null) widget.onChanged!(value);
+    ).then((item) {
+      if (item != null) {
+        didChange(item);
+        if (widget.onChanged != null) widget.onChanged!(item);
       }
     });
   }
 
-  void _showMaterialSelectionPicker(String label, String selectedValue) {
-    showMaterialSelectionPicker(
+  void _showMaterialSelectionPicker(String label, T selectedItem) {
+    showMaterialSelectionPicker<T>(
       context: context,
       title: label,
-      items: options,
-      values: values,
-      icons: widget.icons,
-      selectedValue: selectedValue,
+      items: items,
+      selectedItem: selectedItem,
+      iconizer: widget.iconizer,
       onChanged: (value) {
         didChange(value);
         if (widget.onChanged != null) widget.onChanged!(value);
@@ -198,19 +188,13 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
 
   Widget _build(BuildContext context) {
     // make local mutable copies of values and options
-    options = widget.options;
-    if (widget.values == null) {
-      // if values are not provided, copy the options over and use those
-      values = widget.options;
-    } else {
-      values = widget.values!;
-    }
+    items = widget.items;
 
     // get the content label from options based on value
-    int optionIndex = values.indexOf(value!);
+    int itemIndex = items.indexOf(value!);
     String content = widget.hintText ?? '';
-    if (optionIndex >= 0) {
-      content = options[optionIndex];
+    if (itemIndex >= 0) {
+      content = items[itemIndex].toString();
     }
 
     if (showCupertino(context, widget.showMaterialonIOS))

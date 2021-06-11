@@ -1,13 +1,15 @@
 // example viewmodel for the form
 import 'dart:typed_data';
 
+import 'package:card_settings/card_settings.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class PonyModel {
   String name = 'Twilight Sparkle';
-  String type = 'U';
+  PickerModel type = ponyTypes[1]; //TODO, bind by value
   int age = 7;
-  String gender = "F";
+  PickerModel gender = ponyGenders[1]; //TODO: "F";
   String coatColor = 'D19FE4';
   String maneColor = '273873';
   bool hasSpots = false;
@@ -23,7 +25,7 @@ class PonyModel {
   ];
   double height = 3.5;
   int weight = 45;
-  String style = "MG";
+  PickerModel style = ponyStyles[1]; // TODO: "MG";
   DateTime showDateTime = DateTime(2010, 10, 10, 20, 30);
   double ticketPrice = 65.99;
   int boxOfficePhone = 18005551212;
@@ -57,4 +59,22 @@ const List<String> allHobbies = <String>[
   'shopping',
   'sewing',
   'cooking',
+];
+
+const List<PickerModel> ponyTypes = <PickerModel>[
+  PickerModel('Earth', code: 'E'),
+  PickerModel('Unicorn', code: 'U'),
+  PickerModel('Pegasi', code: 'P'),
+  PickerModel('Alicorn', code: 'A'),
+];
+
+const List<PickerModel> ponyGenders = <PickerModel>[
+  PickerModel('Male', code: 'M'),
+  PickerModel('Female', code: 'F'),
+];
+
+const List<PickerModel> ponyStyles = <PickerModel>[
+  PickerModel('Majestic', code: 'MG', icon: Icon(Icons.sort)),
+  PickerModel('Scrawny', code: 'SC', icon: Icon(Icons.clear_all)),
+  PickerModel('Sleek', code: 'SL', icon: Icon(Icons.swap_calls)),
 ];

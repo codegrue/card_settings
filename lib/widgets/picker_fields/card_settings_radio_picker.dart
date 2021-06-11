@@ -12,13 +12,13 @@ import '../../card_settings.dart';
 import '../../interfaces/common_field_properties.dart';
 
 /// This is a list picker that allows an arbitrary list of options to be provided.
-class CardSettingsRadioPicker extends FormField<String>
+class CardSettingsRadioPicker<T> extends FormField<T>
     implements ICommonFieldProperties {
   CardSettingsRadioPicker({
     Key? key,
-    String? initialValue,
-    FormFieldSetter<String>? onSaved,
-    FormFieldValidator<String>? validator,
+    T? initialItem,
+    FormFieldSetter<T>? onSaved,
+    FormFieldValidator<T>? validator,
     // bool autovalidate: false,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
@@ -31,25 +31,22 @@ class CardSettingsRadioPicker extends FormField<String>
     this.icon,
     this.contentAlign,
     this.hintText,
-    required this.options,
-    this.values,
+    required this.items,
     this.showMaterialonIOS,
     this.fieldPadding,
-  })  : assert(values == null || options.length == values.length,
-            "If you provide 'values', they need the same number as 'options'"),
-        super(
+  }) : super(
             key: key,
-            initialValue: initialValue ?? null,
+            initialValue: initialItem ?? null,
             onSaved: onSaved,
             validator: validator,
             // autovalidate: autovalidate,
             autovalidateMode: autovalidateMode,
-            builder: (FormFieldState<String> field) =>
+            builder: (FormFieldState<T> field) =>
                 (field as _CardSettingsRadioPickerState)._build(field.context));
 
   /// fires when the selection changes
   @override
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<T>? onChanged;
 
   /// The text to identify the field to the user
   @override
@@ -83,10 +80,7 @@ class CardSettingsRadioPicker extends FormField<String>
   final Widget? requiredIndicator;
 
   /// a list of options to show on the picker
-  final List<String> options;
-
-  /// a list of values for each option. If null, options are values.
-  final List<String>? values;
+  final List<T> items;
 
   /// If false hides the widget on the card setting panel
   @override
@@ -101,20 +95,20 @@ class CardSettingsRadioPicker extends FormField<String>
   final EdgeInsetsGeometry? fieldPadding;
 
   @override
-  _CardSettingsRadioPickerState createState() =>
-      _CardSettingsRadioPickerState();
+  _CardSettingsRadioPickerState<T> createState() =>
+      _CardSettingsRadioPickerState<T>();
 }
 
-class _CardSettingsRadioPickerState extends FormFieldState<String> {
+class _CardSettingsRadioPickerState<T> extends FormFieldState<T> {
   @override
-  CardSettingsRadioPicker get widget => super.widget as CardSettingsRadioPicker;
+  CardSettingsRadioPicker<T> get widget =>
+      super.widget as CardSettingsRadioPicker<T>;
 
-  List<String> values = List<String>.empty();
-  List<String> options = List<String>.empty();
+  List<T> items = List<T>.empty();
 
   void _showDialog(String label) {
     if (showCupertino(context, widget.showMaterialonIOS)) {
-      int valueIndex = values.indexOf(value!);
+      int valueIndex = items.indexOf(value!);
       _showCupertinoBottomPicker(valueIndex);
     } else {
       _showMaterialRadioPicker(label, value!);
@@ -124,7 +118,7 @@ class _CardSettingsRadioPickerState extends FormFieldState<String> {
   void _showCupertinoBottomPicker(int valueIndex) {
     final FixedExtentScrollController scrollController =
         FixedExtentScrollController(initialItem: valueIndex);
-    showCupertinoModalPopup<String>(
+    showCupertinoModalPopup<T>(
       context: context,
       builder: (BuildContext context) {
         return _buildCupertinoBottomPicker(
@@ -133,33 +127,31 @@ class _CardSettingsRadioPickerState extends FormFieldState<String> {
             itemExtent: kCupertinoPickerItemHeight,
             backgroundColor: CupertinoColors.white,
             onSelectedItemChanged: (int index) {
-              didChange(values[index]);
-              widget.onChanged!(values[index]);
+              didChange(items[index]);
+              widget.onChanged!(items[index]);
             },
-            children: List<Widget>.generate(options.length, (int index) {
+            children: List<Widget>.generate(items.length, (int index) {
               return Center(
-                child: Text(options[index].toString()),
+                child: Text(items[index].toString()),
               );
             }),
           ),
         );
       },
-    ).then((option) {
-      if (option != null) {
-        String value = values[options.indexOf(option)];
-        didChange(value);
-        if (widget.onChanged != null) widget.onChanged!(value);
+    ).then((item) {
+      if (item != null) {
+        didChange(item);
+        if (widget.onChanged != null) widget.onChanged!(item);
       }
     });
   }
 
-  void _showMaterialRadioPicker(String label, String selectedValue) {
-    showMaterialRadioPicker(
+  void _showMaterialRadioPicker(String label, T selectedItem) {
+    showMaterialRadioPicker<T>(
       context: context,
       title: label,
-      items: options,
-      values: values,
-      selectedValue: selectedValue,
+      items: items,
+      selectedItem: selectedItem,
       onChanged: (value) {
         didChange(value);
         if (widget.onChanged != null) widget.onChanged!(value);
@@ -191,16 +183,13 @@ class _CardSettingsRadioPickerState extends FormFieldState<String> {
 
   Widget _build(BuildContext context) {
     // make local mutable copies of values and options
-    options = widget.options;
-
-    // if values are not provided, copy the options over and use those
-    values = widget.values ?? widget.options;
+    items = widget.items;
 
     // get the content label from options based on value
-    int optionIndex = values.indexOf(value!);
+    int itemIndex = items.indexOf(value!);
     String content = widget.hintText ?? '';
-    if (optionIndex >= 0) {
-      content = options[optionIndex];
+    if (itemIndex >= 0) {
+      content = items[itemIndex].toString();
     }
 
     if (showCupertino(context, widget.showMaterialonIOS))

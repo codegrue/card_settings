@@ -34,6 +34,9 @@ export 'widgets/text_fields/card_settings_text.dart';
 export 'widgets/numeric_fields/card_settings_slider.dart';
 export 'widgets/card_settings_widget.dart';
 
+//export 'package:flutter_material_pickers/flutter_material_pickers.dart'show PickerModel;
+export 'models/picker_model.dart';
+
 /// this is the default height for the cupertino scroll wheel
 const double kCupertinoPickerSheetHeight = 216.0;
 

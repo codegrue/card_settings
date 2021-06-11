@@ -12,13 +12,13 @@ import '../../card_settings.dart';
 import '../../interfaces/common_field_properties.dart';
 
 /// This is a list picker that allows an arbitrary list of options to be provided.
-class CardSettingsListPicker extends FormField<String>
+class CardSettingsListPicker<T> extends FormField<T>
     implements ICommonFieldProperties {
   CardSettingsListPicker({
     Key? key,
-    String? initialValue,
-    FormFieldSetter<String?>? onSaved,
-    FormFieldValidator<String?>? validator,
+    T? initialItem,
+    FormFieldSetter<T?>? onSaved,
+    FormFieldValidator<T?>? validator,
     AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.label = 'Label',
@@ -30,24 +30,21 @@ class CardSettingsListPicker extends FormField<String>
     this.icon,
     this.contentAlign,
     this.hintText,
-    required this.options,
-    this.values,
+    required this.items,
     this.showMaterialonIOS,
     this.fieldPadding,
-  })  : assert(values == null || options.length == values.length,
-            "If you provide 'values', they need the same number as 'options'"),
-        super(
+  }) : super(
             key: key,
-            initialValue: initialValue ?? null,
+            initialValue: initialItem ?? null,
             onSaved: onSaved,
             validator: validator,
             autovalidateMode: autovalidateMode,
-            builder: (FormFieldState<String> field) =>
+            builder: (FormFieldState<T> field) =>
                 (field as _CardSettingsListPickerState)._build(field.context));
 
   /// fires when the picker value is changed
   @override
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<T>? onChanged;
 
   /// The text to identify the field to the user
   @override
@@ -80,11 +77,8 @@ class CardSettingsListPicker extends FormField<String>
   @override
   final Widget? requiredIndicator;
 
-  /// a list of options for the picker
-  final List<String> options;
-
-  /// a list of values for each option. If null, options are values.
-  final List<String>? values;
+  /// a list of items for the picker
+  final List<T> items;
 
   /// If false hides the widget on the card setting panel
   @override
@@ -99,20 +93,21 @@ class CardSettingsListPicker extends FormField<String>
   final EdgeInsetsGeometry? fieldPadding;
 
   @override
-  _CardSettingsListPickerState createState() => _CardSettingsListPickerState();
+  _CardSettingsListPickerState<T> createState() =>
+      _CardSettingsListPickerState<T>();
 }
 
-class _CardSettingsListPickerState extends FormFieldState<String> {
+class _CardSettingsListPickerState<T> extends FormFieldState<T> {
   @override
-  CardSettingsListPicker get widget => super.widget as CardSettingsListPicker;
+  CardSettingsListPicker<T> get widget =>
+      super.widget as CardSettingsListPicker<T>;
 
-  List<String> values = List<String>.empty();
-  List<String> options = List<String>.empty();
+  List<T> items = List<T>.empty();
 
   void _showDialog(String label) {
     if (showCupertino(context, widget.showMaterialonIOS)) {
-      int optionIndex = values.indexOf(value!);
-      _showCupertinoBottomPicker(optionIndex);
+      int itemIndex = items.indexOf(value!);
+      _showCupertinoBottomPicker(itemIndex);
     } else {
       _showMaterialScrollPicker(label, value!);
     }
@@ -121,7 +116,7 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
   void _showCupertinoBottomPicker(int optionIndex) {
     final FixedExtentScrollController scrollController =
         FixedExtentScrollController(initialItem: optionIndex);
-    showCupertinoModalPopup<String>(
+    showCupertinoModalPopup<T>(
       context: context,
       builder: (BuildContext context) {
         return _buildCupertinoBottomPicker(
@@ -130,33 +125,31 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
             itemExtent: kCupertinoPickerItemHeight,
             backgroundColor: CupertinoColors.white,
             onSelectedItemChanged: (int index) {
-              didChange(values[index]);
-              widget.onChanged!(values[index]);
+              didChange(items[index]);
+              widget.onChanged!(items[index]);
             },
-            children: List<Widget>.generate(options.length, (int index) {
+            children: List<Widget>.generate(items.length, (int index) {
               return Center(
-                child: Text(options[index].toString()),
+                child: Text(items[index].toString()),
               );
             }),
           ),
         );
       },
-    ).then((option) {
-      if (option != null) {
-        String value = values[options.indexOf(option)];
-        didChange(value);
-        if (widget.onChanged != null) widget.onChanged!(value);
+    ).then((item) {
+      if (item != null) {
+        didChange(item);
+        if (widget.onChanged != null) widget.onChanged!(item);
       }
     });
   }
 
-  void _showMaterialScrollPicker(String label, String selectedValue) {
-    showMaterialScrollPicker(
+  void _showMaterialScrollPicker(String label, T selectedItem) {
+    showMaterialScrollPicker<T>(
       context: context,
       title: label,
-      items: options,
-      values: values,
-      selectedValue: selectedValue,
+      items: items,
+      selectedItem: selectedItem,
       onChanged: (value) {
         didChange(value);
         if (widget.onChanged != null) widget.onChanged!(value);
@@ -188,16 +181,13 @@ class _CardSettingsListPickerState extends FormFieldState<String> {
 
   Widget _build(BuildContext context) {
     // make local mutable copies of values and options
-    options = widget.options;
-
-    // if values are not provided, copy the options over and use those
-    values = widget.values ?? widget.options;
+    items = widget.items;
 
     // get the content label from options based on value
-    int optionIndex = values.indexOf(value!);
+    int itemIndex = items.indexOf(value!);
     String content = widget.hintText ?? '';
-    if (optionIndex >= 0) {
-      content = options[optionIndex];
+    if (itemIndex >= 0) {
+      content = items[itemIndex].toString();
     }
 
     if (showCupertino(context, widget.showMaterialonIOS))

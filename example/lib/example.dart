@@ -589,7 +589,7 @@ class ExampleFormState extends State<ExampleForm> {
       onSaved: (value) => _ponyModel.spotColor = colorToString(value),
       onChanged: (value) {
         setState(() {
-          _ponyModel.type = colorToString(value);
+          _ponyModel.spotColor = colorToString(value);
         });
         widget.onValueChanged('Spot', value);
       },
@@ -654,11 +654,11 @@ class ExampleFormState extends State<ExampleForm> {
   }
 
   CardSettingsCheckboxPicker _buildCardSettingsCheckboxPicker_Hobbies() {
-    return CardSettingsCheckboxPicker(
+    return CardSettingsCheckboxPicker<String>(
       key: _hobbiesKey,
       label: 'Hobbies',
-      initialValues: _ponyModel.hobbies,
-      options: allHobbies,
+      initialItems: _ponyModel.hobbies,
+      items: allHobbies,
       autovalidateMode: _autoValidateMode,
       validator: (List<String> value) {
         if (value == null || value.isEmpty)
@@ -720,16 +720,16 @@ class ExampleFormState extends State<ExampleForm> {
   }
 
   CardSettingsListPicker _buildCardSettingsListPicker_Type() {
-    return CardSettingsListPicker(
+    return CardSettingsListPicker<PickerModel>(
       key: _typeKey,
       label: 'Type',
-      initialValue: _ponyModel.type,
+      initialItem: _ponyModel.type,
       hintText: 'Select One',
       autovalidateMode: _autoValidateMode,
-      options: <String>['Earth', 'Unicorn', 'Pegasi', 'Alicorn'],
-      values: <String>['E', 'U', 'P', 'A'],
-      validator: (String value) {
-        if (value == null || value.isEmpty) return 'You must pick a type.';
+      items: ponyTypes,
+      validator: (PickerModel value) {
+        if (value == null || value.toString().isEmpty)
+          return 'You must pick a type.';
         return null;
       },
       onSaved: (value) => _ponyModel.type = value,
@@ -777,16 +777,16 @@ class ExampleFormState extends State<ExampleForm> {
   }
 
   CardSettingsRadioPicker _buildCardSettingsRadioPicker_Gender() {
-    return CardSettingsRadioPicker(
+    return CardSettingsRadioPicker<PickerModel>(
       key: _genderKey,
       label: 'Gender',
-      initialValue: _ponyModel.gender,
+      initialItem: _ponyModel.gender,
       hintText: 'Select One',
       autovalidateMode: _autoValidateMode,
-      options: <String>['Male', 'Female'],
-      values: <String>['M', 'F'],
-      validator: (String value) {
-        if (value == null || value.isEmpty) return 'You must pick a gender.';
+      items: ponyGenders,
+      validator: (PickerModel value) {
+        if (value == null || value.toString().isEmpty)
+          return 'You must pick a gender.';
         return null;
       },
       onSaved: (value) => _ponyModel.gender = value,
@@ -800,21 +800,17 @@ class ExampleFormState extends State<ExampleForm> {
   }
 
   CardSettingsSelectionPicker _buildCardSettingsSelectionPicker_Style() {
-    return CardSettingsSelectionPicker(
+    return CardSettingsSelectionPicker<PickerModel>(
       key: _styleKey,
       label: 'Style',
-      initialValue: _ponyModel.style,
+      initialItem: _ponyModel.style,
       hintText: 'Select One',
       autovalidateMode: _autoValidateMode,
-      options: <String>['Majestic', 'Scrawny', 'Sleek'],
-      values: <String>['MG', 'SC', 'SL'],
-      icons: <Icon>[
-        Icon(Icons.sort),
-        Icon(Icons.clear_all),
-        Icon(Icons.swap_calls),
-      ],
-      validator: (String value) {
-        if (value == null || value.isEmpty) return 'You must pick a style.';
+      items: ponyStyles,
+      iconizer: (item) => item.icon,
+      validator: (PickerModel value) {
+        if (value == null || value.toString().isEmpty)
+          return 'You must pick a style.';
         return null;
       },
       onSaved: (value) => _ponyModel.style = value,
@@ -822,7 +818,7 @@ class ExampleFormState extends State<ExampleForm> {
         setState(() {
           _ponyModel.style = value;
         });
-        widget.onValueChanged('Style', value);
+        widget.onValueChanged('Style', value.code);
       },
     );
   }

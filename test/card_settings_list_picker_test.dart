@@ -6,14 +6,12 @@ void main() {
   group('CardSettingsListPicker', () {
     Widget widgetTree = Container();
     var label = "PickOne";
-    var initialValue = "A";
-    var option1 = "Aaa";
-    var option2 = "Bbb";
-    var option3 = "Ccc";
-    var options = [option1, option2, option3];
-    var values = ["A", "B", "C"];
-    var icon = Icons.home;
+    var option1 = PickerModel("Aaa", code: "A", icon: Icon(Icons.home));
+    var option2 = PickerModel("Bbb", code: "B", icon: Icon(Icons.access_alarm));
+    var option3 = PickerModel("Ccc", code: "C", icon: Icon(Icons.exit_to_app));
+    var items = [option1, option2, option3];
     var requiredIndicator = "#";
+    var initialValue = option1;
 
     setUpAll(() async {
       widgetTree = MaterialApp(
@@ -21,12 +19,10 @@ void main() {
           children: [
             CardSettingsSection(
               children: [
-                CardSettingsSelectionPicker(
+                CardSettingsSelectionPicker<PickerModel>(
                   label: label,
-                  initialValue: initialValue,
-                  options: options,
-                  values: values,
-                  icon: Icon(icon),
+                  initialItem: initialValue,
+                  items: items,
                   requiredIndicator: Text(requiredIndicator),
                 )
               ],
@@ -42,8 +38,8 @@ void main() {
 
       // assert
       expect(find.text(label), findsOneWidget);
-      expect(find.text(option1), findsOneWidget);
-      expect(find.byIcon(icon), findsOneWidget);
+      expect(find.text(option1.name), findsOneWidget);
+      expect(find.byIcon(Icons.home), findsOneWidget);
       expect(find.text(requiredIndicator), findsOneWidget);
     });
 
@@ -52,19 +48,19 @@ void main() {
       await tester.pumpWidget(widgetTree);
 
       // act
-      await tester.tap(find.text(option1)); // tap field
+      await tester.tap(find.text(option1.name)); // tap field
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text(option2)); // tap item in dialog
+      await tester.tap(find.text(option2.name)); // tap item in dialog
       await tester.pumpAndSettle();
 
       await tester.tap(find.text("OK"));
       await tester.pumpAndSettle();
 
       // assert
-      expect(find.text(option1), findsNothing);
-      expect(find.text(option2), findsOneWidget);
-      expect(find.text(option3), findsNothing);
+      expect(find.text(option1.name), findsNothing);
+      expect(find.text(option2.name), findsOneWidget);
+      expect(find.text(option3.name), findsNothing);
     });
   });
 }

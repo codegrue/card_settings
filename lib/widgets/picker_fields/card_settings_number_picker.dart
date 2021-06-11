@@ -100,7 +100,7 @@ class CardSettingsNumberPicker extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return CardSettingsListPicker(
+    return CardSettingsListPicker<int>(
       key: key,
       label: this.label,
       showMaterialonIOS: showMaterialonIOS,
@@ -110,12 +110,12 @@ class CardSettingsNumberPicker extends StatelessWidget
       contentAlign: contentAlign,
       visible: visible,
       enabled: enabled,
-      initialValue: initialValue?.toString(),
+      initialItem: initialValue,
       icon: icon,
       requiredIndicator: requiredIndicator,
-      options: List<String>.generate(
+      items: List<int>.generate(
         (max - min) ~/ stepInterval + 1,
-        (i) => (i * stepInterval + min).toString(),
+        (i) => (i * stepInterval + min),
       ),
       autovalidateMode: autovalidateMode,
       validator: _safeValidator,
@@ -124,17 +124,17 @@ class CardSettingsNumberPicker extends StatelessWidget
     );
   }
 
-  String? _safeValidator(String? value) {
+  String? _safeValidator(int? value) {
     if (validator == null) return null;
     return validator!(intelligentCast<int>(value));
   }
 
-  void _safeOnSaved(String? value) {
+  void _safeOnSaved(int? value) {
     if (onSaved == null) return;
     onSaved!(intelligentCast<int>(value));
   }
 
-  void _safeOnChanged(String value) {
+  void _safeOnChanged(int value) {
     if (onChanged == null) return;
     onChanged!(intelligentCast<int>(value));
   }

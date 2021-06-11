@@ -1,5 +1,9 @@
 # Releases
 
+## [3.0.0] - TBD
+
+- [Breaking change] pickers now use a model to describe the `name`, `code`, and `icon` for a picker. see `flutter_material_pickers`
+
 ## [2.0.3] - 2021-05-24
 
 - Upgraded `flutter_cupertino_settings` to qualify for null safety
