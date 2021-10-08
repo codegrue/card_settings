@@ -69,27 +69,31 @@ class CardSettingsButton extends StatelessWidget
   }
 
   Widget _showMaterialButton(BuildContext context, TextStyle buttonStyle) {
-    var fillColor = backgroundColor ?? Theme.of(context).buttonColor;
-    if (!enabled) fillColor = Colors.grey;
+    var style = Theme.of(context).textButtonTheme.style ?? ButtonStyle();
+    if (backgroundColor != null)
+      style = style.copyWith(
+          backgroundColor: MaterialStateProperty.all<Color>(backgroundColor!));
+    if (textColor != null)
+      style = style.copyWith(
+          foregroundColor: MaterialStateProperty.all<Color>(textColor!));
+    if (!enabled)
+      style = style.copyWith(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.grey));
 
     return Container(
       margin: EdgeInsets.only(
-          top: 4.0, bottom: bottomSpacing, left: 4.0, right: 4.0),
+          top: 0.0, bottom: bottomSpacing, left: 6.0, right: 6.0),
       padding: EdgeInsets.all(0.0),
-      color: fillColor,
-      child: RawMaterialButton(
-        padding: EdgeInsets.all(0.0),
-        elevation: 0.0,
+      child: TextButton(
+        style: style,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               label,
-              style: buttonStyle,
             ),
           ],
         ),
-        fillColor: fillColor,
         onPressed: (enabled)
             ? onPressed
             : null, // to disable, we need to not provide an onPressed function

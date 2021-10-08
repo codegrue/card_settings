@@ -42,11 +42,18 @@ ThemeData _buildTheme(Brightness brightness) {
       secondaryHeaderColor: Colors.indigo[400], // card header background
       cardColor: Colors.white, // card field background
       backgroundColor: Colors.indigo[100], // app background color
-      buttonColor: Colors.lightBlueAccent[100], // button background color
       textTheme: TextTheme(
         button: TextStyle(color: Colors.deepPurple[900]), // button text
         subtitle1: TextStyle(color: Colors.grey[800]), // input text
         headline6: TextStyle(color: Colors.white), // card header text
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+              Colors.indigo[100]), // button background color
+          foregroundColor: MaterialStateProperty.all<Color>(
+              Colors.white), // button text color
+        ),
       ),
       primaryTextTheme: TextTheme(
         headline6: TextStyle(color: Colors.lightBlue[50]), // app header text

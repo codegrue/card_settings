@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Flutter",
+            "name": "card_settings",
             "request": "launch",
             "type": "dart",
             "program": "${workspaceFolder}/example/lib/main.dart",

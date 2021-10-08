@@ -313,8 +313,7 @@ class ExampleFormState extends State<ExampleForm> {
       isDestructive: true,
       onPressed: resetPressed,
       backgroundColor: Colors.red,
-      textColor: Colors.white,
-      bottomSpacing: 4.0,
+      textColor: Colors.yellow,
     );
   }
 

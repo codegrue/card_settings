@@ -1,8 +1,11 @@
 # Releases
 
-## [3.0.0] - TBD
+## [3.0.0] - 2021-10-07
 
 - [Breaking change] pickers now use a model to describe the `name`, `code`, and `icon` for a picker. see `flutter_material_pickers`
+- theme `accentColor` changed to `colorScheme.secondary`
+- theme `buttonColor` changed to `textButtonTheme.style.backgroundColor` (see example project)
+- updated `flutter_material_pickers` dependency version
 
 ## [2.0.3] - 2021-05-24
 

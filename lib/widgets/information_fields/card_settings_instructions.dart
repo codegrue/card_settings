@@ -47,7 +47,7 @@ class CardSettingsInstructions extends StatelessWidget
     TextStyle textStyle = Theme.of(context)
         .primaryTextTheme
         .caption!
-        .copyWith(color: textColor ?? Theme.of(context).accentColor);
+        .copyWith(color: textColor ?? Theme.of(context).colorScheme.secondary);
     if (showCupertino(context, showMaterialonIOS)) {
       return Container(
         padding: EdgeInsets.only(top: 8.0, left: 8.0),
