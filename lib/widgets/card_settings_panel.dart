@@ -3,13 +3,8 @@
 
 import 'package:card_settings/card_settings.dart';
 import 'package:card_settings/helpers/platform_functions.dart';
-import 'package:card_settings/widgets/card_settings_widget.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
-
-import 'information_fields/card_settings_header.dart';
-import 'information_fields/card_settings_instructions.dart';
 
 /// This is the card wrapper that all the field controls are placed into
 class CardSettings extends InheritedWidget {

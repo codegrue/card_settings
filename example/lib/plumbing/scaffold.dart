@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../example.dart';
 
 class ExampleScaffold extends StatefulWidget {
+  const ExampleScaffold({Key key}) : super(key: key);
+
   @override
   _ExampleScaffoldState createState() => _ExampleScaffoldState();
 }
@@ -32,24 +32,24 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Text("My Little Pony"),
+        title: const Text("My Little Pony"),
         actions: <Widget>[
           IconButton(
             icon: Theme.of(context).brightness == Brightness.dark
-                ? Icon(Icons.brightness_7)
-                : Icon(Icons.brightness_4),
+                ? const Icon(Icons.brightness_7)
+                : const Icon(Icons.brightness_4),
             onPressed: () => AdaptiveTheme.of(context).toggleThemeMode(),
           ),
           _cupertinoSwitchButton(),
           IconButton(
-            icon: Icon(Icons.save),
+            icon: const Icon(Icons.save),
             onPressed: (_formWidgetKey.currentState == null)
                 ? null
                 : _formWidgetKey.currentState.savePressed,
           ),
         ],
         leading: IconButton(
-          icon: Icon(Icons.refresh),
+          icon: const Icon(Icons.refresh),
           onPressed: (_formWidgetKey.currentState == null)
               ? null
               : _formWidgetKey.currentState.resetPressed,
@@ -63,7 +63,7 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
     ScaffoldMessenger.of(context).removeCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        duration: Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
         content: Text(label + ' = ' + value.toString()),
       ),
     );
@@ -77,8 +77,8 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
       child: Platform.isIOS
           ? IconButton(
               icon: (_showMaterialonIOS)
-                  ? FaIcon(FontAwesomeIcons.apple)
-                  : Icon(Icons.android),
+                  ? const FaIcon(FontAwesomeIcons.apple)
+                  : const Icon(Icons.android),
               onPressed: () {
                 setState(() {
                   _showMaterialonIOS = !_showMaterialonIOS;

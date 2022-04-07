@@ -1,9 +1,9 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:card_settings/card_settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:file_picker/file_picker.dart';
 
@@ -46,7 +46,7 @@ class ExampleFormState extends State<ExampleForm> {
   void initModel() async {
     _ponyModel = PonyModel();
 
-    await _ponyModel.loadMedia();
+    _ponyModel.loadMedia();
 
     setState(() => loaded = true);
   }
@@ -98,7 +98,7 @@ class ExampleFormState extends State<ExampleForm> {
             : _buildLandscapeLayout(),
       );
     } else {
-      return Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator());
     }
   }
 
@@ -148,7 +148,7 @@ class ExampleFormState extends State<ExampleForm> {
           header: CardSettingsHeader(
             label: 'Colors',
           ),
-          divider: Divider(thickness: 1.0, color: Colors.purple),
+          divider: const Divider(thickness: 1.0, color: Colors.purple),
           children: <CardSettingsWidget>[
             _buildCardSettingsColorPicker_Coat(),
             _buildCardSettingsColorPicker_Mane(),
@@ -222,7 +222,7 @@ class ExampleFormState extends State<ExampleForm> {
                 _buildCardSettingsRadioPicker_Gender(),
                 _buildCardSettingsNumberPicker_Age(labelAlign: TextAlign.right),
               ],
-              flexValues: [2, 1],
+              flexValues: const [2, 1],
             ),
             _buildCardSettingsParagraph_Description(3),
             _buildCardSettingsCheckboxPicker_Hobbies(),
@@ -328,7 +328,7 @@ class ExampleFormState extends State<ExampleForm> {
   CardSettingsPassword _buildCardSettingsPassword() {
     return CardSettingsPassword(
       key: _passwordKey,
-      icon: Icon(Icons.lock),
+      icon: const Icon(Icons.lock),
       labelWidth: 200,
       initialValue: _ponyModel.password,
       autovalidateMode: _autoValidateMode,
@@ -350,13 +350,14 @@ class ExampleFormState extends State<ExampleForm> {
   CardSettingsEmail _buildCardSettingsEmail() {
     return CardSettingsEmail(
       key: _emailKey,
-      icon: Icon(Icons.person),
+      icon: const Icon(Icons.person),
       initialValue: _ponyModel.email,
       autovalidateMode: _autoValidateMode,
       validator: (value) {
         if (value == null || value.isEmpty) return 'Email is required.';
-        if (!value.contains('@'))
+        if (!value.contains('@')) {
           return "Email not formatted correctly."; // use regex in real application
+        }
         return null;
       },
       onSaved: (value) => _ponyModel.email = value,
@@ -411,7 +412,7 @@ class ExampleFormState extends State<ExampleForm> {
   CardSettingsTimePicker _buildCardSettingsTimePicker() {
     return CardSettingsTimePicker(
       key: _timeKey,
-      icon: Icon(Icons.access_time),
+      icon: const Icon(Icons.access_time),
       label: 'Time',
       initialValue: TimeOfDay(
           hour: _ponyModel.showDateTime.hour,
@@ -431,7 +432,7 @@ class ExampleFormState extends State<ExampleForm> {
   CardSettingsDatePicker _buildCardSettingsDatePicker() {
     return CardSettingsDatePicker(
       key: _dateKey,
-      icon: Icon(Icons.calendar_today),
+      icon: const Icon(Icons.calendar_today),
       label: 'Date',
       dateFormat: DateFormat.yMMMMd(),
       initialValue: _ponyModel.showDateTime,
@@ -450,7 +451,7 @@ class ExampleFormState extends State<ExampleForm> {
   CardSettingsFilePicker _buildCardSettingsPhotoPicker() {
     return CardSettingsFilePicker(
       key: _photoKey,
-      icon: Icon(Icons.photo),
+      icon: const Icon(Icons.photo),
       label: 'Photo',
       fileType: FileType.image,
       initialValue: _ponyModel.photo,
@@ -466,7 +467,7 @@ class ExampleFormState extends State<ExampleForm> {
   CardSettingsFilePicker _buildCardSettingsVideoPicker() {
     return CardSettingsFilePicker(
       key: _videoKey,
-      icon: Icon(Icons.video_library),
+      icon: const Icon(Icons.video_library),
       label: 'Video',
       fileType: FileType.video,
       initialValue: _ponyModel.video,
@@ -482,7 +483,7 @@ class ExampleFormState extends State<ExampleForm> {
   CardSettingsFilePicker _buildCardSettingsMusicPicker() {
     return CardSettingsFilePicker(
       key: _audioKey,
-      icon: Icon(Icons.music_note),
+      icon: const Icon(Icons.music_note),
       label: 'Audio',
       fileType: FileType.audio,
       initialValue: _ponyModel.audio,
@@ -498,10 +499,10 @@ class ExampleFormState extends State<ExampleForm> {
   CardSettingsFilePicker _buildCardSettingsFileCustomPicker() {
     return CardSettingsFilePicker(
       key: _customFileKey,
-      icon: Icon(Icons.insert_drive_file),
+      icon: const Icon(Icons.insert_drive_file),
       label: 'Custom file',
       fileType: FileType.custom,
-      allowedExtensions: ['jpg'],
+      allowedExtensions: const ['jpg'],
       initialValue: _ponyModel.customFile,
       onSaved: (value) => _ponyModel.customFile = value,
       onChanged: (value) {
@@ -566,7 +567,7 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Height',
       unitLabel: '(ft)',
       decimalDigits: 2,
-      locale: Locale('fr'), // force french mode to simulate localization
+      locale: const Locale('fr'), // force french mode to simulate localization
       initialValue: _ponyModel.height,
       onSaved: (value) => _ponyModel.height = value,
       onChanged: (value) {
@@ -638,8 +639,9 @@ class ExampleFormState extends State<ExampleForm> {
       initialValue: intelligentCast<Color>(_ponyModel.coatColor),
       autovalidateMode: _autoValidateMode,
       validator: (value) {
-        if (value.computeLuminance() < .3)
+        if (value.computeLuminance() < .3) {
           return 'This color is not cheery enough.';
+        }
         return null;
       },
       onSaved: (value) => _ponyModel.coatColor = colorToString(value),
@@ -660,9 +662,9 @@ class ExampleFormState extends State<ExampleForm> {
       items: allHobbies,
       autovalidateMode: _autoValidateMode,
       validator: (List<String> value) {
-        if (value == null || value.isEmpty)
+        if (value == null || value.isEmpty) {
           return 'You must pick at least one hobby.';
-
+        }
         return null;
       },
       onSaved: (value) => _ponyModel.hobbies = value,
@@ -727,8 +729,9 @@ class ExampleFormState extends State<ExampleForm> {
       autovalidateMode: _autoValidateMode,
       items: ponyTypes,
       validator: (PickerModel value) {
-        if (value == null || value.toString().isEmpty)
+        if (value == null || value.toString().isEmpty) {
           return 'You must pick a type.';
+        }
         return null;
       },
       onSaved: (value) => _ponyModel.type = value,
@@ -747,7 +750,7 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Name',
       hintText: 'something cute...',
       initialValue: _ponyModel.name,
-      requiredIndicator: Text('*', style: TextStyle(color: Colors.red)),
+      requiredIndicator: const Text('*', style: TextStyle(color: Colors.red)),
       autovalidateMode: _autoValidateMode,
       focusNode: _nameNode,
       inputAction: TextInputAction.next,
@@ -784,8 +787,9 @@ class ExampleFormState extends State<ExampleForm> {
       autovalidateMode: _autoValidateMode,
       items: ponyGenders,
       validator: (PickerModel value) {
-        if (value == null || value.toString().isEmpty)
+        if (value == null || value.toString().isEmpty) {
           return 'You must pick a gender.';
+        }
         return null;
       },
       onSaved: (value) => _ponyModel.gender = value,
@@ -808,8 +812,9 @@ class ExampleFormState extends State<ExampleForm> {
       items: ponyStyles,
       iconizer: (item) => item.icon,
       validator: (PickerModel value) {
-        if (value == null || value.toString().isEmpty)
+        if (value == null || value.toString().isEmpty) {
           return 'You must pick a style.';
+        }
         return null;
       },
       onSaved: (value) => _ponyModel.style = value,

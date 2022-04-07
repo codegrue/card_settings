@@ -19,7 +19,7 @@ class ExampleTheme extends StatelessWidget {
         return MaterialApp(
           title: 'Card Settings Example',
           theme: theme,
-          home: ExampleScaffold(),
+          home: const ExampleScaffold(),
         );
       },
     );
@@ -33,7 +33,7 @@ ThemeData _buildTheme(Brightness brightness) {
       brightness: brightness,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       backgroundColor: Colors.black,
-      textTheme: GoogleFonts.paprikaTextTheme(TextTheme()),
+      textTheme: GoogleFonts.paprikaTextTheme(const TextTheme()),
       fontFamily: GoogleFonts.getFont('Paprika').fontFamily,
     );
   } else {
@@ -45,7 +45,7 @@ ThemeData _buildTheme(Brightness brightness) {
       textTheme: TextTheme(
         button: TextStyle(color: Colors.deepPurple[900]), // button text
         subtitle1: TextStyle(color: Colors.grey[800]), // input text
-        headline6: TextStyle(color: Colors.white), // card header text
+        headline6: const TextStyle(color: Colors.white), // card header text
       ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(

@@ -1,5 +1,9 @@
 # Releases
 
+## [3.0.1] - 2021-04-07
+
+- upgraded dependencies
+
 ## [3.0.0] - 2021-10-07
 
 - [Breaking change] pickers now use a model to describe the `name`, `code`, and `icon` for a picker. see `flutter_material_pickers`

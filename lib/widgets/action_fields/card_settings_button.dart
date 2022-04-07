@@ -2,9 +2,7 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:card_settings/helpers/platform_functions.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 
 import '../../interfaces/minimum_field_properties.dart';

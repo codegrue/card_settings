@@ -2,7 +2,6 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'dart:math';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 /// This attempts to intelligently cast any value to the desired type.

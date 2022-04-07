@@ -9,7 +9,7 @@ void showResults(BuildContext context, PonyModel model) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Updated Results'),
+        title: const Text('Updated Results'),
         content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +55,7 @@ void showResults(BuildContext context, PonyModel model) {
         ),
         actions: <Widget>[
           TextButton(
-            child: Text("Close"),
+            child: const Text("Close"),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -71,11 +71,12 @@ void showErrors(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Form has validation errors'),
-        content: Text('Please fix all errors before submitting the form.'),
+        title: const Text('Form has validation errors'),
+        content:
+            const Text('Please fix all errors before submitting the form.'),
         actions: <Widget>[
           TextButton(
-            child: Text("Close"),
+            child: const Text("Close"),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -86,7 +87,7 @@ void showErrors(BuildContext context) {
   );
 }
 
-Widget _buildResultsRow(String name, dynamic value, {bool linebreak: false}) {
+Widget _buildResultsRow(String name, dynamic value, {bool linebreak = false}) {
   return Column(
     children: <Widget>[
       Row(
@@ -94,7 +95,7 @@ Widget _buildResultsRow(String name, dynamic value, {bool linebreak: false}) {
           Expanded(
             child: Text(
               '$name:',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           _buildValueInline(value, linebreak),

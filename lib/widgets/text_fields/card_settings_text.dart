@@ -2,7 +2,6 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:card_settings/helpers/platform_functions.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
