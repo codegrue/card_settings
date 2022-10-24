@@ -1,5 +1,9 @@
 # Releases
 
+## [3.2.0] - 2021-04-07
+
+- upgraded dependencies
+
 ## [3.0.1] - 2021-04-07
 
 - upgraded dependencies
