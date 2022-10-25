@@ -24,7 +24,7 @@ void main() {
                   label: label,
                   initialItem: initialValue,
                   items: items,
-                  iconizer: (item) => item.icon,
+                  iconizer: (item) => item?.icon,
                   requiredIndicator: Text(requiredIndicator),
                 )
               ],

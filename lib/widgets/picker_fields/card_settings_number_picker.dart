@@ -16,6 +16,7 @@ class CardSettingsNumberPicker extends StatelessWidget
     this.labelWidth,
     this.initialValue,
     this.contentAlign,
+    this.hintText,
     this.icon,
     this.requiredIndicator,
     required this.min,
@@ -42,6 +43,9 @@ class CardSettingsNumberPicker extends StatelessWidget
   /// controls how the widget in the content area of the field is aligned
   @override
   final TextAlign? contentAlign;
+
+  /// text to display to guide the user on what to enter
+  final String? hintText;
 
   /// The icon to display to the left of the field content
   @override
@@ -108,6 +112,7 @@ class CardSettingsNumberPicker extends StatelessWidget
       labelAlign: labelAlign,
       labelWidth: labelWidth,
       contentAlign: contentAlign,
+      hintText: hintText,
       visible: visible,
       enabled: enabled,
       initialItem: initialValue,
@@ -134,7 +139,7 @@ class CardSettingsNumberPicker extends StatelessWidget
     onSaved!(intelligentCast<int>(value));
   }
 
-  void _safeOnChanged(int value) {
+  void _safeOnChanged(int? value) {
     if (onChanged == null) return;
     onChanged!(intelligentCast<int>(value));
   }

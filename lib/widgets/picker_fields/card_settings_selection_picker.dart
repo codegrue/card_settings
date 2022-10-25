@@ -83,7 +83,7 @@ class CardSettingsSelectionPicker<T> extends FormField<T>
   final List<T> items;
 
   /// the function that will extract the icon from the items model
-  final Iconizer<T>? iconizer;
+  final Iconizer<T?>? iconizer;
 
   /// If false hides the widget on the card setting panel
   @override

@@ -1,6 +1,6 @@
 name: card_settings_example
 description: A Flutter project that demonstrated the use of the card_settings package.
-version: 1.0.0
+version: 1.0.0 
 publish_to: none
 
 dependencies:

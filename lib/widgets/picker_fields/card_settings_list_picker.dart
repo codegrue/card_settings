@@ -43,7 +43,7 @@ class CardSettingsListPicker<T> extends FormField<T>
 
   /// fires when the picker value is changed
   @override
-  final ValueChanged<T>? onChanged;
+  final ValueChanged<T?>? onChanged;
 
   /// The text to identify the field to the user
   @override
@@ -108,7 +108,7 @@ class _CardSettingsListPickerState<T> extends FormFieldState<T> {
       int itemIndex = items.indexOf(value!);
       _showCupertinoBottomPicker(itemIndex);
     } else {
-      _showMaterialScrollPicker(label, value!);
+      _showMaterialScrollPicker(label, value);
     }
   }
 
@@ -143,8 +143,8 @@ class _CardSettingsListPickerState<T> extends FormFieldState<T> {
     });
   }
 
-  void _showMaterialScrollPicker(String label, T selectedItem) {
-    showMaterialScrollPicker<T>(
+  void _showMaterialScrollPicker(String label, T? selectedItem) {
+    showMaterialScrollPicker<T?>(
       context: context,
       title: label,
       items: items,
@@ -183,10 +183,12 @@ class _CardSettingsListPickerState<T> extends FormFieldState<T> {
     items = widget.items;
 
     // get the content label from options based on value
-    int itemIndex = items.indexOf(value!);
     String content = widget.hintText ?? '';
-    if (itemIndex >= 0) {
-      content = items[itemIndex].toString();
+    if (value != null) {
+      int? itemIndex = items.indexOf(value!);
+      if (itemIndex >= 0) {
+        content = items[itemIndex].toString();
+      }
     }
 
     if (showCupertino(context, widget.showMaterialonIOS))

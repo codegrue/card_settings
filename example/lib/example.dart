@@ -701,6 +701,7 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Age',
       labelAlign: labelAlign,
       initialValue: _ponyModel.age,
+      hintText: 'Select One',
       min: 1,
       max: 17,
       stepInterval: 2,
@@ -724,7 +725,7 @@ class ExampleFormState extends State<ExampleForm> {
     return CardSettingsListPicker<PickerModel>(
       key: _typeKey,
       label: 'Type',
-      initialItem: _ponyModel.type,
+      //initialItem: _ponyModel.type,
       hintText: 'Select One',
       autovalidateMode: _autoValidateMode,
       items: ponyTypes,

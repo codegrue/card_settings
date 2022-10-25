@@ -110,7 +110,7 @@ class _CardSettingsRadioPickerState<T> extends FormFieldState<T> {
       int valueIndex = items.indexOf(value!);
       _showCupertinoBottomPicker(valueIndex);
     } else {
-      _showMaterialRadioPicker(label, value!);
+      _showMaterialRadioPicker(label, value);
     }
   }
 
@@ -145,7 +145,7 @@ class _CardSettingsRadioPickerState<T> extends FormFieldState<T> {
     });
   }
 
-  void _showMaterialRadioPicker(String label, T selectedItem) {
+  void _showMaterialRadioPicker(String label, T? selectedItem) {
     showMaterialRadioPicker<T>(
       context: context,
       title: label,
@@ -185,10 +185,12 @@ class _CardSettingsRadioPickerState<T> extends FormFieldState<T> {
     items = widget.items;
 
     // get the content label from options based on value
-    int itemIndex = items.indexOf(value!);
     String content = widget.hintText ?? '';
-    if (itemIndex >= 0) {
-      content = items[itemIndex].toString();
+    if (value != null) {
+      int itemIndex = items.indexOf(value!);
+      if (itemIndex >= 0) {
+        content = items[itemIndex].toString();
+      }
     }
 
     if (showCupertino(context, widget.showMaterialonIOS))

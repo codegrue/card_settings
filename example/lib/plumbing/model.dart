@@ -1,6 +1,4 @@
 // example viewmodel for the form
-import 'dart:typed_data';
-
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
