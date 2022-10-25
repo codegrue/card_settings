@@ -6,7 +6,6 @@
 - Enabled a null or unspecified `initialValue` in `CardSettingsRadioPicker`
 - Added `hintText` property to `CardSettingsNumberPicker` for when there is no initial value
 
-
 ## [3.2.0] - 2021-10-24
 
 - upgraded dependencies
