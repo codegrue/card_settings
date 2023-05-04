@@ -1,5 +1,10 @@
 # Releases
 
+## [3.4.0] - 2023-05-04
+
+- Fixed `CardSettingsInstructions` to wrap if too long for screen
+- Changed intl dependency to 1.18.0
+
 ## [3.3.0] - 2021-10-25
 
 - Enabled a null or unspecified `initialValue` in `CardSettingsListPicker`

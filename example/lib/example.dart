@@ -533,7 +533,8 @@ class ExampleFormState extends State<ExampleForm> {
 
   CardSettingsInstructions _buildCardSettingsInstructions() {
     return CardSettingsInstructions(
-      text: 'This is when this little horse got her big break',
+      text:
+          'This is when this little horse got her big break. It was a moment that will persist in time.',
     );
   }
 

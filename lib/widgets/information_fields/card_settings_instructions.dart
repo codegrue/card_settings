@@ -71,13 +71,11 @@ class CardSettingsInstructions extends StatelessWidget
       decoration:
           BoxDecoration(color: backgroundColor ?? Theme.of(context).cardColor),
       padding: _fieldPadding,
-      child: Row(
-        children: <Widget>[
-          Text(
-            text,
-            style: textStyle,
-          ),
-        ],
+      child: Flexible(
+        child: Text(
+          text,
+          style: textStyle,
+        ),
       ),
     );
   }
