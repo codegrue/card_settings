@@ -17,10 +17,6 @@ dependencies:
   pattern_formatter: ^2.0.0 # used for localized doubles
   flutter_multi_formatter: ^2.10.4  # used for localized phone numbers
 
-dependency_overrides:
-  pattern_formatter:
-    intl: ^0.17.0
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
