@@ -19,7 +19,7 @@ class CardSettingsFilePicker extends FormField<Uint8List>
   CardSettingsFilePicker({
     Key? key,
     // bool autovalidate: false,
-    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction,
     FormFieldSetter<Uint8List>? onSaved,
     FormFieldValidator<Uint8List>? validator,
     Uint8List? initialValue,
@@ -176,8 +176,8 @@ class _CardSettingsFilePickerState extends FormFieldState<Uint8List> {
           return AlertDialog(
             title: Text(
               widget.unattachDialogTitle,
-              style: Theme.of(context).textTheme.headline6?.copyWith(
-                  color: Theme.of(context).textTheme.headline1?.color),
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Theme.of(context).textTheme.displayLarge?.color),
             ),
             actions: <Widget>[
               TextButton(

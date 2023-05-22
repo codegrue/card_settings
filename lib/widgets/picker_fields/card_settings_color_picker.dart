@@ -21,7 +21,7 @@ class CardSettingsColorPicker extends FormField<Color>
     FormFieldSetter<Color>? onSaved,
     FormFieldValidator<Color>? validator,
     Color initialValue = Colors.green,
-    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.onChanged,
     this.visible = true,

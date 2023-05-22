@@ -17,8 +17,8 @@ class ExampleForm extends StatefulWidget {
     this.orientation,
     this.showMaterialonIOS,
     this.scaffoldKey, {
-    this.onValueChanged,
-    Key key,
+    required this.onValueChanged,
+    Key? key,
   }) : super(key: key);
 
   final Orientation orientation;
@@ -32,7 +32,7 @@ class ExampleForm extends StatefulWidget {
 }
 
 class ExampleFormState extends State<ExampleForm> {
-  PonyModel _ponyModel;
+  late PonyModel _ponyModel;
 
   bool loaded = false;
 
@@ -105,7 +105,7 @@ class ExampleFormState extends State<ExampleForm> {
   Future savePressed() async {
     final form = _formKey.currentState;
 
-    if (form.validate()) {
+    if (form!.validate()) {
       form.save();
       showResults(context, _ponyModel);
     } else {
@@ -119,7 +119,7 @@ class ExampleFormState extends State<ExampleForm> {
 
     initModel();
 
-    _formKey.currentState.reset();
+    _formKey.currentState!.reset();
   }
 
   CardSettings _buildPortraitLayout() {
@@ -337,7 +337,7 @@ class ExampleFormState extends State<ExampleForm> {
         if (value.length <= 6) return 'Must be more than 6 characters.';
         return null;
       },
-      onSaved: (value) => _ponyModel.password = value,
+      onSaved: (value) => _ponyModel.password = value!,
       onChanged: (value) {
         setState(() {
           _ponyModel.password = value;
@@ -360,7 +360,7 @@ class ExampleFormState extends State<ExampleForm> {
         }
         return null;
       },
-      onSaved: (value) => _ponyModel.email = value,
+      onSaved: (value) => _ponyModel.email = value!,
       onChanged: (value) {
         setState(() {
           _ponyModel.email = value;
@@ -379,10 +379,10 @@ class ExampleFormState extends State<ExampleForm> {
       validator: (value) {
         return null;
       },
-      onSaved: (value) => _ponyModel.boxOfficePhone = value,
+      onSaved: (value) => _ponyModel.boxOfficePhone = value!,
       onChanged: (value) {
         setState(() {
-          _ponyModel.boxOfficePhone = value;
+          _ponyModel.boxOfficePhone = value!;
         });
         widget.onValueChanged('Box Office', value);
       },
@@ -399,10 +399,10 @@ class ExampleFormState extends State<ExampleForm> {
         if (value != null && value > 100) return 'No scalpers allowed!';
         return null;
       },
-      onSaved: (value) => _ponyModel.ticketPrice = value,
+      onSaved: (value) => _ponyModel.ticketPrice = value!,
       onChanged: (value) {
         setState(() {
-          _ponyModel.ticketPrice = value;
+          _ponyModel.ticketPrice = value!;
         });
         widget.onValueChanged('Ticket Price', value);
       },
@@ -418,7 +418,7 @@ class ExampleFormState extends State<ExampleForm> {
           hour: _ponyModel.showDateTime.hour,
           minute: _ponyModel.showDateTime.minute),
       onSaved: (value) => _ponyModel.showDateTime =
-          updateJustTime(value, _ponyModel.showDateTime),
+          updateJustTime(value!, _ponyModel.showDateTime),
       onChanged: (value) {
         setState(() {
           _ponyModel.showDateTime =
@@ -437,7 +437,7 @@ class ExampleFormState extends State<ExampleForm> {
       dateFormat: DateFormat.yMMMMd(),
       initialValue: _ponyModel.showDateTime,
       onSaved: (value) => _ponyModel.showDateTime =
-          updateJustDate(value, _ponyModel.showDateTime),
+          updateJustDate(value!, _ponyModel.showDateTime),
       onChanged: (value) {
         setState(() {
           _ponyModel.showDateTime = value;
@@ -455,10 +455,10 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Photo',
       fileType: FileType.image,
       initialValue: _ponyModel.photo,
-      onSaved: (value) => _ponyModel.photo = value,
+      onSaved: (value) => _ponyModel.photo = value!,
       onChanged: (value) {
         setState(() {
-          _ponyModel.photo = value;
+          _ponyModel.photo = value!;
         });
       },
     );
@@ -471,10 +471,10 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Video',
       fileType: FileType.video,
       initialValue: _ponyModel.video,
-      onSaved: (value) => _ponyModel.video = value,
+      onSaved: (value) => _ponyModel.video = value!,
       onChanged: (value) {
         setState(() {
-          _ponyModel.video = value;
+          _ponyModel.video = value!;
         });
       },
     );
@@ -487,10 +487,10 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Audio',
       fileType: FileType.audio,
       initialValue: _ponyModel.audio,
-      onSaved: (value) => _ponyModel.audio = value,
+      onSaved: (value) => _ponyModel.audio = value!,
       onChanged: (value) {
         setState(() {
-          _ponyModel.audio = value;
+          _ponyModel.audio = value!;
         });
       },
     );
@@ -504,10 +504,10 @@ class ExampleFormState extends State<ExampleForm> {
       fileType: FileType.custom,
       allowedExtensions: const ['jpg'],
       initialValue: _ponyModel.customFile,
-      onSaved: (value) => _ponyModel.customFile = value,
+      onSaved: (value) => _ponyModel.customFile = value!,
       onChanged: (value) {
         setState(() {
-          _ponyModel.customFile = value;
+          _ponyModel.customFile = value!;
         });
       },
     );
@@ -520,7 +520,7 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Birth day',
       initialValue: _ponyModel.showDateTime,
       onSaved: (value) => _ponyModel.showDateTime =
-          updateJustDate(value, _ponyModel.showDateTime),
+          updateJustDate(value!, _ponyModel.showDateTime),
       onChanged: (value) {
         setState(() {
           _ponyModel.showDateTime = value;
@@ -552,10 +552,10 @@ class ExampleFormState extends State<ExampleForm> {
         }
         return null;
       },
-      onSaved: (value) => _ponyModel.weight = value,
+      onSaved: (value) => _ponyModel.weight = value!,
       onChanged: (value) {
         setState(() {
-          _ponyModel.weight = value;
+          _ponyModel.weight = value!;
         });
         widget.onValueChanged('Weight', value);
       },
@@ -570,10 +570,10 @@ class ExampleFormState extends State<ExampleForm> {
       decimalDigits: 2,
       locale: const Locale('fr'), // force french mode to simulate localization
       initialValue: _ponyModel.height,
-      onSaved: (value) => _ponyModel.height = value,
+      onSaved: (value) => _ponyModel.height = value!,
       onChanged: (value) {
         setState(() {
-          _ponyModel.height = value;
+          _ponyModel.height = value!;
         });
         widget.onValueChanged('Height', value);
       },
@@ -585,9 +585,10 @@ class ExampleFormState extends State<ExampleForm> {
       key: _spotKey,
       label: 'Spot',
       pickerType: CardSettingsColorPickerType.block,
-      initialValue: intelligentCast<Color>(_ponyModel.spotColor),
+      initialValue:
+          intelligentCast<Color>(_ponyModel.spotColor) ?? Colors.black,
       visible: _ponyModel.hasSpots,
-      onSaved: (value) => _ponyModel.spotColor = colorToString(value),
+      onSaved: (value) => _ponyModel.spotColor = colorToString(value!),
       onChanged: (value) {
         setState(() {
           _ponyModel.spotColor = colorToString(value);
@@ -602,7 +603,7 @@ class ExampleFormState extends State<ExampleForm> {
       key: _hasSpotsKey,
       label: 'Has spots?',
       initialValue: _ponyModel.hasSpots,
-      onSaved: (value) => _ponyModel.hasSpots = value,
+      onSaved: (value) => _ponyModel.hasSpots = value!,
       onChanged: (value) {
         setState(() {
           _ponyModel.hasSpots = value;
@@ -616,14 +617,15 @@ class ExampleFormState extends State<ExampleForm> {
     return CardSettingsColorPicker(
       key: _maneKey,
       label: 'Mane',
-      initialValue: intelligentCast<Color>(_ponyModel.maneColor),
+      initialValue:
+          intelligentCast<Color>(_ponyModel.maneColor) ?? Colors.black,
       autovalidateMode: _autoValidateMode,
       pickerType: CardSettingsColorPickerType.material,
       validator: (value) {
-        if (value.computeLuminance() > .7) return 'This color is too light.';
+        if (value!.computeLuminance() > .7) return 'This color is too light.';
         return null;
       },
-      onSaved: (value) => _ponyModel.maneColor = colorToString(value),
+      onSaved: (value) => _ponyModel.maneColor = colorToString(value!),
       onChanged: (value) {
         setState(() {
           _ponyModel.maneColor = colorToString(value);
@@ -637,15 +639,16 @@ class ExampleFormState extends State<ExampleForm> {
     return CardSettingsColorPicker(
       key: _coatKey,
       label: 'Coat',
-      initialValue: intelligentCast<Color>(_ponyModel.coatColor),
+      initialValue:
+          intelligentCast<Color>(_ponyModel.coatColor) ?? Colors.black,
       autovalidateMode: _autoValidateMode,
       validator: (value) {
-        if (value.computeLuminance() < .3) {
+        if (value!.computeLuminance() < .3) {
           return 'This color is not cheery enough.';
         }
         return null;
       },
-      onSaved: (value) => _ponyModel.coatColor = colorToString(value),
+      onSaved: (value) => _ponyModel.coatColor = colorToString(value!),
       onChanged: (value) {
         setState(() {
           _ponyModel.coatColor = colorToString(value);
@@ -662,13 +665,13 @@ class ExampleFormState extends State<ExampleForm> {
       initialItems: _ponyModel.hobbies,
       items: allHobbies,
       autovalidateMode: _autoValidateMode,
-      validator: (List<String> value) {
+      validator: (List<String>? value) {
         if (value == null || value.isEmpty) {
           return 'You must pick at least one hobby.';
         }
         return null;
       },
-      onSaved: (value) => _ponyModel.hobbies = value,
+      onSaved: (value) => _ponyModel.hobbies = value!,
       onChanged: (value) {
         setState(() {
           _ponyModel.hobbies = value;
@@ -685,7 +688,7 @@ class ExampleFormState extends State<ExampleForm> {
       initialValue: _ponyModel.description,
       numberOfLines: lines,
       focusNode: _descriptionNode,
-      onSaved: (value) => _ponyModel.description = value,
+      onSaved: (value) => _ponyModel.description = value!,
       onChanged: (value) {
         setState(() {
           _ponyModel.description = value;
@@ -696,7 +699,7 @@ class ExampleFormState extends State<ExampleForm> {
   }
 
   CardSettingsNumberPicker _buildCardSettingsNumberPicker_Age(
-      {TextAlign labelAlign}) {
+      {TextAlign? labelAlign}) {
     return CardSettingsNumberPicker(
       key: _ageKey,
       label: 'Age',
@@ -712,10 +715,10 @@ class ExampleFormState extends State<ExampleForm> {
         if (value < 3) return 'No Toddlers allowed!';
         return null;
       },
-      onSaved: (value) => _ponyModel.age = value,
+      onSaved: (value) => _ponyModel.age = value!,
       onChanged: (value) {
         setState(() {
-          _ponyModel.age = value;
+          _ponyModel.age = value!;
         });
         widget.onValueChanged('Age', value);
       },
@@ -730,16 +733,16 @@ class ExampleFormState extends State<ExampleForm> {
       hintText: 'Select One',
       autovalidateMode: _autoValidateMode,
       items: ponyTypes,
-      validator: (PickerModel value) {
+      validator: (PickerModel? value) {
         if (value == null || value.toString().isEmpty) {
           return 'You must pick a type.';
         }
         return null;
       },
-      onSaved: (value) => _ponyModel.type = value,
+      onSaved: (value) => _ponyModel.type = value!,
       onChanged: (value) {
         setState(() {
-          _ponyModel.type = value;
+          _ponyModel.type = value!;
         });
         widget.onValueChanged('Type', value);
       },
@@ -762,7 +765,7 @@ class ExampleFormState extends State<ExampleForm> {
         if (value == null || value.isEmpty) return 'Name is required.';
         return null;
       },
-      onSaved: (value) => _ponyModel.name = value,
+      onSaved: (value) => _ponyModel.name = value!,
       onChanged: (value) {
         setState(() {
           _ponyModel.name = value;
@@ -788,13 +791,13 @@ class ExampleFormState extends State<ExampleForm> {
       hintText: 'Select One',
       autovalidateMode: _autoValidateMode,
       items: ponyGenders,
-      validator: (PickerModel value) {
+      validator: (PickerModel? value) {
         if (value == null || value.toString().isEmpty) {
           return 'You must pick a gender.';
         }
         return null;
       },
-      onSaved: (value) => _ponyModel.gender = value,
+      onSaved: (value) => _ponyModel.gender = value!,
       onChanged: (value) {
         setState(() {
           _ponyModel.gender = value;
@@ -812,14 +815,14 @@ class ExampleFormState extends State<ExampleForm> {
       hintText: 'Select One',
       autovalidateMode: _autoValidateMode,
       items: ponyStyles,
-      iconizer: (item) => item.icon,
-      validator: (PickerModel value) {
+      iconizer: (item) => item!.icon,
+      validator: (PickerModel? value) {
         if (value == null || value.toString().isEmpty) {
           return 'You must pick a style.';
         }
         return null;
       },
-      onSaved: (value) => _ponyModel.style = value,
+      onSaved: (value) => _ponyModel.style = value!,
       onChanged: (value) {
         setState(() {
           _ponyModel.style = value;
@@ -835,11 +838,11 @@ class ExampleFormState extends State<ExampleForm> {
       label: 'Rating',
       initialValue: _ponyModel.rating,
       autovalidateMode: _autoValidateMode,
-      validator: (double value) {
+      validator: (double? value) {
         if (value == null) return 'You must pick a rating.';
         return null;
       },
-      onSaved: (value) => _ponyModel.rating = value,
+      onSaved: (value) => _ponyModel.rating = value!,
       onChanged: (value) {
         setState(() {
           _ponyModel.rating = value;

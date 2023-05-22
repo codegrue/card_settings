@@ -1,8 +1,5 @@
 # https://www.dartlang.org/guides/language/analysis-options
 analyzer:
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false
   errors:
     todo: ignore
   exclude:

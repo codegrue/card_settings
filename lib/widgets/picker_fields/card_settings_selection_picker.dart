@@ -19,7 +19,7 @@ class CardSettingsSelectionPicker<T> extends FormField<T>
     FormFieldSetter<T>? onSaved,
     FormFieldValidator<T>? validator,
     // bool autovalidate: false,
-    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.label = 'Label',
     this.visible = true,
@@ -228,10 +228,10 @@ class _CardSettingsListPickerState<T> extends FormFieldState<T> {
                 ),
                 contentWidget: Text(
                   content,
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: (value == null)
                           ? Theme.of(context).hintColor
-                          : Theme.of(context).textTheme.subtitle1?.color),
+                          : Theme.of(context).textTheme.titleMedium?.color),
                   textAlign: widget.contentAlign ??
                       CardSettings.of(context)?.contentAlign,
                 ),
@@ -242,10 +242,10 @@ class _CardSettingsListPickerState<T> extends FormFieldState<T> {
   }
 
   Widget _materialSettingsListPicker(String content) {
-    var style = Theme.of(context).textTheme.subtitle1?.copyWith(
+    var style = Theme.of(context).textTheme.titleMedium?.copyWith(
         color: (value == null)
             ? Theme.of(context).hintColor
-            : Theme.of(context).textTheme.subtitle1?.color);
+            : Theme.of(context).textTheme.titleMedium?.color);
     if (!widget.enabled) style = style?.copyWith(color: Colors.grey);
 
     return GestureDetector(

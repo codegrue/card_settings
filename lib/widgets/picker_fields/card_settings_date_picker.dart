@@ -16,7 +16,7 @@ class CardSettingsDatePicker extends FormField<DateTime>
   CardSettingsDatePicker({
     Key? key,
     // bool autovalidate: false,
-    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction,
     FormFieldSetter<DateTime>? onSaved,
     FormFieldValidator<DateTime>? validator,
     DateTime? initialValue,

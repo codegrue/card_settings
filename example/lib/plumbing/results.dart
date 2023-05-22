@@ -34,22 +34,18 @@ void showResults(BuildContext context, PonyModel model) {
                   'ShowTime', DateFormat.jm().format(model.showDateTime)),
               _buildResultsRow('Phone', model.boxOfficePhone),
               _buildResultsRow('Price', model.ticketPrice),
-              _buildResultsRow(
-                  'Audio',
-                  CardSettingsFilePicker.formatBytes(
-                      model.audio?.length ?? 0, 3)),
+              _buildResultsRow('Audio',
+                  CardSettingsFilePicker.formatBytes(model.audio.length, 3)),
               _buildResultsRow(
                   'Photo',
                   CardSettingsFilePicker.formatBytes(
                       model.photo?.length ?? 0, 2)),
-              _buildResultsRow(
-                  'Video',
-                  CardSettingsFilePicker.formatBytes(
-                      model.video?.length ?? 0, 1)),
+              _buildResultsRow('Video',
+                  CardSettingsFilePicker.formatBytes(model.video.length, 1)),
               _buildResultsRow(
                   'Custom file',
                   CardSettingsFilePicker.formatBytes(
-                      model.customFile?.length ?? 0, 0)),
+                      model.customFile.length, 0)),
             ],
           ),
         ),

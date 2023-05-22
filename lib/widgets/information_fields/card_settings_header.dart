@@ -11,9 +11,9 @@ import '../card_settings_widget.dart';
 /// This is a header to distinguish sections of the form.
 class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
   CardSettingsHeader({
-    this.label: 'Label',
-    this.labelAlign: TextAlign.left,
-    this.height: 44.0,
+    this.label = 'Label',
+    this.labelAlign = TextAlign.left,
+    this.height = 44.0,
     this.color,
     this.showMaterialonIOS,
     this.visible = true,
@@ -85,7 +85,7 @@ class CardSettingsHeader extends StatelessWidget implements CardSettingsWidget {
           Expanded(
             child: Text(
               label,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
               textAlign: labelAlign,
             ),
           ),

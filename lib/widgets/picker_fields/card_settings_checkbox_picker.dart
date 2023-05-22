@@ -18,7 +18,7 @@ class CardSettingsCheckboxPicker<T> extends FormField<List<T>>
     List<T>? initialItems,
     FormFieldSetter<List<T>>? onSaved,
     FormFieldValidator<List<T>>? validator,
-    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.onChanged,
     this.label = 'Select',

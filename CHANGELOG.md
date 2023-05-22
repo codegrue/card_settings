@@ -1,5 +1,11 @@
 # Releases
 
+## [3.5.0] - 2023-05-22
+
+- Made `dart fix` automated changes
+- Updated example to work with >3.0.0 SDK 
+- Updated dependencies
+
 ## [3.4.0] - 2023-05-04
 
 - Fixed `CardSettingsInstructions` to wrap if too long for screen

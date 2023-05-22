@@ -11,13 +11,13 @@ import '../../interfaces/minimum_field_properties.dart';
 class CardSettingsButton extends StatelessWidget
     implements IMinimumFieldSettings {
   CardSettingsButton({
-    this.label: 'Label',
+    this.label = 'Label',
     required this.onPressed,
-    this.visible: true,
+    this.visible = true,
     this.backgroundColor,
     this.textColor,
     this.enabled = true,
-    this.bottomSpacing: 0.0,
+    this.bottomSpacing = 0.0,
     this.isDestructive = false,
     this.showMaterialonIOS,
   });
@@ -54,7 +54,7 @@ class CardSettingsButton extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     TextStyle buttonStyle =
-        Theme.of(context).textTheme.button!.copyWith(color: textColor);
+        Theme.of(context).textTheme.labelLarge!.copyWith(color: textColor);
 
     if (visible) {
       if (showCupertino(context, showMaterialonIOS))

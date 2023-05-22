@@ -19,7 +19,7 @@ class CardSettingsRadioPicker<T> extends FormField<T>
     FormFieldSetter<T>? onSaved,
     FormFieldValidator<T>? validator,
     // bool autovalidate: false,
-    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.label = 'Label',
     this.visible = true,

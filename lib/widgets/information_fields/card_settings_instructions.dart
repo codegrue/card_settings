@@ -12,7 +12,7 @@ import '../card_settings_widget.dart';
 class CardSettingsInstructions extends StatelessWidget
     implements CardSettingsWidget {
   CardSettingsInstructions({
-    this.text: 'Instructions here...',
+    this.text = 'Instructions here...',
     this.backgroundColor,
     this.textColor,
     this.showMaterialonIOS,
@@ -46,7 +46,7 @@ class CardSettingsInstructions extends StatelessWidget
 
     TextStyle textStyle = Theme.of(context)
         .primaryTextTheme
-        .caption!
+        .bodySmall!
         .copyWith(color: textColor ?? Theme.of(context).colorScheme.secondary);
     if (showCupertino(context, showMaterialonIOS)) {
       return Container(

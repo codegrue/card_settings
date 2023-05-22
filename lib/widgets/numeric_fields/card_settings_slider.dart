@@ -14,8 +14,8 @@ class CardSettingsSlider extends FormField<double>
     implements ICommonFieldProperties {
   CardSettingsSlider({
     Key? key,
-    bool autovalidate: false,
-    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
+    bool autovalidate = false,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction,
     FormFieldSetter<double>? onSaved,
     FormFieldValidator<double>? validator,
     double initialValue = 0.0,

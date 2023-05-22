@@ -13,7 +13,7 @@ const unimplemented = "implement in the wrapper widget";
 class CardSettingsField extends StatelessWidget
     implements ICommonFieldProperties {
   CardSettingsField({
-    this.label: 'Label',
+    this.label = 'Label',
     required this.content,
     this.icon,
     this.pickerIcon,
@@ -21,7 +21,7 @@ class CardSettingsField extends StatelessWidget
     this.contentOnNewLine = false,
     this.unitLabel,
     this.errorText,
-    this.visible: true,
+    this.visible = true,
     required this.labelAlign,
     required this.requiredIndicator,
     this.enabled = true,

@@ -15,7 +15,7 @@ class CardSettingsSwitch extends FormField<bool>
   CardSettingsSwitch({
     Key? key,
     // bool autovalidate: false,
-    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction,
     FormFieldSetter<bool>? onSaved,
     FormFieldValidator<bool>? validator,
     bool initialValue = false,

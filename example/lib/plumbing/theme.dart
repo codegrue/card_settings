@@ -1,12 +1,11 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'scaffold.dart';
 
 class ExampleTheme extends StatelessWidget {
   const ExampleTheme({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -28,40 +27,32 @@ class ExampleTheme extends StatelessWidget {
 
 ThemeData _buildTheme(Brightness brightness) {
   if (brightness == Brightness.dark) {
-    return ThemeData(
-      primarySwatch: Colors.teal,
-      brightness: brightness,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      backgroundColor: Colors.black,
-      textTheme: GoogleFonts.paprikaTextTheme(const TextTheme()),
-      fontFamily: GoogleFonts.getFont('Paprika').fontFamily,
-    );
+    return ThemeData.dark();
   } else {
     return ThemeData(
       primaryColor: Colors.teal, // app header background
       secondaryHeaderColor: Colors.indigo[400], // card header background
-      cardColor: Colors.white, // card field background
-      backgroundColor: Colors.indigo[100], // app background color
+      cardColor: Colors.white, // app background color
       textTheme: TextTheme(
-        button: TextStyle(color: Colors.deepPurple[900]), // button text
-        subtitle1: TextStyle(color: Colors.grey[800]), // input text
-        headline6: const TextStyle(color: Colors.white), // card header text
+        labelLarge: TextStyle(color: Colors.deepPurple[900]), // button text
+        titleMedium: TextStyle(color: Colors.grey[800]), // input text
+        titleLarge: const TextStyle(color: Colors.white), // card header text
       ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(
-              Colors.indigo[100]), // button background color
+              Colors.indigo[100]!), // button background color
           foregroundColor: MaterialStateProperty.all<Color>(
               Colors.white), // button text color
         ),
       ),
       primaryTextTheme: TextTheme(
-        headline6: TextStyle(color: Colors.lightBlue[50]), // app header text
+        titleLarge: TextStyle(color: Colors.lightBlue[50]), // app header text
       ),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(color: Colors.indigo[400]), // style for labels
       ),
-      fontFamily: GoogleFonts.getFont('Paprika').fontFamily,
+      //fontFamily: GoogleFonts.getFont('Paprika').fontFamily, colorScheme: ColorScheme(background: Colors.indigo[100]),
       // cardTheme: CardTheme(
       //   shape: RoundedRectangleBorder(
       //     side: BorderSide(width: 2, color: Colors.orange),

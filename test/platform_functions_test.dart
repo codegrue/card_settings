@@ -64,7 +64,7 @@ void main() {
       var result = labelStyle(context, enabled);
 
       // Assert
-      var expectedColor = Theme.of(context).textTheme.subtitle1?.color;
+      var expectedColor = Theme.of(context).textTheme.titleMedium?.color;
       expect(result?.color, expectedColor);
     });
 
@@ -93,7 +93,7 @@ void main() {
       var result = contentStyle(context, value, enabled);
 
       // Assert
-      var expectedColor = Theme.of(context).textTheme.subtitle1?.color;
+      var expectedColor = Theme.of(context).textTheme.titleMedium?.color;
       expect(result?.color, expectedColor);
     });
 

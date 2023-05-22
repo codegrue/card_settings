@@ -18,7 +18,7 @@ class CardSettingsListPicker<T> extends FormField<T>
     T? initialItem,
     FormFieldSetter<T?>? onSaved,
     FormFieldValidator<T?>? validator,
-    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.label = 'Label',
     this.visible = true,

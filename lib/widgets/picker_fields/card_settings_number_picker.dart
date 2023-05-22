@@ -11,7 +11,7 @@ class CardSettingsNumberPicker extends StatelessWidget
     implements ICommonFieldProperties {
   CardSettingsNumberPicker({
     Key? key,
-    this.label: 'Label',
+    this.label = 'Label',
     this.labelAlign,
     this.labelWidth,
     this.initialValue,
@@ -21,13 +21,13 @@ class CardSettingsNumberPicker extends StatelessWidget
     this.requiredIndicator,
     required this.min,
     required this.max,
-    this.stepInterval: 1,
-    this.autovalidateMode: AutovalidateMode.onUserInteraction,
-    this.enabled: true,
+    this.stepInterval = 1,
+    this.autovalidateMode = AutovalidateMode.onUserInteraction,
+    this.enabled = true,
     this.validator,
     this.onSaved,
     this.onChanged,
-    this.visible: true,
+    this.visible = true,
     this.showMaterialonIOS,
     this.fieldPadding,
   }) : assert(min < max);

@@ -9,8 +9,8 @@ class CardFieldLayout extends StatelessWidget implements CardSettingsWidget {
   CardFieldLayout(
     this.children, {
     this.flexValues,
-    this.visible: true,
-    this.showMaterialonIOS: false,
+    this.visible = true,
+    this.showMaterialonIOS = false,
   });
 
   /// the field widgets to place into the layout

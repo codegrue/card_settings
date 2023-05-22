@@ -8,7 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../example.dart';
 
 class ExampleScaffold extends StatefulWidget {
-  const ExampleScaffold({Key key}) : super(key: key);
+  const ExampleScaffold({Key? key}) : super(key: key);
 
   @override
   _ExampleScaffoldState createState() => _ExampleScaffoldState();
@@ -30,7 +30,7 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
 
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text("My Little Pony"),
         actions: <Widget>[
@@ -45,14 +45,14 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
             icon: const Icon(Icons.save),
             onPressed: (_formWidgetKey.currentState == null)
                 ? null
-                : _formWidgetKey.currentState.savePressed,
+                : _formWidgetKey.currentState!.savePressed,
           ),
         ],
         leading: IconButton(
           icon: const Icon(Icons.refresh),
           onPressed: (_formWidgetKey.currentState == null)
               ? null
-              : _formWidgetKey.currentState.resetPressed,
+              : _formWidgetKey.currentState!.resetPressed,
         ),
       ),
       body: form,

@@ -18,7 +18,7 @@ class CardSettingsTimePicker extends FormField<TimeOfDay>
     FormFieldValidator<TimeOfDay>? validator,
     TimeOfDay? initialValue,
     // bool autovalidate: false,
-    AutovalidateMode autovalidateMode: AutovalidateMode.onUserInteraction,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction,
     this.enabled = true,
     this.visible = true,
     this.onChanged,
