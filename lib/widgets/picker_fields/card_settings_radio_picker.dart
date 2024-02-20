@@ -35,7 +35,7 @@ class CardSettingsRadioPicker<T> extends FormField<T>
     this.fieldPadding,
   }) : super(
             key: key,
-            initialValue: initialItem ?? null,
+            initialValue: initialItem,
             onSaved: onSaved,
             validator: validator,
             // autovalidate: autovalidate,
