@@ -36,7 +36,7 @@ class CardSettingsSelectionPicker<T> extends FormField<T>
     this.iconizer,
   }) : super(
             key: key,
-            initialValue: initialItem ?? null,
+            initialValue: initialItem,
             onSaved: onSaved,
             validator: validator,
             // autovalidate: autovalidate,
