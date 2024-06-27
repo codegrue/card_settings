@@ -9,18 +9,18 @@ dependencies:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
-  intl: ^0.18.0
+  intl: ^0.19.0
   meta: ^1.8.0
-  extended_masked_text: ^2.3.1
+  extended_masked_text: ^3.0.1
   flutter_cupertino_settings: ^0.5.0 # show apple style dialogs
   flutter_material_pickers: ^3.5.0 # show android style dialogs
-  pattern_formatter: ^3.0.0 # used for localized doubles
+  pattern_formatter: ^4.0.0 # used for localized doubles
   flutter_multi_formatter: ^2.10.4  # used for localized phone numbers
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  test:
+  test: ^1.25.2
   mockito: ^5.3.2
 
 environment:
